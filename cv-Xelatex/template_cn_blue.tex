@@ -1,0 +1,162 @@
+%should insert picture of QQ and wechat's QRcode
+%# -*- coding:utf-8 -*-
+%% start of file `template_en.tex'.
+\documentclass[11pt,a4paper]{moderncv}
+
+\usepackage{fontspec,xunicode}
+\setmainfont{Tahoma}
+\usepackage[slantfont,boldfont]{xeCJK}
+\usepackage{xcolor}                 % replace by the encoding you are using
+\setCJKmainfont{Adobe Song Std L}
+%\defaultfontfeatures{Mapping=tex-text}
+%\XeTeXlinebreaklocale "zh"
+%\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+% moderncv themes
+\moderncvtheme[blue]{classic}                 % optional argument are 'blue' (default), 'orange', 'red', 'green', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
+%\moderncvtheme[green]{classic}                % idem
+%\moderncvtheme[blue,roman]{hht}
+% character encoding
+
+
+% adjust the page margins
+\usepackage[scale=0.8]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}						% if you want to change the width of the column with the dates
+%\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
+\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
+
+% personal data
+\firstname{陶恒}
+\familyname{\huge{云计算工程师}}
+\title{简历}               % optional, remove the line if not wanted
+\address{湖南大学}{信息科学与工程学院}    % optional, remove the line if not wanted
+%\mobile{123456789}                    % optional, remove the line if not wanted
+\phone{086-15111231335}                      % optional, remove the line if not wanted
+\email{franztaoheng@gmail.com}                     % optional, remove the line if not wanted
+%\extrainfo{http://blog.csdn.net/hengfanz}
+\extrainfo{https://github.com/hengfanz}
+%\extrainfo{http://www.franztao.win/}
+\photo[64pt]{th}                         % '64pt' is the height the picture must be resized to and 'picture' is the name of the picture file; optional, remove the line if not wanted
+\quote{吾生也有涯而知也无涯}                 % optional, remove the line if not wante
+
+%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
+
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{基本信息 Basic Information}
+\cvline{国籍}{中国}
+\cvline{性别}{男}
+\cvline{出生日期}{1992-07}	
+\cvline{政治面貌}{中共党员}
+%\cvline{身份证}{43042219920721901X}
+%\cvline{婚姻状况}{未婚}
+\section{发表作品Publish}
+\cvline{本科}{专利：可信水印相机（2015SR067514）}
+\section{实习经历Internship}
+\cvline{2015.7-9}{深圳乐美客技术有限公司公司-技术支持\newline \tiny{SBC硬件性能测试,wiki网站技术文档编辑,管理，整理和编辑论坛相关工作}}
+\cvline{2016.7}{国防科技大学-暑期学习}
+\section{所获奖项Awards}
+\cvline{硕士}{
+%2017年 华为软件精英挑战赛 武长赛区三等奖64强\newline
+2016年 第十三届全国研究生数学建模竞\textbf{二}等奖\newline
+2016年 华为软件精英挑战赛 武长赛区二等奖32强\newline}
+\cvline{本科}{
+2013年 湖南省程序设计竞赛程序类二等奖\newline
+2013年 湖南科技大学校级优秀学生\newline
+2013-2014年 两次国家励志奖学金\newline
+2014年 湖南省程序设计竞赛软件三等奖\newline
+2014年 湖南科技大学校级优秀班干部\newline
+2014年 全国信息安全大赛三等奖\newline
+2015年 湖南省优秀本科毕业生\newline }
+
+\section{项目经历Project Experience}
+\cvline{项目起止日期}{\small 2012-05-01 ~ 2015-05-01}
+\cvline{项目名称}{\small 数字水印在可信摄录设备中的应用研究}
+\cvline{项目角色}{\small 算法设计员和优化员}
+%项目地点
+\cvline{主要职责与业绩}{\small 项目最终被评为湖南省优秀本科生研究项目，项目研发过程中，自己主要负责三方面的问题，核心算法瓶颈优化问题（二维离散余弦变换时间空间优化），算法运行平台代码的编写（基于安卓平台的运行代码）及软件图形界面的设计(合理设计UI使软件人性化）.
+水印算法的时间优化到原先的一半。安卓软件的UI图形界面无不稳定操作现象。}
+
+\section{专业技能Profession Skills}
+\cvline{数学与算法}{精通\textbf{图论}算法，对基本算法与数据结构熟悉，数学基础夯实，如矩阵论、数论}
+\cvline{程序语言}{掌握java(android),C++,C,assembly(X86),python,javascript(www.franztao.win),matlab,shell 等语言,具备良好语言的开发能力与技巧，能编写核心模块代码}
+\cvline{Linux}{熟悉linux基础知识，熟悉linux操作系统及linux环境编程，能在linux环境下完成日常运维工作}
+\cvline{分布式网络}{熟悉TCP/IP协议，熟悉二层三层协议，熟悉VPN、NAT、MPLS以及路由交换协议（OSPF、BGP、ISIS等路由协议）原理，并有较强的分析故障排查能力和处理经验，具备基础HCNA能力，良好的移动通信知识}
+\cvline{软件定义网络}{熟悉SDN、NFV、OpenFlow协议、VXlan、ODL等网络新技术，了解其基本理念和基本原理}
+\cvline{数据库}{掌握MySQL}
+%\cvline{云计算}{熟悉OpenStack社区Keystone, Horizon, Ceilometer, Heat等Governance项目}
+%\cvline{具体技术}{edit: vim,latex\newline
+%datebase: mysql,sqlite\newline}
+%pthread,MPI,OpenCV,Verilog,linggo,gurobi,GLPK,localsolver,make,shell,SPSS,wireshrak,tcpdump,mininet,opendaylight}
+
+
+\section{其他说明Other}
+\cvline{专业描述}{\textbf{硕士阶段，计算机科学与技术}：研究生一年级主要研究基础查询算法（bloomfilter），现阶段研究生二年级主要研究软件定义网络\textbf{SDN多维流表算法}，网络虚拟化NFV中虚拟网络嵌入\textbf{VNE可生存性算法}等\newline
+\textbf{本科阶段，信息安全专业}：主要从事与计算机安全相关的计算机技术，研究在图像中进行数字内容认证的各种脆弱性数字水印技术，包括：水印嵌入算法，水印盲检测算法，水印不可见性、安全性与鲁棒性的平衡研究等。}
+\cvline{社会实践}{本科一年级任职班级班长，本科二年级任职团支书，本科三年级至四年级任职班长，本科参加英语社团和程序设计集训队。硕士二年级任职团支部书记。}
+\cvline{自我评价}{\small 思维缜密，逻辑性强，具有挑战精神和前瞻性。\newline 良好的团队协作精神,具有良好的沟通能力，良好的书面和口头表达能力，较高的文档撰写水平(Latex)。\newline 喜欢编写代码，喜欢构思算法与代码，学习思考一些有趣的数学问题，喜爱拆卸维修电器，爱好运动，喜欢篮球运动与游泳运动。}
+
+%{思维缜密，逻辑性强，沟通能力强，良好的团队协作精神，对网络技术有浓厚的兴趣，并有持续深钻技术的学习能力，}
+
+
+\section{教育经历Education Background}
+\subsection{硕士}
+\cventry{2015--2018}{湖南大学}{导师}{谢鲲}{}{成绩 top10}                % arguments 3 to 6 are optional
+\subsection{学士}
+\cventry{2011--2015}{湖南科技大学}{项目导师}{向德生}{}{成绩 top10}                % arguments 3 to 6 are optional
+
+\section{语言情况Languages}
+\cvlanguage{英语}{能进行熟练的英文读写，口语交流能力一般；}{CET-6 465}%Skill level
+\cvlanguage{阿拉伯语}{一般}{自学}
+\cvlanguage{粤语}{广州生活6年}{流畅}
+
+%\section{Computer skills}
+%\cvcomputer{category 1}{XXX, YYY, ZZZ}{category 4}{XXX, YYY, ZZZ}
+%\cvcomputer{category 2}{XXX, YYY, ZZZ}{category 5}{XXX, YYY, ZZZ}
+%\cvcomputer{category 3}{XXX, YYY, ZZZ}{category 6}{XXX, YYY, ZZZ}
+
+\section{社会技能与资格证书Qualifications }
+\cvline{社会技能}{\small C1机动车驾驶证（精通）}
+\cvline{资格证书}{\small{中国计算机学会CCF软件能力认证(390 scores/full scores500)\newline
+计算机技术与软件专业技术资格（水平）考试(软件设计师)\newline
+计算机技术与软件专业技术资格（水平）考试(程序员)\newline}
+湖南科技大学英语辅修结业证书}
+%\cvline{hobby 3}{\small Description}
+
+%\section{培训经历}
+%\cvline{培训起止日期}{\small 2015-02-01 ~ 2015-03-01}
+%\cvline{培训课程}{\small CCNA 思科认证网络工程师}
+%\cvline{项目角色}{\small 算法分析员和编码员}
+%培训机构 培训地点
+
+\renewcommand{\listitemsymbol}{-} % change the symbol for lists
+
+%\section{Extra 1}
+%\cvlistitem{Item 1}
+%\cvlistitem{Item 2}
+%\cvlistitem{Item 3}
+%\cvlistitem[+]{Item 3}            % optional other symbol
+
+%\section{Extra 2}
+%\cvlistdoubleitem[\Neutral]{Item 1}{Item 4}
+%\cvlistdoubleitem[\Neutral]{Item 2}{Item 5}
+%\cvlistdoubleitem[\Neutral]{Item 3}{}
+
+%% Publications from a BibTeX file
+%\nocite{*}
+%\bibliographystyle{plain}
+%\bibliography{publications}       % 'publications' is the name of a BibTeX file
+
+%\begin{thebibliography}{99}
+%%\bibitem{11} LaTeX入门与提高，高等教育出版社。
+%湖南科技大学英语辅修结业证书\\
+%\end{thebibliography}
+
+\end{document}
+
+
+%% end of file `template_en.tex'.
