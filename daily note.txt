@@ -1,0 +1,107 @@
+
+oral english 1.voice(weak,continue) 2.intonation
+tell him that
+
+writing english 1.have word to say
+上下义词改写法
+the quality of honesty really matter,be it in personal growth or in national progress
+
+
+reading 1.location(look problem) 2.replace
+
+
+书写是对思维的备忘
+书写是对思维的缓存
+书写是与自己的对话
+书写是与别人的交流
+有时候，语言自己也会思考
+
+任何的笔记都不是一次就能形成的,记笔记不是一次性的活，而是一个不断重复和提高的过程
+对于一个研究项目来说，我认为可以分成如下的阶段：
+（1）问题形成阶段
+（2）寻找解决方法阶段
+（3）具体实验阶段
+（4）与他人交流阶段
+（5）形成学术论文阶段
+（6）投稿并与审稿人交流阶段
+笔记都需要保证
+客观性（一定不能有虚假信息，自己怎么做怎么想都要严格记录下来）、
+全面性（不能有信息的遗漏）、
+逻辑性（每个研究项目都有其内在的逻辑）、
+易读性（因为我们要与别人进行交流，因此notes是非常重要的交流手段）
+
+研究的细节
+相关的文献
+阶段性的成果
+纪传体还是编年体
+
+做练习题，可以先快速给个答案，再仔细算出来看是否相同
+
+
+Supervisor是一个管理进程的工具，可以随系统启动而启动服务，它还时刻监控服务进程，如果服务进程意外退出，Supervisor可以自动重启服务。
+正确的部署方式是使用工具配合脚本完成自动化部署。Fabric就是一个自动化部署工具
+ key `idx_created_at` (`created_at`),
+    primary key (`id`)
+) engine=innodb default charset=utf8;
+grant select, insert, update, delete on awesome.* to 'www-data'@'localhost' identified by 'www-data';
+
+[1] curl command - It is a tool to transfer data from or to a server using http/https/ftp and much more.
+
+[2] lynx command - It is a fully-featured World Wide Web (WWW) client/browser for users running terminals.
+
+[3] wget command - It is a free utility for non-interactive download of files from the Web. It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
+
+[4] w3m command - It is a text based Web browser and pager
+
+
+
+use bigdecimal to accurtately calculation instead of float or double.
+
+
+
+1.VMware  ESXi
+VMware  ESXi是最核心的组件
+VMware  ESXi是我们常说的ESXi主机，虚拟化层
+组件的作用：ESXi用于协调物理计算机的资源，同时通过ESXi管理其上的虚拟机，如部署、迁移等操作。同时还可以通过ESXi对物理计算机上的网络存储资源仅从管理，ESXi通过配置虚拟交换机上的vSwitch管理配置网络资源，通过VMfs和nfs管理虚拟存储资源。
+2.vCenter Server
+主要的作用是：提供集中的管理接口，供管理员可以管理整套的虚拟化环境。
+也可以为虚拟化提供更高级的功能。如，虚拟机迁移，分布式的服务，快速部署虚拟机
+vCenter的配置信息和清单信息主要保存在数据库中，这就是数据库服务器和数据库存储。
+同时vCenter管理主机时，有部分服务需要在各个主机上，比如，分布式虚拟交换机需要一定的分布式服务，同时在管理虚拟化的环境时，需要有相应的权限管理以及ACL用户访问控制。同时，为了便于管理，需要统一的身份验证，vCenter提供了一些接口，供第三方程序进行连接。
+3.VMware的其他组件
+【1】Vsphere Client:客户端的管理工具，用户连接并管理ESXi主机和Vcenter Server时，他能够为管理员提供一个良好的图形化管理界面。
+【2】Update Manager：用作更新管理，比如更新ESXi版本，更新补丁等，时Vcenter的扩展插件，在安装完成后，还需要对客户端的组件进行更新
+【3】VMware Data Protection（VDP）：用于数据保护
+【4】VMware vRealize Orchestrator ：用于实现一系列的自动化工作流
+【5】vCloud Director：云平台组件，适用于部署私有云后，发布云环境。
+
+虚拟化程序安装在宿主机上的架构称为寄居式虚拟化。寄居式虚拟化最大的问题式过度的依赖于宿主操作系统。
+VMware 直接将ESX安装在物理计算机上，这种安装方式称为裸机安装.由于虚拟化程序中包含linux的操作系统，linux的操作系统中非虚拟化部分的进程会占用主机上的部分资源，造成资源的浪费。其次，在进行资源和虚拟机的管理时，只能通过脚本和代理，非常的不方便。
+ESXi也是裸机安装在物理计算机上的，他做的改进是将虚拟化层中繁杂的linux层剔除，只保留了VMkernel虚拟化内核对资源进行管理
+
+Vmware vMotion
+冷迁移
+挂起
+迁移主机
+迁移存储
+
+Vmware 可用性及可扩展性
+
+为什么需要大二层
+虚拟机迁移与数据中心二层网络的变化.
+由于客户要求虚拟机迁移的范围越来越大，甚至是跨越不同地域、不同机房之间的迁移，所以使得数据中心二层网络的范围越来越大，甚至出现了专业的大二层网络这一新领域专题。
+即冗余的设备端口和链路在正常情况下被阻塞掉，不参与数据报文的转发。
+二层网络规模有多大，虚拟机才能迁移有多远。
+由于数据中心内的大二层网络都要覆盖多个接入交换机和核心交换机，主要有以下两类技术。虚拟交换机技术,隧道技术
+
+●CTRL + U - 剪切光标前的内容
+●CTRL + K - 剪切光标至行末的内容
+●CTRL + Y - 粘贴
+●CTRL + E - 移动光标到行末
+●CTRL + A - 移动光标到行首
+●ALT + F - 跳向下一个空格
+●ALT + B - 跳回上一个空格
+●ALT + Backspace - 删除前一个单词
+●CTRL + W - 剪切光标前一个单词
+●Shift + Insert - 向终端内粘贴
+sudo!!

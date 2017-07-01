@@ -1,0 +1,108 @@
+
+//#define MAX_NODE 1005
+double pagerank[MAX_NODE][MAX_NODE];
+double r = 0.15;
+unsigned PageRankIteration = 100;//迭代次数
+bool judge(const pair<int, double> a, const pair<int, double> b) {
+	return a.second > b.second;
+}
+//pageranknode：网络节点数量（不包括消费节点）
+//服务器部署成本
+void pageRank(unsigned pageranknode, vector<pair<int, double> > &p) { //,double inputmatrix[MAX_NODE][MAX_NODE],unsigned weight[MAX_NODE]) {
+
+
+	for (unsigned j = 0; j < pageranknode; j++) {
+		if (0 != pagerank[pageranknode][j]) {
+			for (unsigned i = 0; i < pageranknode; i++) {
+				if (i != j)
+					pagerank[i][j] = pagerank[i][j] / pagerank[pageranknode][j];
+				else {
+					pagerank[i][j] = 1.0 / pageranknode;
+				}
+			}
+		}
+
+	}
+
+	double nowRank[MAX_NODE];
+	double resultRank[MAX_NODE];
+	for (unsigned i = 0; i < pageranknode; i++) {
+		nowRank[i] = 1.0 / pageranknode;
+	}
+	bool isConvergence = true;
+	unsigned iteration = 0;
+	double delta = 0.000001;
+	while (isConvergence) {
+		if (PageRankIteration == iteration) {
+			break;
+		}
+		iteration++;
+		for (unsigned i = 0; i < pageranknode; i++) {
+			resultRank[i] = r * nowRank[i];
+		}
+		for (unsigned i = 0; i < pageranknode; i++) {
+			if (0 != Graph[i].size()) {
+				for (unsigned j = 0; j < pageranknode; j++) {
+					if (0 != pagerank[i][j]) {
+						double value = (1 - r) * nowRank[j] * pagerank[i][j];
+						resultRank[i] += value;
+					}
+				}
+			}
+		}
+		bool iscon = true;
+		for (unsigned i = 0; i < pageranknode; i++) {
+			if (((nowRank[i] - resultRank[i]) > 0)
+					&& ((nowRank[i] - resultRank[i]) > delta)) {
+				iscon = false;
+			}
+			if (((nowRank[i] - resultRank[i]) < 0)
+					&& ((nowRank[i] - resultRank[i]) < (-1.0 * delta))) {
+				iscon = false;
+			}
+		}
+		if (iscon) {
+			isConvergence = false;
+		}
+		for (unsigned i = 0; i < pageranknode; i++) {
+			nowRank[i] = resultRank[i];
+		}
+	}
+
+	for (unsigned i = 0; i < pageranknode; i++) {
+		p.push_back(make_pair(i, nowRank[i]));
+	}
+	sort(p.begin(), p.end(), judge);
+	//for (unsigned i = 0; i < p.size(); i++)
+		//cout << p[i].first << "    " << p[i].second << endl;
+	return;
+}
+
+
+//	double sum = 0;
+	edge e;
+	for (unsigned i = 0; i < MAX_NODE; i++) {
+			for (unsigned j = 0; j < MAX_NODE; j++) {
+				pagerank[i][j] = 0;
+			}
+		}
+	for (unsigned i = 0; i < networkNode; i++) {//0-networkNode
+		for (unsigned j = 0; j < Graph[i].size(); j++) {//0-networkNode 我使用邻接矩阵实现图
+			e = Graph[i].at(j);
+			if (e.toID < networkNode) {//消费节点要去掉
+				//note:
+				//i->j cap cost
+				//pagerank[j][i]=cap/cost;
+				//pagerank[networkNode][i]+=cap/cost;
+				//你注意你的方向边初始是cap＝０　cost是负的
+				pagerank[e.toID][e.fromID] = (1.0 * e.realCap)
+						/ (1.0 * e.realCost);
+				pagerank[networkNode][e.fromID] += pagerank[e.toID][e.fromID];
+			}
+		}
+	}
+	vector<pair<int, double> > p;
+	pageRank(networkNode, p);
+	//p.first 点的序号
+	//p.second 点的pagerank值
+
