@@ -1,0 +1,134 @@
+\documentclass[10.5pt,onecolumn,twoside]{article}
+\usepackage{CJK}
+\begin{document}
+\begin{CJK*}{UTF8}{song}
+\title{Independence of k multiple H3 hash function}
+\author{Tao Heng}
+\maketitle
+\section{The class of functions H3(from initial paper)}
+
+Each hash function in $H_3$ class is a linear transformation ${B^T} = {Q_{r \times w}}{A^T}$ that maps a $w$-bit binary string $A = {a_1}{a_2} \cdots {a_w}$ to an $r$-bit binary string $B = {b_1}{b_2} \cdots {b_r}$ as follows:
+
+\begin{equation}
+%\small
+\footnotesize
+\left( {\begin{array}{*{20}{c}}
+   {{b_1}}  \\
+   {{b_2}}  \\
+    \vdots   \\
+   {{b_r}}  \\
+\end{array}} \right) = \left( {\begin{array}{*{20}{c}}
+   {{q_{11}}} & {{q_{12}}} &  \cdots  & {{q_{1w}}}  \\
+   {{q_{21}}} & {{q_{22}}} &  \cdots  & {{q_{2w}}}  \\
+    \cdots  &  \cdots  &  \cdots  &  \cdots   \\
+   {{q_{r1}}} & {{q_{r2}}} &  \cdots  & {{q_{rw}}}  \\
+\end{array}} \right)\left( {\begin{array}{*{20}{c}}
+   {{a_1}}  \\
+   {{a_2}}  \\
+    \vdots   \\
+   {{a_w}}  \\
+\end{array}} \right)
+\label{eq:h3hash}
+\end{equation}
+
+\noindent where $A$ and $B$ are the input key (index) and its hash value, and the hash generation matrix ${Q_{r \times w}}$ is an $r \times w$ matrix defined over $GF(2)=\{0,1\}$ with each $H_3$ hash function uniquely corresponding to such a ${Q_{r \times w}}$. The hash function of ${Q_{r \times w}}$ can map the key ranged in $\{0,{2^w} - 1\}$ to a hash value ranged in $\{0,{2^r} - 1\}$.
+
+The multiplication and addition in $GF(2)$ is Boolean AND($\bullet$) and XOR($\oplus$), respectively. According to (\ref{eq:h3hash}), each bit of $B$ is calculated as follows:
+\begin{equation}
+%\small
+\footnotesize
+{b_i} = \left( {{a_1} \bullet {q_{i1}}} \right) \oplus \left( {{a_2} \bullet {q_{i2}}} \right) \oplus  \cdots  \oplus \left( {{a_w} \bullet {q_{iw}}} \right){\rm{   }}\left( {i = 1,2, \cdots ,r} \right)
+\label{eq:h3hashbit}
+\end{equation}
+We take two examples to illustrate the $H_3$ class hash function. In the first example, the hash generation matrix is
+\begin{equation}
+%\small
+\footnotesize
+{Q_{2 \times 8}} = \left( {\begin{array}{*{20}{c}}
+   0 & 1 & 1 & 0 & 1 & 1 & 0 & 1  \\
+   1 & 1 & 0 & 0 & 0 & 1 & 0 & 0  \\
+\end{array}} \right),
+\label{eq:h1matrix}
+\end{equation}
+where $w=8$, $r=2$, and the hash function is used to map the input key (index) to its hash value: $\left\{ {0, \ldots ,{{\rm{2}}^{\rm{8}}} - {\rm{1}} = {\rm{255}}} \right\} \to \left\{ {0, \ldots ,{{\rm{2}}^{\rm{2}}} - {\rm{1}} = {\rm{3}}} \right\}$. Under this hash function, the hash value for index 69 can be calculated by Eq.(\ref{eq:h3hash}), expressed as follows
+\begin{equation}
+%\small
+%\footnotesize
+\scriptsize
+\begin{array}{l}
+ h_1\left( {69} \right) = h_1\left( {{\rm{01000101}}} \right) \\
+  = \left( {\begin{array}{*{20}{c}}
+   0 & 1 & 1 & 0 & 1 & 1 & 0 & 1  \\
+   1 & 1 & 0 & 0 & 0 & 1 & 0 & 0  \\
+\end{array}} \right)\left( {\begin{array}{*{20}{c}}
+   0  \\
+   1  \\
+   0  \\
+   0  \\
+   0  \\
+   1  \\
+   0  \\
+   1  \\
+\end{array}} \right) = \left( {\begin{array}{*{20}{c}}
+   1  \\
+   0  \\
+\end{array}} \right) \\
+ \end{array}
+\label{eq:h3example1}
+\end{equation}
+where ${\left( {\begin{array}{*{20}{c}}
+   1  \\
+   0  \\
+\end{array}} \right)^T} = \left( {\begin{array}{*{20}{c}}
+   1 & 0  \\
+\end{array}} \right) = 2\left( {decimal} \right)$, so the hash value of 69 under the hash function $h_1$ is $h_1(69)=2$.
+
+\section{How to construct k independent $H_3$ hash function}
+
+First hash function $Q^1_{r\times w}$ is random obtained. we obtain boolean matrix $T_{w\times w}$ of row $w$ and column w randomly, Second hash function is $Q^2_{r\times w}=Q^1_{r\times w}T_{w\times w}$. and so on, the kth hash function is $Q^k_{r\times w}=Q^1_{r\times w}T_{w\times w}^k$.
+\section{Proof of independent of the k $H_3$ hash function}
+
+\subsection{Universal hashing}
+Let $\textrm{H}$ be a finite collection of hash functions that map a given universe $U$ of keys into the range ${0,1,\ldots,m-1}$ Such a collection is said to be universal if for each pair of distinct keys $k,l\in U$, the number of hash functions $h\in \textrm{H}$ for which $h(k)=h(l)$ is at most $|\textrm{H}|/m$. In other words, with a hash function randomly chosen from $\textrm{H}$, the chance of a collision between distinct keys k and l is no more than the chance $1/m$ of a collision if h(k) and h(l) were randomly and independently chosen from the set ${0,1,\ldots,m-1}$.
+
+\subsection{Field $(R, \oplus, \bigwedge )$  is a set $R={0,1}$ is vector space}
+\label{subesc:vectorspace}
+let $(R, \oplus ),R = \{ 0,1\}$ is  algebraic system, R = \{0,1\}.
+
+$(R, \oplus )$ is abel group. proof is below.
+\begin{itemize}
+  \item closure: $\forall x_1,x_2\in R,x_1\oplus x_2\in R$
+  \item identity: $\exists e=0,\forall x \in R,x\oplus e=x$
+  \item inverse: inverse of element 0 is 1,inverse of element 1 is 0.
+  \item associativity: $\exists x,y,z\in R,x\oplus(y\oplus z)=(x\oplus y)\oplus z$
+  \item commutativity: $\exists x,y\in R,x\oplus y=y\oplus x$
+\end{itemize}
+$(R, \bigwedge ),R = \{ 0,1\}$ is monoid. proof is below.
+\begin{itemize}
+  \item closure: $\forall x_1,x_2\in R,x_1\bigwedge x_2\in R$
+  \item identity: $\exists e=0,\forall x \in R,x\bigwedge e=x$
+  \item associativity: $\exists x,y,z\in R,x\bigwedge(y\bigwedge z)=(x\bigwedge y)\bigwedge z$
+\end{itemize}
+$(R, \oplus, \bigwedge )$ is ring. proof is below.
+\begin{itemize}
+  \item $(R, \oplus )$ is abel group
+  \item $(R, \bigwedge ),R = \{ 0,1\}$ is monoid
+  \item $\forall x,y,z \in R,a\bigwedge(b\oplus c)=a\bigwedge((\neg b\bigwedge c)\bigvee(b\bigwedge \neg c))=(a\bigwedge b) \oplus (a\bigwedge c)$
+\end{itemize}
+
+$(R, \oplus, \bigwedge )$ is field. proof is below.
+\begin{itemize}
+  \item commutativity: $\exists x,y\in R,x\bigwedge y=y\bigwedge x$
+  \item additative $\oplus$ identitity 0 is not equal to multiplicative $\bigwedge$ identity 1.
+\end{itemize}
+
+A vector space over a field $(R, \oplus, \bigwedge )$  is a set $R={0,1}$.
+
+\subsection{Proof}
+
+Firstly, Independence of $Q^1_{r\times w}$ and $Q^2_{r\times w}$ is equality to $(\exists x \in A, Q^1_{r\times w}(x) = Q^2_{r\times w}(x)\ is\ at\ most\ n/|B|,\ B=2^r)$, n is the number of insert elements.
+ 
+ As we all know, $H_3$ hash function is universal hash function. $Q^2_{r\times w}(x)=(Q^1_{r\times w}T^1_{r\times w})(x)=Q^1_{r\times w}(T^1_{r\times w}(x))$(subsec.\ref{subesc:vectorspace}). Suppose $\exists x\in M,Q^1_{r\times w}(x)=Q^1_{r\times w}(T^1_{r\times w}(x))$. How much is most probably largest cardinality of set $M$ so that $Q^1_{r\times w}(x)=Q^1_{r\times w}(T^1_{r\times w}(x))$, $Q^1_{r\times w}$ is universal hash function. So at most $|M|=\lceil n/2^r\rceil$ elements is in the set M, that is largest $M={m_0,m_1,\ldots,m_{\lceil n/2^r\rceil}}$. then suppose $\exists m\in M, m=T^1_{r\times w}(x)$, there are at most $\lceil n/2^w\rceil$ elements in X which is mapped into value m on the basis of $T^1_{r\times w}$ is universal hash function.In the final, exists $\lceil n/2^w\rceil$ $Q^1_{r\times w}(x) = Q^2_{r\times w}(x)\ is\ at\ most\ n/|B|,\ B=2^r)$
+
+\end{CJK*}
+\end{document}

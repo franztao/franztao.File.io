@@ -1,0 +1,38 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related work}{}% 2
+\BOOKMARK [1][-]{section.3}{Preliminaries, motivation and problem}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Basic concept of Bloom filter}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Scalability requirement for big data}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Design goal}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Design overview}{}% 7
+\BOOKMARK [1][-]{section.5}{Challenge of SFBF}{}% 8
+\BOOKMARK [1][-]{section.6}{Adaptive hash function generation}{}% 9
+\BOOKMARK [2][-]{subsection.6.1}{Review of H3 hash function}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.2}{Hash function generation}{section.6}% 11
+\BOOKMARK [1][-]{section.7}{Low cost SFBF query and maintenance}{}% 12
+\BOOKMARK [2][-]{subsection.7.1}{SFBF query requirement}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.2}{Relationship of generated hash functions}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.3}{Query algorithm}{section.7}% 15
+\BOOKMARK [1][-]{section.8}{SFBF Analysis}{}% 16
+\BOOKMARK [2][-]{subsection.8.1}{False positive rate}{section.8}% 17
+\BOOKMARK [2][-]{subsection.8.2}{CPU time for SFBF querying}{section.8}% 18
+\BOOKMARK [2][-]{subsection.8.3}{Space size and load factor}{section.8}% 19
+\BOOKMARK [2][-]{subsection.8.4}{Impact of expanding speed}{section.8}% 20
+\BOOKMARK [1][-]{section.9}{Performance evaluation}{}% 21
+\BOOKMARK [2][-]{subsection.9.1}{Experiment setup}{section.9}% 22
+\BOOKMARK [2][-]{subsection.9.2}{Evaluation results}{section.9}% 23
+\BOOKMARK [3][-]{subsubsection.9.2.1}{Extension round}{subsection.9.2}% 24
+\BOOKMARK [3][-]{subsubsection.9.2.2}{False positive rate}{subsection.9.2}% 25
+\BOOKMARK [3][-]{subsubsection.9.2.3}{Querying CPU time}{subsection.9.2}% 26
+\BOOKMARK [3][-]{subsubsection.9.2.4}{Size of filter}{subsection.9.2}% 27
+\BOOKMARK [1][-]{section.10}{Conclusion}{}% 28
+\BOOKMARK [1][-]{section.11}{new contents}{}% 29
+\BOOKMARK [1][-]{section.11}{References}{}% 30
+\BOOKMARK [1][-]{IEEEbiography.0}{Biographies}{}% 31
+\BOOKMARK [2][-]{IEEEbiography.1}{Kun Xie}{IEEEbiography.0}% 32
+\BOOKMARK [2][-]{IEEEbiography.2}{Xin Wang}{IEEEbiography.0}% 33
+\BOOKMARK [2][-]{IEEEbiography.3}{Heng Tao}{IEEEbiography.0}% 34
+\BOOKMARK [2][-]{IEEEbiography.4}{Jigang Wen}{IEEEbiography.0}% 35
+\BOOKMARK [2][-]{IEEEbiography.5}{Yinghua Min}{IEEEbiography.0}% 36
+\BOOKMARK [2][-]{IEEEbiography.6}{Keqin Li}{IEEEbiography.0}% 37
+\BOOKMARK [2][-]{IEEEbiography.7}{Gaogang Xie}{IEEEbiography.0}% 38

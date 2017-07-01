@@ -1,0 +1,64 @@
+1.预测的论文
+congestion control
+On predicting data cache behavior for real-time systems
+不可能预测数据的到来
+依照数据前面数据几个时间段到了的速度来选择
+http://www.sciencepub.net/nature/0101/13-wang.pdf
+
+2.counting bloomfilter
+A fatal weakness of SFBF is that, this variant of BF cannot support delete operation. Setting the “1”s to “0”s of an item may result in the deletion of wrong items, due to the existence of hash conflicts. This issue should be discussed.
+
+
+3.genreate k indepedence matric
+I wonder how to keep the independence between the k base matrices so as to deduce the k independent hash functions. Moreover, the paper has not evaluated or discussed the storage overhead of maintaining these matrices.
+
+4.find two new data-sets.
+5.construct new picture.
+
+http://traces.cs.umass.edu/index.php/Network/Network
+YouTube Traces From the Campus Network
+
+youtube_traces.tgz contains two different sets of traces:
+
+- youtube.parsed.*.dat
+  These trace files contain information about client requests for YouTube
+  video clips. Each line in a file represents such a request and is of the 
+  following format:
+  
+  #Timestamp	    #YouTube server IP #Client IP    #Request #Video ID   #Content server IP
+                     (anonymized)       (anonymized)  
+  1189828805.208862 63.22.65.73        140.8.48.66   GETVIDEO lML9dik8QNw 158.102.125.12 
+
+#Video ID和#Content server IP连在一起，hash成一个32位的整数
+
+http://www-tkn.ee.tu-berlin.de/research/trace/ltvt.html
+Jurassic Park I 
+
+MPEG 4 
+low quality 
+medium quality 
+high quality 
+H.263 
+16 kbit/s target bit rate 
+64 kbit/s target bit rate 
+256 kbit/s target bit rate 
+unspecified target bitrate, VBR
+
+687
+345
+7584
+4513
+6117
+5756
+6036
+6470
+6258
+5731
+6548
+1943
+3778
+5884
+
+每4个整数连在一起，再哈希成一个32位的整数
+  
+  

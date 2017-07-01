@@ -1,0 +1,118 @@
+\begin{thebibliography}{10}
+
+\bibitem{bloom1970space}
+B.~H. Bloom, ``Space/time trade-offs in hash coding with allowable errors,''
+  {\em Communications of the ACM}, vol.~13, no.~7, pp.~422--426, 1970.
+
+\bibitem{Broder2004}
+M.~M. A~Broder, ``Network applications of bloom filters: A survey,'' {\em
+  Internet Mathematics}, vol.~1, no.~4, pp.~485--509, 2004.
+
+\bibitem{tarkoma2012theory}
+S.~Tarkoma, C.~E. Rothenberg, and E.~Lagerspetz, ``Theory and practice of bloom
+  filters for distributed systems,'' {\em Communications Surveys \& Tutorials,
+  IEEE}, vol.~14, no.~1, pp.~131--155, 2012.
+
+\bibitem{6848046}
+S.~Xiong, Y.~Yao, Q.~Cao, and T.~He, ``kbf: A bloom filter for key-value
+  storage with an application on approximate state machines,'' in {\em IEEE
+  INFOCOM 2014}.
+
+\bibitem{fan2000summary}
+L.~Fan, P.~Cao, J.~Almeida, and A.~Z. Broder, ``Summary cache: a scalable
+  wide-area web cache sharing protocol,'' {\em IEEE/ACM Transactions on
+  Networking (TON)}, vol.~8, no.~3, pp.~281--293, 2000.
+
+\bibitem{mitzenmacher2002compressed}
+M.~Mitzenmacher, ``Compressed bloom filters,'' {\em IEEE/ACM Transactions on
+  Networking (TON)}, vol.~10, no.~5, pp.~604--612, 2002.
+
+\bibitem{kumar2006space}
+A.~Kumar, J.~Xu, and J.~Wang, ``Space-code bloom filter for efficient per-flow
+  traffic measurement,'' {\em IEEE Journal on Selected Areas in
+  Communications}, vol.~24, no.~12, pp.~2327--2339, 2006.
+
+\bibitem{deng2006approximately}
+F.~Deng and D.~Rafiei, ``Approximately detecting duplicates for streaming data
+  using stable bloom filters,'' in {\em ACM SIGMOD 2006}.
+
+\bibitem{dutta2012towards}
+S.~Dutta, S.~Bhattacherjee, and A.~Narang, ``Towards intelligent compression in
+  streams: a biased reservoir sampling based bloom filter approach,'' in {\em
+  EDBT 2012}.
+
+\bibitem{dutta2013streaming}
+S.~Dutta, A.~Narang, and S.~K. Bera, ``Streaming quotient filter: a near
+  optimal approximate duplicate detection approach for data streams,'' {\em
+  Proceedings of the VLDB Endowment}, vol.~6, no.~8, pp.~589--600, 2013.
+
+\bibitem{yoon2010aging}
+M.~Yoon, ``Aging bloom filter with two active buffers for dynamic sets,'' {\em
+  Knowledge and Data Engineering, IEEE Transactions on}, vol.~22, no.~1,
+  pp.~134--138, 2010.
+
+\bibitem{tree6848077}
+M.~K. Yoon, J.~Son, and S.-H. Shin, ``Bloom tree: A search tree based on bloom
+  filters for multiple-set membership testing,'' in {\em IEEE INFOCOM 2014}.
+
+\bibitem{guo2006theory}
+D.~Guo, J.~Wu, H.~Chen, X.~Luo, {\em et~al.}, ``Theory and network applications
+  of dynamic bloom filters.,'' in {\em INFOCOM 2006}.
+
+\bibitem{xie2007scalable}
+K.~Xie, Y.~Min, D.~Zhang, J.~Wen, and G.~Xie, ``A scalable bloom filter for
+  membership queries,'' in {\em Global Telecommunications Conference, 2007.
+  GLOBECOM'07. IEEE}, pp.~543--547, IEEE, 2007.
+
+\bibitem{wei2010mad2}
+J.~Wei, H.~Jiang, K.~Zhou, and D.~Feng, ``Mad2: A scalable high-throughput
+  exact deduplication approach for network backup services,'' in {\em IEEE MSST
+  2010}.
+
+\bibitem{almeida2007scalable}
+P.~S. Almeida, C.~Baquero, N.~Pregui{\c{c}}a, and D.~Hutchison, ``Scalable
+  bloom filters,'' {\em Information Processing Letters}, vol.~101, no.~6,
+  pp.~255--261, 2007.
+
+\bibitem{cohen2003spectral}
+S.~Cohen and Y.~Matias, ``Spectral bloom filters,'' in {\em ACM SIGMOD 2003}.
+
+\bibitem{carter1979universal}
+J.~L. Carter and M.~N. Wegman, ``Universal classes of hash functions,'' {\em
+  Journal of computer and system sciences}, vol.~18, no.~2, pp.~143--154, 1979.
+
+\bibitem{ramakrishna1997efficient}
+M.~Ramakrishna, E.~Fu, and E.~Bahcekapili, ``Efficient hardware hashing
+  functions for high performance computers,'' {\em IEEE Transactions on
+  Computers}, vol.~46, no.~12, pp.~1378--1381, 1997.
+
+\bibitem{ramakrishna1991perfect}
+M.~Ramakrishna and G.~Portice, ``Perfect hashing functions for hardware
+  applications,'' in {\em Data Engineering, 1991. Proceedings. Seventh
+  International Conference on}, pp.~464--470, IEEE, 1991.
+
+\bibitem{MAWI}
+``Mawi working group traffic archive.''
+  \url{http://mawi.nezu.wide.ad.jp/mawi/}.
+
+\bibitem{UMass}
+``Umass.'' \url{http://traces.cs.umass.edu/index.php/Network/Network}.
+
+\bibitem{TKN}
+``Tkn.'' \url{http://www-tkn.ee.tu-berlin.de/research/trace/ltvt.html}.
+
+\bibitem{wang2003wavelet}
+W.~Wang and J.~Ding, ``Wavelet network model and its application to the
+  prediction of hydrology,'' {\em Nature and Science}, vol.~1, no.~1,
+  pp.~67--71, 2003.
+
+\bibitem{menard2002applied}
+S.~Menard, {\em Applied logistic regression analysis}.
+\newblock No.~106, Sage, 2002.
+
+\bibitem{hsu2003applications}
+C.-C. Hsu and C.-Y. Chen, ``Applications of improved grey prediction model for
+  power demand forecasting,'' {\em Energy Conversion and management}, vol.~44,
+  no.~14, pp.~2241--2249, 2003.
+
+\end{thebibliography}

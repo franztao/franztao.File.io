@@ -1,0 +1,42 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related work}{}% 2
+\BOOKMARK [1][-]{section.3}{Preliminaries and motivation}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Basic concept of Bloom filter}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Scalability requirement for big data}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{SFBF design}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Extension algorithm}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Example of SFBF extention}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Impact of expanding speed}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.4}{SFBF Analysis}{section.4}% 10
+\BOOKMARK [3][-]{subsubsection.4.4.1}{False positive rate}{subsection.4.4}% 11
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Space size and load factor}{subsection.4.4}% 12
+\BOOKMARK [2][-]{subsection.4.5}{Deletion support by extending SFBF to CSFBF}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Challenge of SFBF implementation}{}% 14
+\BOOKMARK [1][-]{section.6}{Adaptive hash function generation}{}% 15
+\BOOKMARK [2][-]{subsection.6.1}{Review of H3 hash function}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.2}{Hash function generation}{section.6}% 17
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Generation of independent hash functions}{subsection.6.2}% 18
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Adaptively generate hash functions for different SFBF vectors}{subsection.6.2}% 19
+\BOOKMARK [1][-]{section.7}{Low cost SFBF query}{}% 20
+\BOOKMARK [2][-]{subsection.7.1}{SFBF query requirement}{section.7}% 21
+\BOOKMARK [2][-]{subsection.7.2}{Relationship of generated hash functions}{section.7}% 22
+\BOOKMARK [2][-]{subsection.7.3}{Query algorithm}{section.7}% 23
+\BOOKMARK [2][-]{subsection.7.4}{CPU time cost for SFBF querying}{section.7}% 24
+\BOOKMARK [1][-]{section.8}{Performance evaluation}{}% 25
+\BOOKMARK [2][-]{subsection.8.1}{Experiment setup}{section.8}% 26
+\BOOKMARK [2][-]{subsection.8.2}{Evaluation results}{section.8}% 27
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Extension round}{subsection.8.2}% 28
+\BOOKMARK [3][-]{subsubsection.8.2.2}{False positive rate}{subsection.8.2}% 29
+\BOOKMARK [3][-]{subsubsection.8.2.3}{Querying CPU time}{subsection.8.2}% 30
+\BOOKMARK [3][-]{subsubsection.8.2.4}{Size of filter}{subsection.8.2}% 31
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 32
+\BOOKMARK [1][-]{section.9}{References}{}% 33
+\BOOKMARK [1][-]{IEEEbiography.0}{Biographies}{}% 34
+\BOOKMARK [2][-]{IEEEbiography.1}{Kun Xie}{IEEEbiography.0}% 35
+\BOOKMARK [2][-]{IEEEbiography.2}{Heng Tao}{IEEEbiography.0}% 36
+\BOOKMARK [2][-]{IEEEbiography.3}{Xin Wang}{IEEEbiography.0}% 37
+\BOOKMARK [2][-]{IEEEbiography.4}{Yinghua Min}{IEEEbiography.0}% 38
+\BOOKMARK [2][-]{IEEEbiography.5}{Dafang Zhang}{IEEEbiography.0}% 39
+\BOOKMARK [2][-]{IEEEbiography.6}{Jigang Wen}{IEEEbiography.0}% 40
+\BOOKMARK [2][-]{IEEEbiography.7}{Keqin Li}{IEEEbiography.0}% 41
+\BOOKMARK [2][-]{IEEEbiography.8}{Gaogang Xie}{IEEEbiography.0}% 42

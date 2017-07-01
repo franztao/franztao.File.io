@@ -1,0 +1,175 @@
+%\documentclass[compressed,notitlepage,narroweqnarry,inline,12pt,onecolumn]{IEEEtran}
+\documentclass[10pt,journal,letterpaper]{IEEEtran}
+%\usepackage{latex8}
+\usepackage{times}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{cite}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{url}
+\pagestyle{plain}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.55cm}
+%%\geometry{left=1.40cm,right=1.40cm,top=1.33cm,bottom=2.1cm}
+%%\linespread{0.986}
+%\setlength{\abovedisplayskip}{1 mm}
+%\setlength{\belowdisplayskip}{0.5 mm}
+%%\setlength{\abovecaptionskip}{0.0pt}
+%%\setlength{\belowcaptionskip}{0.0pt}
+%%\titlespacing{\section}{0pt}{4pt}{0 pt}
+%%\titlespacing{\subsection}{0pt}{2pt}{0pt}
+%%\titlespacing{\subsubsection}{0pt}{2pt}{0pt}
+
+\newcommand{\rev}[1]{\uwave{#1}}
+%\newcommand{\rev}[1]{#1}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\newcommand{\del}[1]{\sout{#1}}  %revise the text
+%\newcommand{\del}[1]{}
+
+\newcommand{\note}[1]{{\sffamily\itshape\bfseries\uline{#1}}}
+
+
+\begin{document}
+\title{Algorithm for Finding the Shortest Paths with SRLG Disjoint Counterpart}
+\author{Kun Xie$^1$, \emph{Member, IEEE}, Heng Tao$^1$}
+
+\maketitle
+\vspace{-3em}
+%\vspace{-0.6in}
+\begin{abstract}
+    Suvivability is a critical problem for high-speed networks,the Data Control Layer get two paths which is SRLG-Disjoint in order to guarantee the network continue working when the previous work path is damaged.
+
+\end{abstract}
+
+
+\section{Introduction}
+
+问题的由来：SDN路由可生存性问题,AP,BP,SRLG，minmin问题，问题的复杂度（NP 问题）
+
+Shared Risk Link Group (SRLG) is an important concept from survivable optical. An SRLG is a group of network links that share a common physical resource (cable, conduit, node or substructure),whose failure will cause the failure of all links of the group [Papadimitriou et al., 2001 ].Typical optical network architecture can be classified into two layers: optical layer and physical layer,which are shown in Fig. 1. The physical layer includes fiber spans(e.g. cable, conduit. etc.), optical switch nodes (e.g. OADM,1 OXC2) and fiber span nodes (i.e. locations where fiber spans terminate).The optical layer consists of links and optical switch nodes(a subset of the nodes in the physical layer). A "link" in the
+optical layer is a connection in the physical layer, which may traverse over several fiber spans and/or fiber span nodes. Also,
+several such links may pass through the same fiber span and fiber span node. The multiple links that pass through the same fiber
+span constitute an SRLG. A single failure such as a fiber span cut in the physical layer can cause multiple link failures.
+
+Shared Risk Link Group (SRNG)
+
+\section{Related work}
+\label{sec:RELATED_WORK}
+
+
+\section{Preliminaries, motivation and problem}
+\label{sec:Review of Bloom filter}
+In this section, we first introduce the Concept of Disjoint paths problem: then lead to describe the proof of the SRLG-Disjoint is NP-complete.
+Problem: Disjoint paths(DP) problem:
+    Give a directed network G=($\mathbb{N,L}$)of a set $\mathbb{N}$ of N nodes and a set $\mathbb{L}$ of L weighted links,two special node s,t$\in$ $\mathbb{N}$,and a integer k$\geq$0,Find k paths $P_1$,$P_2$,...,$P_k$ from s to t,such that the paths share no common links(nodes,SRLG and SRNG).
+
+Additional conditions could also be imposed on the disjoint paths, such as:
+
+\begin{itemize}
+ \item Min-max disjoint paths problem - the sum of the weights of all the constituent links of the path with the largest path weight is minimized.
+ \item Min-min disjoint paths problem - the sum of the weights of all the constituent links of the path with the smallest path weight is minimized.
+ \item Bounded disjoint paths problem - the sum of the weights of all the constituent links of each path should each be less than D.
+ \item Min-sum disjoint paths problem - the sum of the weights of all the constituent links of the k paths is minimized.
+\end{itemize}
+
+The min-min condition is NP-hard to solve [ L. Guo and H. Shen, “On finding min min disjoint paths,” Algorithmica, vol. 66, no. 3, pp. 641–653, 2013. ], and to be
+approximated within a factor of e for any constant e > 1 [D. Xu, Y. Chen, Y. Xiong, C. Qiao, and X. He, “On
+the complexity of and algorithms for finding the shortest path with a disjoint counterpart,” IEEE/ACM Transactions on Netw., vol. 14, no. 1, pp. 147–158, 2006.].
+The min-min condition is useful when only one path is active and used by traffic, while the other k>1 paths remain idle as backups. Only when an active path fails will one of the backup paths be activated to substitute the active path. Hence, the active path should have as minimal weight as possible, since the active path is used more frequently than the backup paths.
+
+SRLG disjoint min min problem ‘s computational time  proof ?
+every SRLGs just have one links ,this problem is equivalence of link-disjoint problem.
+
+Extend the algorithm(COSRLGE) to a Min-Sum problem  with ordered dual costs  MSOD
+
+
+
+\subsection{Basic concept of link-disjoint path algorithm }
+Firstly,find the shortest path $P_1$ from source to destination in Graph G,if there not exist $P_1$,the algorithn end,then get a graph $G_r$ through removing the links of $P_1$ and related SRLG of $P_1$ in graph G.find a path $P_2$ from source to destination in Graph $G_r$,if there is $P_2$ so there is a pair of SRLG-disjoint paths.
+
+Linear Programing method to solve the problem,the computation complexity is high.
+
+
+\subsection{Survivability}
+
+
+\subsection{Design goal}
+
+
+
+
+\section{Design overview}
+[On the Complexity of and Algorithms for Finding the Shortest Path With a Disjoint Counterpart]
+[MSDP with ACO: A maximal SRLG disjoint routing algorithm based on ant colony optimization]
+
+
+\section{A HEURISTIC SOLUTION TO MIN-MIN SRLG-DISJOINT PROBLEM }
+\label{sec:A Heuristic Solution to MIN-MIN SRLG-Disjoint Problem}
+In this section, we describe the proposed Conflicting SRLG(Shared Risk Link Group) Link Exclusion (CSLE) heuristic for the Min-Min SRLG-Disjoint Problem, which can also be used for the Min-Sum SRLG-Disjoint Problem to provide shared path protection as will be discussed in Section fffffff.Like other APFbased heuristics,CSLE tries to find the shortest path first for us as an AP. If a corresponding SRLG-disjoint BP can be found,the algorithm terminates with the optimal solution.Otherwise, it may have run into a possible trap so it will try a different AP for which a BP may exist. CSLE differs from other APF-based heuristics, including KSP, in how they decide which other AP to try next.
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=4.35in]{franz/Initial_Graph}
+  \caption{Initial Graph}\label{fig:Initial Graph}
+\end{figure}
+
+
+\subsection{Basic Idea}
+\label{subsec:Basic Idea}
+We will first explain the basic concept of CSLE before describing the algorithm detailed.So the problem of finding a SRNG(shared risk node group)-disjoint path can be transformed to the problem of finding a SRLG-disjoint path by splitting each node of shared risk node group into two halves with a “virtual” zero-cost directed link,which of them are belong the same Shared Risk Link Group when they is from the same SRNG(shared risk node group),and an undirected link can be represented as two directed links,we will use the example of finding two-disjoint paths in a directed network shown in \ref{fig:Initial Graph}, to illustrate the intuition behind our CSLE heuristic. In \ref{fig:Initial Graph} The shortest AP found so far is shown in dotted line for which no SRLG-disjoint BP exists.
+In \ref{fig:Initial Graph},there are four shared risk link groups.as follows, the links \{S-1,S-2\} is the first shared risk link group. the links \{2-3,5-d\} is the second shared risk link group. the links \{3-8,3-4,9-4\} is the third shared risk link group. the links \{4-5,5-7\} is the forth shared risk link group.
+
+For a given AP,we define its Conflicting SRLG(Shared Risk Link Group) Link Set $\mathbb{T}$ to be a subset of the links on the AP such that any AP using all these “problematic”fffffffff links cannot find a SRLG-disjoint BP. Although together all the links along AP form such a conflicting SRLG link set, we are interested in a set having as few as possible. For example in \ref{fig:Initial Graph} $\mathbb{T}$ can be {2->3,3->4,4->5},{e1,e2,e3}.Later, we will describe an algorithm to find T and prove that if any AP uses all the links ffffffff in this T, no SRLG-disjoint BP can be found. Note that, it is possible that an AP using all but one link in T can still have a BP.
+
+\subsection{Divided-and-conquer}
+Now, we will make use of the Conflicting SRLG(Shared Risk Link Group) Link Set $\mathbb{T}$ to divide-and-conquer the Min-Min SRLG-Disjoint Problem. More specifically, let (the inclusion set $\mathbb{I}$)and(the exclusion set $\mathbb{O}$) be two disjoint subsets of $\mathbb{E}$. Denoted by $\mathbb{P(I,O)}$) the subproblem (of the Min-Min SRLG-Disjoint Problem) of finding a pair of AP and BP, where the AP is the shortest among all possible APs that must use the links in $\mathbb{I}$ but not the links in $\mathbb{O}$. Then, the (original) Min-Min SRLG-Disjoint Problem can be represented by $\mathbb{P{\emptyset,\emptyset}}$.
+Note that, for any given link, the solution to $\mathbb{P{\emptyset,\emptyset}}$, if exists at all, will use an AP that either contains the link or not. Accordingly, for the example in \ref{fig:Initial Graph}, can be divided into two subproblems $\mathbb{P{\emptyset,e_1}}$ and $\mathbb{P{e_1,\emptyset}}$, Similarly, $\mathbb{P{{e_1},\emptyset}}$ can be further divided into two subproblems $\mathbb{P{{e_1,e_2},\emptyset}}$ and $\mathbb{P{{e_1},{e_2}}}$,$\mathbb{P{{e_l,e_2},\emptyset}}$ can be further divided into two subproblems $\mathbb{P{{e_l,e_2,e_3},\emptyset}}$ and $\mathbb{P{{e_l,e_2},{e_3}}}$. The concept of the conflicting shared risk link set T comes handy because there is no need to consider $\mathbb{P{{e_l,e_2,e_3},\emptyset}}$ which we know has no solution.
+
+We will try to find an optimal solution to each of the two subproblems $\mathbb{P{\emptyset,{e_1}}}$ and $\mathbb{P{{e_1},\emptyset}}$, and then select the better one (i.e., the path pair with the shorter AP) to be the final (optimal) solution to the original problem . If there is no
+solution to any of the two subproblems, we can guarantee that there is no solution to the original problem, simply because of the way in which the problem was divided. Note that, each subproblem can be solved in a similar divide-and-conquer way. In addition, in a subproblem, such as $\mathbb{P{\emptyset,{e_1}}}$, even though we have excluded a conflicting SRLG(shared risk link group)link set from AP,it is possible that the new (shortest) AP found still does not have a SRLG-disjoint BP. In such a case, we will find a new conflicting SRLG(shared risk link group) link set for this new AP, based on which the subproblem can be further divided into several sub-subproblems, until either a solution is found for a sub-subproblem, or no AP can be found for this sub-subproblem due to a large number of excluded conflicting links from this sub-subproblem.
+
+In general, given a conflicting SRLG(shared risk link group) link set $|T|=\{e_1,e_2,\cdots,e|T|\}$, the original Min-Min problem can be first divided into the following subproblems,$\mathbb{P{\emptyset,{e_1}}}$,$\mathbb{P{{e_1},{e_2}}}$,$\cdots$,$\mathbb{P{{e_1,e_2,\dots,e_{|T|-1}},{e_{|T|}}}}$.In other words, the number of subproblems to be solved is equal to $\mathbb{T}$, (This is why we want to have a small set of  $\mathbb{T}$). Speaking of complexity, it should take us less time to solve each subproblem than the original problem itself as at least one link (which is a conflicting SRLG(shared risk link group) link ) will be removed from any further path computation for an AP, which also ensures that a different AP will be found and tested for the existence of a link-disjoint BP. In practice, such a divide-and-conquer approach based on the exclusion of conflicting SRLG(shared risk link group) links can yield an optimal solution fast, and in fact, faster than any existing approaches such as KSP, as will be shown later.
+
+
+
+\section{Finding SRLG(Shared Risk Link Group) Link Set}
+\label{sec:Finding SRLG(Shared Risk Link Group) Link Set}
+In this section, we describe how to find a conflicting SRLG(shared risk link group) link set $\mathbb{T}$ for a given AP for which there is no link-disjoint BP in a directed network G. Let |AP| be the length of AP in hops, be the set of |AP| links on AP and $\widehat{AP}$ be the set of reverse links of AP.
+
+To find the SRLG-disjoint path, we construct a new graph G* as follows.
+\begin{enumerate}
+  \item $\mathbb{G}$* use the same $\mathbb{V}$ and $\mathbb{E}$ of $\mathbb{G}$.
+  \item Transform any SRLGs which follow the star property (fffffffffffff use picture describe the definition )(a link belongs to at most two SRLGs and two risks affecting the same link form stars at different nodes)[ Graph Transformation Approaches for Diverse Routing in Shared Risk Resource Group (SRRG) failures Pallab Datta and Arun K. Somani]
+
+  \item The capacity of all links after transformation based last step is set to $1$.Find the SRLG-disjoint paths from source node $s$ to target node $t$ is equivalent to find two 1-unit flow from source node (s) to target node (t) path in graph G* and some link of each path is not in the same SRLG. Then, the AP is transformed into a path composed with dotted line in G*
+
+\end{enumerate}
+Finding a SRLG-disjoint path pair between nodes $s$ and $d$ in a given graph $\mathbb{G=(V,E)}$ is the same as finding two unit-flows in a flow network where each link’s capacity is set to 1 unit and some links is not able to exist in two paths together. We assume that the network is symmetrical, i.e., even for link $e$ whose reverse link does not exist, we add a reverse link $\widehat{e}$ with $0$ capacity to network. In \ref{fig:Initial Graph} only the links with 1 unit capacity are shown as doted lines. We will use the technique of finding a min-cut to obtain the conflicting SRLG(shared risk link group) link set.
+
+
+Theorem:networkflow
+A $s-d$cut of a directed network $\mathbb{G=(V,E)}$ is a pair
+where $s \in \mathbb{S} \subset \mathbb{V}$and $d\in \mathbb{D = V-S}$ is a partition of[T. Corman, C. Leiserson, and R. Rivest, Introduction to Algorithms.Cambridge, MA: MIT Press, 1990.].We call the capacitated links (links with nonzero capacity) from $\mathbb{S}$ to $\mathbb{D}$ positive links and the capacitated links from to negative links. The (positive) capacity of the cut is the sum of capacity of the positive links and the negative capacity of the cut is the sum of capacity of the negative links. A min-cut is a s-d cut whose positive capacity is minimal. The value of any flow from s to d in G is bounded by the positive capacity of the min-cut of G [T. Corman, C. Leiserson, and R. Rivest, Introduction to Algorithms.Cambridge, MA: MIT Press, 1990.].
+
+To find the conflicting SRLG(shared risk link group) link set for the chosen AP, we construct a new graph G0 from G* as follows.
+\begin{enumerate}
+  \item G0 use the same V and E of G*
+  \item The capacity of links in AP is set to 1.
+  \item The capacity of links in $\hat{AP}$ is set to 0.
+  \item The capacity of the links belonging the SRLG which exist itself link in AP is set to Csrlg=|AP|+1. Nsrlg designate the numbers of links which is not on the AP and is in the same SRLG with the links on AP.
+  \item The capacity of all other links with nonzero capacity in G(except those in AP or $\hat{AP}$) is set to |AP|+1+Csrlg$\times$Nsrlg (or a lager value).
+\end{enumerate}
+Let $\Fi_{0}$=$\mathbb{(S,D)}$ be a min-cut of $\mathbb{G}_0$, and $\mathbb{L}$ represent the set of positive links of $\Fi_{0}$.we will prove that the set of negative links on AP of $\Fi_{0}$ and the set of links of capacity is |AP|+1 which is in same SRLG with the positive links is $\mathbb{C}$. i.e, a conflicting SRLG(shared risk link group) link set according to our definition.For the example in \ref{fig:Initial Graph} $\Fi_{0}$ can partition V into $\mathbb{S}$=\{s ,s1s2,1,2,3,4,5,9,3834,3494\} and $\mathbb{D}$=\{4,6,7,8,d\},whose positive links are $\mathbb{L}$=\{3834->8,5->7,5->6,5->d\} and T={}.Ssrlg={4->5,3494->4,2->3}
+
+\end{document}

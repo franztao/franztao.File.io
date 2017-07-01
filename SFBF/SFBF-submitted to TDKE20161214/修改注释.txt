@@ -1,0 +1,135 @@
+----
+审稿人问题
+
+*我的解决答案
+或者 未解决
+-----
+
+
+Reviewer: 1
+-----
+In the introduction section, the authors argue that the conventional BF is not applicable in the presence of “Big data”. The second reason is not clear enough. In the fourth paragraph of page 1 on the right, you state that “existing solutions can be hardly applied in practical network environment,” would you be more specific and give a toy example?
+
+
+*“Fast Packet Classification Using Bloom filters“
+*SDN的流表问题。
+-----
+
+In the second paragraph of section 4, it is self-contradictory and confused to say “As shown in Fig. 2, instead of using a single BF, we consider the use of a BF set consisting of a number of BF vectors to build the SFBF. Originally, SFBF has only one Bloom filter vector……”. The readers will get lost. It is necessary to clarify that the SFBF is treated as one single BF or a set of BF.
+
+未解决
+-------
+
+A basic assumption of this work is that the expanding speed of the coming data set is predicable and can be derived accurately. However, this assumption is not impractical. Even if the expanding speed is predicable, how and when to predicate it? What is the time granularity of this predication?
+
+*“LSSVM Network Flow Prediction Based on theSelf-adaptive Genetic Algorithm Optimization“
+
+*“Flow rate and time mean speed predictions for the urban freeway network using state space models“
+*http://www.sciencedirect.com/science/article/pii/S0968090X14000564
+这两篇论文都是说预测网络流量
+
+
+-----
+
+A fatal weakness of SFBF is that, this variant of BF cannot support delete operation. Setting the “1”s to “0”s of an item may result in the deletion of wrong items, due to the existence of hash conflicts. This issue should be discussed.
+
+*变成增量型BLOOMFILTER,就能支持删除操作
+-----
+
+As for the generation of hash functions, I wonder how to keep the independence between the k base matrices so as to deduce the k independent hash functions. Moreover, the paper has not evaluated or discussed the storage overhead of maintaining these matrices.
+
+*“The Computational Complexity of (XOR; AND)-Counting Problems“
+
+
+*Q1的xor秩为x1(xor-rank(Q1)=x1),Q2的xor秩为x2(xor-rank(Q2)=x2),如果满足xor-rank(Q1 或 *Q2)>max(x1,x2),则Q1与Q2是xor无关的。
+
+------
+Additional effort should be made to improve the expression.
+Typos: “RECENTLY , ” should be “RECENTLY, ”  “though very simple and low cost bit shifting operations” in the second page on the left should be “through very simple…….” etc
+What is the difference between “conventional BF” and the “Basic Bloom Filter” ?
+The reference of equations in the paper could be “Eq. (X)” like you did in section 6.1.
+Some words in the figures are too small to read, e.g., Fig.5, Fig.7, Fig.11.
+The yellow lines in Fig.9 is not an elegant choice.
+
+
+*Typos: “RECENTLY , ” should be “RECENTLY, ”  解决
+*“though very simple and low cost bit shifting operations” in the second page on the left should be “through very simple…….” 未解决
+*What is the difference between “conventional BF” and the “Basic Bloom Filter” ? 未解决
+*The reference of equations in the paper could be “Eq. (X)” like you did in section 6.1. 解决
+*Some words in the figures are too small to read, e.g., Fig.5, Fig.7, Fig.11.
+The yellow lines in Fig.9 is not an elegant choice. 解决
+
+-----------
+
+Reviewer: 2
+-----
+My main concerns are the contribution and novelty of this manuscript. It is very similar to the authors’ previous conference paper “A scalable bloom filter for membership queries (GLOBECOM’07) [14]”. But the authors do not introduce the difference between the journal version and the conference version. More specifically, many contents of Sections 4, 5, 6, 7, 8, algorithms 1, 3, and Figures 3, 9, 12, are from the conference paper [14]. Section 3 introduces the work [14] but the changes are unclear.
+
+未解决
+------
+Another concern is the evaluation. From the title, SFBF is to meet the requirements of ever-increasing big data. But the size of tested data in Figures 8-12 is very small, which only contains items of 3*10^4. In addition, the traces Calgary-HTTP and NASA-HTTP are collected about 20 years before-- too old to be convinced as the representative workloads of “ever-increasing big data”.
+
+
+已经解决，数据规模是10^6
+-------
+Table 1: the data time of MAWi should be 2015-01-01[14:00:00-14:15:0]. It contains 15 minutes not 15 seconds.
+
+这个table I,我删除了，由于第四个数据是电影数据，不好列出来，第三个数据给的时间只有“between June 2007 and March 2008.”
+-----
+It is a little unfair to compare SFBF with DBF on the metric of false positive rate using difference space consumption. From the results shown in Figure 12, SFBF usually consumes much more space than DBF.
+
+个人观点，BLOOMFILTER已经是非常精简的数据结构，我们用空间换取其他性能的优化
+------
+
+
+Reviewer: 3
+
+----
+Although this can be interesting in terms of space used (as shown in 9.2.4), it is not obvious in which situations this feature has real impact in practice. Furthermore, as the space efficiency seems to come with a large impact on false positive rate (as shown in 9.2.2), the trade-off does not seem interesting.
+
+还是空间换效率（false positive rate）的问题
+-----
+Regarding this dynamic increase in the size, something that the paper misses is a discussion on which value should be selected at each moment (the evaluation does not help, as when a dynamic parameter is used, it is selected randomly). This would be fundamental for someone implementing such approach.
+
+
+解决，lamda的问题
+----
+
+However, my main problem with SFBF is that using SFBF it is impossible to bound the false positive rate, which is something that a developer using Bloom filters needs to know to assess the risk of using Bloom filter as opposed to using a deterministic set representation.
+Furthermore, the way the paper is written is also a bit misleading in this respect. For example, in the related work section, the authors criticize [13,15] by not being able to bound the false positive rate but they do not mention that SFBF also cannot bound this error. Again, in sec. 8.1, when analyzing the false positive rate, the authors only present the formula without discussing of the implications of its implications (as a note, sec. 8.1 should be moved close to SFBF proposal). For a reader that cannot understand the implication of the theorem of sec. 8.1, the only place in the paper where it becomes clear that SFBF cannot bound false positive error is sec. 9.2.2.
+
+不理解审稿人的意思。。
+----
+The second contribution, the design of hash functions and its use to optimize access to SFBF is quite interesting.
+Is there anything really specific to SFBF that makes the proposed approach work for SFBF and not, for example, for [16]? If not, as I believe, the authors should stress that fact and show that their proposal could also be adapted for use in other scalable Bloom filter with benefit.
+This also makes me question whether the materials presented in this paper would not be better organized in two parts. First, the proposal of SFBF, and its analysis.  Second, the design of the hash functions, its use in the scalable Boom filters and its analysis.
+
+哈希函数的设计
+k=3 时
+Q1=
+00000000000000000000000000000001
+00000000000000000000000000000010
+00000000000000000000000000000100
+
+Q2=
+00000000000000000000000000001000
+00000000000000000000000000010000
+00000000000000000000000000100000
+
+以此类推，没有找到论文支撑这个hash函数的构造方法，和相关论文构造xor无关的hash函数
+----
+The evaluation does a good job on comparing the proposed approach with the DBF, showing that SFBF is superior. However, what is missing is a comparison with one of the approaches that are able to bound the false positive rate, as solutions where the false positive error is unbounded can only be justified if their performance is (much) better (when compared with those that can bound the error).
+
+未解决
+不理解审稿人什么意思
+----
+
+
+In fig. 11, the authors must explain why DBF is much better than SFBF for (c) and (d) and much worse for (a) and (b).
+这个问题，当数据规模大的时候就不出现在图上了。
+----
+
+The figure in the evaluation are ok for someone reading the PDF in a computer with the colors in the lines and the possibility of zooming out the paper. For someone reading it from a printed version in grey scale, it is impossible to tell which line is what.
+
+谢老师，您再看看这图可以吗？
+-----
