@@ -1,0 +1,142 @@
+%note reverse AP should be writed in the paper?
+%note the reverse AP��is zero,give the reason.every node is passed just one.
+%note,R_x is sole
+%note A+B=sum sum/2 discuss relationship of Min-Min and Min-Sum
+%NPC proof and Problem Formulation,could describe the proof more detailly
+% APF-based
+%\documentclass[compressed,notitlepage,narroweqnarry,inline,12pt,onecolumn]{IEEEtran}
+\documentclass[10pt,journal,letterpaper]{IEEEtran}
+%\usepackage{latex8}
+\usepackage{times}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\usepackage[nocompress]{cite}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{url}
+\usepackage{CJK}
+%\usepackage{amsthm}
+\pagestyle{plain}
+\usepackage{geometry}
+\usepackage{tikz}
+\geometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.55cm}
+%\usepackage[pdftex,active,tightpage]{preview}
+%\setlength\PreviewBorder{0mm}
+
+%%\geometry{left=1.40cm,right=1.40cm,top=1.33cm,bottom=2.1cm}
+%%\linespread{0.986}
+%\setlength{\abovedisplayskip}{1 mm}
+%\setlength{\belowdisplayskip}{0.5 mm}
+%%\setlength{\abovecaptionskip}{0.0pt}
+%%\setlength{\belowcaptionskip}{0.0pt}
+%%\titlespacing{\section}{0pt}{4pt}{0 pt}
+%%\titlespacing{\subsection}{0pt}{2pt}{0pt}
+%%\titlespacing{\subsubsection}{0pt}{2pt}{0pt}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue]{hyperref}
+
+\newcommand{\songti}{\CJKfamily{song}}
+
+\newcommand{\rev}[1]{\textcolor{blue}{{#1}}}%revise the text with blue color, you can use this one.
+%\newcommand{\rev}[1]{\uwave{#1}}
+
+%\newcommand{\rev}[1]{#1}
+%\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+%\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\newcommand{\del}[1]{\sout{#1}}  %revise the text
+%\newcommand{\del}[1]{}
+
+\newcommand{\note}[1]{{\sffamily\itshape\bfseries\uline{#1}}}
+
+\newcommand{\CSLE}{Conflicting SRLG Link Exclusion Set }
+\newcommand{\CSLI}{Conflicting SRLG Link Set }
+\newcommand{\CE}{${CSLE}$ }
+\newcommand{\CI}{${CSLS}$ }
+
+\newcommand{\CSLEs}{Conflicting SRLG Link Exclusion Set of graph $G^*$ }
+\newcommand{\CSLIs}{Conflicting SRLG Link Set of graph $G^*$ }
+\newcommand{\CEs}{${CSLE}^*$ }
+\newcommand{\CIs}{${CSLS}^*$ }
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+
+
+\begin{document}
+%\begin{CJK*}{GBK}{song}
+\title{Divide and conquer for fast SRLG Disjoint Routing}
+%\author{Kun Xie$^1$, \emph{Member, IEEE}, Heng Tao$^1$\\
+%$^1$ College of Computer Science and Electronic Engineering,Hunan University, China\\}
+
+\maketitle
+\vspace{-3em}
+%\vspace{-0.6in}
+\begin{abstract}
+    Enuring transmission survivability is a crucial problem for high-speed networks. Path protection is a fast and capacity-efficient approach for increasing the availability of end-to-end connections. The emerging SDN infrastructure makes it feasible to provide diversity routing in a practical network. For more robust path protection, it is desirable to provide an alternative path that does not share any risk resource with the active path. We consider finding the SRLG-Disjoint paths, where a Shared Risk Link Group (SRLG) is a group of network links that share a common physical resource whose failure will cause the failure of all links of the group.
+     Since the traffic is carried on the active path most of time, it is useful that the weight of the shorter path of the disjoint path pair is minimized, and we call it  Min-Min SRLG-Disjoint problem. We prove this problem is NP-complete, and design an an efficient algorithm that can search for the SRLG-Disjoint path pair taking advantage of existing search results. Our performance studies demonstrate that our algorithm can outperform other approaches with higher routing performance while at much higher search speed.
+
+\end{abstract}
+
+\input introduction
+\input related
+\input PRELIMINARIES
+\input problem
+\input overview
+\input conflict
+\input complete
+\input performance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{conclusion}
+\label{sec:conclusion}
+In this paper, we have proved the Min-Min  SRLG-Disjoint routing problem is NP-complete. The key problem faces in SRLG-Disjoint routing problem  is the trap problem, where the SRLG-disjoint path BP can not be found after an AP is found. To handle the trap problem, additional APs need to be tested until the BP is found. To reduce the search complexity, we propose a divide-and-conquer solution to partition the original Min-Min SRLG-Disjoint problem into multiple sub-problems. Specifically, we define a SRLG conflicting set and design an algorithm to find the set on a AP under the trap problem. This guides the problem partition taking advantage of existing search results. Compared to existing techniques, such a solution searching process can take advantage of the existing AP search results and parallel executions for significantly faster path finding.
+We have conducted extensive simulations  using  topology trace from Huawei on a multi-core CPU platform. The simulation results demonstrate that our algorithm can outperform other approaches with higher routing performance while at much higher search
+speed.
+%\end{CJK*}
+
+%\appendix
+%This appendix will try to clarify themain differences between
+%the considered heuristics. The network which will be used
+\bibliographystyle{ieeetr}
+
+\bibliography{Bib}
+
+\end{document}

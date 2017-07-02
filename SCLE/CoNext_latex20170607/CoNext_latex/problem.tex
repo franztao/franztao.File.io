@@ -1,0 +1,85 @@
+\section{Problem description and analysis}
+\label{sec:Problem}
+
+\subsection{Problem description}
+A shared risk link group (SRLG) is a group of links that share a component whose failure causes the failure of all links in the group. A link can belong to multiple SRLGs.
+
+An example of such a component is the fiber conduit \cite{bhandari1994optimal} in optical networks, where several optical links may be placed side-by-side in one single conduit, as illustrated in Fig.\ref{fig:SRLGgraph}. Links (1,2), (3,2) and (3,4) are placed inside a single conduit, while links (3,2) and (3,4) also share another single conduit. If a conduit gets cut, the corresponding links will fail. Each conduit corresponds a SRLG.  Other example applications of SRLGs are the correlated congestion of transportation networks and cascading failures of power grid networks \cite{coudert2007shared}.
+\begin{figure}[htbp]
+
+  \centering
+\subfigure[Physical topology with conduit]{\includegraphics[width=1.25 in]{franz/PhysicalGraph}
+}
+\subfigure[Network Graph]{\includegraphics[width=1.0 in]{franz/VirtualGraph}
+}
+\caption{Example of shared risk link group(SRLG)}\label{fig:SRLGgraph}
+\label{fig:Logic shift operation}
+
+\end{figure}
+
+Let $\mathbb{R}$ be the risk (failure) set in the network. Each risk may correspond to a conduit cut, \rev{a} fiber cut, a card failure at a node, a software failure, or any combination of these factors. For $r_i \in \mathbb{R}$, its SRLG is the link set associated with risk $r_i$, denoted as $\mathbb{R}_{r_i}$, where $1\leq i\leq \chi$ and $\chi=|{\mathbb{R}}|$ is the number of risks/SRLGs.  In Fig.\ref{fig:Initial Graph}, the network includes five SRLGs $\mathbb{R}_{r_1}=\{e_1,e_9\}$, $\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$, $\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$, $\mathbb{R}_{r_4}=\{e_5,e_{13}\}$, $\mathbb{R}_{r_5}=\{e_{15},e_{18}\}$. In this example, link $e_2$ is in two SRLGs $\mathbb{R}_{r_2}$ and $\mathbb{R}_{r_3}$.
+
+A network is often represented as a graph $G(\mathbb{V},\mathbb{E})$, where $\mathbb{V}$ is the set of $|\mathbb{V}|$ nodes (which for instance represent routers) and $\mathbb{E}$ is the set of $|\mathbb{E}|$ links (which for instance represent optical fiber lines or radio channels). Links may be characterized by weights representing for instance their delay, length, or cost. For a link $e_i$, we denote the weight of the link as $w_{e_i}$. The weight of a path $P$ is denoted as $w_P=\sum\limits_{e_i\in \mathbb{P}}w_{e_i}$, which is the sum of  the weight of each link in the path.
+
+Let $r_P$ denote the risk set that impacts a path $P$, that is $r_P=\{r\in \mathbb{R}$: path $P$ contains links in $\mathbb{R}_r\}$. In Fig.\ref{fig:Initial Graph}, the link set on the AP is $\mathbb{AP}=\{e_1,e_2,e_3,e_4,e_5,e_6,e_7,e_8\}$ with $e_1\in \mathbb{R}_{r_1}$, $e_2\in \mathbb{R}_{r_2}$, $e_2\in \mathbb{R}_{r_3}$, $e_3\in \mathbb{R}_{r_2}$, $e_4\in \mathbb{R}_{r_3}$, $e_5\in \mathbb{R}_{r_4}$,  the risk set of AP is ${r}_{{AP}}=\{r_1, r_2, r_3, r_4\}$. SRLG-disjoint paths share no common risks among themselves. For multiple SRLG-disjoint paths, the failure of a path due to a risk would not affect other paths. This paper focuses on finding  two SRLG-disjoint paths for path protection, which can be described as follows.
+
+
+\textbf{Min-Min SRLG-disjoint routing problem.} Given a graph $G(\mathbb{V},\mathbb{E})$, a weight $w_{e_i}$ associated with each link $e_i\in \mathbb{E}$, a source  $s$ and a destination  $d$,  find a pair of SRLG disjoint paths from $s$ to $d$ (denoted as $AP$ and $BP$), thus that  the smallest path weight of the two disjoint paths is minimized, that is,
+
+\begin{equation}
+\begin{array}{*{20}{c}}
+   {\mathop {minimize}\limits_{AP,BP} } & {\min \left( {{w_{AP}},{w_{BP}}} \right)}  \\
+   {subject\ to} & {{r_{AP}} \cap {r_{BP}}{\rm{ = }}\phi }  \\
+   {} & {\mathbb{AP} \cap \mathbb{BP}{\rm{ = }}\phi }  \\
+\end{array}
+\label{eq:problem definition}
+\end{equation}
+where ${w_{AP}}$ and ${w_{BP}}$ are the path weights of AP and BP, respectively, $\mathbb{AP}$ and $\mathbb{BP}$ are the link sets on paths AP and BP, respectively, ${r_{AP}}$ and ${r_{BP}}$ are the risk sets that impacts AP and BP, respectively.
+
+
+%\begin{figure*}[tp]
+%\centering
+%\begin{minipage}[t]{0.3\linewidth}
+%\centering
+%\includegraphics[width=3.5in]{franz/InitialGraph}
+%\caption{$\mathbb{AP}=\{e_1,e_2,e_3,e_4,e_5,e_6,e_7,e_8\}$, $\mathbb{\mathbb{ER}}=\{e_9,e_{11},e_{17},e_{13},e_{19}\}$.  SRLGs: $\mathbb{R}_{r_1}=\{e_1,e_9\}$,$\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$,$\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$,$\mathbb{R}_{r_4}=\{e_5,e_{13}\}$,$\mathbb{R}_{r_5}=\{e_{15},e_{18}\}$}
+%\label{fig:Initial Graph}
+%\end{minipage}
+%\hfill
+%\begin{minipage}[t]{0.3\linewidth}
+%\centering
+%\includegraphics[width=3.5in]{franz/DeletePathGraph}
+%\caption{Disconnected graph after deleting the links in $\mathbb{AP}$ and ${\mathbb{ER}}$.}
+%\label{fig:DeletePathGraph}
+%\end{minipage}
+%\end{figure*}
+
+%
+\begin{figure}[tp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3.6in]{franz/InitialGraph}
+  \caption{$\mathbb{AP}=\{e_1,e_2,e_3,e_4,e_5,e_6,e_7,e_8\}$, $\mathbb{\mathbb{ER}}=\{e_9,e_{11},e_{17},e_{13},e_{19}\}$. SRLGs:$\mathbb{R}_{r_1}=\{e_1,e_9\}$,$\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$,$\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$,$\mathbb{R}_{r_4}=\{e_5,e_{13}\}$,$\mathbb{R}_{r_5}=\{e_{15},e_{18}\}$}\label{fig:Initial Graph}
+\end{figure}
+\begin{figure}[tp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3.6in]{franz/DeletePathGraph}
+  \caption{Disconnected graph after deleting the links in $\mathbb{AP}$ and ${\mathbb{ER}}$.}
+  \label{fig:DeletePathGraph}
+\end{figure}
+
+
+
+\subsection{Problem analysis}
+\label{sec:NPC proof}
+\begin{theorem}
+\label{le:lemma1}
+    The Min-Min SRLG-disjoint path problem is NP-complete.
+\end{theorem}
+
+\begin{proof}
+According to \cite{xu2004finding},  the Min-Min link-disjoint routing problem is NP-complete problem.
+ It is commonly known that the Min-Min link-disjoint routing problem is a sub-problem of Min-Min SRLG-disjoint routing problem. That is, after we remove the constraint ${{r_{AP}} \cap {r_{BP}}{\rm{ = }}\phi }$ in (\ref{eq:problem definition}), the Min-Min SRLG-disjoint routing problem is transformed to a Min-Min link-disjoint routing problem.
+ Therefore, according to  the  reducibility theorem\cite{cormen2009introduction} \revtao{in computer complexity field}, it is easy to conclude that Min-Min SRLG-disjoint routing problem is also NP-complete.
+\end{proof}
