@@ -1,0 +1,76 @@
+% ----------------------------------------------------------------
+% Article Class (This is a LaTeX2e document)  ********************
+% ----------------------------------------------------------------
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{epstopdf}
+\usepackage{subfigure}
+%\usepackage[nocompress]{cite}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{url}
+%\usepackage{CJK}
+\usepackage{amsthm}
+%\usepackage{geometry}
+\usepackage{tikz}
+%\usepackage[pdftex,active,tightpage]{preview}
+%\setlength\PreviewBorder{0mm}
+\usepackage{hyperref}
+%\hypersetup{colorlinks,linkcolor=red,anchorcolor=blue}
+%%\geometry{left=1.40cm,right=1.40cm,top=1.33cm,bottom=2.1cm}
+%%\linespread{0.986}
+%\setlength{\abovedisplayskip}{1 mm}
+%\setlength{\belowdisplayskip}{0.5 mm}
+%%\setlength{\abovecaptionskip}{0.0pt}
+%%\setlength{\belowcaptionskip}{0.0pt}
+%%\titlespacing{\section}{0pt}{4pt}{0 pt}
+%%\titlespacing{\subsection}{0pt}{2pt}{0pt}
+%%\titlespacing{\subsubsection}{0pt}{2pt}{0pt}
+%\usepackage[colorlinks,linkcolor=red,anchorcolor=blue]{hyperref}
+%\hypersetup{colorlinks,linkcolor=red,anchorcolor=blue}
+
+\setCJKmainfont{STFangsong}
+\newcommand{\rev}[1]{\textcolor{blue}{{#1}}}%revise the text with blue color, you can use this one.
+\newcommand{\del}[1]{\sout{#1}}  %revise the text
+%\newcommand{\del}[1]{}
+
+\newcommand{\note}[1]{{\sffamily\itshape\bfseries\uline{#1}}}
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{定理}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{pro}[thm]{证明}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+% ----------------------------------------------------------------
+\begin{document}
+%\input RightClaimingDocument
+\input SpecificationAttachMap
+\input Specification
+
+%\input SpecificationAbstract
+\end{document}
+% ----------------------------------------------------------------
