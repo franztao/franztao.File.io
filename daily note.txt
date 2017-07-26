@@ -94,14 +94,14 @@ Vmware 可用性及可扩展性
 二层网络规模有多大，虚拟机才能迁移有多远。
 由于数据中心内的大二层网络都要覆盖多个接入交换机和核心交换机，主要有以下两类技术。虚拟交换机技术,隧道技术
 
-●CTRL + U - 剪切光标前的内容
-●CTRL + K - 剪切光标至行末的内容
-●CTRL + Y - 粘贴
-●CTRL + E - 移动光标到行末
-●CTRL + A - 移动光标到行首
-●ALT + F - 跳向下一个空格
-●ALT + B - 跳回上一个空格
-●ALT + Backspace - 删除前一个单词
-●CTRL + W - 剪切光标前一个单词
-●Shift + Insert - 向终端内粘贴
-sudo!!
+
+deprecation 使用了不赞成使用的类或方法时的警告 
+unchecked 执行了未检查的转换时的警告，例如当使用集合时没有用泛型 (Generics) 来指定集合保存的类型。
+
+fallthrough 当 Switch 程序块直接通往下一种情况而没有 Break 时的警告。 
+path 在类路径、源文件路径等中有不存在的路径时的警告。  
+serial 当在可序列化的类上缺少 serialVersionUID 定义时的警告。  
+finally 任何 finally 子句不能正常完成时的警告。 
+all 关于以上所有情况的警告。
+
+    @SuppressWarnings 批注允许您选择性地取消特定代码段（即，类或方法）中的警告。其中的想法是当您看到警告时，您将调查它，如果您确定它不是问题，您就可以添加一个 @SuppressWarnings 批注，以使您不会再看到警告。

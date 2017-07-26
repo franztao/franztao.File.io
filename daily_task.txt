@@ -1,12 +1,20 @@
 ﻿---------------
 doing 
+my grauduation paper
 
 Characterization of Failures in an Operational
 IP Backbone Network
 
 http://web.stanford.edu/class/cs244/timetable.html
 
+
 germary
+
+wj@zonekey.com
+这个是校稿的
+mq222@163.com
+这个是搞后边那些事的
+
 
 
 Doing every day 
@@ -22,8 +30,6 @@ csapp chapter12
 bomb
 csapp virtual network
 read topological video
-philosophy of Marx
-
 
 when i read some post,then i should auto-translate it before scanning it.
 learn logical thinking,when i read hongguan and logical thinking, translating and noting the main content of the project,wirting some inspiration.
@@ -87,6 +93,7 @@ mininet,opendaylight
 Gephi is an open-source network analysis and visualization software package written in Java on the NetBeans platform
 wmware vSphere
 ns-3
+TCL language
 
 4532791061810001000
 
