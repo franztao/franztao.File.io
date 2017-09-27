@@ -1,20 +1,10 @@
 ﻿---------------
 doing 
 my grauduation paper
+design pattern
 
-Characterization of Failures in an Operational
-IP Backbone Network
 
 http://web.stanford.edu/class/cs244/timetable.html
-
-
-germary
-
-wj@zonekey.com
-这个是校稿的
-mq222@163.com
-这个是搞后边那些事的
-
 
 
 Doing every day 
@@ -26,8 +16,7 @@ to do
 BBC american dream
 upload all experimental data into blog
 use python to program a webscaner to decrypto the password 
-csapp chapter12
-bomb
+
 csapp virtual network
 read topological video
 
@@ -92,9 +81,12 @@ tcpdump is a common packet analyzer that runs under the command line.
 mininet,opendaylight
 Gephi is an open-source network analysis and visualization software package written in Java on the NetBeans platform
 wmware vSphere
-ns-3
+GNS
 TCL language
+openflow
+metasploit
 
 4532791061810001000
 
 mathmodel2016
+

@@ -1,0 +1,121 @@
+
+\section{Evaluation}
+In the proposed two step for $\MyProblemAbrreviation$, we employ a proactive failure dependent protection based EVN design with sufficient redundancy before embedding process in order to conquer the limitation of existing work, which consider the redundancy within
+the embedding process and failure independent protection based migration approach, in resource efficiency. Accordingly, the performance of optimal solution of EVN design and embedding formula, and heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding cost, as well as the migration frequency after facility node failure. when a substrate node fail, which is placed with two virtual node.
+
+
+\subsection{Simulation Settings}
+For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability $\VirtualNodenodeProbability$. The computing requirements on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$. The arrivals of VN requests are modeled by a Poisson process (with mean of 10 requests per 100 time units).The duration of the requests follows an exponential distribution with 1000 time units on average.
+We assume the relative cost of computing and bandwidth is $\RelativeCostbetweenComputingBandwidth$\cite{armbrust2009above,yu2010survivable}, which means $\theta=\RelativeCostbetweenComputingBandwidth$. The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using the GT-ITM tool\cite{zegura1996model} The computing
+(bandwidth) resources of the substrate nodes (links) are real
+numbers uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and
+$\SubStrateEdgeBandwithMaximum$).
+%To model the facility node failure scenario, we randomly choose one substrate facility node to fail in every $\SubStrateFacilityNodeFailDuration$ time units..
+
+\subsection{Acceptance Ratio}
+In this section, the service acceptance ratio for VN with the proposed survivable approach is examined, as well as a typical integer liner program method. Also, the acceptance ratio of VN without survivability requirement is presented as a baseline to gauge the impact of additional amount of resources consumed for survivability on the service provisioning capability of SN.We employ the proposed $\MyProblemAbrreviation$ as the embedding algorithm for all the EVN designing approach.
+
+In Fig. 6, acceptance ratio drops quickly before 5000 time
+units because there are sufficient substrate resources for the
+arrived VN requests, and when the amount of running VN
+requests in system are stable (after 7500 time units), acceptance
+ratio would keep consistent. Fig. 6 also depicts that FDEVN:
+MinFir and FD-EVN:Rad lead to higher acceptance ratio
+than FI-EVN algorithm through efficient resources sharing. In
+particular, comparing with FI-EVN, FD-EVN:MinFir approach achieves almost 15% improvement of acceptance ratio in the
+long run. Intuitively, it is the result of fact that, for FI-EVN embedding,
+the backup node is associated with a lot of resources
+since it has to emulate every primary node after it fails, and
+so, embedding of backup node is vulnerable. However, the acceptance
+ratio suffers at least 8% losses caused by redundant
+resources consumption for survivability purpose.
+
+\subsection{Embedding Cost}
+In this work, the embedding cost is calculated as the cost of the substrate resources (i.e. cost of CP. on all facility nodes and CM. on all fiber links) consumed to satisfy the EVN resource requirements. And, in this simulation, we assume there are sufficient resources in all the substrate components.
+
+We further compare the embedding cost of different EVN design
+algorithms with (denoted as +Shared) or without (denoted as +NoShared) consideration of the substrate resources sharing in
+EVNE approach. Generally, with regular VN arriving and leaving, embedding cost.
+
+\subsection{Migration Frequency}
+As mentioned above, FD-EVN algorithms achieve higher acceptance ratio and lower embedding cost at the cost of more node migration after facility node failure, which would cause service interruption and should be examined carefully, especially for the application with SLA constraints. We run our simulation in $\SubstrateNewtorkRunTimeInterval$ time unites, which corresponds to about $\SubStrateFacilityNodeFailDuration$ requests on average in each instance of simulation. The migration frequency
+after random facility node  failure is presented in Fig. 8 in terms of the number of VN nodes.
+
+
+\begin{figure*}
+  \centering
+  % Requires \usepackage{graphicx}
+ \begin{equation*}
+\left[ {\begin{array}{*{20}{c}}
+&C_{P_{2.2}}&C_{P_{2.3}}&C_{P_3}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.2}}\\
+{R_{V_1}}&\infty&\infty&\infty&\infty&\fbox{N+(2)+4+5+3}&\infty&${N+(2)+4+5+3}$&\infty&\infty&\infty\\
+R_{V_2}&\fbox{4}&\infty&\infty&\infty&\infty&${N+(3)+4+6}$&\infty&\infty&${N+(3)+4+6}$&\infty\\
+R_{V_3}&\infty&${M+(2)+5}$&\fbox{5}&\infty&\infty&\infty&\infty&\infty&\infty&${N+(5)+5+6}$\\
+R_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&\infty&\infty&${N+(6)+3}$&\infty&\infty\\
+\end{array}} \right]
+\end{equation*}
+ \begin{equation*}
+\left[ {\begin{array}{*{20}{c}}
+&C_{P_{1}}&C_{P_3}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.2}}\\
+{R_{V_1}}&4&\infty&\infty&${M+4}$&\infty&$N+(2)+4+5+3$&\infty&\infty&\infty\\
+R_{V_2}&\infty&\infty&\infty&\infty&${M+(1)+4+1} $&\infty&\infty&${N+(3)+4+6}$&\infty\\
+R_{V_3}&\infty&6&\infty&\infty&\infty&\infty&\infty&\infty&$N+(5)+5+6$\\
+R_{V_4}&\infty&\infty&0&\infty&\infty&\infty&$N+(6)+3$&\infty&\infty\\
+\end{array}} \right]
+\end{equation*}
+
+ \begin{equation*}
+\left[ {\begin{array}{*{20}{c}}
+&C_{P_{1}}&C_{P_{2.2}}&C_{P_{2.3}}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.3}}\\
+R_{V_1}&\fbox{5}&\infty&\infty&\infty&M+5&\infty&${N+(2)+4+5+3}$&\infty&\infty&\infty\\
+R_{V_2}&\infty&\mbox{6}&\infty&\infty&\infty&\fbox{M+6}&\infty&\infty&${N+(3)+4+6}$&\infty\\
+R_{V_3}&\infty&\infty&\fbox{M+(2)+1}&\infty&\infty&\infty&\infty&\infty&\infty&${N+(5)+5+6}$\\
+R_{V_4}&\infty&\infty&\infty&\fbox{0}&\infty&\infty&\infty&${N+(6)+3}$&\infty&\infty\\
+\end{array}} \right]
+\end{equation*}
+\end{figure*}
+The physical infrastructure consists of 40 compute
+nodes with capacity uniformly distributed between 50 and 100 units. These nodes are
+randomly connected with a probability of 0.4 occurring between any two nodes, and the
+bandwidth on each physical link is uniformly distributed between 50 and 100 units. VInf
+requests arrive randomly over a timespan of 800 time slots and the inter-arrival time is
+assumed to follow the Geometric distribution at a rate of 0.75 per time slot. The resource
+lease times of each VInf follows the Geometric distribution as well at a rate of 0.01 per time
+slot. A high request rate and long lease times ensures that the physical infrastructure is
+operating at high utilization. Each VInf consists of nodes between 2 to 10, with a compute
+capacity demand of 5 to 20 per node. Up to 90$\%$ of these nodes are critical and all failures
+are independent with probability 0.01. Connectivity between any two nodes in the VInf is
+random with probability 0.4, and the minimum bandwidth on any virtual link is 10 units.
+There are two main sets of results: (i) scaling the maximum bandwidth of a virtual link
+from 20 to 40 units while reliability guarantee of every VInf is 99.99$\%$, and (ii) scaling the
+reliability guarantee of each VInf from 99.5$\%$ to 99.995$\%$ while the maximum bandwidth
+of a virtual link is 30 units.
+
+
+Accept ratio
+mapping cost
+migration cost
+cpu time per Vinf
+
+\begin{table}
+  \centering
+  \begin{tabular}{ll}
+    \fbox{Accepted VNR Ratio} & Ratio of virtual networks that were successfully embedded into the substrate topology \\
+    \fbox{Stress} & Average number of virtual links/nodes that have been assigned to the substrate links/nodes\\
+    \fbox{Utilization}& Bandwidth/CPU utilization of substrate links/nodes.\\
+    \fbox{Path Length} & Length of communication paths assigned to virtual links\\
+    \fbox{Cost, Revenue, and Cost/Revenue}& Cost: Sum of CPU and bandwidth resources being used for the embedding. Revenue: Sum of CPU and bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.\\
+    \mbox{Active Nodes} &Number of nodes that need to be active in order to host all the virtual networks. This metric is especially useful in the context of energy efficient VNE algorithms.\\
+    Power Consumption &Power consumption of all Active nodes. Several powerconsumption models are implemented.\\
+    Runtime & Average runtime of the algorithm.\\
+    Initialization Overhead &Some algorithms come with initialization cost (in terms of runtime), e.g., the distributed algorithm presented in initially partitions the network before embedding VNRs.\\
+    Hidden Hops Ratio& Ratio of hidden hops, e.g., the number of nodes only needed for forwarding packages between other nodes. Especially useful in the context of energy efficient VNE algorithms.\\
+    Communication Overhead &Communication overhead of distributed algorithms (i.e., number of messages sent between substrate nodes).
+  \end{tabular}
+\end{table}
+
+%\end{CJK*}
+
+%\appendix
+%This appendix will try to clarify themain differences between
+%the considered heuristics. The network which will be used

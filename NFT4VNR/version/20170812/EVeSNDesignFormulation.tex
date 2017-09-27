@@ -1,0 +1,38 @@
+\section{EeVSN Design Formulation}
+The software-defined NFV architecture further offers agile traffic steering and joint optimization of network functions and resources In this section, we define the EeVSN design problem as follows: for a given VN request with N task nodes, the VN is embeded in substrate network SN and running service $s_i(s_i\in S)$, enhance the VN with one additional node and a set of appropriate links to connect these nodes, and reserve sufficient computing and communication resources in these nodes and links to guarantee the restorability of VN request after a facility node failure.
+
+write the bandwith and computting resource between FI and FD.
+
+\subsection{VN Reqeust Model}
+A task graph for a VN request is an undirected attributed
+graph, denoted asGV (V V ,EV ), where V V corresponds to a set
+of task nodes andEV denotes a set of bidirectional edges among
+the VN nodes. Each task node specifies the needed computing
+resource cVs
+, and each edge specifies the requested amount of
+communication (bandwidth) resource bV
+st .
+
+\subsection{EeVSN Design Formulation}
+With the discussion above, for a given N-nodes VN, EVN is designed within an Edit Grid with N+1 nodes through properly
+selecting the necessary links between these nodes and dimensioning the resources requirements associated with these nodes
+and links. Our design objective is to minimize the total amount of such resources while still guaranteeing that if a node fails
+(that is, the node and its adjacent links are removed in the Edit Grid), we can still assign each node/link in VN to a node/link in
+the EVN, that has sufficient CP.CM. resources respectively.
+
+Furthermore, there are two different cases. If re-embedding or
+migrating the unaffected task node is allowed for failure recovering,
+it is known as the FD-EVN design problem.Otherwise, after
+each failure, if the failed node is restored in the only one backup
+node without migrating other unaffected node, it is referred to
+as the FI-EVN design problem. Generally speaking, designing
+FD-EVN is a combinatorial optimization problem and needs to
+be investigated in depth, while FI-EVN exists exclusively and
+could be figured out easily (meaning not very clear).
+
+In conclusion, the formulation indicates that this problem is
+a BQP problem and the solution of this problem is a series of
+permutation matrix  which determine the
+migration reassigning approach after each node failure. Thus, its
+computation complexity is (N)N , whereN is the computation
+complexity for one node failure.

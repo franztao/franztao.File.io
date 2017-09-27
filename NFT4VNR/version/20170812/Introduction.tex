@@ -1,0 +1,41 @@
+
+\section{Introduction}
+%what is VN
+In network virtualization, the primary entity is the Virtual Network (VN). A VN is a combination of active and passive network elements (network nodes and network links) on top of a Substrate Network (SN). Virtual nodes are interconnected through virtual links, forming a virtual topology. By virtualizing both node and link resources of a SN, multiple virtual network topologies with widely varying characteristics can be created and co-hosted on the same physical hardware.
+
+%why node failure happern
+With network infrastructure rapidly becoming  virtualized, shared and dynamically changing, it is essential to have strong reliability support from the physical infrastructure, since a single physical server or link failure affects several shared virtual entities. Providing reliability is often linked with over-provisioning both computational and network capacities, and employing load balancing for additional robustness. However, we do not talk about the capacity requirement and geographical location requirement of virtual node, and the bandwidth capacity requirement of virtual link in this paper.
+
+
+
+However, with network virtualization gaining momentum, the survivability challenges in VNE should also be well investigated.
+In a large networked computing system, hardware and software failures of facility nodes and communication resources
+(e.g., links and switching nodes) are norm instead of exception, such as power outages caused by virus attack, disk failures, misconfiguration or fiber cut \cite{xu2012survivable,rahman2010survivable,rahman2013svne,guo2011shared,chen2010resilient}. Such failures will force the virtual node (links) assigned to it to be migrated/re-embeded to another facility node at a geographically different location (link disjoint substrate path). This means that, in order to survive from the disruptions due to such failures, one must reserve redundant facility nodes and bandwidth on fiber links such that after any failure, there are adequate remaining computing and networking resources to migrate/remap the VN request. Accordingly, the problem of minimizing the resources, including computing (CP.) and communication (CM.) resources, reserved for VN request to tolerate substrate failures, (hereafter called Survivable
+VNE problem, SVNE) is both critical and challenging. Actually, SVNE problem is quite different with the protection approach
+in IP over WDM network by investigating facility node failure caused virtual node failure problem and employing node migration induced VN remapping as an unique recovery strategy.
+
+In terms of SVNE capable of recovering/re-embedding the task nodes after a facility node failure, there are two basic approaches: Failure Dependent Protection (FDP \cite{yu2010survivable} and Failure Independent Protection (FIP) \cite{yeow2011designing}, and the differences between them are as follows. In FIP, a host (facility) node is assigned and dedicated to backup all working host (facility) nodes. That is, no matter which working host node fails, the affected task node will be migrated to the only one backup host node. On the other hand, with FDP, each working host node can have a different backup host node under different failure scenarios. In fact, after a failure, even an unaffected task node may be migrated from a working host node to its corresponding backup host node, as a result of re-embedding the entire task graph. In other words, FDP could provide more flexibility in survivable VN designing by allowing task nodes migrating freely after failure, so FIP could be considered as a special case of FDP and FDP is expected to use fewer resources at the cost of more task nodes migrations after a failure.
+
+
+To survive a substrate link failure, pre-computed alternative paths inVN are used in general and the bandwidths are allocated before or after a failure. For instance, the reactive detour solution is employed after a substrate link failure in \cite{rahman2010survivable}, while authors in \cite{guo2011shared} propose a proactive backup approach (considering the backup resources sharing) to avoid service disruption in reactive restoration approach and improve the substrate resource utilization.
+
+Through synchronization\cite{bressoud1996hypervisor,cully2008remus} and migration techniques\cite{clark2005live,wang2008virtual} on virtual machines and routers, we suppose that every virtual network have specific service functions, in addition that fault tolerant can be introduced at the virtualization layer\cite{yeow2011designing}.
+
+As nodes often represent expensive components (servers) and edges represent less expensive interconnections (links), most attention has been devoted to node faults, i.e., the removal of nodes (and their incident edges), rather than edge faults where only edges are removed.
+
+Our paper focus on the problem of resource deployment for virtual network infrastructure with reliability guarantee. Practical issue such as forwarding graph embedding and chain composition.
+
+The organization os this paper is as follow. In the next section, we briefly describe the background, notations and define reliability in Sec.\ref{sec:ProblemFormulation}.
+%
+%\begin{table}
+%\centering
+%\begin{tabular}{cc}
+%\hline
+%Term & Description \\
+%$G(V,E,S)$ & $G(V,E,S)$ denotes the Virtual Network, consisting of nodes V, links E and service functions\\
+%$B(V,S)$ & $B(V,S)$ denotes the Backup nodes set, consisting of nodes V and service functions S which is corresponding to every nodes \\
+%\hline
+%\end{tabular}
+%\caption{terminology used throughout this paper}\label{tab:term}
+%\end{table}
+

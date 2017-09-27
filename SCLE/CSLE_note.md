@@ -188,3 +188,11 @@ large: my algorithm and ILP spend much time finding the answer.
 
 - [ ] ksp time complexity
 - [ ] APF
+
+
+- [x] Promise
+- [x] normalized
+
+execvp: Permission denied
+failed to execute ./Debug/CSLSAlgorithmi
+do not add permission to shell script
