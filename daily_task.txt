@@ -1,11 +1,15 @@
 ﻿---------------
 doing 
-my grauduation paper
 design pattern
 
 
-http://web.stanford.edu/class/cs244/timetable.html
+http://mp.weixin.qq.com/s/ketN7eBCNYN9N2gWbW19rw
+Paving the Way towards NFV: An Infrastructure based Approach
 
+firewall
+l2 hub
+l2 switch
+https://greatresearch.org/blog/
 
 Doing every day 
 hum-sing method
@@ -27,7 +31,6 @@ learn logical thinking,when i read hongguan and logical thinking, translating an
 
 
 
-曾静心研究MQTT等物联网协议，关注物联网行业动态，熟悉Eclipse等开源社区；
 
 软件性能算法：负责软件性能算法设计与关键技术研究，包含分布式并行算法、数据库算法、数据分析与挖掘；
 信性能算法：负责通信算法（GSM/WCDMA/LTE/WIFI/5G/铜线/光/微波）研究、负责网络规划与网络优化算法的研究与交付、负责电信领域的数据分析与挖掘；
