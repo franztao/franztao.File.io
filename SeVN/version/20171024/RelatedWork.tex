@@ -1,0 +1,62 @@
+
+
+Network virtualization is a promising technology to re-
+duce the operating costs and management complexity of net-
+works, and it is receiving an increasing amount of research
+interest [7]. Reliability is bound to become a more promi-
+nent issue as infrastructure providers move toward virtual-
+izing their networks over cheaper commodity hardware [3].
+Analysis on the reliability of overlay networks in terms of
+connectivity in the overlays has been developed [17]. Un-
+fortunately, it is not applicable to our problem as we are
+concerned with critical virtual nodes and embedding them
+as an entire infrastructure with reliability guarantees.
+Fault tolerance is provided in data centers [19, 13] through
+excessive redundant nodes and links organized in a special
+way. These works provide reliability but do not customize
+reliability guarantees to embedded VInfs.
+While we are not aware of works studying the allocation of
+reliable virtual networks, [23] considered the use of “shadow
+VNet”, namely a parallel virtualized slice, to study the re-
+liability of a network. However, such slice is not used as a
+back-up, but as a monitoring tool, and as a way to debug
+the network in the case of failure. [22] considered the use
+of virtualized router as a management primitive that can be
+used to migrate routers for maximal reliability.
+Meanwhile some works address node fault tolerance at the
+virtualization level. Bressoud [4] was the first few to intro-
+duce fault tolerance at the hypervisor. Two virtual slices
+residing on the same physical node can be made to operate
+in sync through the hypervisor on the same physical node.
+Others [10, 9] have made progress for the virtual slices to be
+duplicated and migrated over a network. Various duplica-
+tion techniques and migration protocols were proposed for
+different types of applications (web servers, game servers,
+and benchmarking applications) [9]. Remus [10] and Ke-
+mari [21] are two other systems that allows for state syn-
+chronization between two virtual nodes for full, dedicated
+redundancy. However, these works focus on the practical
+issues, and do not address the resource allocation issue.
+VNsnap [15] is another method to take static snapshots of
+an entire virtual infrastructure to some reliable storage, in
+order to recover from failures. This can be stored as reliably
+in a distributed manner as replicas [6], or as parities [11,
+25]. VNsnap does not address synchronization, nor guaran-
+tee sufficient resources for recovery from snapshots.
+Fundamentally, there are methods to construct topologies
+for redundant nodes that address both nodes and links reli-
+ability [1, 12]. Based on some input graph, additional links
+are introduced such that the least number is needed. How-
+ever, a node failure, in this case, may involve migrations
+among the remaining nodes to preserve the original topol-
+ogy. This may not be suitable in a scenario where migrations
+may disrupt other running parts of the network.
+
+Our problem involves virtual network embedding [8, 18]
+with added node and link redundancy for reliability. Our
+model employs the use of path-splitting [26], which allows a
+link to be split over multiple routes such that the aggregate
+flow across those routes equal to the demand between the
+two nodes. This gives more resilience to link failures and
+allows for graceful degradation. A related work that does
+not use path-splitting for embedding reliability is [16].

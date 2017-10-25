@@ -1,0 +1,15 @@
+\section{SeVN backup resource embed formulation}
+After designing an SeVN, in this section we also formulate its embedding problem as a heuristic method fitting for both FD-SeVN and FI-SeVN embedding, since the difference between them in embedding approach could be reconciled by a general resources sharing constraint. More details would be elaborated in the following part.
+
+%Besides, with respect to the node embedding, we have the assumption that all the virtual nodes in SeVN should be mapped on physically isolated substrate nodes. However, for virtual links embedding, since not all the virtual links or not all their bandwidth would be employed simultaneously under single node failure, some virtual links could share substrate resources if they are embedded on the same substrate link, which would reduce the total substrate bandwidth needed.
+
+
+\subsection{additional embedded backup resource}
+From Sec.\ref{lab:DynamicProgrammingEquation}, we should obtain node to node map $P_i$, then compute out every node should reallocate how much computation and every edge should reallocate how much bandwith in substrate network SN. As most virtual network embedding algorithm, node mapping phase is completed, the next procedure is edge mapping phase. we use dijkstra algorithm request path of substrate node with respect to every virtual network's node, then reallocate path's bandwith into substrate network.
+
+
+Finally, we repeat the procedure of graph decomposition and multiple knapsack problem for each following node failure to
+construct the final FD-SeVN. As shown in Fig.\ref{fig:FD}, partial augment of the SeVN for each node failure is presented. It is
+worth noting that, every step of partial enhancement is based on the latest step.
+
+
