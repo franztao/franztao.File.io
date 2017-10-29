@@ -1,44 +1,51 @@
 
 \section{Evaluation}
-In the proposed two step for $\MyProblemAbrreviation$ problem, we employ a proactive failure dependent protection(FD) based $\MyProblemAbrreviation$ design with sufficient redundancy before embedding process in order to conquer the limitation of existing work, which consider the redundancy within the embedding process and failure independent protection based migration approach in resource efficiency.
+In the proposed two step for $\MyProblemAbrreviation$ problem, we employ a proactive failure dependent protection(FD) based $\MyProblemAbrreviation$ design with sufficient redundancy before embedding process in order to conquer the limitation of existing work, which consider the redundancy within the embedding process and failure independent protection based migration approach in resource efficiency.(Shared or nonShared)
 
 
 In this section, we evaluate the performance of the SeVN heuristic method when allocating resources with considered all virtual nodes. In particular, we focus on the resource usage of the physical infrastructure and virtual network request, and the admission rates of eVN survivable requests. We further compare that to a virtual request where VN do not have survivability requirement, i.e.
 virtual network request (labeled VN), as a baseline to gauge the additional amount of resources consumed for survivability.
 
-current: every virtual network's request exist relative lease time, record current virtual or substrate network's parameters in current situation.
-Accumulate: additional record every virtual or substrate network's parameters.
+current: every virtual network's request exist relative lease time, record current virtual or substrate network's performance in current situation.
 
+Accumulate: additional record every virtual or substrate network's performance.
+
+We first describe the simulation setup, then present the simulation results.
 \subsection{Simulation Settings}
-For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability $\VirtualNodenodeProbability$. The computing requirements on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$. The arrivals of VN requests are modeled by a Poisson process (with mean of 10 requests per 100 time units). The duration of the requests follows an exponential distribution with 1000 time units on average.
-We assume the relative cost of computing and bandwidth is $\RelativeCostbetweenComputingBandwidth$\cite{armbrust2009above,yu2010survivable}, which means $\theta=\RelativeCostbetweenComputingBandwidth$. The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using random generating graph method. The computing(bandwidth) resources of the substrate nodes (links) are real
-numbers uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and
-$\SubStrateEdgeBandwithMaximum$).
+For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability $\VirtualNodenodeProbability$. The computing requirements on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$.
+
+VN requests arrive randomly over a timespan of $\SubstrateNewtorkRunTimeInterval$ time slots and the inter-arrival time is
+assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot. A high request rate and long lease times ensures that the physical infrastructure is operating at high utilization.
+
+We assume the relative cost of computing and bandwidth is $\RelativeCostbetweenComputingBandwidth$\cite{armbrust2009above,yu2010survivable}, which means $\theta=\RelativeCostbetweenComputingBandwidth$. The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using random generating graph method. The computing(bandwidth) resources of the substrate nodes (links) are real numbers uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and $\SubStrateEdgeBandwithMaximum$).
 %To model the facility node failure scenario, we randomly choose one substrate facility node to fail in every $\SubStrateFacilityNodeFailDuration$ time units..
 %the GT-ITM tool\cite{zegura1996model}
 
-The physical infrastructure consists of 40 compute
-nodes with capacity uniformly distributed between 50 and 100 units. These nodes are
-randomly connected with a probability of 0.4 occurring between any two nodes, and the
-bandwidth on each physical link is uniformly distributed between 50 and 100 units. VInf
-requests arrive randomly over a timespan of 800 time slots and the inter-arrival time is
-assumed to follow the Geometric distribution at a rate of 0.75 per time slot. The resource
-lease times of each VInf follows the Geometric distribution as well at a rate of 0.01 per time
-slot. A high request rate and long lease times ensures that the physical infrastructure is
-operating at high utilization. Each VInf consists of nodes between 2 to 10, with a compute
-capacity demand of 5 to 20 per node. Up to 90$\%$ of these nodes are critical and all failures
-are independent with probability 0.01. Connectivity between any two nodes in the VInf is
-random with probability 0.4, and the minimum bandwidth on any virtual link is 10 units.
-There are two main sets of results: (i) scaling the maximum bandwidth of a virtual link
-from 20 to 40 units while reliability guarantee of every VInf is 99.99$\%$, and (ii) scaling the
-reliability guarantee of each VInf from 99.5$\%$ to 99.995$\%$ while the maximum bandwidth
-of a virtual link is 30 units.
+%The arrivals of VN requests are modeled by a Poisson process (with mean of 10 requests per 100 time units). The duration of the requests follows an exponential distribution with 1000 time units on average.
+
+%The physical infrastructure consists of 40 compute nodes with capacity uniformly distributed between 50 and 100 units. These nodes are
+%randomly connected with a probability of 0.4 occurring between any two nodes, and the
+%bandwidth on each physical link is uniformly distributed between 50 and 100 units. VInf
+%requests arrive randomly over a timespan of 800 time slots and the inter-arrival time is
+%assumed to follow the Geometric distribution at a rate of 0.75 per time slot. The resource
+%lease times of each VInf follows the Geometric distribution as well at a rate of 0.01 per time
+%slot. A high request rate and long lease times ensures that the physical infrastructure is
+%operating at high utilization. Each VInf consists of nodes between 2 to 10, with a compute
+%capacity demand of 5 to 20 per node. Up to 90$\%$ of these nodes are critical and all failures
+%are independent with probability 0.01. Connectivity between any two nodes in the VInf is
+%random with probability 0.4, and the minimum bandwidth on any virtual link is 10 units.
+%There are two main sets of results: (i) scaling the maximum bandwidth of a virtual link
+%from 20 to 40 units while reliability guarantee of every VInf is 99.99$\%$, and (ii) scaling the
+%reliability guarantee of each VInf from 99.5$\%$ to 99.995$\%$ while the maximum bandwidth
+%of a virtual link is 30 units.
 
 \subsection{Measure Parameters}
- Accordingly, the performance of optimal solution of $\MyProblemAbrreviation$ design and embedding formula, and different measures of heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding Stress, and other measures as described in the follow.
+
+
+Accordingly, the performance of optimal solution of $\MyProblemAbrreviation$ design and embedding formula, and different measures of heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding Stress, and other measures as described in the follow.
 \begin{itemize}
-  \item Accepted Ratio: Ratio of embedded virtual networks that were successfully survivable and embedded into the substrate topology.
-  \item Utilization:  number of virtual or substrate links/nodes.
+  \item Accepted Ratio: Ratio of embedded virtual networks that were successfully augmented for survivable guarantees and embedded into the substrate topology.
+  \item Utilization:  number of virtual/substrate opened links/nodes.
   \item Stress: Average number of virtual links/nodes that have been assigned to the substrate links/nodes or  substrate links/nodes.
   \item Cost, Revenue, and Cost/Revenue: Cost: Sum of CPU and bandwidth resources being used for the embedding. Revenue: Sum of CPU and bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.
  \item Active Nodes: Number of nodes that need to be active in order to host all the virtual networks. This metric is especially useful in the context of energy efficient VNE algorithms.
@@ -117,20 +124,21 @@ Substrate Network Accumulate Utilization\ref{fig:UtilizationAccumulateSubstrateN
 
 \subsection{Substrate Utilization/ Virtual Utilization}
 ratio of substrate network's utilization to virtual network's utilization
-UtilizationSubVir2VirNet\ref{fig:UtilizationSubVir2VirNet}:
+
+Substrate Utilization/ Virtual Utilization\ref{fig:UtilizationSubVir2VirNet}:
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/UtilizationSubVir2VirNet}\\
-  \caption{UtilizationSubVir2VirNet}\label{fig:UtilizationSubVir2VirNet}
+  \caption{Substrate Utilization/ Virtual Utilization}\label{fig:UtilizationSubVir2VirNet}
 \end{figure}
 
-UtilizationSubVir2VirNetAccumulate\ref{fig:UtilizationSubVir2VirNetAccumulate}:
+Substrate Utilization/ Virtual Utilization Accumulate\ref{fig:UtilizationSubVir2VirNetAccumulate}:
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/UtilizationSubVir2VirNetAccumulate}\\
-  \caption{UtilizationSubVir2VirNetAccumulate}\label{fig:UtilizationSubVir2VirNetAccumulate}
+  \caption{Substrate Utilization/ Virtual Utilization Accumulate}\label{fig:UtilizationSubVir2VirNetAccumulate}
 \end{figure}
 
 
@@ -144,6 +152,7 @@ Virtual Network Current Stress\ref{fig:StressCurrentVirtualNetwork}:
   \includegraphics[width=3in]{Fig/StressCurrentVirtualNetwork}\\
   \caption{Virtual Network Current Stress}\label{fig:StressCurrentVirtualNetwork}
 \end{figure}
+
 Virtual Network Accumulate Stress\ref{fig:StressAccumulateVirtualNetwork}:
 \begin{figure}
   \centering
@@ -151,13 +160,15 @@ Virtual Network Accumulate Stress\ref{fig:StressAccumulateVirtualNetwork}:
   \includegraphics[width=3in]{Fig/StressAccumulateVirtualNetwork}\\
   \caption{Virtual Network Accumulate Stress}\label{fig:StressAccumulateVirtualNetwork}
 \end{figure}
+
 Substrate Network Current Stress\ref{fig:StressCurrentSubstrateNetwork}:
 \begin{figure}
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/StressCurrentSubstrateNetwork}\\
-  \caption{Virtual Network Accumulate Stress}\label{fig:StressCurrentSubstrateNetwork}
+  \caption{Substrate Network Current Stress}\label{fig:StressCurrentSubstrateNetwork}
 \end{figure}
+
 Substrate Network Accumulate Stress\ref{fig:StressAccumulateSubstrateNetwork}:
 \begin{figure}
   \centering
@@ -172,7 +183,7 @@ Substrate Network Accumulate Stress\ref{fig:StressAccumulateSubstrateNetwork}:
 \subsection{Cost}
 Cost: Sum of CPU and bandwidth resources being used for the embedding.
 
-In this work, the embedding cost is calculated as the cost of the substrate resources (i.e. cost of node computaion. on all facility nodes and edge bandwidth. on all fiber links) consumed to satisfy the $\MyProblemAbrreviation$ resource requirements. And, in this simulation, we assume there are sufficient resources in all the substrate components.
+In this work, the embedding cost is calculated as the cost of the substrate resources (i.e. cost of node computaion on all facility nodes, edge bandwidth on all fiber links) consumed to satisfy the $\MyProblemAbrreviation$ resource requirements. And, in this simulation, we assume there are sufficient resources in all the substrate components.
 
 
 Cost Current SubstrateNetwork\ref{fig:CostCurrentSubstrateNetwork}:
@@ -264,46 +275,54 @@ Cost Revenue Accumulate\ref{fig:CostRevenueAccumulate}:
   \caption{Accumulate Cost Revenue}\label{fig:CostRevenueAccumulate}
 \end{figure}
 
+\subsection{Virtual Network Request and successful Survivable embedded Virtual Network Request}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/VirNetReqSurNetReq}\\
+  \caption{Virtual Network Request and successful Survivable embedded Virtual Network Request}\label{fig:VirNetReqSurNetReq}
+\end{figure}
+
 %\subsection{Migration Frequency}
 %As mentioned above, FD-EVN algorithms achieve higher acceptance ratio and lower embedding cost at the cost of more node migration after facility node failure, which would cause service interruption and should be examined carefully, especially for the application with SLA constraints. We run our simulation in $\SubstrateNewtorkRunTimeInterval$ time unites, which corresponds to about $\SubStrateFacilityNodeFailDuration$ requests on average in each instance of simulation. The migration frequency
 %after random facility node  failure is presented in Fig. 8 in terms of the number of VN nodes.
 
 
-\begin{figure*}
-  \centering
-  % Requires \usepackage{graphicx}
-
-
-
- \begin{equation*}
-\left[ {\begin{array}{*{20}{c}}
-&C_{P_{2.2}}&C_{P_{2.3}}&C_{P_3}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.2}}\\
-{R_{V_1}}&\infty&\infty&\infty&\infty&\fbox{N+(2)+4+5+3}&\infty&${N+(2)+4+5+3}$&\infty&\infty&\infty\\
-R_{V_2}&\fbox{4}&\infty&\infty&\infty&\infty&${N+(3)+4+6}$&\infty&\infty&${N+(3)+4+6}$&\infty\\
-R_{V_3}&\infty&${M+(2)+5}$&\fbox{5}&\infty&\infty&\infty&\infty&\infty&\infty&${N+(5)+5+6}$\\
-R_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&\infty&\infty&${N+(6)+3}$&\infty&\infty\\
-\end{array}} \right]
-\end{equation*}
- \begin{equation*}
-\left[ {\begin{array}{*{20}{c}}
-&C_{P_{1}}&C_{P_3}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.2}}\\
-{R_{V_1}}&4&\infty&\infty&${M+4}$&\infty&$N+(2)+4+5+3$&\infty&\infty&\infty\\
-R_{V_2}&\infty&\infty&\infty&\infty&${M+(1)+4+1} $&\infty&\infty&${N+(3)+4+6}$&\infty\\
-R_{V_3}&\infty&6&\infty&\infty&\infty&\infty&\infty&\infty&$N+(5)+5+6$\\
-R_{V_4}&\infty&\infty&0&\infty&\infty&\infty&$N+(6)+3$&\infty&\infty\\
-\end{array}} \right]
-\end{equation*}
-
- \begin{equation*}
-\left[ {\begin{array}{*{20}{c}}
-&C_{P_{1}}&C_{P_{2.2}}&C_{P_{2.3}}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.3}}\\
-R_{V_1}&\fbox{5}&\infty&\infty&\infty&M+5&\infty&${N+(2)+4+5+3}$&\infty&\infty&\infty\\
-R_{V_2}&\infty&\mbox{6}&\infty&\infty&\infty&\fbox{M+6}&\infty&\infty&${N+(3)+4+6}$&\infty\\
-R_{V_3}&\infty&\infty&\fbox{M+(2)+1}&\infty&\infty&\infty&\infty&\infty&\infty&${N+(5)+5+6}$\\
-R_{V_4}&\infty&\infty&\infty&\fbox{0}&\infty&\infty&\infty&${N+(6)+3}$&\infty&\infty\\
-\end{array}} \right]
-\end{equation*}
-\end{figure*}
+%\begin{figure*}
+%  \centering
+%  % Requires \usepackage{graphicx}
+%
+%
+%
+% \begin{equation*}
+%\left[ {\begin{array}{*{20}{c}}
+%&C_{P_{2.2}}&C_{P_{2.3}}&C_{P_3}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.2}}\\
+%{R_{V_1}}&\infty&\infty&\infty&\infty&\fbox{N+(2)+4+5+3}&\infty&${N+(2)+4+5+3}$&\infty&\infty&\infty\\
+%R_{V_2}&\fbox{4}&\infty&\infty&\infty&\infty&${N+(3)+4+6}$&\infty&\infty&${N+(3)+4+6}$&\infty\\
+%R_{V_3}&\infty&${M+(2)+5}$&\fbox{5}&\infty&\infty&\infty&\infty&\infty&\infty&${N+(5)+5+6}$\\
+%R_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&\infty&\infty&${N+(6)+3}$&\infty&\infty\\
+%\end{array}} \right]
+%\end{equation*}
+% \begin{equation*}
+%\left[ {\begin{array}{*{20}{c}}
+%&C_{P_{1}}&C_{P_3}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.2}}\\
+%{R_{V_1}}&4&\infty&\infty&${M+4}$&\infty&$N+(2)+4+5+3$&\infty&\infty&\infty\\
+%R_{V_2}&\infty&\infty&\infty&\infty&${M+(1)+4+1} $&\infty&\infty&${N+(3)+4+6}$&\infty\\
+%R_{V_3}&\infty&6&\infty&\infty&\infty&\infty&\infty&\infty&$N+(5)+5+6$\\
+%R_{V_4}&\infty&\infty&0&\infty&\infty&\infty&$N+(6)+3$&\infty&\infty\\
+%\end{array}} \right]
+%\end{equation*}
+%
+% \begin{equation*}
+%\left[ {\begin{array}{*{20}{c}}
+%&C_{P_{1}}&C_{P_{2.2}}&C_{P_{2.3}}&C_{P_4}&C_{B_{1.1}}&C_{B_{1.2}}&C_{B_{2.1}}&C_{B_{2.4}}&C_{B_{3.2}}&C_{B_{3.3}}\\
+%R_{V_1}&\fbox{5}&\infty&\infty&\infty&M+5&\infty&${N+(2)+4+5+3}$&\infty&\infty&\infty\\
+%R_{V_2}&\infty&\mbox{6}&\infty&\infty&\infty&\fbox{M+6}&\infty&\infty&${N+(3)+4+6}$&\infty\\
+%R_{V_3}&\infty&\infty&\fbox{M+(2)+1}&\infty&\infty&\infty&\infty&\infty&\infty&${N+(5)+5+6}$\\
+%R_{V_4}&\infty&\infty&\infty&\fbox{0}&\infty&\infty&\infty&${N+(6)+3}$&\infty&\infty\\
+%\end{array}} \right]
+%\end{equation*}
+%\end{figure*}
 
 
 
