@@ -34,7 +34,7 @@ Redistribute physical resource corresponding to augment graph $G^o$  with additi
 \subsubsection{Graph Decomposition}
 Star Structure: A star structure s is an attributed, single-level, rooted tree which can be represented by a 7-tuple $star=(v_*,c_*,C_*,s_*,S_*,L_*,B_*)$ as shown in Figure \ref{fig:GraphDecomposition}, where $v_*$ is the root node, $c_*$ is the needed node's computation, $C_*$ is the node's remain computation could be resigned again, $s_*$ is the node's service type, $S^*$ is service type set of the node, $L_*$ is other all nodes  adjacent with nodes $v_*$, $B_*$ is the bandwidth of each link $e_{ij}$ associated with the root node $v_*$. Edges exist between the root node and its adjacent nodes, and no edge exists among its adjacent nodes.
 
-More exactly, for node $v_n$ in an attributed graph  $G_V (V_V,E_V,s_V,S_V,L_V,C_V,B_V,M_V)$, we can generate a star structure $star_n$ corresponding to $v_n$ in the following way: $star_n=(v_n,c_n,C_n,s_n,S_n,L_n,B_n)$ where $s_n$ is a service type $se_i$ running in node $v_n$, $S_n=\{se_{j}|$ for all $se_j$ belong node $v_n$ service set$\}$.  $L_n=\{l(v_u)|$ for all nodes  adjacent with $n\}$, $B_n=\{B_{n,u}| $for all $e_{n,u}\in E\}$, $M^V$ is initial map relationship when there is no node failure. Accordingly, we can derive N star structures for a graph from a substrate network with embedded Virtual network of N nodes (we just discuss N virtual nodes fail). In this way, a graph can be transformed to a set of star structure. For example, construct $star_2$ corresponding to node $v_2$, $star_2=(v_2,3,7,se_2,\{se_2,se_3\},\{v_1,v_3\},\{b_{21}=4,b_{23}=6\})$, virtual node $v_1$ correspond star structure $star_1=(v_1,2,5,se_1,\{se_1\},(v_2,v_3,v_4),\{b_{12}=4,b_{13}=5,b_{14}=3\})$
+More exactly, for node $v_n$ in an attributed graph  $G_V (V_V,E_V,s_V,S_V,L_V,C_V,B_V,M_V)$, we can generate a star structure $star_n$ corresponding to $v_n$ in the following way: $star_n=(v_n,c_n,C_n,s_n,S_n,L_n,B_n)$ where $s_n$ is a service type $se_i$ running in node $v_n$, $S_n=\{se_{j}|$ for all $se_j$ belong node $v_n$ service set$\}$.  $L_n=\{l(v_u)|$ for all nodes  adjacent with $n\}$, $B_n=\{B_{n,u}| $for all $e_{n,u}\in E\}$, $M^V$ is initial map relationship when there is no node failure. Accordingly, we can derive N star structures for a graph from a substrate network with embedded Virtual network of N nodes (we just discuss N virtual nodes fail). In this way, a graph can be transformed to a set of star structure. A quintessential example should be cited that construct $star_2$ corresponding to node $v_2$, $star_2=(v_2,3,7,se_2,\{se_2,se_3\},\{v_1,v_3\},\{b_{21}=4,b_{23}=6\})$, virtual node $v_1$ correspond star structure $star_1=(v_1,2,5,se_1,\{se_1\},(v_2,v_3,v_4),\{b_{12}=4,b_{13}=5,b_{14}=3\})$
 %, $C^*$ is the computation resource requirement of every nodes, $C^n=\{C^n_{u}|$for all $e_{n,u}\in E\}$
 \begin{figure}
 \centering
@@ -46,9 +46,9 @@ More exactly, for node $v_n$ in an attributed graph  $G_V (V_V,E_V,s_V,S_V,L_V,C
 
 
 Due to the particularity of star structure, the alignment cost between two star structures can be computed easily as below. For two star structures $star_x$ and $star_y$, if $star_x$'s $s^x$ is not in $S^y$, the alignment cost of $star_x$ to $star_y$ is $\infty$, otherwise the alignment cost of $star_x$ to $star_y$ is equation \ref{equ:alignmentcost}:
-\begin{equation*}\label{equ:alignmentcost}
+\begin{equation}\label{equ:alignmentcost}
 \lambda(star_x,star_y)=\sum\limits_{l(v_u)\in L^x \cap L^y}\gamma|B_{y,u}-B_{x,u}|_0+\sum\limits_{l(v_u)\in L^x - L^y}\gamma B_{y,u}+\beta|c^x-c^y|_0+ \delta(v_x,v_y)+\theta(v_y)
-\end{equation*}
+\end{equation}
 where $\delta$, $\theta$ and $|x|_0$ is defined as follows:
 
 $\delta ({v_x},{v_y}) = \left\{ \begin{array}{l}

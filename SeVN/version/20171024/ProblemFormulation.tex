@@ -7,7 +7,7 @@
 \subsubsection{Node Fault tolerant (NFT)}
 We refer to the concept of $k$-NFT\cite{harary1996node}. Let $G(V,E)$ be a graph with $n$ nodes and $q$ edges. An $(n+k)$-node graph $G^*$ is k-node fault-tolerant, or $k$-NFT, with respect to $G$ if every graph $G^*-R$ obtained by removing any nodes set $R$ of $k>0$ nodes from $G^*$ contains $G$. Generally speaking, $G$ is subgraph isomorphism of $G^*-R$. We will refer to $G^*$ as a $k$-NFT supergraphs of $G$ or simply as a $k$-NFT($G$). We also say $G^*\cong$ $k$-NFT($G$), the set of all k-NFT($G$) supergraphs of $G$.
 
-The complete graph $K_{n+k}$ of $n + k$ nodes is trivially a k-NFT supergraph of every $G$ that contains up to n nodes. We are concerned mainly with $k$-NFT graphs that satisfy the following optimality criterion: If $G^*$ has the smallest number $|E(G^*)|$ of edges among all $(n + k)$-node supergraphs that are $k$-NFT with respect to $G$, then $G^*$ is optimally $k$-NFT with respect to $G$. The number $NFT_{ec}$$(G,k)$ =$|E(G^*)-E(G)|$ is called the $k$-NFT edge cost of $G$. The number $NFT_{nc}$$(G,k)$ =$|V(G^*)-V(G)|$ is called the $k$-NFT node cost of $G$, however $NFT_{nc}$$(G,k)$ = k with respect with k node fault tolerant graph of graph $G$ . For example, $NFT_{nc}$$(C_5,1)$ and $NFT_{ec}$$(C_5,1)$ of graph $C_5$ is 1 and 5 respectively as show in Fig.\ref{fig:NFTexample}.
+The complete graph $K_{n+k}$ of $n + k$ nodes is trivially a k-NFT supergraph of every $G$ that contains up to n nodes. We are concerned mainly with $k$-NFT graphs that satisfy the following optimality criterion: If $G^*$ has the smallest number $|E(G^*)|$ of edges among all $(n + k)$-node supergraphs that are $k$-NFT with respect to $G$, then $G^*$ is optimally $k$-NFT with respect to $G$. The number $NFT_{ec}$$(G,k)$ =$|E(G^*)-E(G)|$ is called the $k$-NFT edge cost of $G$. The number $NFT_{nc}$$(G,k)$ =$|V(G^*)-V(G)|$ is called the $k$-NFT node cost of $G$, however $NFT_{nc}$$(G,k)$ = k with respect with k node fault tolerant graph of graph $G$ . For example, $NFT_{nc}$$(C_5,1)$ and $NFT_{ec}$$(C_5,1)$ of graph $C_5$ is 1 and 5 respectively as demonstrated in Fig.\ref{fig:NFTexample}.
 
 \begin{figure}
   \centering
@@ -156,14 +156,14 @@ However, this poses a limitation since the result only guarantees graph isomorph
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=2in]{Fig/VNQ}\\
-\caption{Virtual Network Request: $G^V (V^V,E^V,s^V,L^V)$}\label{fig:VNQ}
+\caption{Virtual Network Request: $G^V (V^V,E^V,s^V)$}\label{fig:VNQ}
 \end{figure}
 
 \begin{figure}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=2in]{Fig/eVN}\\
-\caption{embedded Virtual Network: $G^V (V^V,E^V,s^V,L^V,S^V,C^V,B^V,M^V_V)$}\label{fig:eVN}
+\caption{embedded Virtual Network: $G^V (V^V,E^V,s^V,S^V,C^V,B^V,M^V_V)$}\label{fig:eVN}
 \end{figure}
 
 \begin{figure}
