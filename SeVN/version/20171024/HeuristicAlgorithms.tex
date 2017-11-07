@@ -3,7 +3,8 @@
 
 
 \subsection{SeVN Design Formulation}
-With the discussion above, for a given N-nodes VN, SeVN is designed within augment graph $G^o$ of N+1 nodes through properly selecting the necessary links between these nodes and dimensioning the resources requirements associated with these nodes and links.
+\label{sub:SeVNDesignFormulation}
+With the discussion above, for a given N-nodes VN, SeVN is designed within augment graph $G^o$ of N+k nodes through properly selecting the necessary links between these nodes and dimensioning the resources requirements associated with these nodes and links.
 
 Our design objective is to minimize the total amount of such resources(node computation, edge bandwidth) while still guaranteeing that if a node fails (that is, the node and its adjacent links are removed in the graph $G^o$) former graph still normal work, we can still assign each node/link of VN to a node/link of the SeVN, that has sufficient node computation and edge's bandwidth resources respectively.
 
@@ -29,6 +30,35 @@ The general idea of the heuristic for FD-SeVN design is to consider the failure 
 %This translates to ensuring that every backup node has guaranteed bandwidth to all neighbors of all critical nodes.
 
 Redistribute physical resource corresponding to augment graph $G^o$  with additional computational and bandwidth resource. concrete step is that apply for computational resource for virtual nodes and complete path around bandwidth for virtual edges.
+
+
+At the same time, for the task graph reassigning approach in
+Edit Grid, we also introduce the permutation matrices, which is
+an (N+1)×(N+1) orthogonal matrix having PPT = PT P = I
+(where I is the identity matrices), to indicate the corresponding
+state vector transformation of Edit Grid. Assume at this point
+that the initial state of the Edit Grid η0 contains the given task
+graph in its standard placement. And we have another state η1
+such that it describes task graph situated on the Edit Grid in a
+different way as shown in Fig. 3(c), as well as its state vector
+shown in Table I. Based on the knowledge in graph theory,
+the two graphs corresponding to these different states of Edit
+Grid are isomorphic [14] which suggests that there is a bijection
+between these two attributed graphs. So, we could employ
+permutation matrices to implement task graph reassignment in
+Edit Grid. For example, with the following Edit Grid state η0 :
+
+However, as a matter of fact, computing the minimum additional
+resources needed to convert one attributed graph to
+another (hereafter called graph alignment problem, GAP) is an
+NP-complete problem which could be reduced from the Graph
+Edit Distance problem [26]. Therefore, we relax some constraints
+and propose two heuristic algorithms. In detail, we first
+decompose a graph to a multiset of star structures which retains
+certain structural information of the original graph. Then, the
+graph alignment cost could be approximated by the matching
+cost between two graphs based on their star representations.
+This approach is elaborated as follows.
 
 \subsection{FD-SeVN Algorithm}
 \subsubsection{Graph Decomposition}

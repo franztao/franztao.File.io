@@ -1,15 +1,11 @@
 ﻿---------------
 doing 
 design pattern
-
-
-http://mp.weixin.qq.com/s/ketN7eBCNYN9N2gWbW19rw
-Paving the Way towards NFV: An Infrastructure based Approach
-
-firewall
-l2 hub
-l2 switch
 https://greatresearch.org/blog/
+
+
+
+use python to program a webscaner to decrypto the password 
 
 Doing every day 
 hum-sing method
@@ -19,10 +15,8 @@ think out the mathamatic problem from tao's book
 to do
 BBC american dream
 upload all experimental data into blog
-use python to program a webscaner to decrypto the password 
 
 csapp virtual network
-read topological video
 
 when i read some post,then i should auto-translate it before scanning it.
 learn logical thinking,when i read hongguan and logical thinking, translating and noting the main content of the project,wirting some inspiration.
@@ -41,7 +35,6 @@ learn logical thinking,when i read hongguan and logical thinking, translating an
 精通GIS、3维地图、3D模型等定位与地理呈现算法与实现； 
 具备存储分层Cache算法、分布式文件系统、EC算法等存储相关冗余算法技术经验。
 
-熟悉docker开源技术，熟悉docker工作原理或相关组件，或是读过相关代码；
 
 分布式计算/虚拟化技术/并行计算(任务调度，资源管理)；
 网络文件存储技术/网络文件系统/分布式文件系统；熟悉分布式数据库；
@@ -88,6 +81,7 @@ GNS
 TCL language
 openflow
 metasploit
+docker
 
 4532791061810001000
 
