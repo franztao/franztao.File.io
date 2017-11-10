@@ -14,8 +14,6 @@ think out the mathamatic problem from tao's book
 
 to do
 BBC american dream
-upload all experimental data into blog
-
 csapp virtual network
 
 when i read some post,then i should auto-translate it before scanning it.
@@ -23,17 +21,6 @@ learn logical thinking,when i read hongguan and logical thinking, translating an
 
 
 
-
-
-
-软件性能算法：负责软件性能算法设计与关键技术研究，包含分布式并行算法、数据库算法、数据分析与挖掘；
-信性能算法：负责通信算法（GSM/WCDMA/LTE/WIFI/5G/铜线/光/微波）研究、负责网络规划与网络优化算法的研究与交付、负责电信领域的数据分析与挖掘；
-加速算法：负责网络智能芯片、终端芯片等架构或算法研发（DPI、加解密、压缩、搜索）；
-存储算法：从事存储领域前沿技术与高效算法研究、存储冗余控制算法、存储可靠性及性能提升等；
-媒体算法：负责图像处理、模式识别、音效增强等研究开发 
-有，熟悉计算机原理/软件开发，懂得IP网络/TCP/IP协议；
-精通GIS、3维地图、3D模型等定位与地理呈现算法与实现； 
-具备存储分层Cache算法、分布式文件系统、EC算法等存储相关冗余算法技术经验。
 
 
 分布式计算/虚拟化技术/并行计算(任务调度，资源管理)；
