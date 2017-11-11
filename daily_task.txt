@@ -4,9 +4,6 @@ design pattern
 https://greatresearch.org/blog/
 
 
-
-use python to program a webscaner to decrypto the password 
-
 Doing every day 
 hum-sing method
 sing-write method
@@ -20,45 +17,6 @@ when i read some post,then i should auto-translate it before scanning it.
 learn logical thinking,when i read hongguan and logical thinking, translating and noting the main content of the project,wirting some inspiration.
 
 
-
-
-
-分布式计算/虚拟化技术/并行计算(任务调度，资源管理)；
-网络文件存储技术/网络文件系统/分布式文件系统；熟悉分布式数据库；
-存储容灾技术/数据分级存储技术/网络存储Qos技术/SSD技术/IP-SAN技术/虚拟存储技术/面向对象存储技术/存储安全技术/网络存储管理技术/海量存储网络结构与设计/并行海量存储系统结构研究/网络存储系统研究/存储密集型应用研究；
-海量数据在线分析/数据挖掘/搜索/用户行为分析；
-TCP/IP协议和网络QoS技术，有文件传输/P2P文件传输/P2P streaming/网络拥塞控
- 
- 
-6、熟悉虚拟化及容器技术（KVM/Docker）者优先；
-7、熟悉分布式存储技术（Ceph）者优先；
-3、熟练掌握Python语言，熟悉Django, Pecan, Flask等常用Web框架；
-5、理解掌握Nginx/Apache等常用WebServer的工作原理和优化
-1、熟悉OpenStack社区Keystone, Horizon, Ceilometer, Heat等Governance项目；
-2、负责云网络的业务编排的设计与开发；
-3、熟悉数据中心网络产品：路由器、防火墙、负载均衡器、VPN业务网关的特性；
-4、熟悉OpenStack、CloudStack等云平台，对其中网络的业务编排有较深入的认识；
-
-
-
-Job Responsibilities
-☘  Perform R&D on network virtualization technologies, such as NFV (Network Function Virtualization), SDN (Software Defined Networking), SFC (Service Function Chaining), MEC (Mobile Edge Computing), to evolve next generation mobile network.
-☘  Software development and integration of key modules for LTE networks such as, LTE EPC, NFV orchestrator, NFV infrastructure (NFVI) platform.
-☘  Research major open projects related to cloud/NFV: OPNFV, ONP, OpenStack, OpenDaylight, ONOS, DPDK.
-Requirements
-☘  Bachelor’s degree with 6+ years of experience, or Master’s degree with 3+ years of experience in Computer Science, Engineering or Telecommunications related studies, or PhD holder in related area. Less experience (including fresh graduates) will be considered for Engineer position.
-☘  Knowledge of computer networks and protocols.
-☘  Knowledge and solid experience in C/C++ programming; Python, Java, Golang would be a plus.
-☘  Knowledge/experience in open projects on: DPDK, OPNFV, ONP, OpenStack, OpenDaylight, ONOS, would be a plus.
-☘  Knowledge and experience in SDN switches, would be a plus.
-☘  Networking technologies such as VxLAN, BGP, would be a plus.
-☘  Linux networking & virtualization: Kernel network stack, OVS, KVM/Qemu, libvirt, LXC/Docker, would be a plus.
-☘  Fluent in English, good written and oral communications skills.
-
-
-
-
-
 Wireshark is a free and open source packet analyzer
 tcpdump is a common packet analyzer that runs under the command line.
 mininet,opendaylight
@@ -70,7 +28,5 @@ openflow
 metasploit
 docker
 
-4532791061810001000
 
-mathmodel2016
 
