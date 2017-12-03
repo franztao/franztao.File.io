@@ -113,3 +113,6 @@ all 关于以上所有情况的警告。
 	
 Windows注册表的那些事儿
 http://blog.csdn.net/ful1021/article/details/29294153
+
+华为架构师8年经验谈：从单体架构到微服务的服务化演进之路
+http://blog.csdn.net/u012562943/article/details/51814905

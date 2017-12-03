@@ -2,8 +2,6 @@
 doing 
 design pattern
 https://greatresearch.org/blog/
-
-
 Doing every day 
 hum-sing method
 sing-write method
@@ -26,7 +24,8 @@ GNS
 TCL language
 openflow
 metasploit
+haskell
 docker
-
+MAVEN
 
 

@@ -88,6 +88,7 @@ Accordingly, the performance of optimal solution of $\MyProblemAbrreviation$ des
   \item Stress: Average number of virtual links/nodes that have been assigned to the substrate links/nodes or  substrate links/nodes.
   \item Cost, Revenue, and Cost/Revenue: Cost: Sum of CPU and bandwidth resources being used for the embedding. Revenue: Sum of CPU and bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.
  \item Active Nodes: Number of nodes that need to be active in order to host all the virtual networks. This metric is especially useful in the context of energy efficient VNE algorithms.
+ \item Migration Frequenct Ratio: Average number of substrate nodes/links that have been assigned to the virtual links/nodes.
 \end{itemize}
 %\begin{table*}
 %\label{tab:measure}
@@ -322,7 +323,13 @@ Cost Revenue Accumulate\ref{fig:CostRevenueAccumulate}:
   \caption{Virtual Network Request and successful Survivable embedded Virtual Network Request}\label{fig:VirNetReqSurNetReq}
 \end{figure}
 
-%\subsection{Migration Frequency}
+\subsection{Migration Frequency}
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/MigrationFrequence}\\
+  \caption{Migration Frequency Ratio}\label{fig:MigrationFrequence}
+\end{figure}
 %As mentioned above, FD-EVN algorithms achieve higher acceptance ratio and lower embedding cost at the cost of more node migration after facility node failure, which would cause service interruption and should be examined carefully, especially for the application with SLA constraints. We run our simulation in $\SubstrateNewtorkRunTimeInterval$ time unites, which corresponds to about $\SubStrateFacilityNodeFailDuration$ requests on average in each instance of simulation. The migration frequency
 %after random facility node  failure is presented in Fig. 8 in terms of the number of VN nodes.
 
