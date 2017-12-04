@@ -1,0 +1,56 @@
+http://www.sdnlab.com/17218.html
+https://www.zhihu.com/question/20832139
+
+
+#SDN与OpenFlow技术简介
+起源与发展
+斯坦福大学的Clean Slate项目组
+Nick McKeown教授
+开放网络基金会（Open NetworkingFoundation）
+Google的Urs H?lzle在以OpenFlow@Google
+#OpenFlow标准和规范
+#Openflow规范主要分为如下四大部分
+OpenFlow规范将Switch上的端口分为3种类别：
+1.OpenFlow的端口（Port）
+a) 物理端口，即设备上物理可见的端口；
+b) 逻辑端口，在物理端口基础上由Switch设备抽象出来的逻辑端口，如为tunnel或者聚合等功能而实现的逻辑端口；
+c) OpenFlow定义的端口。
+
+2. OpenFlow的FlowTable（国内有直译为“流表”的）
+
+OpenFlow规范中定义了三种消息类型：
+1.Controller/Switch消息
+2.异步（Asynchronous）消息
+3.对称（Symmetric）消息
+
+#OpenFlow的应用
+1.网络虚拟化 – FlowVisor
+2.负载均衡 – Aster*x
+3.绿色节能的网络服务 – ElasticTree
+
+
+唯有熟悉了网络技术的历史，掌握了网络遇到的难题，哪些用SDN来解决是非常彻底的
+软件独立于硬件，让硬件标准化，软件平台化，信息中心化
+
+#硬件标准化/软件平台化
+网络设备行业却一直没有形成这样的生态圈。我觉得是两个方面的原因
+1.整个行业没有意识
+2.大玩家没有意愿
+#信息中心化
+信息中心化是对传统网络的一大挑战
+##转发
+网络设备的核心是转发，即packet从接口X转发到接口Y。转发的依据是选路，路由协议会告诉系统如何选路。转发最头疼的问题是link down
+###SDN的优势
+1.加快路由计算的速度
+2.预先做出某种判断
+##配置管理
+配过防火墙，或者见过大型网络下防火墙在生产环境下实际配置
+##DEBUG
+
+
+一是定义 SDN 概念和架构背后的人，以及推动SDN 架构走向成熟的标志性事件；二是最初SDN借鉴了哪些关键的技术理念，SDN架构是如何在这些技术原理的支撑下发展起来的
+http://mp.weixin.qq.com/s?__biz=MzI2MDQ1MzQ0OA==&mid=2247483841&idx=1&sn=528afaabce2e4a5e6e9debbbcac66881&chksm=ea6824e6dd1fadf0fe2e77b7a0a21a397492e9e381a05837faa55dbd966e2222fc48ae54af70&mpshare=1&scene=1&srcid=0313brOJuGDXp5zY3DbeZdo3#rd
+
+
+1.SDN的本质是可编程，传统网络设备也会提供编程能力——比如SNMP、REST API，但是这种编程能力的粒度比较粗，API本质上是对配置命令的一种封装所以是一种北向接口。而SDN描绘的编程能力粒度更加细，不但定义了北向接口也定义了面向数据平面的南向接口。
+
