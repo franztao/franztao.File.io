@@ -1,6 +1,8 @@
 
 \section{SeVN Problem Formulation}
 \label{sec:ProblemFormulation}
+
+\cite{cui2016big}
 In this section, From above section Sec.\ref{sec:Introduction}, we extract problem definition of the SeVN problem as follows: for a given VN request which had been embedded into SN with N task nodes, then survive the eVN with
 some additional nodes , a set of appropriate links to connect these N+k nodes and match node's function type, and reserve sufficient computing/communication resources in these nodes/links to guarantee the restorability of eVN request after a facility node failure.
 
@@ -140,7 +142,7 @@ There are different combinations of function type belonging all nodes of embedde
 
 There exist many backup virtual nodes $B(V,S)$ which are abstracted from un-occupied substrate network's node. When one fault node $v_i$ appeared in virtual network request $G^V (V^V,E^V,s^V,C^V,B^V)$, Solving the survivable request of embedded virtual network is of approximately equivalence with asking 1-FNFT$(G,B)$ of graph $G$ and backup nodes set $B$ without computation and bandwidth's limitation.
 %Generally speaking, survivable embedded virtual network's request is function node fault-tolerant of virtual network $G^V (V^V,E^V,s^V)$ with backup nodes set $B(V,S)$ without considering computation and bandwidth limitation.
- 
+
 Startup new node, connect link among nodes $V\cup B$, augment node computing or augment link bandwidth of existing link to construct $G^o$ as shown in Fig.\ref{fig:FD},\ref{fig:FI}, for which G is a subgraph of $G^o-R(R \subseteq V\cup B)$, $R$ is node set.We would connect some edges amongst nodes $V\cup B$ to construct FNFT graph of arbitrary graph $G$ as show Fig.\ref{fig:FD},\ref{fig:FI}, when only one node of VN failed, the topological graph of VN is also subgraph isomorphism of graph of SeVN, whose proof is describe as supposed in Sec\ref{sec:SubgraphIsomorphismProof}. %For example, when node v3 failed the node v2 run function 3 and backup node run function 2 so that the graph of VNR is subgraph isomorphism of SVN-v3 as shown in figure \ref{fig:optgraph_n1_fail},\ref{fig:optgraph_n2_fail},\ref{fig:optgraph_n3_fail}, the red edge and red node is disable.
 %write the bandwith and computting resource between FI and FD.
 

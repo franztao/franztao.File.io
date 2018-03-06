@@ -140,12 +140,14 @@ We can define $dp[i][{C_1}][{C_2}] \ldots [{C_m}]$ recursively as in Equation \r
 
 \begin{equation}
 \label{equ:statetransferequation}
+
 \min \left\{ \begin{array}{l}
 dp[i - 1][{C_1-c_i}][{C_2}] \ldots [{C_m}]+\lambda(star^L_i,star^R_1)\\
 dp[i - 1][{C_1}][{C_2-c_i}] \ldots [{C_m}]+\lambda(star^L_i,star^R_2)\\
 ...\\
 dp[i - 1][{C_1}][{C_2}] \ldots [{C_m-c_i}]+\lambda(star^L_i,star^R_n)
 \end{array} \right.
+
 \end{equation}
 
 dynamic programming method  could be applied to solve the multiple knapsack problem whose time complexity is $O[(n+b)*n*\prod_{i=1}^{n+b}C^i]$, which is pseudo-polynomial time. Space complexity is $O[n*\prod_{i=1}^{n+b}C^i]$.
@@ -174,7 +176,6 @@ dynamic programming method  could be applied to solve the multiple knapsack prob
 \RETURN SeVN,$G^S$
 \end{algorithmic}
 \end{algorithm}
-
 
 
 

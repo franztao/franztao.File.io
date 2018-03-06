@@ -47,6 +47,7 @@ In any real virtual networks, any nodes of virtual network  are deployed with a 
   \caption{function virtual network (VN) embedding and one node failure}\label{fig:VNmapSN}
 \end{figure}
 
+
 proactive or reactive type
 
 There are two main survivability methods: protection and restoration \cite{ramamurthy2003survivable}. Failure protection is done in a proactive way to reserve the backup resources before any failure happens. Reactive mechanisms, which are called restoration mechanisms, react after the failure occurs and start the backup restoring mechanism. However, some data loss is possible in the reactive case. There exist two kinds of backups for the protection scheme: dedicated backup or shared backup. In shared backup, the resources for the backup may be shared with other backups. In the dedicated case the backup resources are not shared for other backups.
@@ -71,7 +72,7 @@ node cost larger than edge cost
 
 As nodes often represent expensive components (servers) and edges represent less expensive interconnections (links) \cite{armbrust2009above,yu2010survivable}, most attention has been devoted to node faults, i.e., the removal of nodes (and their incident edges), rather than edge faults where only edges are removed.
 
-The node failure type we focus in this paper is independent node failures. multiple independent or dependent failure nodes problem could be discussed in the future. 
+The node failure type we focus in this paper is independent node failures. multiple independent or dependent failure nodes problem could be discussed in the future.
 
 
 %
@@ -87,4 +88,4 @@ The node failure type we focus in this paper is independent node failures. multi
 %\caption{terminology used throughout this paper}\label{tab:term}
 %\end{table}
 
-The organization of this paper is as follow. In the next section, we briefly describe the background, notations and define survivability in Sec.\ref{sec:ProblemFormulation}. Finally, we evaluate and validate the ideas through simulation in Sec.\ref{sec:Evaluation}. 
+The organization of this paper is as follow. In the next section, we briefly describe the background, notations and define survivability in Sec.\ref{sec:ProblemFormulation}. Finally, we evaluate and validate the ideas through simulation in Sec.\ref{sec:Evaluation}.
