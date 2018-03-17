@@ -72,7 +72,7 @@ star node,the all adjacent edges of the node is assigned into the one srlg or pa
 
 20160824
 the algorithms just run 30s .
-- [ ] the glpk have itself internal bug.(glp_set_obj_coef)
+the glpk have itself internal bug.(glp_set_obj_coef)
 
 20160825：
 in dense and less srlg graph  ,my algorithm can use compress node shortest path to find mustnode path.
@@ -80,8 +80,7 @@ in undirected graph ,we should add reverse edge which in the same srlg with forw
 
 
 20160831
-had i better use commercial library of ILP
-when the graph is dense , our algorithm may use dijstra to find must node path.
+had i better use commercial library of ILP when the graph is dense , our algorithm may use dijstra to find must node path.
 - [x] write localsolver code
 - [x] find some tool to show this graph dynamically
 - [x] write annonation 
@@ -124,12 +123,7 @@ when the graph is dense , our algorithm may use dijstra to find must node path.
 - [x] COSE ()becasue of the time's limitation,COSE return a near- [ ] optimal answer) 
 - [x] KSP (pthread problem,pthred_cancel)
 
-20161012
-KSP get no answer when its code is put after other.
-result- [ ] >APSum
-Count of SRLG between the AP/BP
-there exist a paper which use the method put by me solve the multi- [ ] objection
-find many testcase in these paper.
+
 
 20161016
 COSE runtime time exceed 10s
@@ -140,12 +134,12 @@ min- [ ] min and min- [ ] sum can be put into consideration together.
 20161204
 i think our algorithm may be the optimal solution for solving SRLG- [ ] disjoint min- [ ] min
 could we utilize bloomfilter into the SDN's flowtable 
-ask xiegaogang ,the application
+- [x] ask xiegaogang ,the application
 
 20161216
-- [x]  [].允许算法在规定时间内找路失败（即允许算法是概率多项式算法）
-- [x]  [].范数里还有那些范数能解决这种问题
-- [x]  [].适用于图中找点的数据结构和数学理论
+- [x]  允许算法在规定时间内找路失败（即允许算法是概率多项式算法）
+- [x]  范数里还有那些范数能解决这种问题
+- [x]  适用于图中找点的数据结构和数学理论
  
 子问题是不是相对于原问题上，求得解的概率要大
 
@@ -154,7 +148,7 @@ ask xiegaogang ,the application
 
 20170305
 - [x]  the algorithm could be extended to be utilized to sovle min-sum or min-max?
-> just discuss the differntce among min- min with minsum and min-max.
+- [x] just discuss the differntce among min- min with minsum and min-max.
 solve domain-disjoint paths
 
 
@@ -162,7 +156,7 @@ solve domain-disjoint paths
 three dimension idea to solve SRLG
 - [ ] how to decide which edge is belonging which SRLG
 - [x] find a graph tool that can show topo's figure.
-> contact huawei's engineer
+- [x] contact huawei's engineer
 >19大规模网络拓扑可视化工具的研究综述
 - [ ] i should write a program that is used to chech wether the answer is right
 - [ ] how to process edge or node of multiconstrain ? the most addition norm
@@ -184,15 +178,14 @@ large: my algorithm and ILP spend much time finding the answer.
 
 
 20170517
-- [ ] the fifth sample 
+- [X] the fifth sample 
 
-- [ ] ksp time complexity
-- [ ] APF
+- [X] ksp time complexity
+- [X] APF
 
 
 - [x] Promise
 - [x] normalized
 
-execvp: Permission denied
-failed to execute ./Debug/CSLSAlgorithmi
+execvp: Permission denied failed to execute ./Debug/CSLSAlgorithmi
 do not add permission to shell script
