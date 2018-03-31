@@ -3,6 +3,8 @@ doing
 
 
 formulation of SCLS
+note of computer theory
+
 
 design pattern
 
