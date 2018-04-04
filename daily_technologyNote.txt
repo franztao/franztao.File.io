@@ -148,3 +148,8 @@ http://blog.csdn.net/u012562943/article/details/51814905
 2.所有事情或大部分事情通过计算机自动完成。（但是思考并形成可重复自动化运行的算法是人做的）
 3.部分思考被机器替代。（即机器本身通过学习自己产生算法，而替代人的思考）
 
+
+any problem in computer science can be sloved by another layer of indirecition
+
+
+
