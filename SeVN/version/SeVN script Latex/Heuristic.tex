@@ -1,0 +1,62 @@
+﻿\section{Heuristics Algorithms}
+\subsection{Heuristics Algorithms Design Formulation of SeVN }
+\label{sub:SeVNDesignFormulation}
+With the discussion above, for a given N-nodes VNR, SeVN is designed within augment graph $G^*$ of N+k nodes through properly selecting the necessary nodes or links between these nodes and dimensioning the resources requirements associated with these nodes and links.
+
+Our design objective is to minimize the total amount of such resources(startup node number, node computing, edge bandwidth) while still guaranteeing that if a node fails (that is, the node and its adjacent links are removed in the graph $G^*$) virtual network request's topological graph still keep integration of graph $G$ topological structure and insist normal work, we can still assign each node/link of VN to a node/link of the SeVN, that has sufficient node computing and edge's bandwidth resources respectively. It is our objection that firstly minimize number of start-up backup nodes, then minimize node computing resource, last minimize edge bandwidth resource to construct function node fault tolerant graph $G^*$.
+
+Furthermore, there are two different cases. If re-embedding or migrating the unaffected node(un-failed node) is allowed for failure recovering, it is known as the FD-SeVN design problem. Otherwise, after each failure, if the failed node is restored in the only one backup node without migrating other unaffected node, it is referred to as the FI-SeVN design problem. Generally speaking, designing FD-SeVN is a combinatorial optimization problem and needs to be investigated in depth, while FI-SeVN exists exclusively and could be figured out easily.
+
+
+\subsection{Design Procedure}
+
+%这样转可以还原的。为什么。
+In this section, we propose a heuristic algorithms for FD-SeVN problem, as well as an SeVN problem's algorithm with resources sharing consideration fitting for both FD-SeVN and FI-SeVN.
+
+Decompose topological graph of  virtual network $VN$ into N star structure $STAR$, construct match relationship between star structures. This match relationship is corresponding node transform cost relationship.
+
+However, as a matter of fact, computing the minimum additional resources needed to convert one attributed graph to another (hereafter called graph alignment problem, GAP) is an NP-complete problem which could be reduced from the Graph Edit Distance problem \cite{justice2006binary}. Therefore, we propose a heuristic algorithms in detail, and we first decompose a graph to a set which contains star structures which retains certain structural information of the graph of embedded virtual network. Then, the graph alignment cost could be approximated by the matching cost(transform cost) between two graphs based on their star representations. This approach is elaborated as follows.
+
+
+The general idea of the heuristic for FD-SeVN design is to consider the failure of primary nodes in virtual network node's label sequentially, and in each step, compute the minimum additional resources needed to reassign the task graph based on an incremental approach (i.e., recovering from the current node failure should take not only the survived primary nodes/links resources into consideration, but also the survived redundant resources reserved for previous node failure). After iteratively execute all the node failures, SeVN is constructed within the Star Structure with the added redundant resources in each step. Generally speaking, select a optimal node $v_i$ to minimum additional resource with respect to every steps.(Min value for every step )
+
+
+%This translates to ensuring that every backup node has guaranteed bandwidth to all neighbors of all critical nodes.
+
+Redistribute physical resource corresponding to augment graph $G^i$  with additional computational and bandwidth resource. concrete step is that apply for computational resource for virtual nodes and complete path around bandwidth for virtual edges.
+
+
+%At the same time, for the task graph reassigning approach in
+%Edit Grid, we also introduce the permutation matrices, which is
+%an (N+1)×(N+1) orthogonal matrix having PPT = PT P = I
+%(where I is the identity matrices), to indicate the corresponding
+%state vector transformation of Edit Grid. Assume at this point
+%that the initial state of the Edit Grid η0 contains the given task
+%graph in its standard placement. And we have another state η1
+%such that it describes task graph situated on the Edit Grid in a
+%different way as shown in Fig. 3(c), as well as its state vector
+%shown in Table I. Based on the knowledge in graph theory,
+%the two graphs corresponding to these different states of Edit
+%Grid are isomorphic [14] which suggests that there is a bijection
+%between these two attributed graphs. So, we could employ
+%permutation matrices to implement task graph reassignment in
+%Edit Grid. For example, with the following Edit Grid state η0 :
+
+
+\subsection{FD-SeVN Algorithm}
+\subsubsection{Graph Decomposition}
+Star Structure: A star structure s is an attributed, single-level, rooted tree which can be represented by a 7-tuple $star=(v^*,c^*,C^*,f^*,F^*,L^*,B^*)$ as shown in Figure \ref{fig:StarRepresentation}, where $v^*$ is the root node, $c^*$ is the  node's demand computing, $C^*$ is the node's remain computing capacity could be resigned again, $f^*$ is the node's function type, $F^*$ is function type set of the node, $L^*$ is other all nodes  adjacent with nodes $v^*$, $B^*$ is the bandwidth of each link $e_{ij}$ associated with the root node $v^*$. Edges exist between the root node and its adjacent nodes, and no edge exists among its adjacent nodes.
+
+More exactly, for node $v_i$ in an attributed graph  $G^V (V^V,E^V,f^V,F^V,L^V,C^V,B^V,M^V)$, we can generate a star structure $star_i$ corresponding to $v_i$ in the following way, $star_i=(v^V_i,c^V_i,C^V_i,f^V_i,F^V_i,L^V_i,B^V_i)$ where $f^V_i$ is a function type $f_i$ running in node $v_i$, $F^V_i=\{f_{j}|$ for all $f_j$ belong node $v_i$ function set$\}$.  $L^V_i=\{v_j|$ for all nodes $v_j$  adjacent with node $v_i\}$, $B^V_i=\{b_{i,j}| $ for all $e_{i,j}\in L^V_i\}$. Accordingly, we can derive $N$ star structures from topological graph of substrate network with embedded virtual network of N nodes (we uniformly discuss all N virtual nodes fail). In this way, topological graph of embedded virtual network can be transformed to a  star structure. A quintesfntial example should be cited that construct $star_2$ corresponding to node $v_2$, $star_2=(v_2,3,7,f_2,\{f_2,f_3\},\{v_1,v_3\},\{b_{21}=4,b_{23}=6\})$, virtual node $v_1$ correspond star structure $star_1=(v_1,2,5,f_1,\{f_1\},(v_2,v_3,v_4),\{b_{12}=4,b_{13}=5,b_{14}=3\})$.
+%, $C^*$ is the computation resource requirement of every nodes, $C^n=\{C^n_{u}|$for all $e_{n,u}\in E\}$
+%\begin{figure}
+%\centering
+%% Requires \usepackage{graphicx}
+%\includegraphics[width=3in]{fig/GraphDecomposition}\\
+%\caption{Graph Decomposition}\label{fig:GraphDecomposition}
+%\end{figure}
+
+
+
+
+

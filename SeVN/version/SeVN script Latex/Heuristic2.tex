@@ -1,0 +1,92 @@
+
+\subsubsection{Match Items}
+Based on the topological graph of the embedded virtual network, we construct star structure set $STAR^L$, which erase some star structure corresponding to one substrate node without embedding virtual node. when calculating the virtual node $v_i$ which map to substrate node $s_i$ failure, constructing star structure set $STAR^R$ with erasing the node $v_i$ and the edge adjacent with node $v_i$ as shown in Fig.\ref{fig:StarRepresentation}.
+
+\subsubsection{Alignment Cost Matrix}
+Due to the particularity of star structure, the alignment cost between two star structure set can be computed easily as below. For the two star structures $star^L_i$ and $star^R_j$ which is from $STAR^L$ and $STAR^R$ respectively, if node $f_i^V$ of $star^L_i$  is not included in $F^V_j$, the alignment cost of $star^L_i$ to $star^R_j$ is $\infty$, otherwise the alignment cost of $star^L_i$ to $star^R_j$ is
+%equation \ref{equ:alignmentcost}:
+%\begin{equation}\label{equ:alignmentcost}
+\[\lambda(star^L_i,star^R_j)=\sum\limits_{v_u\in L_i \cap L_j}\gamma|b_{i,u}-b_{j,u}|_0+\newline
+\sum\limits_{v_u\in L_i - L_j}\gamma b_{i,u}+\beta|c_i-c_j|_0+ \delta(v_i,v_j)+\theta(v_j)\]
+%\end{equation}
+where $\delta$, $\theta$ and $|x|_0$ is defined as follows:
+
+$\delta ({v_i},{v_j}) = \left\{ \begin{array}{l}
+{\rm{M_{m}}}\\
+0
+\end{array} \right.\begin{array}{*{20}{c}}
+v_i\neq v_j\\
+{otherwise}
+\end{array}$
+
+$\theta ({v_j}) = \left\{ \begin{array}{l}
+{\rm{C_{s}}}\\
+0
+\end{array} \right.\begin{array}{*{20}{c}}
+v_j\ is\ free\\
+{otherwise}
+\end{array}$
+
+$|x|_0 = \left\{ \begin{array}{l}
+{x}\\
+0
+\end{array} \right.\begin{array}{*{20}{c}}
+if\ x\geq 0\\
+{if\ x\leq 0}
+\end{array}$
+
+$\delta(v_i,v_j)\neq 0$ indicates that  root node $v_i$ should be reallocated to node $v_j$. $M_m$ is migration cost, $C_s$ is startup new node cost.we define $\lambda(star_i,star_j)$ according to graph edit distance\cite{sanfeliu1983distance}. In mathematics and computer science, graph edit distance (GED) is a measure of similarity (or dissimilarity) between two graphs.
+
+In this way, both the topological graph of  embedded virtual network and the residual graph are composed to two star structure sets. With such a graph decomposition once a specific virtual node failure, an alignment matrix of the two star structure set could be constructed based on the alignment cost definition above. Therefore, the proposed GAP could be transformed to a (multiple knapsack problem) which will be investigated in the following part. For example, the alignment cost matrix when virtual network $v_1$ fail as follow.
+\begin{equation*}
+\tiny{
+ {\begin{array}{*{20}{c}}
+&R_{S_{2}}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
+{L_{V_1}}&\infty&\infty&\infty&\fbox{$C_{s}$+(2)+12}&C_{s}+(2)+12&\infty\\
+L_{V_2}&\fbox{4}&\infty&\infty&C_{s}+(3)+10&\infty&C_{s}+(3)+10\\
+L_{V_3}&M_{m}+(5)+11&\fbox{5}&\infty&\infty&\infty&C_{s}+(5)+11\\
+L_{V_4}&\infty&\infty&\fbox{3}&\infty&C_{s}+(6)+3&\infty\\
+\end{array}}
+}
+\label{lab:Node1FaliureAlignmentMatrix}
+\end{equation*}
+
+To elaborate this approach, Figure \ref{fig:StarRepresentation} shows how the 4-nodes VN be decomposed into a set of four star structures (shown as $STAR_L$ ), and each containing a primary task node (also called root node which is highlighted and color as blue), its adjacent links and its neighboring nodes.
+
+\subsection{Multiple Knapsack Problem}
+Based on the discussion above, the computation problem of minimal graph alignment cost is transformed to solving optimal multiple knapsack problem, which is one of the fundamental combinational optimization problems. In our case, there are two sets of vertices corresponding to the two sets of star structure of $STAR_L$ and $STAR_R$ respectively, and the weight of the edge between star structures of $STAR_L$ and $STAR_R$ is the alignment cost between the corresponding two stars.
+
+Firstly, we proposed the formalization of the multiple knapsack problem as follow:
+
+$M_{ij}=1(1\leq i\leq n,1 \leq j \leq m)$ represent that whether the i-th virtual node map the j-th substrate node, n and m denote virtual node's size and substrate node's size respectively.
+
+$Cost_{ij}(1\leq i\leq n,1 \leq j \leq m)$ represent that the cost of i-th virtual node map the j-th substrate node. $\infty$ represent that there is not map relationship.
+
+$c_i(1\leq i\leq n)$ represent that the i-th virtual node demand computational resource, $C_i(1\leq i\leq m)$ represent that the i-th substrate network maximum useful computation resource.
+
+Objection: minimum $Cost_{ij}*M_{ij}$
+
+constraints: $\sum\limits_{1\leq j\leq m} M_{ij}=1$,$\sum\limits_{1\leq i\leq n} c_i*M_{ij}\leq C_j$
+
+\subsubsection{Dynamic Programming Equation}
+\label{lab:DynamicProgrammingEquation}
+We propose a dynamic programming equation method for solving the multiple knapsack problem. Assume $C_1,C_2,\ldots,C_n$, $C$ are strictly positive integers. Define $dp[i][{C_1}][{C_2}] \ldots [{C_m}]=0$ to be the minimum value that can be attained with n capacity variables  which less than or equal to $C_i$ using items up to knapsack i.
+
+Initial state $dp[i][{C_1}][{C_2}] \ldots [{C_m}]=0$ is firstly assigned as infinity $\infty$. $dp[i][{C_1}][{C_2}] \ldots [{C_m}]=0$ when there is no any virtual node which is confirmed to map into another node. The total cost of current state is zero. $dp[i][{C_1}][{C_2}] \ldots [{C_m}]$ when  i nodes is succeeded to be mapped another nodes. The total cost of current state is minimal cost from optimal node location.
+
+We can define $dp[i][{C_1}][{C_2}] \ldots [{C_m}]$ recursively as in Equation \ref{equ:statetransferequation}, when put i-th node into another node, in this situation, the current state is calculated from former i-1 nodes are succeeded to be mapped.
+
+\begin{equation}
+\label{equ:statetransferequation}
+\min \left\{ \begin{array}{l}
+dp[i - 1][{C_1-c_i}][{C_2}] \ldots [{C_m}]+\lambda(star^L_i,star^R_1)\\
+dp[i - 1][{C_1}][{C_2-c_i}] \ldots [{C_m}]+\lambda(star^L_i,star^R_2)\\
+...\\
+dp[i - 1][{C_1}][{C_2}] \ldots [{C_m-c_i}]+\lambda(star^L_i,star^R_n)
+\end{array} \right.
+\end{equation}
+
+dynamic programming method  could be applied to solve the multiple knapsack problem whose time complexity is $O[(n+b)*n*\prod_{i=1}^{n+b}C^i]$, which is pseudo-polynomial time. Space complexity is $O[n*\prod_{i=1}^{n+b}C^i]$.
+
+
+

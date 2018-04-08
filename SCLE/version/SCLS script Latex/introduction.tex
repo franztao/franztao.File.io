@@ -1,0 +1,51 @@
+\section{Introduction}
+With the rapid increase of application data and the deployment of high speed network, a failure in the network infrastructure (e.g. a fiber cut or a router shutdown) may lead to a vast amount of data loss. This makes it more important to exploit diversity routing with additional paths to increase the survivability \cite{yallouz2017tunable} of end-to-end transmissions.
+
+Besides the difficulty and complexity in finding the additional paths, it is also difficult to enable transmission through the alternative paths in conventional networks. The emerging Software Defined Networking (SDN) paradigm \cite{mckeown2008openflow,jain2013b4} separates the data plane from the control plane, and applies centralized control for more efficient network monitoring and management. Compared to the decentralized routing in conventional networks, the centralized control in SDN allows advanced routing service such as diversity routing to be easily implemented \cite{jarschel2014interfaces,muller2014survivor,lopez2016role}. For example, some simple extensions on OpenFlows allow nodes to autonomously react to failures by switching to a pre-computed end-to-end backup path \cite{kempf2012scalable,sgambelluri2013openflow}. This makes the diversity routing a viable and increasingly important method for network survivability.
+
+
+
+ To protect a mission-critical connection from a single link (node) failure, a common solution for path protection \cite{kuipers2012overview} is to find a link (node) disjoint pair of paths from a source (ingress) node to a destination (egress) node. When there are no faults, the active path (AP, also called working path or primary path) is used to carry the traffic. When a fault occurs, the traffic is re-routed along the other path, called backup path (or BP). For a network to be reliable, both AP and BP paths must not share a common risk of failure.
+
+A Shared Risk Link Groups (SRLG) is a group of network links that share a common physical resource (cable, conduit, node or substructure) whose failure will cause the failure of all links of the group.
+To ensure that AP and BP paths do not fail at the same time, they should be SRLG-disjoint without links sharing any common risks. Since the traffic is carried on AP most of the time, it is useful that the cost of one path of the disjoint path pair is minimized to use the  path as AP. In order to enable SRLG disjoint routing and facilitate other failure risk management, it is important to know which links form SRLG. Some recent studies \cite{sebos2001auto,zhang2017rsvp} propose to automatically discover and collect the SRLG information. %\note{You cannot make up words without meaning to any others. You need to describe it. What I mean is to collect the SRLG information, that is, what links form a SRGL.} 
+In this paper, we focus on Min-Min SRLG-disjoint routing to find two SRLG-disjoint paths such that the smaller weight of these two paths is minimized.
+
+The finding of backup paths that are not coupled with the active path yet also efficient has been a big challenge and a problem that has attracted many attentions from academia and industries. Although several link/node-disjoint routing algorithms are proposed so far \cite{suurballe1984quick,bhandari1997optimal,li1990complexity,guo2003link,xu2004finding,beshir2011variants,guo2013finding,hu2003diverse}, the number of SRLG-disjoint routing algorithms is very limited.  A link-disjoint or node-disjoint routing problem is only a simple and specific case of SRLG-disjoint routing problems. Among the limited studies on SRLG-disjoint routing, one type of solution is to formulate an Integer Linear Programming (ILP) \cite{hu2003diverse} problem to jointly optimize the selection of both AP and BP, and then solve the formed ILP problem using the branch-and-bound \cite{lawler1966branch} search techniques. With a high time complexity, the ILP-based algorithms are not feasible for large networks.
+
+  To reduce the complexity, several heuristic algorithms following active-path-first (APF) are proposed \cite{oki2002disjoint,li2002fiber,eppstein1998finding}. However, this type of methods faces a big challenge. For a specific AP, it may not be able to find an SRLG disjoint BP even though a pair of disjoint paths do exist. This is the so-called "trap" problem \cite{dunn1994comparison}, which can exist even if the network is highly connected \cite{laborczi2001solving}, and becomes more severe when the network is sparse. Although some attempts are made to address the trap issue in a simple scenario where  one link belongs to only one SRLG,  a large number of paths need to be tested in order to find a disjoint path pair, which incurs a high computational complexity. As a network link may belong to several SRLGs, the problem can become intractable.
+
+In this work, based on the graph theory, we provide the insights for the trap problem when looking for the SRLG-disjoint paths. Specifically, for an AP found with the trap problem, we observe that there exists a sub-set of links on the AP path that no AP going through all these "problematic" links can find an SRLG-disjoint BP. We call this set as a SRLG Conflicting Link Set. Once encountering a trap problem, instead of searching through all possible alternative paths, we propose to look for the SRLG Conflicting Link Set based on max-flow min-cut theorem \cite{ford2015flows}. We further propose a divide-and-conquer min-min SRLG disjoint routing algorithm to partition the original routing problem into several sub-problems which can be executed in parallel to find the viable AP and BP pairs. Our main contributions are summarized as follows:
+
+
+
+%\begin{itemize}
+%  \item We propose a novel scheme to construct a new flow graph with a clever setting of the link capacity to facilitate the finding of the SRLG Conflicting Link Set.
+%  \item We propose an algorithm to find a  minimum SRLG Conflicting Link Set, which helps to reduce the complexity of searching for the alternative SRLG-disjoint path pair.
+%  \item Based on the risk sharing features of the SRLG graph, we transform the minimum SRLG Conflicting Link Set finding problem to a set cover problem, which allows us to apply general algorithms to find the minimum SRLG Conflicting Link Set under different complex SRLG scenarios (including a link belonging to one or multiple SRLG with various SRLG patterns).
+%  \item We propose a novel divide-and-conquer algorithm which can partition the original min-min SRLG disjointing routing problem into multiple sub-problems for parallel executions upon encountering a trap problem.  Compared to existing techniques, such a solution searching process can take advantage of the existing AP search results and parallel executions for significantly faster path finding.
+%  \item  We have done extensive simulations on a multi-core CPU platform to evaluate the proposed algorithms. The simulation results demonstrate that our algorithm can find the best solutions in different network scenarios at much faster speed.
+%\end{itemize}
+
+$\bullet$ We propose a novel scheme to construct a new flow graph with a clever setting of the link capacity to facilitate the finding of the SRLG Conflicting Link Set.
+
+$\bullet$ We propose an algorithm to find a  minimum SRLG Conflicting Link Set, which helps to reduce the complexity of searching for the alternative SRLG-disjoint path pair.
+
+$\bullet$ Based on the risk sharing features of the SRLG graph, we transform the minimum SRLG Conflicting Link Set finding problem to a set cover problem, which allows us to apply general algorithms to find the minimum SRLG Conflicting Link Set under different complex SRLG scenarios (including a link belonging to one or multiple SRLG with various SRLG patterns).
+
+$\bullet$ We propose a novel divide-and-conquer algorithm which can partition the original min-min SRLG disjointing routing problem into multiple sub-problems for parallel executions upon encountering a trap problem.  Compared to existing techniques, such a solution searching process can take advantage of the existing AP search results and parallel executions for significantly faster path finding.
+
+$\bullet$  We have done extensive simulations on a multi-core CPU platform to evaluate the proposed algorithms. The simulation results demonstrate that our algorithm can find the best solutions in different network scenarios at much faster speed.
+
+
+The rest of the paper is organized as follows. We introduce the related work in Section~\ref{sec:Related} and background in Section ~\ref{sec:PRELIMINARIES}. We introduce our problem and our basic solution to address the trap issue in Section~\ref{sec:Problem} and Section~\ref{sec:Trap problem and solution overview }, respectively. In Section~\ref{sec:Find SRLG conflict link set} and ~\ref{sec:Route Algorithm}, we present in details our algorithms for finding the SRLG Conflicting Link Set and the SRLG-disjoint routing paths. Finally, we conclude our work in Section~\ref{sec:conclusion}.
+
+
+
+
+
+
+%\section{Related work}
+%According to the objectives associated to the SRLG-disjoint path, there are several types SRLG-disjoint path finding problems, such as Min-Sum SRLG-disjoint path, Min-Max SRLG-disjoint path, Min-Min SRLG-disjoint path, Bounded SRLG-disjoint path.
+
+%Even the KSP algorithm, which is one of the most effective algorithm to deal with the trap problem for node/link disjoint path, has serious weakness. More specifically, a major problem of KSP is that after the current candidate AP fails the test (that is, it does not have a corresponding disjoint BP), the next candidate AP to be tested is selected solely based on the path length, without considering which link (or links) along the current candidate AP has caused the failure in finding disjoint BP. As a result, usually a large number of paths need to be tested in order to find a disjoint path pair. Which introduce large time complexity.

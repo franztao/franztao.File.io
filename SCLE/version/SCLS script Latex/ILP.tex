@@ -1,0 +1,56 @@
+\section{ILP}
+The paths of interest are between and . Again, for ease of exposition, we assume that is a directed graph.
+We first introduce some necessary notation.
+
+$\textbf{0}=[0,0,\ldots,0]^T$,the zero column vector
+
+$\textbf{1}=[1,1,\ldots,1]^T$,the unit column vector
+
+
+$w=[w_e]_{e\in \mathbb{E}}$ the cost row vector for the edges, where $w_e$ is
+the cost of edge $e\in \mathbb{E}$
+
+$u=[u_v]^T_{v\in \mathbb{V}}$ the source destination column vector, where
+${\rm{u_v}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ v = s}\\
+{ - 1}&{if\ v = d}\\
+0&{otherwise}
+\end{array}} \right.$
+
+$A=[a_{v,e}]_{\mathbb{V}\times \mathbb{E}}$ the node edge incidence matrix, where ${\rm{a_{v,e}}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ edge\ e\ originates\ from\ node\ v}\\
+{ - 1}&{if\ edge\ e\ terminates\ at\ node\ v}\\
+0&{otherwise}
+\end{array}} \right.$
+
+$H=[h_{r,e}]_{R\times E}$ the risk-edge incidence matrix, where ${\rm{h_{r,e}}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ edge\ e \in \mathbb{R}_r}\\
+0&{otherwise}
+\end{array}} \right.$
+
+$x_i=[x_{i,e}]^T_{e\in \mathbb{E}}$ the column vector containing edge decision variables for path i=AP,BP, where
+${x_{i,e}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ edge\ e \in path\ p_i}\\
+0&{otherwise}
+\end{array}} \right.$
+
+
+The problem of finding two SRLG diverse paths from s to d with minimum total edge cost can be formulated as the following ILP problem .
+
+min $(w\times x_{AP},w\times x_{BP})$
+
+such that $A\times x_i=u,(i=AP,BP)$,$x_{AP}+x_{BP}\leq \textbf{1}$, $(h_{r,e_j}\times x_{AP,e_j})+h_{r,e_j}\times x_{BP,e_j} \leq \textbf{1}(1\leq r \leq \mathbb{R},1\leq j \leq \mathbb{E})$
+
+The problem of finding two SRLG diverse paths from s to d with minimum total edge cost can be formulated as the following IQCP problem .
+
+min $(w\times x_{AP},w\times x_{BP})$
+
+such that $A\times x_i=u,(i=AP,BP)$,$x_{AP}+x_{BP}\leq \textbf{1}$, $H\times x_{AP}\times x_{BP}^T\times H^T = \textbf{0} $
+
+Constraint (1) guarantees that the edges selected based on
+$x_i$ is a path from s to d.
+
+Constraint (2) guarantees that the two path is link-disjoint.
+
+Constraint (3) guarantees that no one element in R is contained
+in both paths

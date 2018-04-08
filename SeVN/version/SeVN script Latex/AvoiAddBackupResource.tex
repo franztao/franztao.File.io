@@ -1,0 +1,49 @@
+
+\section{Avoid  duplicately adding backup resource}
+
+
+Given one node fails, after applying Algorithm \ref{alg:DPAlg} to calculate the minimum additional resource, new physical node and physical path is added and involved to maintain the network service. If a physical node that does not hold any virtual node before node fail is added to be the backup node, we should set the physical node with $a=1$ to indicate that this node is involved to hold virtual already.
+
+ As our survivable virtual network embedding problem wants to minimize the backup resource added when any one node fails instead of given one node failure, we should test each node fail one by one and add sufficient backup resource. As the backup resource only need when node fails,  the  backup resource  should be shared when different node fails. If we directly apply cost defined in (\ref{eq:edge weight}) to calculate the backup resources when another physical node fails, as cost defined in (\ref{eq:edge weight}) does not consider the backup resource sharing, it will result in a problem of duplicately adding backup resource.
+
+ To  solve this problem,  we add the  $M(j)$ to the physical star structure to denote the set of virtual nodes migrated into  physical node $s_j$ in the case of node failure.
+
+
+\begin{equation}
+PhysicalStar(s_j)=(s_j, \phi^{-1}( s_j), c_j, F(j), \phi(N(\phi^{-1}( s_j))), a, M(j))
+\end{equation}
+
+As the backup resource should be added to only once, to facilitate expressing  this constraint, we define following constraint.
+\begin{equation}
+\mu (x) = \left\{ {\begin{array}{*{20}{c}}
+   x & {x > 0}  \\
+   0 & {x \le 0}  \\
+\end{array}} \right.
+\end{equation}
+When we test another node fails, instead of cost defined in (\ref{eq:edge weight}), we define a new cost function by taking consideration of the backup resource sharing when different node fails.
+\begin{figure*}
+  \centering
+  % Requires \usepackage{graphicx}
+    \begin{equation}
+  \footnotesize
+w(i,j) = \left\{ {\begin{array}{*{20}{c}}
+   {\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} } & {{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right),{v_{i'}} \in M(j),k \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}  \\
+   {\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}}  + \lambda f({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)) + \beta {M_m} + \theta } & {{v_i} \notin \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right),{v_{i'}} \in M(j)}  \\
+\end{array}} \right.
+    \label{eq:new edge weight}
+    \end{equation}
+\end{figure*}
+
+As shown in  eq(\ref{eq:new edge weight}), the resource cost is setting according to two cases.  If virtual node $v_i$ is originally hold by  physical server $s_j$ or $v_i$ is migrated to the physical server, that is, ${{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right)}$, when its neighbor $v_k \in N(i)$ fails with ${\phi \left( k \right) \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}$, the path bandwidth cost is ${\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$.
+
+Otherwise, the virtual node $v_i$ is not hold by the physical server and not migrated to the server in previous node fail test, besides the bandwidth cost ${\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$, the node capacity cost ${\lambda f({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, VM migrate cost ${\beta {M_m}}$ and $\theta$ should be counted for mapping the virtual star ($v_i$) to the physical server ($s_j$). In ${f({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, if the backup capacity already allocated ${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is larger than amount needed  in current mapping (i.e., $d_i$), no resource is needed, otherwise, the backup resource gap ${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is needed.
+
+there are n+1 level's dynamic programming functions and there are $\prod_{i=1}^{m}C^i$ dynamic programming functions in every level. The time complexity of calculating every dynamic programming function is $O(m)$. Therefore, overall time complexity of the dynamic programming method is $n*\prod_{i=1}^{m}C^i*O(m)=O(n*m*\prod_{i=1}^{m}C^i)$. Additionally, for recording every level's virtual node's placement, the overall space complexity is $O[(n+1)*\prod_{i=1}^{m}C^i]$, which is, however, could be optimized to $O[\prod_{i=1}^{m}C^i]$, because when updating every level's dynamic programming function, the dynamic programming function only use back step level's dynamic programming function.
+
+
+ As shown in Fig.\ref{fig:StarRepresentationNode2} and Equ.(\ref{lab:Node2FaliureAlignmentMatrixNew}), the optimal $M_{ij}=\left[ {\begin{array}{*{20}{c}}
+1&0&0&0&0&0&0\\
+0&0&0&1&0&0&0\\
+0&1&0&0&0&0&0\\
+0&0&1&0&0&0&0
+\end{array}} \right]$.

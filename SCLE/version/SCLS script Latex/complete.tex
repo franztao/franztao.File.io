@@ -1,0 +1,79 @@
+\section{The complete min-min SRLG disjoint routing Algorithm}
+\label{sec:Route Algorithm}
+In this section, we first present our complete solution, then analyze its complexity.
+\subsection{Complete solution}
+Algorithm \ref{alg:min-min} shows the complete min-min SRLG disjoint routing Algorithm. The input parameter in the algorithm includes  the network graph ($G$), the source ($s$), the destination  ($d$), the inclusion link set should be included in AP ($\mathbb{I}$), and the exclusion link set should not be included in AP ($\mathbb{O}$). The output of the algorithm is the SRLG disjoint path pair $(AP,BP)$.
+
+To look for the SRLG disjoint paths, the smallest weight AP in the network is searched  first through FIND\_AP$(G,s,d, \mathbb{I},\mathbb{O})$ in step \ref{alg:findap} with $\mathbb{I}=\phi,\mathbb{O}=\phi$, and then BP is searched through  FIND\_SRLG\_Disjoint\_BP
+$(G,s,d,AP)$ in step \ref{alg:findsrlgdisjointbp}. Specially, the AP path can be found through the Dijkstra algorithm. To calculate BP, FIND\_SRLG\_Disjoint\_BP
+$(G,s,d,AP)$ includes two steps. First, for all the links on the AP, remove the links that share a common risk with these links. Second, the Dijkstra's algorithm runs over the remaining links of the network again to compute the second shortest path BP from $s$ to $d$.
+
+If we can find a SRLG-Disjoint BP, the Min-Min SRLG disjoint routing problem is solved and  the path pair found is returned as shown in step \ref{alg:returnpathpair}. Otherwise, a trap problem happens. To handle the trap problem, step  \ref{alg:findsrlgconflictinglinkset} first finds the SRLG Conflicting Link Set $\mathbb{T}$, step \ref{alg:dividedandconquer} further divides the original  Min-Min SRLG disjoint routing problem into $\left| \mathbb{T} \right|$ sub-problems based on the conflict set $\mathbb{T}$. All the sub-problems can be executed in parallel. Step \ref{alg:findfeasible} utilizes the set $\mathbb{F}$ to store the feasible solutions  satisfying that  both $A{P_i} \ne \phi$ and $B{P_i} \ne \phi$. Among all the feasible solutions in the $\mathbb{F}$, the path pair with the lowest AP path weight will be selected as the optimal solution for the original Min-Min SRLG disjoint routing problem.
+
+We take the graph in Fig.\ref{fig:CompositeGraph} as an example to illustrate  our Algorithm \ref{alg:min-min}.
+According to step $\ref{alg:findap}$, our  algorithm first searches for a path  $\mathbb{AP}=\{e_1,e_2,e_3,e_4,e_5,e_6,e_7,e_8\}$ with the smallest weight through the dijkstra algorithm, with the path shown as the dotted line in Fig.\ref{fig:CompositeGraph}(c). After removing the links on AP and also the links that share the common risks with AP, we have the graph in Fig.\ref{fig:CompositeGraph}(d), which is a disconnected graph and no BP can be found. %\note{You gave the exact example earlier. Dear sister, from the previous comments, we find we need a example to illustrate the how our algorithm runs}
+However, as shown in Fig.\ref{fig:CompositeGraph}(b), there exists a SRLG-disjoint path pair in the topology. Therefore, a trap problem happens. After finding the SRLG conflict link set $\{e_2,e_5,e_6\}$ in step $\ref{alg:findsrlgconflictinglinkset}$, we apply divide and conquer to divide the original problem ${\mathcal P}(\emptyset ,\emptyset )$  into three sub-problems, ${\mathcal P}(\emptyset ,\{e_2\} )$, ${\mathcal P}(\{e_2\} ,\{e_5\} )$ and ${\mathcal P}(\{e_2,e_5\} ,\{e_6\} )$ according to step $\ref{alg:dividedandconquer}$. After executing these sub-problems in parallel, the path pair with the minimum AP weight is returned.
+
+ %For example, subproblem ${\mathcal P}(\{e_2\} ,\{e_5\} )$ obtain a AP ($e_1,e_2,e_3,e_{11},e_{12},e_8$) whose corresponding BP ($e_15,e_18,e_3,e_6,e_7,e_{14}$). compare the AP's weight of ${\mathcal P}(\{e_2\} ,\{e_5\} )$  with other parellel subproblems in order to obtain optimal solution. subproblem ${\mathcal P}(\emptyset ,\{e_2\} )$ obtain a AP ($e_9,e_3,e_4,e_5,e_6,e_7,e_8$) which result finding no BP, so continue divide and conquer subproblem ${\mathcal P}(\emptyset ,\{e_2\} )$ as like Alg.\ref{alg:min-min} step 8.}
+
+\begin{algorithm}
+\small{
+\caption{Min-Min}
+\begin{algorithmic}[1]
+\label{alg:min-min}
+%\caption{Main process of Algorithm}
+\REQUIRE
+$G$: the network graph\\
+$s$: the source node\\
+$d$: the destination node \\
+$\mathbb{I}$:   the inclusion link set should be included in AP\\
+$\mathbb{O}$: the exclusion link set should not be included in AP\\
+\ENSURE
+AP: the active path\\
+BP: the backup path
+\STATE $AP=\emptyset$, $BP=\emptyset, \mathbb{I}=\emptyset, \mathbb{O}=\emptyset$
+\STATE $AP\leftarrow$ FIND$\_$AP$(G,s,d,\mathbb{I},\mathbb{O})$\label{alg:findap}
+\IF{$AP\neq\emptyset$}
+    \RETURN $BP\leftarrow$ FIND\_SRLG\_Disjoint\_BP$(G,s,d,AP)$\label{alg:findsrlgdisjointbp}
+    \IF{$BP\neq\emptyset$}
+        \RETURN {path pair $(AP,BP)$}\label{alg:returnpathpair}
+    \ELSE
+        \STATE find SRLG Conflicting Link Set $\mathbb{T}$\label{alg:findsrlgconflictinglinkset}
+        \STATE $\mathbb{T}\leftarrow \mathbb{T}-(\mathbb{I}\cup\mathbb{O})$
+        %\IF{$\mathbb{T}\neq \emptyset$}
+        \STATE {divide and conquer for execution in parallel\\
+        \tiny{
+        $\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\left\{ \begin{array}{l}
+ \left( {A{P_1},B{P_1}} \right)={{Min-Min}}\left( {G,s,d,\mathbb{I} ,\mathbb{O}\cup\{ {t_1}\} } \right), \\
+ \left( {A{P_2},B{P_2}} \right)={{Min-Min}}\left( {G,s,d,\mathbb{I}\cup\{ {t_1}\} ,\mathbb{O}\cup\{ {t_2}\} } \right), \\
+ \left( {A{P_3},B{P_3}} \right)={{Min-Min}}\left( {G,s,d,\mathbb{I}\cup\{ {t_1},{t_2}\} ,\mathbb{O}\cup\{ {t_3}\} } \right), \\
+  \cdots  \\
+ \left( {A{P_{\left| \mathbb{T} \right|}},B{P_{\left| \mathbb{T} \right|}}} \right) = {{Min-Min}}\left( {G,s,d,\mathbb{I}\cup \{ {t_1},{t_2}, \cdots ,{t_{\left| \mathbb{T} \right| - 1}}\} ,\mathbb{O}\cup\{ {t_{\left| \mathbb{T} \right|}}\} } \right) \\
+ \end{array} \right.$
+ }
+        }\label{alg:dividedandconquer}
+        \STATE{  {$\!\!\!\!\!\!\!\!\!\!\!F\leftarrow$ FIND\_FEASIBLE$(( {A{P_1},B{P_1}} )),\cdots,( {A{P_{|\mathbb{T} |}},B{P_{| \mathbb{T} |}}} )$}}\label{alg:findfeasible}
+        %\ENDIF
+         \IF{$F\neq{\emptyset,\emptyset}$}
+         \RETURN{path pair $(AP,BP)$ satisfying that $AP = \mathop {\arg \min }\limits_{AP} \left\{ F \right\}$}
+        \ENDIF
+
+    \ENDIF
+\ENDIF
+\end{algorithmic}
+}
+\end{algorithm}
+
+\subsection{Complexity analysis}
+\label{subsec:Complexity analysis}
+To find a SRLG disjoint path pair when an AP encounters a trap problem, our algorithm first calculates the SRLG Conflicting Link Set, and then solves the original problem by partitioning it into $|\mathbb{T}|$ sub-problems. As introduced in Section \ref{subsec:Set cover problem for SRLG Conflicting Link Set},  the edge number of cut set $\mathbb{L}_{\Phi}$ is usually not large, therefore, finding the SRLG Conflicting Link Set in our paper does not introduce much cost. Therefore, we focus on the computation cost on the path finding process.
+
+Generally, for a network with $|\mathbb{E}|$ links and $|\mathbb{V}|$ nodes, the complexity of finding the least weight path is $(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$. To solve the trap problem, our path finding problem is a little bit different from the original least weight path finding problem. We introduce some constraints for path finding, for example, an AP path must pass through a link set or cannot pass a set. As these link sets are usually not large, the constraints bring little  difference in the cost calculation. As different sub-problems have different link sets thus different complexity, to make the description simple and clear, we still use $(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$ as one time of path searching. As our algorithm divides the original problem into $|\mathbb{T}|$ sub-problems, the complexity of our algorithm is $|\mathbb{T}|\times(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$.
+
+For complexity comparison, we also show the complexity of path finding process in  CoSE \cite{rostami2007cose} and KSP \cite{eppstein1998finding}.
+
+CoSE tries to find a conflicting SRLG set instead of a Conflicting Link Set as we do. Although their search for conflicting SRLG set is exhaustive with a high cost, in this paper, we focus on the cost analysis of path finding process and do not take into account this cost in the comparison. As our SRLG Conflicting Link Set is derived from min-cut and the set cover problem, the $|\mathbb{T}|$ is the minimum size of SRLG Conflicting Link Set. Therefore, the output of the conflicting SRLG set in CoSE is at least $|\mathbb{T}|$, and we denote the SRLG set as $\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$. As each SRLG path includes multiple links, the sub-problems to be partitioned should be much larger than ours. In the process of the problem partition for an SRLG including  $|SRLG|$ links, the inclusion or exclusion of an SRLG link in an AP would create  $|SRLG|$ sub-problems.  Thus a SRLG set $\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$ will introduce $\prod\limits_{i = 1}^{_{\left| T \right|}} {\left| {SRL{G_i}} \right|}$ sub-problems in CoSE, as a link  combination (with each link extracted from a SRLG to get it out of the trap) corresponds  a sub-problem. Therefore, the complexity of CoSE  is $\prod\limits_{i = 1}^{_{|\mathbb{T}|}} {\left| {SRL{G_i}} \right|}\times (|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$, which is much larger than ours.
+
+For KSP \cite{eppstein1998finding}, the path finding complexity is $K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$, where $K$ is the number of first $K$ shortest paths that should be tested before finding the SRLG disjoint BP. However, as KSP does not borrow any information from the previous path searching process, in the worst case, KSP should try all the paths from the source $s$ to the destination $d$. Therefore, the worst $K$ would be  $2^{|\mathbb{E}|}$, which brings very large computation cost.
+
+Therefore, compared with  CoSE \cite{rostami2007cose} and KSP \cite{eppstein1998finding}, our algorithm exploits the min-cut theory to reduce the number of paths searched thus having the smallest computation cost.  In Section \ref{subsubsec:Runtime}, we will further provide extensive simulations to demonstrate that our algorithm can achieve very high computation speed to find the SRLG disjoint paths using the topology trace data.
