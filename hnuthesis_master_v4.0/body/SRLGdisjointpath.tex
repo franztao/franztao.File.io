@@ -52,7 +52,7 @@ Datta\cite{datta2008graph}提出方法是将SRLG分离路径问题转化为链�
 Min-Min SRLG分离路径问题的复杂性为C(A)，则NP-complete的$\leq$C(A).
 
 为了求Min-Min SRLG分离路径问题的时间复杂度，我们首先假设了一个问题B(问题B的复杂性表示为C(B))，当找到两条的SRLG分离路径并且路径较小的路径其权重小于或等于M(M是大于零整数数)。Min-mim SRLG分离路径问题A与问题B等价，我们知道M必须大于零并且小于$\sum\limits_{e_i\in \mathbb{E}}w_{e_i}$。例如，我们假设0≤M≤10和m=6是最优解，通过经典的二分法（binary search method)时间复杂度为O(log(N))，如图.\ref{fig:binarySearch}所示，通过二分法我们得到了两条分离的路径，较小的路径其权重为m，因此问题A与 问题B等价。
-\begin{figure}[tp]
+\begin{figure}[htp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3.0in]{figures/binarySearch}
@@ -61,7 +61,7 @@ Min-Min SRLG分离路径问题的复杂性为C(A)，则NP-complete的$\leq$C(A).
 \end{figure}
 假设程序X在输入问题B时，如果问题B没有解，则程序Y立即停止，否则程序B继续执行并获得问题B的解，因此问题B可以归结为NP-硬停止问题。因此C(B)$\leq$NP-hard。
 
-此外，给定任意两条路径，很容易在多项式时间内判别这两条路径是否为SRLG分离路径，较小的路径其权重小于或等于M，从而使得C(B)$\leq$NP-complete。当B的复杂度等于A时，我们有C(A)=C(B)$\leq$NP-complete。因此，A=NP-complete。  
+此外，给定任意两条路径，很容易在多项式时间内判别这两条路径是否为SRLG分离路径，较小的路径其权重小于或等于M，从而使得C(B)$\leq$NP-complete。当B的复杂度等于A时，我们有C(A)=C(B)$\leq$NP-complete。因此，A=NP-complete。
 \end{proof}
 \section{陷阱（trap)问题}
 基于APF的启发式算法可能会陷入“陷阱”问题。也就是说，当一个AP被确定时，即使网络中确实存在一对分离路径对，它也可能无法找到SRLG分离的BP路径。图.\ref{fig:CompositeGraph}.(c),(d)说明了陷阱问题。虚线表示一个AP，其链路集为$\mathbb{AP}=\{e_1,e_2,e_3$ $,e_4,e_5,e_6,e_7,e_8\}$。在删除AP上的链路和与AP共享风险的链路后，图.\ref{fig:CompositeGraph}.(d) 所示的不存在从s到d的路径，因此找不到BP。
@@ -79,32 +79,121 @@ Min-Min SRLG分离路径问题的复杂性为C(A)，则NP-complete的$\leq$C(A).
 \section{分而治之的快速共享风险链路组分离路径算法}
 当一个陷阱问题发生，并且对于给定的AP没有SRLG分离路径BP时，AP中可能存在一个子链路集，这样任何通过这个链路集里所有的这些“问题”链路的AP都不能找到一个SRLG分离BP。 我们称之为\textbf{SRLG冲突链路集}。与KSP不同，当最短AP遇到陷阱问题时，我们将通过两个主要步骤来解决这个问题。在图.\ref{fig:KSPproblem}的例子中，我们将首先找到图.\ref{fig:KSPproblem}中的SRLG冲突链路p集合，然后应用分而治之算法将原问题划分为两个子问题$\mathcal{P}(\emptyset,\{e_1\})$和 $\mathcal{P}(\{e_1\},\{e_2\})$。 这两个子问题可以在多核CPU平台上并行执行，快速得到SRLG分离路径对。
 \subsection{分而治之}
-在得到SRLG冲突链路集后，设计了一种分而治之的算法，将原Min-Min SRLG不相交路由问题划分为多个子问题，并行执行，加快了SRLG不相交路径对的查找过程。
+在得到SRLG冲突链路集后，设计了一种分而治之的算法，将原Min-Min SRLG不相交路由问题划分为多个子问题，并行执行，加快求SRLG分离路径对的过程。
 
-为了便于问题划分，我们首先用I∩O=∅定义两个不相交的链接集I和O，其中我被称为包含集，O称为排除集。由P(i，O)表示的子问题(Min-Min SRLG-不相交问题)，用于寻找一对AP和BP，其中AP是所有可能的AP中最短的，必须使用I中的链接，而不是O中的链接。
+为了便于问题划分，我们首先用定义两个不相交的链接集和$\mathbb{I}$和$\mathbb{O}$，其中我被称$\mathbb{I}$为包含集集合，$\mathbb{O}$称为排除集集合。由$\mathcal{P}({\mathbb{I},\mathbb{O}})$表示的Min-Min SRLG-分离问题，用于寻找一对AP和BP，其中AP是所有可能的AP中最短的，其中路径$AP$必须经过$\mathbb{I}$集合里的所有链路和不经过$\mathbb{O}$集合里的所有链路
 
-最初，让I=∅和O=∅，原来的Min-MinSRLG-不相交路由问题可以用P(∅，∅)表示.。注意，对于任何给定的链接，P(∅，∅)的解决方案(如果它存在的话)将使用包含或不包含链接的AP。给定SRLG冲突链路集T与E_1，e_2，···，e_T表示的T链路，原问题可按以下顺序划分。
+最初，让$\mathbb{I}=\emptyset$ 和 ${\mathbb{O}}=\emptyset$，原来的Min-Min SRLG分离路径对问题可以用$\mathcal{P}(\emptyset,\emptyset)$表示。给定SRLG冲突链路集$\mathbb{T}=\{{e_1},{e_2}, \cdots ,{e_{\left| \mathbb{T} \right|}}\}$，原问题$\mathcal{P}(\emptyset,\emptyset)$可按以下步骤划分。
 
-除了子问题P({e1，e2，···，e T}，∅)外，我们将试图为每个子问题找到一个最优解。
-然后选择最好的路径对(即最短路径对)。
-(AP)是原问题的最终(最优)解。
-P(∅，∅)。如果这些子问题没有解决办法，
-我们可以保证没有办法解决原来的
-问题，因为我们划分问题的方式包括了所有的问题。
-可能的路径。
-就复杂性而言，解决问题所需的时间应该更少。
-每个子问题至少比原来的问题本身
-一个链接(来自T)将从任何进一步的
-AP的路径计算，这也确保了不同的
-AP将被发现，并测试是否存在一个SRLGdisnonovingBP。
+\begin{enumerate}
+  \item 首先，$\mathcal{P}(\emptyset,\emptyset)$能被划分成两个子问题$\mathcal{P}(\emptyset,\{e_1\})$ 和 $\mathcal{P}(\{e_1\},\emptyset)$。
+  \item 类似，$\mathcal{P}(\emptyset,\{e_1\})$能被划分成两个子问题 $\mathcal{P}(\{e_1,e_2\},\emptyset)$ 和 $\mathcal{P}(\{e_1\},\{e_2\})$。
+  \item 这个划分步骤持续直到步骤$|\mathbb{T}|$，问题$\mathcal{P}(\{e_1,e_2,\cdots ,{e_{\left| \mathbb{T} \right|-1}}\},\emptyset)$ 进一步的拆分成两个子问题$\mathcal{P}(\{e_1,e_2,\cdots ,{e_{\left| \mathbb{T} \right|-1}}, {e_{\left| \mathbb{T} \right|}}\},\emptyset)$ 和 $\mathcal{P}(\{e_1,e_2,\cdots ,{e_{\left| \mathbb{T} \right|-1}}\},{e_{\left| \mathbb{T} \right|}})$。注意到，子问题$\mathcal{P}(\{e_1,e_2,\cdots ,{e_{\left| \mathbb{T} \right|-1}}, {e_{\left| \mathbb{T} \right|}}\},\emptyset)$是无解的。
+\end{enumerate}
 
-当遇到陷阱问题时，我们的解决方案将原来的问题划分，并测试每个子问题以寻找最终的解决方案。在我们的分治解决方案中，子问题是基于从遇到陷阱问题的AP中发现的SRLG冲突链路集来测试的。与现有的算法相比，该算法在不考虑现有结果和问题的情况下，可以在很大程度上降低算法的计算量。对于图6中的例子，SRLG冲突链接集是T={e2，e5，e6}。分区过程如图6所示。根据SRLG冲突链路集，我们应该尝试总共3个标记子问题P({e2，e5}，{e6})，P({e2}，{e5})和P(∅，{e2})，其中选择AP路径权重最低的最优子问题P(∅，∅)作为最终的(最优)解决方案。注意，我们不需要解决子问题P({e2，e5}，∅)和P({e2}，∅)，因为它们的解决方案已经包含在上面的子问题中。第一个解空间由两个子问题P({e2，e5，e6}，∅)和P({e2，e5}，{e6})组成。由于SRLG冲突链接集为T={e2，e5，e6}，显然，子问题P({e2，e5，e6}，∅)没有解决方案。因此，P({e2，e5}，{e6})的解空间等于P({e2，e5}，∅)的解空间。同样，P({e2}，∅)的解空间包括P({e2}{e5}，∅)和P({e2}，{e5})的解空间。
 
+
+除了子问题$\mathcal{P}(\{e_1,e_2,\cdots ,{e_{\left| \mathbb{T} \right|}}\},\emptyset)$外，我们将试图求其它每个子问题的最优解。然后选择最好的路径对(即最短路径对)。作为原问题$\mathcal{P}(\emptyset,\emptyset)$的最终(最优)解。如果这些子问题都没有解，则我们可以得出原问题没有任何解，因为我们子问题包括了所有的可能的分离路径对。
+
+就时间复杂性而言，解决子问题所需的时间比原来的问题应该花费的更少。因为一条链路(来自集合$\mathbb{T}$)将在计算AP的路径时被去除，这也确保了不同的AP路径将被测试且是否存在一个SRLG分离BP路径。
+
+当遇到陷阱问题时，我们的解决方案将划分原来的问题，并测试每个子问题以寻找到最终的解。在我们的分而治之方法中，子问题是由SRLG冲突链路集而得，而这个SRLG冲突链路集适是当AP路径遇到陷阱问题生成的。与现有的算法相比较，该算法在不考虑现有结果和问题的情况下，可以在很大程度上降低算法的计算量。对于图.\ref{fig:DividedConquer}中的例子所示，SRLG冲突链接集是$\mathbb{T}=\{e_2,e_5,e_6\}$。拆分过程过程如图.\ref{fig:DividedConquer}所示。根据SRLG冲突链路集，我们应该测试总共3个子问题${{\mathcal{P}}(\{ e_2,e_5\} ,\{ e_6\} )}$, ${{\mathcal{P}}(\{ e_2\} ,\{ e_5\} )}$ 和 ${{\mathcal{P}}(\emptyset ,\{ e_2\} )}$，其中选择AP路径权重最低的最优子问题作为原问题$\mathcal{P}(\emptyset,\emptyset)$最终的(最优)解。
+
+注意，我们不需要解决子问题${{\mathcal{P}}(\{ e_2,e_5\}, \emptyset)}$ 和 ${{\mathcal{P}}(\{ e_2\},\emptyset )}$，因为它们的解已经包含在其它的子问题中。第一个解空间由两个子问题${{\mathcal P}(\{ e_2,e_5,e_6\} ,\emptyset )}$ 和 ${{\mathcal P}(\{ e_2,e_5\} ,\{ e_6\} )}$组成。由于SRLG冲突链接集为$\mathbb{T}=\{e_2,e_5,e_6\}$，显然，子问题${{\mathcal P}(\{ e_2,e_5,e_6\} ,\emptyset )}$是没有解的。因此，${{\mathcal P}(\{ e_2,e_5\} ,\{ e_6\} )}$的解空间等于${{\mathcal{P}}(\{ e_2, e_5\}, \emptyset)}$的解空间。同样，${{\mathcal{P}}(\{ e_2\},\emptyset )}$的解空间包括${{\mathcal{P}}(\{ e_2\} \{ e_5\}, \emptyset)}$  和 ${{\mathcal{P}}(\{ e_2\} ,\{ e_5\} )}$的解空间。
+\begin{figure}[htbp]
+\small{
+\begin{equation*}
+{\mathcal P}(\emptyset ,\emptyset )\left\{ {\begin{array}{*{20}{l}}
+{{\mathcal P}(\{ e_2\} ,\emptyset )\left\{ {\begin{array}{*{20}{l}}
+{{\mathcal P}(\{ e_2,e_5\} ,\emptyset )\left\{ {\begin{array}{*{20}{l}}
+{{\mathcal P}(\{ e_2,e_5,e_6\} ,\emptyset )}\\
+{\boxed{{\mathcal P}(\{ e_2,e_5\} ,\{ e_6\} )}}
+\end{array}} \right.}\\
+{\boxed{{\mathcal P}(\{ e_2\} ,\{ e_5\} )}}
+\end{array}} \right.}\\
+{\boxed{{\mathcal P}(\emptyset ,\{ e_2\} )}}
+\end{array}} \right.
+\end{equation*}
+}
+\caption{Example to illustrate divide-and-conquer solution}
+\label{fig:DividedConquer}
+\end{figure}
 
 
 
 
 \subsection{SRLG冲突链路集合}
+在本节中，我将描述了如何找到一个SRLG冲突链路集合，当在网络$G$中给定一个AP路径并且没有SRLG分离的BP路径。
+\subsubsection{通过新奇的边容量设置准则构造一个新的图$G^*$}
+如\ref{subsubsec:maxFlow}节介绍的，如果在图G中去除所有在边割集$\mathbb{\mathbb{L}}_{\Phi}$的所有边，则$|f| = 0$。也就是说，不存在任何流能从$s$到$d$。在本文中，我们试图基于割集的概念找到SRLG冲突链路集合。如果AP从s到d流通，经过的链路与割集$\mathbb{\mathbb{L}}_{\Phi}$共享风险，则找不到任何与其对应的SRLG分离路径BP，因为没有一条在割集中的链路可以被BP选择。
+
+基于割集上基础上为了找到SRLG 冲突链路集，我们构造了一个新的图$G^*$ ，如下所示.
+\begin{enumerate}
+  \item $G^*$与$G$的节点和链路结构一样
+  \item 跟每条链路$e_i$相关的链路权重$w_{e_i}$是跟其相对应图$G$中边的权重一样的。
+  \item 我们使用以下准则设置每条边$e_i \in \mathbb{E}$相关的容量$c_{e_i}$
+\end{enumerate}
+ \begin{equation}
+c_{e_i} = \left\{ {\begin{array}{*{20}{c}}
+   1 & {e_i{\rm{ }} \in {\rm{ \mathbb{AP}}}}  \\
+   {\left| \mathbb{AP} \right|+1} & {e_i{\rm{ }} \in {\rm{ \mathbb{E}}}{{\rm{\mathbb{R}}}}}  \\
+   {\left| {{\rm\mathbb{AP}}} \right| + \left( {\left| {{\rm\mathbb{AP}}} \right| + 1} \right)\times \left| {{\rm{\mathbb{E}}}{{\rm{\mathbb{R}}}}} \right| + 1} & {otherwise}  \\
+\end{array}} \right.
+\label{eq:capacity principle}
+\end{equation}
+$\mathbb{AP}$指在图$G$中较小权重路径$AP$上所有链路的集合，和$\mathbb{\mathbb{ER}}$指不属于路径$AP$上的边但是与路径$AP$上的边共享风险的链路集合。
+
+在图.\ref{fig:CompositeGraph}(c)所示，路径$AP$的边集合$\mathbb{AP}=\{e_1,e_2,e_3,e_4$
+$,e_5,e_6,e_7,e_8\}$, $\mathbb{\mathbb{ER}}=\{e_9,e_{11},e_{17},e_{13},e_{19}\}$。$|\mathbb{AP}|=8$, $|\mathbb{\mathbb{ER}}|=5$, $|\mathbb{AP}|+1=9$ 和 ${\left| {{\rm{\mathbb{AP}}}} \right| + \left( {\left| {{\rm{\mathbb{AP}}}} \right| + 1} \right)\times \left| {{\rm{\mathbb{E}}}{{\rm{\mathbb{R}}}}} \right| + 1}=54$. 我们产生一个新图$G^*$如图.\ref{fig:FlowStarGraph}所示, 在图$G^*$中边的容量是根据公式.(\ref{eq:capacity principle})所设置.
+
+\begin{figure}[tp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3.6in]{figures/FlowStarGraph}
+  \caption{New Graph $G^*$}\label{fig:FlowStarGraph}
+\end{figure}
+
+\subsubsection{新图$G^*$中最小割集的性质}
+最大流最小割定理指出，在网络中，从源节点$s$到目的节点$d$最大流值等于最小边割集的总容量，即最小的链路总容量，如果删除最小边割集上的边，将断开目的节点$d$与源节点$s$的连通。 我们的算法基于图的最小割集的链路集来求得最小SRLG 冲突链路集。
+
+我们将首先展示我们重建新图$G^*$的一些优良特性为求得最小SRLG冲突链路集。
+
+\begin{lemma}
+\label{le:lemma1}
+    在图$G^*$任何从$s$到$d$的路径必须经过一条边在边集合 $\mathbb{AP}$ 或者 $\mathbb{\mathbb{ER}}$中。
+    %note:draw a picture to describe the proof
+\end{lemma}
+\begin{proof}
+我们用矛盾的方法证明这条引理。假设对于某条路径AP，有另一条路径从$s$到$d$在图$G^*$中不与AP共享风险，即这条路径不通过$\mathbb{AP}$ 或者 $\mathbb{\mathbb{ER}}$的任何一条链路。我们可以很容易得出这样的结论，这条路径是与路径AP对应的SRLG分离路径BP。这与AP没有对应的SRLG分离路径的说法相矛盾。
+\end{proof}
+
+\begin{lemma}
+\label{le:lemma2}
+    图$G^*$的任何一条最大流的流值是最多为$|\mathbb{AP}|+(|\mathbb{AP}|+1)\times|\mathbb{\mathbb{ER}}|$。
+\end{lemma}
+\begin{proof}
+假设$G^*$的最大流f为$|f|=k$。在$G^*$中，f可以被划分为k个从s到d的1单元流。根据引理.\ref{le:lemma1}，这些1单位流中的每一个都必须通过通过$\mathbb{AP}$ 或者 $\mathbb{\mathbb{ER}}$的至少一个链路。请注意，$\mathbb{AP}$ 或者 $\mathbb{\mathbb{ER}}$ 中链路的容量分别为1或者$|\mathbb{AP}|$+1。根据$\mathbb{AP}$ 和 $\mathbb{\mathbb{ER}}$中链路的容量设置，因为$\mathbb{AP}$中的链路只能承载1单位流量,而在ER中，一条链路在$\mathbb{ER}$中能最多承载$|\mathbb{AP}|$+1单位流量.因此，最多只能有$|\mathbb{AP}|+ (|\mathbb{AP}|+1)\times|\mathbb{\mathbb{ER}}|$个从s到d的单位流量。
+\end{proof}
+
+\begin{lemma}
+\label{le:lemma3}
+    图$G^*$的最小割$\Phi$的边割集$\mathbb{L}_{\Phi}$所有链路都在$\mathbb{AP}$ 或者$\mathbb{\mathbb{ER}}$中。
+\end{lemma}
+
+\begin{proof}
+根据最大流最小切定理，$c(\Phi)$表示的最小切割$\Phi$的的容量，其应该等于最大流量值，根据引理 \ref{le:lemma2}最大流量最多为$|\mathbb{AP}|+ |\mathbb{ER}|\times (|\mathbb{AP}|+1)$。 根据容量设定原则如公式\ref{eq:capacity principle}所示，一条链路既不在$\mathbb{AP}$ 也不在 $\mathbb{ER}$ ($e_i \notin \mathbb{AP}$ 和 $e_i \notin \mathbb{ER}$), 这条链路的容量为 $c_{e_i} = \left| {{\rm\mathbb{AP}}} \right| + \left( {\left| {{\rm\mathbb{AP}}} \right| + 1} \right)\times \left| {{\rm{\mathbb{E}}}{{\rm{\mathbb{R}}}}} \right| + 1$， 这条链路是大于$|\mathbb{AP}|+(|\mathbb{AP}|+1)\times |\mathbb{ER}|$. 因此，这条链路不可能在$\mathbb{L}_{\Phi}$中. 因此，割集$\mathbb{L}_{\Phi}$中的所有链路都必须属于边集合$\mathbb{AP}$ 或者 $\mathbb{ER}$。
+\end{proof}
+
+在带有SRLG属性的网络中，如果AP选择了链接或与AP中选择的链接分担相同的风险，不能选择链路作为AP的SRLG-不相交的BP。我们称此链接为AP“阻塞”。
+
+\begin{theorem}
+    If a path of a unit-flow of $G$ blocks all the links in \textbf{cut-set} $\mathbb{L}_{\Phi}$, then no more flow can pass through the cut of the graph.
+\label{th:block flow}
+\end{theorem}
+
+
+\subsubsection{SRLG冲突链路集的集覆盖问题}
+
 \subsection{算法步骤}
 \subsection{实验环境与评价指标}
 \subsection{算法性能评估及比较}
