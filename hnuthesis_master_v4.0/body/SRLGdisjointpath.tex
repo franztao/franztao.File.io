@@ -1,9 +1,9 @@
 \chapter{共享风险链路组分离路径算法研究}
 
 \section{问题描述}
-SRLG分离路径在它们之间没有任何共同的风险资源，也就是说，由于风险而导致的路径失败不会影响其他路径。图.\ref{fig:CompositeGraph}(b)显示两条SRLG分离路径对，表示为AP 和BP. 因为这两条路没有共同的风险资源，如果AP失败，BP仍然可以工作。本章主要讨论了两条不相交的路径保护路径，即可以描述如下。
+SRLG分离路径在它们之间没有任何共同的风险资源，也就是说，由于风险而导致的路径失败不会影响其他路径。图.\ref{fig:CompositeGraph}(b)显示两条SRLG分离路径对，表示为AP 和BP. 因为这两条路没有共同的风险资源，如果AP 失败，BP仍然可以工作。本章主要讨论了两条不相交的路径保护路径，即可以描述如下。
 
-\textbf{Min-Min SRLG分离路径问题}。给定一个图$G(V,E)$，每条链路$e_i\in \mathbb{E}$ 相关联一个权重权重$w_{e_i}$，一个源节点$s$和一个终结点$d$，找到一对$s$到$d$ 的SRLG分离路径对(表示为AP和BP)，而且要求这两条分离路径中路径权重较小的那条路径权重最小化，形式如下：
+\textbf{Min-Min SRLG分离路径问题}。给定一个图$G(V,E)$，每条链路$e_i\in \mathbb{E}$ 相关联一个权重权重$w_{e_i}$，一个源节点$s$和一个终结点$d$，找到一对$s$ 到$d$ 的SRLG分离路径对(表示为AP和BP)，而且要求这两条分离路径中路径权重较小的那条路径权重最小化，形式如下：
 
 \begin{equation}
 \begin{array}{*{20}{c}}
@@ -14,7 +14,7 @@ SRLG分离路径在它们之间没有任何共同的风险资源，也就是说�
 \label{eq:problem definition}
 \end{equation}
 
-即${w_{AP}}$ 和 ${w_{BP}}$是AP和BP的路径权重，$\mathbb{AP}$ 和 $\mathbb{BP}$分别是路径AP和BP上的链路集，${r_{AP}}$ 和 ${r_{BP}}$分别是影响路径AP和BP的SRLG集。
+即${w_{AP}}$ 和 ${w_{BP}}$是AP和BP的路径权重，$\mathbb{AP}$ 和 $\mathbb{BP}$分别是路径AP和BP上的链路集，${r_{AP}}$ 和 ${r_{BP}}$分别是影响路径AP和BP的SRLG 集。
 
 
 \begin{figure*}[tp]
@@ -34,7 +34,7 @@ SRLG分离路径在它们之间没有任何共同的风险资源，也就是说�
 
 对简单的APF算法的扩展，提出了KSP(K-最短路径)算法来处理节点/链路分离路径的陷阱问题。虽然它是处理陷阱问题最有效的算法之一，但它在大型网络中的性能受到影响，因为KSP 可能会涉及多路径搜索测试(K测试)，直到它找到分离路径。当前候选的路径AP遇到陷阱问题后，仅根据路径长度选择下一个要测试的候选AP，而不考虑当前候选AP的那条链路(或那些链路)导致查找分离路径BP失败。因此，为了找到一对分离路径对，需要对大量的路径进行测试，这就引入了KSP算法中与K相关的时间复杂度。对于遇到陷阱问题的AP，我们应用从AP 路径导出的SRLG冲突链路集来指导将来的AP路径测试。这在很大程度上有助于减少寻找替代路径的时间复杂度。
 
-其它SRLG分离路径算法\cite{rostami2012msdp,rostami2007cose,datta2008graph,xu2003new,todimala2004imsh}，搜索最大SRLG分离路径对，并且路径间共享最小数目的公共链路。由于AP 和BP 可能具有相同的风险资源组，通过这种方法找到的解决方案是不可靠的。我们的算法目标是寻找完全SRLG分离路径。Xu\cite{xu2003trap}试图找到完全SRLG分离路径。但他的算法减少了问题的搜索空间，加快了路径搜索的速度。然而，它可能会以较大的代价返回路径，因为在削减后的空间可能会失去最优解。相反，为了大大加快搜索过程，我们利用SRLG冲突链接集将原问题划分为多个子问题，这些子问题可以并行执行。因此，我们的算法可以运行得更快，返回主路径成本非常低。
+其它SRLG分离路径算法\cite{rostami2012msdp,rostami2007cose,datta2008graph,xu2003new,todimala2004imsh}，搜索最大SRLG分离路径对，并且路径间共享最小数目的公共链路。由于AP 和BP 可能具有相同的风险资源组，通过这种方法找到的解决方案是不可靠的。我们的算法目标是寻找完全SRLG分离路径。Xu\cite{xu2003trap}试图找到完全SRLG 分离路径。但他的算法减少了问题的搜索空间，加快了路径搜索的速度。然而，它可能会以较大的代价返回路径，因为在削减后的空间可能会失去最优解。相反，为了大大加快搜索过程，我们利用SRLG冲突链接集将原问题划分为多个子问题，这些子问题可以并行执行。因此，我们的算法可以运行得更快，返回主路径成本非常低。
 
 Datta\cite{datta2008graph}提出方法是将SRLG分离路径问题转化为链路分离路径问题，然后利用链路分离路径算法来解决。然而，只有特殊的SRLG模式(例如，星型)可以
 将其转换为链路分离，这样就限制了该算法的广泛应用。当AP遇到陷阱问题时，CoSE\cite{rostami2007cose}算法试图找到一个SRLG集合，任何AP路径包含了这个SRLG集合里的所有SRLG，则必定找不到任何的与其对应的SRLG分离路径BP。CoSE 首先通过多轮搜索查找多个AP共享的SRLG，并且组成一个SRLG集合，然后根据SRLG集合来划分原始问题以搜索SRLG分离路径对。而不使用SRLG 中链路之间共享风险的特性，CoSE方法的这种穷尽搜索需要非常高的计算开销。
@@ -48,7 +48,7 @@ Datta\cite{datta2008graph}提出方法是将SRLG分离路径问题转化为链�
     Min-Min SRLG-分离路径问题是 NP-complete.
 \end{theorem}
 \begin{proof}
-根据\cite{bhatia2006finding}，Min-Min链路分离路径问题是NP-complete的。Min-Min链路分离路径问题是Min-Min SRLG-分离路径问题的子问题。设
+根据\cite{bhatia2006finding}，Min-Min链路分离路径问题是NP-complete 的。Min-Min链路分离路径问题是Min-Min SRLG-分离路径问题的子问题。设
 Min-Min SRLG分离路径问题的复杂性为C(A)，则NP-complete的$\leq$C(A).
 
 为了求Min-Min SRLG分离路径问题的时间复杂度，我们首先假设了一个问题B(问题B的复杂性表示为C(B))，当找到两条的SRLG分离路径并且路径较小的路径其权重小于或等于M(M是大于零整数数)。Min-mim SRLG分离路径问题A与问题B等价，我们知道M必须大于零并且小于$\sum\limits_{e_i\in \mathbb{E}}w_{e_i}$。例如，我们假设0≤M≤10和m=6是最优解，通过经典的二分法（binary search method)时间复杂度为O(log(N))，如图.\ref{fig:binarySearch}所示，通过二分法我们得到了两条分离的路径，较小的路径其权重为m，因此问题A与 问题B等价。
@@ -59,9 +59,9 @@ Min-Min SRLG分离路径问题的复杂性为C(A)，则NP-complete的$\leq$C(A).
   \caption{Request optimal solution M through Binary search method }
   \label{fig:binarySearch}
 \end{figure}
-假设程序X在输入问题B时，如果问题B没有解，则程序Y立即停止，否则程序B继续执行并获得问题B的解，因此问题B可以归结为NP-硬停止问题。因此C(B)$\leq$NP-hard。
+假设程序X在输入问题B时，如果问题B没有解，则程序Y立即停止，否则程序B继续执行并获得问题B的解，因此问题B可以归结为NP-hard问题。因此C(B)$\leq$NP-hard。
 
-此外，给定任意两条路径，很容易在多项式时间内判别这两条路径是否为SRLG分离路径，较小的路径其权重小于或等于M，从而使得C(B)$\leq$NP-complete。当B的复杂度等于A时，我们有C(A)=C(B)$\leq$NP-complete。因此，A=NP-complete。
+此外，给定任意两条路径，很容易在多项式时间内判别这两条路径是否为SRLG 分离路径，较小的路径其权重小于或等于M，从而使得C(B)$\leq$NP-complete。当B的复杂度等于A时，我们有C(A)=C(B)$\leq$NP-complete。因此，A=NP-complete。
 \end{proof}
 \section{陷阱问题}
 基于APF的启发式算法可能会陷入“陷阱”问题。也就是说，当一个AP被确定时，即使网络中确实存在一对分离路径对，它也可能无法找到SRLG分离的BP路径。图.\ref{fig:CompositeGraph}.(c),(d)说明了陷阱问题。虚线表示一个AP，其链路集为$\mathbb{AP}=\{e_1,e_2,e_3$ $,e_4,e_5,e_6,e_7,e_8\}$。在删除AP上的链路和与AP共享风险的链路后，图.\ref{fig:CompositeGraph}.(d) 所示的不存在从s到d的路径，因此找不到BP。
@@ -81,7 +81,7 @@ Min-Min SRLG分离路径问题的复杂性为C(A)，则NP-complete的$\leq$C(A).
 \subsection{分而治之}
 在得到SRLG冲突链路集后，设计了一种分而治之的算法，将原Min-Min SRLG不相交路由问题划分为多个子问题，并行执行，加快求SRLG分离路径对的过程。
 
-为了便于问题划分，我们首先用定义两个不相交的链接集和$\mathbb{I}$和$\mathbb{O}$，其中我被称$\mathbb{I}$为包含集集合，$\mathbb{O}$称为排除集集合。由$\mathcal{P}({\mathbb{I},\mathbb{O}})$表示的Min-Min SRLG-分离问题，用于寻找一对AP和BP，其中AP是所有可能的AP中最短的，其中路径$AP$必须经过$\mathbb{I}$集合里的所有链路和不经过$\mathbb{O}$集合里的所有链路
+为了便于问题划分，我们首先用定义两个不相交的链接集和$\mathbb{I}$和$\mathbb{O}$，其中我被称$\mathbb{I}$为包含集集合，$\mathbb{O}$称为排除集集合。由$\mathcal{P}({\mathbb{I},\mathbb{O}})$表示的Min-Min SRLG- 分离问题，用于寻找一对AP和BP，其中AP是所有可能的AP中最短的，其中路径$AP$必须经过$\mathbb{I}$集合里的所有链路和不经过$\mathbb{O}$集合里的所有链路
 
 最初，让$\mathbb{I}=\emptyset$ 和 ${\mathbb{O}}=\emptyset$，原来的Min-Min SRLG分离路径对问题可以用$\mathcal{P}(\emptyset,\emptyset)$表示。给定SRLG冲突链路集$\mathbb{T}=\{{e_1},{e_2}, \cdots ,{e_{\left| \mathbb{T} \right|}}\}$，原问题$\mathcal{P}(\emptyset,\emptyset)$可按以下步骤划分。
 
@@ -197,23 +197,18 @@ $,e_5,e_6,e_7,e_8\}$, $\mathbb{\mathbb{ER}}=\{e_9,e_{11},e_{17},e_{13},e_{19}\}$
 定理\ref{th:block flow}提供了找到SRLG冲突链路集的可能性。即当AP路径遇到陷阱问题时，我们找到$\mathbb{AP}$路径边集的子集能够阻塞国有在边割集$\mathbb{L}_{\Phi}$的所有边，和这个子集即SRLG冲突链路集。当一条路径包含SRLG冲突链路集里的所有边，则没有任何流能经过割集$\Phi$，因此没有与其对应的SRLG分离路径BP。
 
 \subsubsection{SRLG冲突链路集的集合覆盖问题}
-虽然AP路径上的所有链接一起构成了SRLG冲突链接集，我们感兴趣的是一个集，它的数量很少链接，作为SRLG冲突链接集的大小确定分区的子问题数。调至V-B节。
+虽然AP路径上的所有链接一起构成了SRLG冲突链路集，我们感兴趣的是尽量规模较小的SRLG冲突链路集，SRLG冲突链路集的大小确定分离成的子问题规模。
 
-根据定理2，最小SRLG冲突链接集查找问题可以描述为：查找AP上的最小链接子集，这些链接可以阻塞割集LΦ
+根据定理\ref{th:block flow}，最小SRLG冲突链路集问题可以描述为：查找AP 链路集上的最小链路子集，这些链路可以阻塞边割集$\mathbb{L}_{\Phi}$。
 
-对于任何链接ei，让sredenote链接集分担风险。和EI。显然，Sreicover本身和所有的链接包括EI在内的SRLG。例如，在图8中，e2是在两个SRLG中SRLGs $\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$, $\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$, therefore, $\mathbb{SR}_{e_2}=\{e_2,e_3,e_{19},e_4,e_{11},e_{17}\}$.
+对于任何链路$e_i$，$\mathbb{SR}_{e_i}$表示与链路$e_i$共享风险的链接集。显然，$\mathbb{SR}_{e_i}$包括$e_i$本身和所有包含链路$e_i$风险贡献链路组SRLG集合的所有边。例如，如图\ref{fig:MinCutStarGraph}所示，$e_i$ 是在两个SRLG中$\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$， $\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$，因此, $\mathbb{SR}_{e_2}=\{e_2,e_3,e_{19},e_4,e_{11},e_{17}\}$。
 
+对每条在AP上的路径$e_i$，我们定义每条边的cut-block-link集合为${\mathbb{B}_{{e_i}}} = \mathbb{SR}_{{e_i}} \cap \mathbb{L}_{\Phi}$，这个集合是边割集$\mathbb{L}_{\Phi}$的子集，能通过$e_i$而堵塞这个集合的所有边。
 
-For any link $e_i$, let $\mathbb{SR}_{e_i}$ denote the link set that shares risks with $e_i$. Obviously, $\mathbb{SR}_{e_i}$ covers $e_i$ itself and all the links in the SRLG that includes $e_i$. For example in Fig.\ref{fig:MinCutStarGraph}, as $e_2$ is in two SRLGs $\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$, $\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$, therefore, $\mathbb{SR}_{e_2}=\{e_2,e_3,e_{19},e_4,e_{11},e_{17}\}$.
-
-For each link $e_i$ on AP, we define its cut-block-link set as ${\mathbb{B}_{{e_i}}} = \mathbb{SR}_{{e_i}} \cap \mathbb{L}_{\Phi}$, which is the sub-set of \textbf{cut-set} $\mathbb{L}_{\Phi}$ that can be blocked by $e_i$.
-
-因此，最小SRLG冲突链路集查找问题可以表述为集覆盖问题：给定AP(AP的路径链接集)、剪切集LΦ和集合的剪切块链接集。
-
-Therefore, the minimum SRLG Conflicting Link Set finding problem can be formulated as a Set Cover Problem: given $\mathbb{AP}$ (the link set of path links of $AP$), the \textbf{cut-set} $\mathbb{L}_{\Phi}$,  and a collection of the cut-block-link sets ${\mathbb{B}_{{e_1}}},{\mathbb{B}_{{e_2}}}, \cdots ,{\mathbb{B}_{{e_{|\mathbb{AP}|}}}}$, we want to find the fewest sets whose union is $\mathbb{L}_{\Phi}$, that is, the smallest $\mathbb{T} \subseteq \{e_i| e_i\in \mathbb{AP}\}$ such that ${ \cup_{e_i \in \mathbb{T}}}{\mathbb{B}_{e_i}} = \mathbb{L}_{\Phi}$.
+因此，最小SRLG冲突链路集问题可以定义为一个集合覆盖问题：给定$\mathbb{AP}$(路径AP上的链路集合)、边割集$\mathbb{L}_{\Phi}$和cut-block-link集合${\mathbb{B}_{{e_1}}},{\mathbb{B}_{{e_2}}}, \cdots ,{\mathbb{B}_{{e_{|\mathbb{AP}|}}}}$。我们求出最小cut-block-link集合集，其交集是边割集$\mathbb{L}_{\Phi}$，即最小规模的$\mathbb{T} \subseteq \{e_i| e_i\in \mathbb{AP}\}$ 以至于 ${ \cup_{e_i \in \mathbb{T}}}{\mathbb{B}_{e_i}} = \mathbb{L}_{\Phi}$。
 
 
-\begin{figure*}[tp]
+\begin{figure*}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3.8in]{figures/MinCutStarGraph}
@@ -221,396 +216,14 @@ Therefore, the minimum SRLG Conflicting Link Set finding problem can be formulat
   \label{fig:MinCutStarGraph}
 \end{figure*}
 
-The Set Cover Problem is usually an NP-hard problem with its complexity depending on the size of the elements (denoted by $n$). In our minimum SRLG Conflicting Link Set finding problem, $n=|\mathbb{L}_{\Phi}|$, that is, the edge number of cut set $\mathbb{L}_{\Phi}$. As this paper's focus is not to improve the solution of the set cover problem, we apply the algorithm proposed in \cite{chvatal1979greedy} with the complexity $O(log(|\mathbb{L}_{\Phi}|))$  to find the minimum SRLG Conflicting Link Set. Usually, even for a large scale network, the  AP with the shortest path does not have a large number of $n=|\mathbb{L}_{\Phi}|$. Therefore, the cost to calculate the minimum SRLG Conflicting Link Set through the set cover is not large.
+集合覆盖问题通常是一个np-hard问题。它的复杂性取决于元素的大小(表示($N$)。在我们的最小SRLG冲突链路集问题中，$n=|\mathbb{L}_{\Phi}|$，即割集$\mathbb{L}_{\Phi}$的边数。因为本文的重点不是改进集合覆盖问题算法，我们应用\cite{chvatal1979greedy}中提出的算法。在复杂度$O(log(|\mathbb{L}_{\Phi}|))$的情况下求出最小的SRLG冲突链路集,通常即使是在大规模的网络，最短的路径作为AP都没有大跳数$n=|\mathbb{L}_{\Phi}|$。因此，用集合覆盖问题来求最小值SRLG冲突链路集代价不是很大。
 
-To illustrate how to find the minimum SRLG Conflicting Link Set, we show an example in Fig.\ref{fig:MinCutStarGraph}. For the min-cut $\Phi(\mathbb{S},\mathbb{D})$, $\mathbb{S}=\{s, 1, 2, 3, 4, 5, 9\}$ and $\mathbb{D}=\{d, 6, 7, 8\}$, the \textbf{cut-set} is $\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$. For links in $\mathbb{AP}$,  cut-block-link sets are: $\mathbb{B}_{e_1}=\emptyset$, $\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$, $\mathbb{B}_{e_3}=\{e_{19}\}$, $\mathbb{B}_{e_4}=\{e_{11}\}$, $\mathbb{B}_{e_5}=\{e_{13}\}$, $\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$. To cover $\mathbb{L}_{\Phi}$, the fewest cut-block-link sets are $\{\mathbb{B}_{e_2}$, $\mathbb{B}_{e_5}$, $\mathbb{B}_{e_6}\}$. Therefore, the minimum SRLG Conflicting Link Set is $\mathbb{T}=\{e_2, e_5, e_6 \}$.
+为了说明如何找到最小SRLG冲突链路集，我们如图\ref{fig:MinCutStarGraph}所展示了一个例子。为了求最小$\Phi(\mathbb{S},\mathbb{D})$， $\mathbb{S}=\{s, 1, 2, 3, 4, 5, 9\}$和$\mathbb{D}=\{d, 6, 7, 8\}$。边割集$\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$。对于AP路径上的所有链路，cut-block-link集合是：$\mathbb{B}_{e_1}=\emptyset$, $\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$, $\mathbb{B}_{e_3}=\{e_{19}\}$, $\mathbb{B}_{e_4}=\{e_{11}\}$, $\mathbb{B}_{e_5}=\{e_{13}\}$, $\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$。为了覆盖$\mathbb{L}_{\Phi}$，最少的cut-block-link集合是$\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$。因此，最小SRLG冲突链路集是$\mathbb{T}=\{e_2, e_5, e_6 \}$。
 
-In the example of Fig.\ref{fig:MinCutStarGraph}, although $|\mathbb{L}_{\Phi}|=4$, the size of  the minimum SRLG Conflicting Link Set $|\mathbb{T}|=|\{e_2, e_5, e_6 \}|=3$ is even smaller than $|\mathbb{L}_{\Phi}|=4$. This is because $e_2$ belongs to   SRLGs $\mathbb{R}_{r_2}$ and $\mathbb{R}_{r_3}$, and can block two links in $e_{11}$ and  $e_{19}$ in the \textbf{cut-set} $\mathbb{L}_{\Phi}$.
+如图\ref{fig:MinCutStarGraph}所示的例子中，虽然$|\mathbb{L}_{\Phi}|=4$，但是最小SRLG冲突链路集$|\mathbb{T}|=|\{e_2, e_5, e_6 \}|=3$是小于$|\mathbb{L}_{\Phi}|=4$。这是因为$e_2$属于$\mathbb{R}_{r_2}$和$\mathbb{R}_{r_3}$，并能阻塞在割集$\mathbb{L}_{\Phi}$中的两条链路$e_{11}$和$e_{19}$ 
 
-According to the graph style of SRLG, there are two categories \cite{datta2008graph}:  star-style and none star-style. For star-style SRLG, all the links start from the same node or ends at the same node. For example, in Fig.\ref{fig:MinCutStarGraph}, $e_1$ and $e_9$ start from the  the same node $s$, $\mathbb{R}_{r_1}$ is a star-style SRLG.  For none star-style SRLG, not all links in the SRLG starting from the same node or ending at the same node. In Fig.\ref{fig:MinCutStarGraph}, $\mathbb{R}_{r_2}$, $\mathbb{R}_{r_3}$, $\mathbb{R}_{r_4}$ and $\mathbb{R}_{r_5}$ are none star-style SRLGs.
-Moreover, even though Fig.\ref{fig:MinCutStarGraph} includes both  star-style SRLG  and none star-style SRLG,  our  algorithm works efficiently and effectively to find the conflicting set through the solving of the set cover problem.
 
-Therefore, different from some existing studies \cite{datta2008graph} which can only handle a single SRLG style or a simple scenario such as  one link belonging to only one SRLG, our algorithm works effectively in a more  general scenario that a link can belong to one or multiple SRLGs with more diverse SRLG styles.
+根据SRLG的拓扑类型\cite{datta2008graph}，SRLG的拓扑类型：星型类型和非星型类型。对星型类型SRLG，所有链路都从同一个节点开始或结束在同一个节点。例如，如图\ref{fig:MinCutStarGraph}所示，$e_1$和$e_9$来自相同的节点$s$，$\mathbb{R}_{r_1}$是星型SRLG。对非星型类型，并不是SRLG中的所有链路都是从相同节点开始或结束于同一节点。如图\ref{fig:MinCutStarGraph}所示，$\mathbb{R}_{r_2}$, $\mathbb{R}_{r_3}$, $\mathbb{R}_{r_4}$ 和 $\mathbb{R}_{r_5}$是非星型类型。而且，即使在图\ref{fig:MinCutStarGraph}所示包括星型SRLG 和无星型SRLG，我们的算法高效且有效地通过解决集合覆盖问题来解决冲突集。
 
 
-
-\subsection{算法步骤}
-在本节中，我们首先介绍我们的完整解决方案，然后分析其复杂性。
-
-算法1显示完全min-min srg不相交。路由算法算法中的输入参数包括网络图(G)、源(S)、目标(D)应将包含链接集包括在AP(I)中，以及排除链路集不应包含在AP(O)中。算法的输出是SRLG不相交路径对。(美联社，BP)。
-
-Algorithm \ref{alg:min-min} shows the complete min-min SRLG disjoint routing Algorithm. The input parameter in the algorithm includes  the network graph ($G$), the source ($s$), the destination  ($d$), the inclusion link set should be included in AP ($\mathbb{I}$), and the exclusion link set should not be included in AP ($\mathbb{O}$). The output of the algorithm is the SRLG disjoint path pair $(AP,BP)$.
-
-
-寻找SRLG不相交的路径，最小的首先搜索网络中的权重ap在步骤2中找到AP(G，s，d，i，O)，其中i=φ，O=φ，然后通过查找srlg不相交的bp对bp进行搜索。(g，s，d，AP)第4步。特别是，AP路径可以是通过Dijkstra算法发现的。为了计算BP，发现SRLG不相交BP(G，s，d，AP)包括两个步骤。首先，对于AP上的所有链接，删除共享这些链接的共同风险。第二，Dijkstra算法再次运行网络的其余链接来计算。从s到d的第二条最短路径BP。
-
-
-To look for the SRLG disjoint paths, the smallest weight AP in the network is searched  first through FIND\_AP$(G,s,d, \mathbb{I},\mathbb{O})$ in step \ref{alg:findap} with $\mathbb{I}=\phi,\mathbb{O}=\phi$, and then BP is searched through  FIND\_SRLG\_Disjoint\_BP
-$(G,s,d,AP)$ in step \ref{alg:findsrlgdisjointbp}. Specially, the AP path can be found through the Dijkstra algorithm. To calculate BP, FIND\_SRLG\_Disjoint\_BP
-$(G,s,d,AP)$ includes two steps. First, for all the links on the AP, remove the links that share a common risk with these links. Second, the Dijkstra's algorithm runs over the remaining links of the network again to compute the second shortest path BP from $s$ to $d$.
-
-
-如果我们能找到一个srg不相交的bp，那么Min-Min srlg解决了不相交的路由问题，找到了路径对。返回，如步骤6所示。否则，陷阱问题发生了。要处理陷阱问题，步骤8首先找到SRLG冲突链接集T，步骤10进一步划分原Min-Min SRLG不相交路由问题到T子-基于冲突集的问题T.所有的子问题都可以并行执行。步骤11利用集合F存储满足APi 6=φ和BPI 6=φ的可行解。在F中的所有可行解中，具有选择最低的AP路径权重作为最优解。对于原Min-Min SRLG不相交路由问题
-
-
-If we can find a SRLG-Disjoint BP, the Min-Min SRLG disjoint routing problem is solved and  the path pair found is returned as shown in step \ref{alg:returnpathpair}. Otherwise, a trap problem happens. To handle the trap problem, step  \ref{alg:findsrlgconflictinglinkset} first finds the SRLG Conflicting Link Set $\mathbb{T}$, step \ref{alg:dividedandconquer} further divides the original  Min-Min SRLG disjoint routing problem into $\left| \mathbb{T} \right|$ sub-problems based on the conflict set $\mathbb{T}$. All the sub-problems can be executed in parallel. Step \ref{alg:findfeasible} utilizes the set $\mathbb{F}$ to store the feasible solutions  satisfying that  both $A{P_i} \ne \phi$ and $B{P_i} \ne \phi$. Among all the feasible solutions in the $\mathbb{F}$, the path pair with the lowest AP path weight will be selected as the optimal solution for the original Min-Min SRLG disjoint routing problem.
-
-
-我们以图3中的图表为例来说明算法1.根据步骤2，我们的算法首先搜索对于路径AP={e1，e2，e3，e4，e5，e6，e7，e8}具有最小的通过Dijkstra算法加权，路径显示为图3(C)中的虚线。删除AP 上的链接后此外，与AP有共同风险的链接，我们有图3(D)中的图，这是一个不连通图，找不到BP。然而，如图3(B)所示，拓扑中存在SRLG-不相交路径对.因此，陷阱问题就会发生。在找到SRLG 冲突链接之后设置{e2，e5，e6}在步骤8中，我们对将原问题P(∅，∅)分为三个子问题，P(∅，{e2})，P({e2}，{e5})和P({e2，e5}，{e6})第10步。并行执行这些子问题之后，返回具有最小AP权重的路径对。
-
-
-We take the graph in Fig.\ref{fig:CompositeGraph} as an example to illustrate  our Algorithm \ref{alg:min-min}.
-According to step $\ref{alg:findap}$, our  algorithm first searches for a path  $\mathbb{AP}=\{e_1,e_2,e_3,e_4,e_5,e_6,e_7,e_8\}$ with the smallest weight through the dijkstra algorithm, with the path shown as the dotted line in Fig.\ref{fig:CompositeGraph}(c). After removing the links on AP and also the links that share the common risks with AP, we have the graph in Fig.\ref{fig:CompositeGraph}(d), which is a disconnected graph and no BP can be found. %\note{You gave the exact example earlier. Dear sister, from the previous comments, we find we need a example to illustrate the how our algorithm runs}
-However, as shown in Fig.\ref{fig:CompositeGraph}(b), there exists a SRLG-disjoint path pair in the topology. Therefore, a trap problem happens. After finding the SRLG conflict link set $\{e_2,e_5,e_6\}$ in step $\ref{alg:findsrlgconflictinglinkset}$, we apply divide and conquer to divide the original problem ${\mathcal P}(\emptyset ,\emptyset )$  into three sub-problems, ${\mathcal P}(\emptyset ,\{e_2\} )$, ${\mathcal P}(\{e_2\} ,\{e_5\} )$ and ${\mathcal P}(\{e_2,e_5\} ,\{e_6\} )$ according to step $\ref{alg:dividedandconquer}$. After executing these sub-problems in parallel, the path pair with the minimum AP weight is returned.
-
- %For example, subproblem ${\mathcal P}(\{e_2\} ,\{e_5\} )$ obtain a AP ($e_1,e_2,e_3,e_{11},e_{12},e_8$) whose corresponding BP ($e_15,e_18,e_3,e_6,e_7,e_{14}$). compare the AP's weight of ${\mathcal P}(\{e_2\} ,\{e_5\} )$  with other parellel subproblems in order to obtain optimal solution. subproblem ${\mathcal P}(\emptyset ,\{e_2\} )$ obtain a AP ($e_9,e_3,e_4,e_5,e_6,e_7,e_8$) which result finding no BP, so continue divide and conquer subproblem ${\mathcal P}(\emptyset ,\{e_2\} )$ as like Alg.\ref{alg:min-min} step 8.}
-
-\begin{algorithm}
-\small{
-\caption{Min-Min}
-\begin{algorithmic}[1]
-\label{alg:min-min}
-%\caption{Main process of Algorithm}
-\REQUIRE
-$G$: the network graph\\
-$s$: the source node\\
-$d$: the destination node \\
-$\mathbb{I}$:   the inclusion link set should be included in AP\\
-$\mathbb{O}$: the exclusion link set should not be included in AP\\
-\ENSURE
-AP: the active path\\
-BP: the backup path
-\STATE $AP=\emptyset$, $BP=\emptyset, \mathbb{I}=\emptyset, \mathbb{O}=\emptyset$
-\STATE $AP\leftarrow$ FIND$\_$AP$(G,s,d,\mathbb{I},\mathbb{O})$\label{alg:findap}
-\IF{$AP\neq\emptyset$}
-    \RETURN $BP\leftarrow$ FIND\_SRLG\_Disjoint\_BP$(G,s,d,AP)$\label{alg:findsrlgdisjointbp}
-    \IF{$BP\neq\emptyset$}
-        \RETURN {path pair $(AP,BP)$}\label{alg:returnpathpair}
-    \ELSE
-        \STATE find SRLG Conflicting Link Set $\mathbb{T}$\label{alg:findsrlgconflictinglinkset}
-        \STATE $\mathbb{T}\leftarrow \mathbb{T}-(\mathbb{I}\cup\mathbb{O})$
-        %\IF{$\mathbb{T}\neq \emptyset$}
-        \STATE {divide and conquer for execution in parallel\\
-        \tiny{
-        $\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\left\{ \begin{array}{l}
- \left( {A{P_1},B{P_1}} \right)={{Min-Min}}\left( {G,s,d,\mathbb{I} ,\mathbb{O}\cup\{ {t_1}\} } \right), \\
- \left( {A{P_2},B{P_2}} \right)={{Min-Min}}\left( {G,s,d,\mathbb{I}\cup\{ {t_1}\} ,\mathbb{O}\cup\{ {t_2}\} } \right), \\
- \left( {A{P_3},B{P_3}} \right)={{Min-Min}}\left( {G,s,d,\mathbb{I}\cup\{ {t_1},{t_2}\} ,\mathbb{O}\cup\{ {t_3}\} } \right), \\
-  \cdots  \\
- \left( {A{P_{\left| \mathbb{T} \right|}},B{P_{\left| \mathbb{T} \right|}}} \right) = {{Min-Min}}\left( {G,s,d,\mathbb{I}\cup \{ {t_1},{t_2}, \cdots ,{t_{\left| \mathbb{T} \right| - 1}}\} ,\mathbb{O}\cup\{ {t_{\left| \mathbb{T} \right|}}\} } \right) \\
- \end{array} \right.$
- }
-        }\label{alg:dividedandconquer}
-        \STATE{  {$\!\!\!\!\!\!\!\!\!\!\!F\leftarrow$ FIND\_FEASIBLE$(( {A{P_1},B{P_1}} )),\cdots,( {A{P_{|\mathbb{T} |}},B{P_{| \mathbb{T} |}}} )$}}\label{alg:findfeasible}
-        %\ENDIF
-         \IF{$F\neq{\emptyset,\emptyset}$}
-         \RETURN{path pair $(AP,BP)$ satisfying that $AP = \mathop {\arg \min }\limits_{AP} \left\{ F \right\}$}
-        \ENDIF
-
-    \ENDIF
-\ENDIF
-\end{algorithmic}
-}
-\end{algorithm}
-
-
-\subsection{时间复杂度}
-若要在AP遇到时查找SRLG不相交路径对，请执行以下操作一个陷阱问题，我们的算法首先计算SRLG。冲突链接集，然后通过把它划分成T个子问题。如节所述切集LΦ的边数通常不大，因此，本文寻找SRLG冲突链路集。不会带来太多的成本。因此，我们关注的是路径查找过程的计算开销。
-
-一般来说，对于一个有E连接和V节点的网络，求最小权路径的复杂性是(E)。(V)log(V)。为了解决陷阱问题，我们的路径发现问题与最初的最小重量有点不同。路径查找问题。我们引入了路径的一些约束条件。例如，查找AP路径必须通过链接集。或者不能通过一组。由于这些链接集通常并不大，这些约束在成本计算上几乎没有差别。如不同的子问题有不同的链接集，因此不同。复杂性，为了使描述简单明了，我们仍然使用(EV)log(V)作为一次路径搜索。作为我们算法将原问题分成T个子问题，算法复杂度为T(EV)log(V)。
-
-对于复杂性的比较，我们也展示了复杂性。的路径发现过程，在Cose[28]和KSP[23]。
-
-Cose试图找到一个冲突的SRLG集，而不是一个冲突链接集，就像我们所做的。虽然他们在寻找冲突的SRLG集是穷尽的，成本很高。本文主要研究路径发现过程的成本分析。在比较中不要考虑到这一成本。由于我们的SRLG冲突链接集来自min-裁剪和集合覆盖问题，T是最小的。SRLG冲突链接集的大小。因此，在Cose中冲突的SRLG集至少是T，并且我们表示SRLG集合为SRLG 1，SRLG 2，···，SRLG T？由于每个srlg路径包含多个链接，因此子问题。分区应该比我们的要大得多。在SRLG问题分区的过程包括SRLG链接，包含或排除SRLG链接在AP中会产生SRLG子问题。所以一个S-RLG集？SRLG 1，SRLG 2，···，SRLG T？将介绍T型qi=1个SRLGi子问题，作为链接组合(从SRLG提取每个链接以将其从(陷阱)对应一个子问题。因此，复杂性柯斯t qI=1 SRLGi(E V)log(V)，即比我们的大得多。
-
-对于KSP[23]，路径查找复杂度为K((E))。(V)log(V)，其中K是第一个K的最短数。在发现SRLG不相交之前应该测试的路径BP。然而，由于KSP没有从前面的路径搜索过程，在最坏的情况下，是ksp。应该尝试从源到目标的所有路径。因此，最糟糕的K值是2E，这会带来很大的影响。计算量大。
-
-因此，相对于成本[ 28 ]和KSP [ 23 ]，我们
-算法利用最小割理论来减少
-这样搜索的路径具有最小的计算成本。在
-第viii-b3，我们将进一步提供广泛的模拟
-证明我们的算法可以达到很高的效果。
-计算速度找到SRLG不相交的路径使用
-拓扑跟踪数据。
-
-To find a SRLG disjoint path pair when an AP encounters a trap problem, our algorithm first calculates the SRLG Conflicting Link Set, and then solves the original problem by partitioning it into $|\mathbb{T}|$ sub-problems. As introduced in Section \ref{subsec:Set cover problem for SRLG Conflicting Link Set},  the edge number of cut set $\mathbb{L}_{\Phi}$ is usually not large, therefore, finding the SRLG Conflicting Link Set in our paper does not introduce much cost. Therefore, we focus on the computation cost on the path finding process.
-
-Generally, for a network with $|\mathbb{E}|$ links and $|\mathbb{V}|$ nodes, the complexity of finding the least weight path is $(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$. To solve the trap problem, our path finding problem is a little bit different from the original least weight path finding problem. We introduce some constraints for path finding, for example, an AP path must pass through a link set or cannot pass a set. As these link sets are usually not large, the constraints bring little  difference in the cost calculation. As different sub-problems have different link sets thus different complexity, to make the description simple and clear, we still use $(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$ as one time of path searching. As our algorithm divides the original problem into $|\mathbb{T}|$ sub-problems, the complexity of our algorithm is $|\mathbb{T}|\times(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$.
-
-For complexity comparison, we also show the complexity of path finding process in  CoSE \cite{rostami2007cose} and KSP \cite{eppstein1998finding}.
-
-CoSE tries to find a conflicting SRLG set instead of a Conflicting Link Set as we do. Although their search for conflicting SRLG set is exhaustive with a high cost, in this paper, we focus on the cost analysis of path finding process and do not take into account this cost in the comparison. As our SRLG Conflicting Link Set is derived from min-cut and the set cover problem, the $|\mathbb{T}|$ is the minimum size of SRLG Conflicting Link Set. Therefore, the output of the conflicting SRLG set in CoSE is at least $|\mathbb{T}|$, and we denote the SRLG set as $\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$. As each SRLG path includes multiple links, the sub-problems to be partitioned should be much larger than ours. In the process of the problem partition for an SRLG including  $|SRLG|$ links, the inclusion or exclusion of an SRLG link in an AP would create  $|SRLG|$ sub-problems.  Thus a SRLG set $\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$ will introduce $\prod\limits_{i = 1}^{_{\left| T \right|}} {\left| {SRL{G_i}} \right|}$ sub-problems in CoSE, as a link  combination (with each link extracted from a SRLG to get it out of the trap) corresponds  a sub-problem. Therefore, the complexity of CoSE  is $\prod\limits_{i = 1}^{_{|\mathbb{T}|}} {\left| {SRL{G_i}} \right|}\times (|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$, which is much larger than ours.
-
-For KSP \cite{eppstein1998finding}, the path finding complexity is $K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$, where $K$ is the number of first $K$ shortest paths that should be tested before finding the SRLG disjoint BP. However, as KSP does not borrow any information from the previous path searching process, in the worst case, KSP should try all the paths from the source $s$ to the destination $d$. Therefore, the worst $K$ would be  $2^{|\mathbb{E}|}$, which brings very large computation cost.
-
-Therefore, compared with  CoSE \cite{rostami2007cose} and KSP \cite{eppstein1998finding}, our algorithm exploits the min-cut theory to reduce the number of paths searched thus having the smallest computation cost.  In Section \ref{subsubsec:Runtime}, we will further provide extensive simulations to demonstrate that our algorithm can achieve very high computation speed to find the SRLG disjoint paths using the topology trace data.
-
-\subsection{实验环境与评价指标}
-
-因为我们找不到任何拓扑跟踪数据SRLG链接，我们通过注入生成一个合成的数据集-ING SRLG进入华为拓扑跟踪发布。华为拓扑跟踪有7种不同的拓扑，具有不同的数目。节点、链路、链路权重(表示链路的延迟或其他参数)表一显示了基本的网络设置(编号)。这7个拓扑中的节点、链接)。基于华为的拓扑跟踪，我们随机生成SRLG组，使用SRLG图的注入数与SRLG边比(定义为SRLG边)(第3行和第4行)桌子。
-
-
-As we could not find any topology trace data that contain SRLG links, we generate a synthesized data  set by injecting SRLG into a Huawei topology trace published. Huawei topology trace has $\TopoNum$ different topologies with various number of nodes, links, link weights (represent link's delay or other parameter). Table \ref{tab:AllSample} shows the basic network setting (number of nodes, links) in these $\TopoNum$ topologies. Based on huawei's topology trace, we randomly generate SRLG groups, with the number of SRLG graphs injected and the SRLG edge ratio (defined as $\frac{{No.SRLG \  {\rm{ }}edges}}{{Total \  {\rm{ }}No.edges}}$) shown on the 3rd and 4th rows of the table.
-
-
-
-%The github website \cite{code} support complete experimental code and experimental topology data.}
-
-
-
-
-\begin{table*}[tp]
-\caption{$\TopoNum$ different topologies.}
-  \centering
-\footnotesize{  \begin{tabular}{*{18}{c}}
-\toprule
-Topology & 1 & 2 & 3 & 4 & 5 & 6& 7   \\
-\midrule
-Node    &     527&      521    &      521     &    2023             &     451     &     521     &     449       \\
-Edge   &    4158 &  4052     &    4152      &   4142          &       2780   &      4052   &      2778    \\
-%Graph density  & 1.5\% &    1.49\% &   1.52\%  &  0.1\%  &   0.10\% &   1.41\%  &  1.5\% &   1.38\%   \\
-No.SRLG & 132 &  86   &  89  &  207        & 210  &  128  &   88    \\
-SRLG edge ratio & 9.66\% & 6.16\% &   6.18\% &   14.94\%    &   22.55\%  &  9.65\% &   9.53\%     \\
-\bottomrule
-\end{tabular}
-}
-
-\label{tab:AllSample}
-\end{table*}
-
-为了进行性能比较，除了我们的方案(名为)，我们还实现了另外四个SRLG-不相交。路由算法如下：
-
-For performance comparisons, besides our scheme (named by \CI), we also implemented other four SRLG-disjoint routing algorithms as follows:
-
-ILP：[19]中的工作旨在寻找SRLG-不相交的路径。通过ILP公式使总重量这两条路中的一条被最小化了。我们不知道其他的研究则寻找Min-Min SRLG-不相交路径。通过ILP公式。因此，在[19]之后，我们构造我们的Min-Min SRLG-不相交路由问题通过改变目标函数。2)iqcp：作为任意0−1整数线性规划，其中所有变量为0或1，ILP可表示为二次约束程序与ILP不同，我们还模拟了Min-Min SRLG-不相交路由问题-整数二次约束规划(IQCP)[19]。3)KSP[23]：它在源和目标作为候选AP，然后一个接一个地测试它们要查看是否有相应的(不相交的)bp，直到我们发现了这样的BP。4)Cose[28]：当AP遇到陷阱问题时，Cose尝试进行简单而详尽的搜索，以找到SRLG。通过srlg集的AP无法找到的设置。不相交的BP路径。基于SRLG集，它划分原问题并设计算法。若要搜索SRLG不相交路径对，请执行以下操作。
-
-\begin{enumerate}
-  \item ILP: The work in \cite{hu2003diverse}  aims to find SRLG-disjoint paths through an ILP formulation such that the total weight of the two paths are minimized. We are not aware that other studies look for the Min-Min SRLG-disjoint paths through ILP formulation. Therefore, following \cite{hu2003diverse}, we formulate  our Min-Min SRLG-disjoint routing problem by changing the objective function.
-  \item IQCP: As any $0-1$ integer linear program where all variables are either 0 or 1,  ILP can be formulated as a quadratically constrained program. Different from ILP, we also model Min-Min SRLG-disjoint routing problem through the Integer Quadratic Constraints Program (IQCP) \cite{hu2003diverse}.
-  \item KSP \cite{eppstein1998finding}: It finds the first $K$ shortest paths between the source and the destination as candidate APs, and then tests them one by one in the increasing order of their costs to see if it has a corresponding (disjoint) BP, until such a BP is found.
-  \item CoSE \cite{rostami2007cose}: When an AP encounters a trap problem, CoSE tries a simple and exhaustive search to find a SRLG set that no AP going through the SRLG set can find the SRLG-disjoint BP path. Based on the SRLG set, it partitions the original problem  and designs an algorithm to search for the SRLG disjoint path pair.
-\end{enumerate}
-%\rev{As constraints of ILP equation for keeping linear calculation is $\sum\limits_{1\leq i \leq \chi} |\mathbb{R}_{r_i}|^2$ more than that of IQCP, ILP can be formulated as a quadratically constrained program so that reduce the quantity of constraints. As ILP}, we also model Min-Min SRLG-disjoint routing problem through the Integer Quadratic Constraints Program (IQCP) \rev{based on} \cite{hu2003diverse}.
-
-前两者(ILP和IQCP)是基于整数程序的。模特。在我们的实现中，工具GUROBI 7.0[37]用于解决这两个整数问题。六次-性能指标用于评估不同的SRLG-不相交路由算法：路径权重：是路径中链接权重的总和。路径跳：路径中的跳数。运行时：平均毫秒数SRLG-不相交路径查找。算法加速比：给定两种情况下的计算时间不同的算法(算法1和算法2)，表示为T1和T2，算法在算法2计算时间上的加速关于gal 1：s1−2=t1/t2。
-
-
-核心加速比：并行程序的核心加速比[38]通常定义为SP=t1p，其中p是处理器内核和T1和Tp表示在1上的运行时间。核核和p核。效率：定义为[38]EP=SPP=t1PTP，它是典型的报告为范围内的百分比(0，1)。所有的模拟都是在linux服务器上运行的。使用Intel(R)Xeon(R)CPU E5-number00 2.00GHz(24核)和32.00GB内存。为了测量计算时间，我们在所有实现的算法中插入一个定时器。
-
-
-The first two (ILP and IQCP) are based on integer program models. In our implementation, the tool GUROBI 7.0 \cite{optimization2012gurobi} is employed to resolve these two integer problems.  Six performance metrics are applied to evaluate the performance of different SRLG-disjoint routing algorithms:
-%\begin{itemize}
-%  \item \textbf{Path weight}: is the sum of the link weight in the path.
-%  \item \textbf{Path hop}: the number of hops in the path
-%  \item \textbf{Runtime}: the average number of milliseconds taken for SRLG-disjoint path finding.
-%  \item \textbf{Algorithm speedup}: Given the computation time under two different  algorithms ($alg_1$ and $alg_2$), denoted as $T_1$ and $T_2$, the algorithm speedup in the computation time of the $alg_2$ with respect to the $alg_1$: ${S_{1 - 2}} = T_1/T_2$.
-%  \item \textbf{Core speedup}: The core speedup \cite{bryant2003computer} of a parallel program is typically defined as $S_P=\frac{T_1}{T_p}$,
-%where $p$ is the number of processor cores and $T_1$ and $T_p$ denote the running time on 1 core and $p$ cores, respectively.
-%
-%  \item \textbf{Efficiency}: is defined \cite{bryant2003computer} as $E_p=\frac{S_p}{p}=\frac{T_1}{pT_p}$,
-%it is typically reported as a percentage in the range (0, 1].
-%
-%\end{itemize}
-
-\textbf{Path weight}: is the sum of the link weight in the path.
-
-
- \textbf{Path hop}: the number of hops in the path.
-
-\textbf{Runtime}: the average number of milliseconds taken for SRLG-disjoint path finding.
-
-
-\textbf{Algorithm speedup}: Given the computation time under two different  algorithms ($alg_1$ and $alg_2$), denoted as $T_1$ and $T_2$, the algorithm speedup in the computation time of the $alg_2$ with respect to the $alg_1$: ${S_{1 - 2}} = T_1/T_2$.
-
-
- \textbf{Core speedup}: The core speedup \cite{grama2003introduction} of a parallel program is typically defined as $S_P=\frac{T_1}{T_p}$,
-where $p$ is the number of processor cores and $T_1$ and $T_p$ denote the running time on 1 core and $p$ cores, respectively.
-
-
- \textbf{Efficiency}: is defined \cite{grama2003introduction} as $E_p=\frac{S_p}{p}=\frac{T_1}{pT_p}$,
-it is typically reported as a percentage in the range (0, 1].
-
-
-
-
-All simulations are run on a linux server, which is equipped with Intel(R) Xeon(R) CPU E5-2620 0 \@ 2.00GHz (24 Cores) and 32.00GB RAM. To measure the computation time, we insert a timer to all the implemented algorithms.
-
-
-我们通过将SRLG注入到拓扑跟踪我们产生了两种SRLG。模拟，明星风格和非明星风格。光学网络，slg是明星风格，而在其他网络，如一个覆盖网络，SRLG可以是非星型的.每个SRLG组是通过随机选择2-5链接生成的.在五种SRLG不相交的路由算法，只有Cose和我们SCLS是并行算法。尽管ILP、IQCP和KSP不是并行算法，我们仍然在实现它们想给出我们的设计所获得的速度增益。我们以所有拓扑的归一化结果为最终结果。最小-最大归一化的仿真结果[39]为了节省空间。以获得更详细的模拟建立和仿真结果，我们的算法源代码。并可下载所合成的拓扑跟踪集。来自GitHub网站[40]
-
-
-We generate the topology set by injecting SRLG into a topology trace. Two kinds of SRLG are generated in our simulation, the star-style and the non-star-style. In Optical Networks, SRLG is star-style, while in other networks such as an overlay network, SRLG can be non-star-style. Each SRLG group is generated by randomly selecting 2-5 links. Among the five SRLG disjoint routing algorithms, only CoSE and our SCLS are parallel algorithms. Although ILP, IQCP and KSP are not parallel algorithms, we still implement them as we want to present the speed gain obtained by our design. We take of the normalized results  of all topologies as the final simulation results according to min-max normalization \cite{tax2000feature} for the reason of space saving. For more detailed simulation setup and simulation result, the source codes of our algorithms and the synthesized topology trace sets can be downloaded from the github website \cite{code}
-
-
-
-
-\subsection{Performance comparison}
-
-
-
-\subsection{算法性能评估及比较}
-根据第VII-B节的分析，在KSP下，COM-求第一条K最短路的计算复杂度是K(((E)V)log(V))，这将是很大的最坏的K=2 E。与分析一致，当我们使用7个拓扑运行ksp，没有仿真结果。在1小时内返回，而其他人则可以在11秒。计算时间长，使得ksp难以实现。在实践中使用。因此，我们不提供模拟。结果在KSP下。
-
-
-From the analysis in Section \ref{subsec:Complexity analysis}, under KSP, the computation complexity to find the first $K$ shortest paths is $K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$ , which would be large with the worst $K=2^{|\mathbb{E}|}$.
-% where $K$ is the number of first  shortest paths that should be tested before finding the SRLG disjoint BP.}
- Consistent with the analysis, when we run KSP using the $\TopoNum$ topologies, no simulation results can be returned within 1 hour, while others can return results within 11 seconds. Long computation time makes KSP difficult to use in practice. Therefore, we do not provide the simulation results under KSP.
-
-路径权重：图9显示AP、BP和AP和BP的总和。显然，所有的算法SCLS、Cose、ILP和IQCP实现了相同的AP。权重，但不同的BP权重因此不同的和权。AP和BP。因为所有算法都解决了相同的Min-MinSRLG-不相交的路由程序，尽管他们发现不同不相交的路径对，它们都能达到找到同样重量最小的AP。作为SCLS，Cose基于最短路径算法(如(Dijkstra)，他们还发现BP路径具有相同的权重。然而，两个基于ILP的算法，ILP和iqcp，聚焦。如何最小化AP的权重但找到任何BPsrlg-与ap不相交，由这两条路径搜索到的bp路径。算法是不同的。2)路径跳：图10显示AP、BP和AP和BP之和因为所有算法的目标都是最小化SRLG-不相交路径对的最小路径权重。在路径跳数中，它们具有相同的ap权重。(图9)尽管他们有不同的AP路径跳(图10)。
-
-\subsubsection{Path Weight}
-Fig.\ref{fig:normalization weitgh sum} shows the weight of AP, BP, and the sum of both AP and BP. Obviously, all implemented algorithms \CI, CoSE, ILP and IQCP achieve the same AP weight, but different BP weights thus different sum weights of AP and BP. As all the algorithms solve the same Min-Min SRLG-disjoint routing program, although they find different SRLG-disjoint path pairs, they can all achieve the goal of finding the  AP with the same least weight.
-As \CI, CoSE find the  BP based on a shortest path algorithm (such as Dijkstra), they also find the BP path with the same weight. However, the two ILP-based algorithms, ILP and IQCP, focus on minimizing the weight of AP but find any BP that is SRLG-disjoint with AP, the BP paths searched by these two algorithms are different.
-
-%\begin{figure*}[h]
-%\begin{center}
-%  % Requires \usepackage{graphicx}
-%  \includegraphics[width=.25\textwidth]{franz/weight.eps}
-%  \caption{Path weight}\label{fig:normalization weitgh sum}
-%  \includegraphics[width=.25\textwidth]{franz/hop.eps}
-%  \caption{Path hop}\label{fig:normalization hop}
-%\end{center}
-% \includegraphics[width=.25\textwidth]{franz/runtime}\\
-%  \caption{Runtime}\label{fig:normalization runtime}
-%\end{figure*}
-\begin{figure}[tp]
-\centering
-\begin{minipage}[t]{0.45\linewidth}
-\centering
-\includegraphics[width=1.7in]{figures/weight}
-\caption{Path weight}
-\label{fig:normalization weitgh sum}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.45\linewidth}
-\centering
-\includegraphics[width=1.7in]{figures/hop}
-\caption{Path hop}
-\label{fig:normalization hop}
-\end{minipage}
-\end{figure}
-
-
-\begin{figure*}[tp]
-\centering
-\begin{minipage}[t]{0.3\linewidth}
-\centering
-\includegraphics[width=2.25in]{figures/runtime}
-\caption{Runtime}
-\label{fig:normalization runtime}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.3\linewidth}
-\centering
-\includegraphics[width=2.25in]{figures/Runtime_noKSP_noCOSE}\\
-  \caption{Runtime without CoSE}\label{fig:Runtime_noKSP_noCOSE}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.3\linewidth}
-\centering
-\includegraphics[width=2.25in]{figures/speedup}
-\caption{Core speedup}
-\label{fig:Speedup}
-\end{minipage}
-\end{figure*}
-
-
-\begin{figure*}[tp]
-\centering
-\begin{minipage}[t]{0.3\linewidth}
-\centering
-\includegraphics[width=2.25in]{figures/Multiple}
-\caption{Algorithm speedup}
-\label{fig:Multiple}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.3\linewidth}
-\centering
-\includegraphics[width=2.25in]{figures/MultipleNoSCLS}
-\caption{Algorithm speedup without SCLS}
-\label{fig:MultipleNoSCLS}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.3\linewidth}
-\centering
-\includegraphics[width=2.25in]{figures/Efficiency}
- \caption{Efficiency}
- \label{fig:Efficiency}
-\end{minipage}
-\end{figure*}
-
-
-
-\subsubsection{Path Hop}
-Fig.\ref{fig:normalization hop} shows the path hop of AP, BP, and the sum of both AP and BP. As all algorithms target to minimize the least path weight of the SRLG-disjoint path pair instead of the number of path hops, they have the same AP weight (Fig.\ref{fig:normalization weitgh sum}) even though they have different AP path hops (Fig.\ref{fig:normalization hop}). Although the AP weights under all algorithms are smaller than the BP weights in Fig.\ref{fig:normalization weitgh sum}, in Fig.\ref{fig:normalization hop}, the AP hops may not always be fewer than the BP hops.
-
-%\begin{figure}
-%  \centering
-%  % Requires \usepackage{graphicx}
-%  \includegraphics[width=2.35in]{franz/hop}\\
-%  \caption{Path hop}\label{fig:normalization hop}
-%\end{figure}
-
-尽管所有算法的AP权重都小于BP权重在图9中，在图10中，AP跳可能并不总是这样比英国石油公司的啤酒花还少。3)运行时：图11显示了不同运行时间下的运行时间算法通过改变CPU核的使用数量。如Cose下的运行时明显大于其他算法，以更清楚地显示其他算法的结果。算法，我们在图12中进一步绘制运行时结果因为ILP和IQCP不是并行算法，的不同数目下的这些算法的运行时。
-
-\subsubsection{Runtime}
-\label{subsubsec:Runtime}
-Fig.\ref{fig:normalization runtime} shows the run time under different algorithms by varying the number of CPU cores utilized.
-As the runtime under CoSE is significantly larger than that under other algorithms, to more clearly show the results of other algorithms, we further plot the runtime results in Fig.\ref{fig:Runtime_noKSP_noCOSE} by excluding CoSE.
-As ILP, and IQCP are not parallel algorithms, the runtime of these algorithms under different number of cores is approximately equal. The runtime of our SCLS  and CoSE decreases with the increase of the number of processor cores because these two algorithms can partition the original problem into multiple sub-problems to execute in parallel and take advantage of the parallelism of the multi-core CPU to speed up the path searching process. Although CoSE is a parallel algorithm, the computation time is even larger than  ILP and IQCP. Some possible reasons include 1) the search process to find the conflicting SRLG set in CoSE  is not efficient; 2) As one SRLG usually includes multiple links, the partitioning of problem based on conflicting SRLG will introduce a large number of sub-problems to solve, which also results in a large computation cost.
-
-
-
-%\begin{figure}
-%  \centering
-%  % Requires \usepackage{graphicx}
-%  \includegraphics[width=2.35in]{franz/runtime}\\
-%  \caption{Runtime}\label{fig:normalization runtime}
-%\end{figure}
-岩心大致相等。我们的SCLS和COSE随处理器数目的增加而减小。因为这两种算法可以分割原始的问题分成多个子问题并行执行利用多核CPU的并行性加快路径搜索过程。虽然Cose是并行算法，计算时间比ILP和IQCP。一些可能的原因包括：1)搜索在Cose中查找冲突的SRLG集的过程不是2)由于一个SRLG通常包含多个链接，基于冲突SRLG意志的问题划分介绍了大量的子问题需要解决，其中也有一些子问题需要解决。计算量大。与Cose不同的是，我们的SCLS寻找的是一组conf-将AP上的链接切换到陷阱问题中。图中的最小割集理论，实现了图的最短时间。图11。这表明我们的冲突链接集查找算法是有效的，而且我们的分而治之。基于SRLG的智能AP搜索过程及算法冲突链路集可以大大降低计算量。
-
-Different from CoSE, our SCLS looks for the set of conflicting links on an AP caught into the trap problem based on the min-cut theory in graph, and achieves the lowest time in Fig.\ref{fig:normalization runtime}. This demonstrates that our conflicting link set finding algorithm is efficient, and moreover our divide-and-conquer algorithm and intelligent AP searching process based on SRLG Conflicting Link Set can largely reduce the computation cost.
-
-%KSP is known as an effective algorithm to handle the trap problem. However, among all the algorithms implemented, the running time under KSP is the largest. A major problem of KSP is that after the current candidate AP fails the test (that is, it does not have a corresponding disjoint BP), the next candidate AP to be tested is selected solely based on the path length. In the 8 topologies we studied in the trace,  usually a large number of paths need to be tested in order to find a disjoint path pair (if it exists between a pair of nodes), thus KSP needs a large computation time.
-
-\subsubsection{Algorithm speedup}
-算法加速：在图14中，我们进一步比较了它们计算速度特别是，找出加速带在使用不同的算法查找所需的路径，我们使用Cose作为基线算法，并设置算法1。=Cose。类似于图11中的结果，SCLS的速度在图14中是Cose的700多倍。类似于图11，因为Cose的运行速度要小得多在图14中很难观察到，我们更进一步将图15中的算法加速比结果排除在最大的一次。
-
-In Fig.\ref{fig:Multiple}, we further compare their computation speeds. Specially, to find out how much speedup is gained when using different algorithms to find the required paths,
-%to calculate the algorithm speedup metric,
-we use CoSE as the baseline algorithm and set $alg_1$ =CoSE. Similar to the results in the Fig.\ref{fig:normalization runtime}, the speed of SCLS is more than 700 times that of  CoSE in Fig.\ref{fig:Multiple}.  Similar to Fig.\ref{fig:normalization runtime}, as the running speed of CoSE is significantly smaller than others and can hardly be observed in Fig.\ref{fig:Multiple}, we further plot the algorithm speedup results in Fig.\ref{fig:MultipleNoSCLS} by excluding the largest one SCLS.
-
-
-
-\subsubsection{Core speedup}
-
-核心加速比：而不是使用算法加速若要比较所有算法的总体运行速度，请将使用公制“核心加速比”来评估数字的核心影响给定的运行速度。算法。图13绘制了所有算法下的核心加速图已执行。算法ILP和IQCP下的核心加速比是在任何核心数下大约等于1，因为它们不是并行算法。我们SCLS的核心加速当核数小于4时，随核心数的增加而增加，在此之后，SCLS的核心加速比保持稳定，即演示4核心对于SCLS来说是足够的。这个结果是符合Amdahl定律[41]的理论核心加速比仅限于由问题确定的上限。尺寸。然而，cose下的运行时继续增加。即使核心数等于8，这是双倍的。数字4。这个结果表明即使是8核cpu。不能满足COSE的并行性要求。这是因为Cose发现的冲突SRLG集包含一个大量的链接，这进一步导致了大量的链接子问题，因此问题的大小和计算量都很大。费用。
-
-
-Rather than using the algorithm speedup to compare the overall running speeds of all algorithms, the metric "core speedup" is utilized to evaluate how the number of cores in the CPU impacts the running speed of a given algorithm.
-Fig.\ref{fig:Speedup} plots the core speedup under all algorithms implemented.
-%For the two parallel algorithms SCLS and CoSE, the core speedup   increases with the increase of the number of cores. %\del{Therefore, larger number of cores brings larger performance gain for these two parallel algorithms SCLS and CoSE.}
-%However, the increasing speed becomes smaller when the number of cores becomes larger and it incurs a higher cost to coordinate the process.
-Core speedup under algorithms ILP and IQCP is  approximately equal to 1 under any core number because they are not parallel algorithms. The core speedup of our SCLS increases with increase of core number when it is less than 4, beyond which the core speedup of SCLS remains stable, which demonstrates that 4 core is sufficient for SCLS. This result is consistent with Amdahl's law\cite{amdahl1967validity} that the theoretical core speedup is limited to a upper bound determined by the problem size. However, the runtime under CoSE continues to increases even though the core number is  equal to 8 which doubles the number 4. This result demonstrates that even 8-core CPU can not satisfy the parallelism requirement in CoSE. This is because the conflicting SRLG set found by CoSE includes  a large number of links,  which further results in a large number of sub-problems  and thus large problem size and  computation cost.
-
-
-%1) the search
-%process to find the conflicting SRLG set in CoSE is not
-%efficient; 2) As one SRLG usually includes multiple links,
-%the partitioning of problem based on conflicting SRLG will
-%introduce a large number of sub-problems to solve, which also
-%results in a large computation cost
-%
-%Among all algorithms, \revtao{the core speedup of our SCLS is the largest except CoSE, which demonstrates that our divide and conquer algorithm designed  based on the SRLG conflicting link set can bring the largest parallelism gain than non-parallel algorithm, and the cardinality of subproblem is smaller than CoSE}.
-
-%\note{How many paths pairs to search in your simulations. If you only search for one pair, then the sub=-problems may be lower than the number of cores, so multi core cannot be used.}
-\subsubsection{Efficiency}
-%Efficiency is a measure of the overhead due to the parallelization. Programs with a high efficiency spend more time on useful work and less time on synchronization and communications.
-
-效率：类似于图13，涉及更多的核心，效率值随着大量核心数的增加而降低。更多的成本来协调这一过程。在图16中，效率所有算法的值都随着核心号码。与图13中的结果一致，如Cose在核心之后，引入了比我们的scls更多的子问题。数达到4，在Cose下的效率大于。SCLS。然而，我们的SCLS取得了更大的成绩-如图14所示。所有的仿真结果表明，我们的SCLS可以实现。优于其他路由性能更高的方法而在更高的搜索速度，因为冲突找到的链接集可以促进有效的问题划分并行算法执行，计算量小。
-
-
-Similar to Fig.\ref{fig:Speedup}, with more cores involved, the efficiency value decreases  as a large core number brings more cost to coordinate the process. In Fig.\ref{fig:Efficiency}, the efficiency values of all algorithms decrease with the increase of the core number. Consistent with the results in Fig.\ref{fig:Speedup}, as CoSE introduces more sub-problems than our SCLS, after the core number reaches 4, the efficiency under CoSE is larger than SCLS. However, our SCLS achieves significantly larger algorithm speedup as shown Fig.\ref{fig:Multiple}. %\note{You'd better use the same colore to represent the same algorithm in different figures. It makes reading and understanding difficult with your messy color setup. You may explain what is algorithm speedup and core speedup earlier when you first refer them, although you don't need to give formal definition.}
-
-All the simulation results demonstrate that our SCLS can outperform other approaches with higher routing performance while at a much higher search speed, because the  conflicting link set found can facilitate efficient problem partition for parallel algorithm execution with low computation cost.
-
+因此，与现有的一些研究不同的是，\cite{datta2008graph}只能处理单个SRLG类型，这样的简单场景中一条链路只属于一个SRLG，我们的算法能更有效的处理多种情形。在更一般的情况下，链路可以属于一个或多个SRLG具有更多不同的SRLG类型。
