@@ -1,32 +1,13 @@
 
 
 \subsection{时间复杂度}
-若要在AP遇到时查找SRLG不相交路径对，请执行以下操作一个陷阱问题，我们的算法首先计算SRLG。冲突链接集，然后通过把它划分成T个子问题。如节所述切集LΦ的边数通常不大，因此，本文寻找SRLG冲突链路集。不会带来太多的成本。因此，我们关注的是路径查找过程的计算开销。
+在为了查找SRLG分离路径对时，当AP遇到陷阱问题，我们的算法首先计算出SRLG冲突链路集，然后通过把原问题划分成T个子问题来求解原问题。如\ref{subsec:Set cover problem for SRLG Conflicting Link Set}节所述边割集$\mathbb{L}_{\Phi}$的边数规模通常不是很大，因此，本算法寻找SRLG冲突链路集不会带来太多的时间成本。因此，我们关注的是路径查找过程的计算开销。
 
-一般来说，对于一个有E连接和V节点的网络，求最小权路径的复杂性是(E)。(V)log(V)。为了解决陷阱问题，我们的路径发现问题与最初的最小重量有点不同。路径查找问题。我们引入了路径的一些约束条件。例如，查找AP路径必须通过链接集。或者不能通过一组。由于这些链接集通常并不大，这些约束在成本计算上几乎没有差别。如不同的子问题有不同的链接集，因此不同。复杂性，为了使描述简单明了，我们仍然使用(EV)log(V)作为一次路径搜索。作为我们算法将原问题分成T个子问题，算法复杂度为T(EV)log(V)。
+一般来说，对于一个有$|\mathbb{E}|$条链路和$|\mathbb{V}|$个节点的网络，求最小权重路径问题的复杂性是$(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$。为了解决陷阱问题，我们的路径查找问题与最初的最小权重路径问题有点不同。我们在路径查找的过程中引入了一些约束条件。例如，查找AP路径必须通过必过链路集和必不过链路集。由于这些链路集通常并不大，这些约束在成本计算上几乎没有差别。因为不同的子问题有不同的链路集，为了使描述简单明了，我们仍然使用$(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$作为一次路径搜索时间复杂度。而我们算法将原问题分成$|\mathbb{T}|$个子问题，算法复杂度为$|\mathbb{T}|\times(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$。
 
-对于复杂性的比较，我们也展示了复杂性。的路径发现过程，在Cose[28]和KSP[23]。
 
-Cose试图找到一个冲突的SRLG集，而不是一个冲突链接集，就像我们所做的。虽然他们在寻找冲突的SRLG集是穷尽的，成本很高。本文主要研究路径发现过程的成本分析。在比较中不要考虑到这一成本。由于我们的SRLG冲突链接集来自min-裁剪和集合覆盖问题，T是最小的。SRLG冲突链接集的大小。因此，在Cose中冲突的SRLG集至少是T，并且我们表示SRLG集合为SRLG 1，SRLG 2，···，SRLG T？由于每个srlg路径包含多个链接，因此子问题。分区应该比我们的要大得多。在SRLG问题分区的过程包括SRLG链接，包含或排除SRLG链接在AP中会产生SRLG子问题。所以一个S-RLG集？SRLG 1，SRLG 2，···，SRLG T？将介绍T型qi=1个SRLGi子问题，作为链接组合(从SRLG提取每个链接以将其从(陷阱)对应一个子问题。因此，复杂性柯斯t qI=1 SRLGi(E V)log(V)，即比我们的大得多。
+对于不同算法复杂性的比较，我们也展示了在Cose\cite{rostami2007cose}和KSP\cite{eppstein1998finding}在路径查找过程中的复杂性。
 
-对于KSP[23]，路径查找复杂度为K((E))。(V)log(V)，其中K是第一个K的最短数。在发现SRLG不相交之前应该测试的路径BP。然而，由于KSP没有从前面的路径搜索过程，在最坏的情况下，是ksp。应该尝试从源到目标的所有路径。因此，最糟糕的K值是2E，这会带来很大的影响。计算量大。
+CoSE试图找到一个冲突的SRLG集合，而不是一个冲突链路集。但是他们寻找冲突的SRLG集的方法是穷尽的查找而且成本很高。在这我们主要分析研究路径查找过程时间成本。由于我们的SRLG冲突链路集是由最小割和集合覆盖问题导出的，$|\mathbb{T}|$是最小的SRLG冲突链路集规模。因此，在CoSE中的冲突SRLG集至少是$|\mathbb{T}|$，并且我们表示SRLG集合为$\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$，由于每个SRLG路径包含多条链路，因此CoSE的子问题应该比我们的要大得多。在AP路径上的一个SRLG 的必过链路集合不过链路集会产生$|SRLG|$个子问题。所以一个SRLG集合$\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$将引入$\prod\limits_{i = 1}^{_{\left| T \right|}} {\left| {SRL{G_i}} \right|}$个子问题。因此CoSE的复杂性是$\prod\limits_{i = 1}^{_{|\mathbb{T}|}} {\left| {SRL{G_i}} \right|}\times (|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$，这是比我们的算法那复杂度大得多的。
 
-因此，相对于成本[ 28 ]和KSP [ 23 ]，我们
-算法利用最小割理论来减少
-这样搜索的路径具有最小的计算成本。在
-第viii-b3，我们将进一步提供广泛的模拟
-证明我们的算法可以达到很高的效果。
-计算速度找到SRLG不相交的路径使用
-拓扑跟踪数据。
-
-To find a SRLG disjoint path pair when an AP encounters a trap problem, our algorithm first calculates the SRLG Conflicting Link Set, and then solves the original problem by partitioning it into $|\mathbb{T}|$ sub-problems. As introduced in Section \ref{subsec:Set cover problem for SRLG Conflicting Link Set},  the edge number of cut set $\mathbb{L}_{\Phi}$ is usually not large, therefore, finding the SRLG Conflicting Link Set in our paper does not introduce much cost. Therefore, we focus on the computation cost on the path finding process.
-
-Generally, for a network with $|\mathbb{E}|$ links and $|\mathbb{V}|$ nodes, the complexity of finding the least weight path is $(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$. To solve the trap problem, our path finding problem is a little bit different from the original least weight path finding problem. We introduce some constraints for path finding, for example, an AP path must pass through a link set or cannot pass a set. As these link sets are usually not large, the constraints bring little  difference in the cost calculation. As different sub-problems have different link sets thus different complexity, to make the description simple and clear, we still use $(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$ as one time of path searching. As our algorithm divides the original problem into $|\mathbb{T}|$ sub-problems, the complexity of our algorithm is $|\mathbb{T}|\times(|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$.
-
-For complexity comparison, we also show the complexity of path finding process in  CoSE \cite{rostami2007cose} and KSP \cite{eppstein1998finding}.
-
-CoSE tries to find a conflicting SRLG set instead of a Conflicting Link Set as we do. Although their search for conflicting SRLG set is exhaustive with a high cost, in this paper, we focus on the cost analysis of path finding process and do not take into account this cost in the comparison. As our SRLG Conflicting Link Set is derived from min-cut and the set cover problem, the $|\mathbb{T}|$ is the minimum size of SRLG Conflicting Link Set. Therefore, the output of the conflicting SRLG set in CoSE is at least $|\mathbb{T}|$, and we denote the SRLG set as $\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$. As each SRLG path includes multiple links, the sub-problems to be partitioned should be much larger than ours. In the process of the problem partition for an SRLG including  $|SRLG|$ links, the inclusion or exclusion of an SRLG link in an AP would create  $|SRLG|$ sub-problems.  Thus a SRLG set $\left\{ {SRL{G_1},SRL{G_2}, \cdots ,SRL{G_{|\mathbb{T}|}}} \right\}$ will introduce $\prod\limits_{i = 1}^{_{\left| T \right|}} {\left| {SRL{G_i}} \right|}$ sub-problems in CoSE, as a link  combination (with each link extracted from a SRLG to get it out of the trap) corresponds  a sub-problem. Therefore, the complexity of CoSE  is $\prod\limits_{i = 1}^{_{|\mathbb{T}|}} {\left| {SRL{G_i}} \right|}\times (|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|)$, which is much larger than ours.
-
-For KSP \cite{eppstein1998finding}, the path finding complexity is $K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$, where $K$ is the number of first $K$ shortest paths that should be tested before finding the SRLG disjoint BP. However, as KSP does not borrow any information from the previous path searching process, in the worst case, KSP should try all the paths from the source $s$ to the destination $d$. Therefore, the worst $K$ would be  $2^{|\mathbb{E}|}$, which brings very large computation cost.
-
-Therefore, compared with  CoSE \cite{rostami2007cose} and KSP \cite{eppstein1998finding}, our algorithm exploits the min-cut theory to reduce the number of paths searched thus having the smallest computation cost.  In Section \ref{subsubsec:Runtime}, we will further provide extensive simulations to demonstrate that our algorithm can achieve very high computation speed to find the SRLG disjoint paths using the topology trace data.
+对于KSP算法\cite{eppstein1998finding}，路径查找复杂度为$K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$，其中K是在发现SRLG分离路径对之前应该测试的路径次数。然而，由于KSP没有从前面的路径搜索过程利用前面的信息，在最坏的情况下，KSP可能尝试从源节点$s$到目的节点$d$的所有路径。因此，最糟糕的K值是$2^{|\mathbb{E}|}$，这会带来很大的计算成本。

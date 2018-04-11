@@ -78,6 +78,7 @@ where ${w_{AP}}$ and ${w_{BP}}$ are the path weights of AP and BP, respectively,
   \label{fig:CompositeGraph}
 \end{figure*}
 
+
 \subsection{Problem analysis}
 \label{sec:NPC proof}
 \begin{theorem}
@@ -85,27 +86,30 @@ where ${w_{AP}}$ and ${w_{BP}}$ are the path weights of AP and BP, respectively,
     The Min-Min SRLG-disjoint path problem is NP-complete.
 \end{theorem}
 
-\begin{proof}
-\revtao{
-According to \cite{bhatia2006finding}, the Min-Min link-disjoint path problem is NP-complete.  It is a sub-problem of Min-Min SRLG-disjoint path problem. Denoting the complexity of our Min-Min SRLG-disjoint path problem as C(A), we have NP-complete$\leq$C(A).}
-
-\revtao{
-For proofing complexity of Min-Min SRLG-disjoint path problem less or equal to NPC, we firstly supposed a problem B (denoted as the complexity as C(B)) of finding two SRLG-disjoint paths with the minimum path weight less than or equal to M (M is more than zero integer number). Min-Min SRLG-disjoint routing problem A is equivalent with problem B. We know M must more than zero and less than $\sum\limits_{e_i\in \mathbb{E}}w_{e_i}$. For example, we suppose $0\leq M\leq 10$ and m=6 is optimal solution, through classical binary search method with time complexity O(log(n)) as shown in Fig.\ref{fig:binarySearch}, we obtain two SRLG-disjoint paths with the minimum path optimal weight is m, Therefore problem A equivalent with problem B.}
-
-\revtao{We supposed a program X that when input the problem B if the problem B do not have solution, the program X instantly halt, otherwise program X continue executing and obtaining the problem B's solution, therefore problem B can be reducible to the NP-hard halting problem. Therefore C(B)$\leq$NP-hard}
-
-\revtao{Moreover, given any two paths, it is easy (in polynomial time) to identify whether these two paths are SRLG-disjoint paths and satisfy that the minimum path weight is less than or equal to M, so that C(B)$\leq$NP-complete. As B's complexity is equal to A, we have C(A)=C(B)$\leq$NP-complete. Therefore, A=NP-complete.}
-
-
-\end{proof}
-
-
-
-
-\begin{figure}[tp]
-  \centering
-  % Requires \usepackage{graphicx}
-  \includegraphics[width=3.0in]{franz/binarySearch}
-  \caption{Request optimal solution M through Binary search method }
-  \label{fig:binarySearch}
-\end{figure}
+Proof: Due to the limited space, the proof is omitted.
+%
+%\subsection{Problem analysis}
+%\label{sec:NPC proof}
+%\begin{theorem}
+%\label{le:lemma1}
+%    The Min-Min SRLG-disjoint path problem is NP-complete.
+%\end{theorem}
+%
+%\begin{proof}
+%\revtao{
+%According to \cite{bhatia2006finding}, the Min-Min link-disjoint path problem is NP-complete.  It is a sub-problem of Min-Min SRLG-disjoint path problem. Denoting the complexity of our Min-Min SRLG-disjoint path problem as C(A), we have NP-complete$\leq$C(A).}
+%
+%\revtao{
+%For proofing complexity of Min-Min SRLG-disjoint path problem less or equal to NPC, we firstly supposed a problem B (denoted as the complexity as C(B)) of finding two SRLG-disjoint paths with the minimum path weight less than or equal to M (M is more than zero integer number). Min-Min SRLG-disjoint routing problem A is equivalent with problem B. We know M must more than zero and less than $\sum\limits_{e_i\in \mathbb{E}}w_{e_i}$. For example, we suppose $0\leq M\leq 10$ and m=6 is optimal solution, through classical binary search method with time complexity O(log(n)) as shown in Fig.\ref{fig:binarySearch}, we obtain two SRLG-disjoint paths with the minimum path optimal weight is m, Therefore problem A equivalent with problem B.}
+%
+%\revtao{We supposed a program X that when input the problem B if the problem B do not have solution, the program X instantly halt, otherwise program X continue executing and obtaining the problem B's solution, therefore problem B can be reducible to the NP-hard halting problem. Therefore C(B)$\leq$NP-hard}
+%
+%\revtao{Moreover, given any two paths, it is easy (in polynomial time) to identify whether these two paths are SRLG-disjoint paths and satisfy that the minimum path weight is less than or equal to M, so that C(B)$\leq$NP-complete. As B's complexity is equal to A, we have C(A)=C(B)$\leq$NP-complete. Therefore, A=NP-complete.}
+%\end{proof}
+%\begin{figure}[tp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=3.0in]{franz/binarySearch}
+%  \caption{Request optimal solution M through Binary search method }
+%  \label{fig:binarySearch}
+%\end{figure}

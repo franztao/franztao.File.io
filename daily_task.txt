@@ -1,10 +1,6 @@
 ﻿---------------
 doing 
-
-
-
 design pattern
-
 
 Doing every day 
 hum-sing method
@@ -18,17 +14,18 @@ when i read some post,then i should auto-translate it before scanning it.
 learn logical thinking,when i read hongguan and logical thinking, translating and noting the main content of the project,wirting some inspiration.
 
 
-Wireshark is a free and open source packet analyzer
-tcpdump is a common packet analyzer that runs under the command line.
-mininet,opendaylight
-Gephi is an open-source network analysis and visualization software package written in Java on the NetBeans platform
-wmware vSphere
-GNS
-TCL language
-openflow
-metasploit
-haskell
-docker
-MAVEN
+
+比较多个实验
+论文的署名
+学校
+时间复杂度
+
+论文的两个点
+
+论文题目
+
+multiple disjoint path problem
+
+
 
 
