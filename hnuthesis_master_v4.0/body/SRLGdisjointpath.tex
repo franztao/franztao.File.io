@@ -1,4 +1,4 @@
-\chapter{共享风险链路组分离路径算法研究}
+\chapter{共享风险链路组分离路径算法}
 
 \section{问题描述}
 SRLG分离路径在它们之间没有任何共同的风险资源，也就是说，由于风险而导致的路径失败不会影响其他路径。图.\ref{fig:CompositeGraph}(b)显示两条SRLG分离路径对，表示为AP 和BP. 因为这两条路没有共同的风险资源，如果AP 失败，BP仍然可以工作。本章主要讨论了两条不相交的路径保护路径，即可以描述如下。
@@ -220,7 +220,7 @@ $,e_5,e_6,e_7,e_8\}$, $\mathbb{\mathbb{ER}}=\{e_9,e_{11},e_{17},e_{13},e_{19}\}$
 
 为了说明如何找到最小SRLG冲突链路集，我们如图\ref{fig:MinCutStarGraph}所展示了一个例子。为了求最小$\Phi(\mathbb{S},\mathbb{D})$， $\mathbb{S}=\{s, 1, 2, 3, 4, 5, 9\}$和$\mathbb{D}=\{d, 6, 7, 8\}$。边割集$\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$。对于AP路径上的所有链路，cut-block-link集合是：$\mathbb{B}_{e_1}=\emptyset$, $\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$, $\mathbb{B}_{e_3}=\{e_{19}\}$, $\mathbb{B}_{e_4}=\{e_{11}\}$, $\mathbb{B}_{e_5}=\{e_{13}\}$, $\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$。为了覆盖$\mathbb{L}_{\Phi}$，最少的cut-block-link集合是$\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$。因此，最小SRLG冲突链路集是$\mathbb{T}=\{e_2, e_5, e_6 \}$。
 
-如图\ref{fig:MinCutStarGraph}所示的例子中，虽然$|\mathbb{L}_{\Phi}|=4$，但是最小SRLG冲突链路集$|\mathbb{T}|=|\{e_2, e_5, e_6 \}|=3$是小于$|\mathbb{L}_{\Phi}|=4$。这是因为$e_2$属于$\mathbb{R}_{r_2}$和$\mathbb{R}_{r_3}$，并能阻塞在割集$\mathbb{L}_{\Phi}$中的两条链路$e_{11}$和$e_{19}$ 
+如图\ref{fig:MinCutStarGraph}所示的例子中，虽然$|\mathbb{L}_{\Phi}|=4$，但是最小SRLG冲突链路集$|\mathbb{T}|=|\{e_2, e_5, e_6 \}|=3$是小于$|\mathbb{L}_{\Phi}|=4$。这是因为$e_2$属于$\mathbb{R}_{r_2}$和$\mathbb{R}_{r_3}$，并能阻塞在割集$\mathbb{L}_{\Phi}$中的两条链路$e_{11}$和$e_{19}$
 
 
 根据SRLG的拓扑类型\cite{datta2008graph}，SRLG的拓扑类型：星型类型和非星型类型。对星型类型SRLG，所有链路都从同一个节点开始或结束在同一个节点。例如，如图\ref{fig:MinCutStarGraph}所示，$e_1$和$e_9$来自相同的节点$s$，$\mathbb{R}_{r_1}$是星型SRLG。对非星型类型，并不是SRLG中的所有链路都是从相同节点开始或结束于同一节点。如图\ref{fig:MinCutStarGraph}所示，$\mathbb{R}_{r_2}$, $\mathbb{R}_{r_3}$, $\mathbb{R}_{r_4}$ 和 $\mathbb{R}_{r_5}$是非星型类型。而且，即使在图\ref{fig:MinCutStarGraph}所示包括星型SRLG 和无星型SRLG，我们的算法高效且有效地通过解决集合覆盖问题来解决冲突集。
