@@ -30,7 +30,33 @@
 \end{itemize}
 
 \section{网络故障分类}
+网络故障主要表现为链路故障，链路故障恢复
+策略可分为主动式和被动式两种[张民贵, 刘斌. IP 网络的快速故障恢复[J]. 电子学报, 2008,
+[4] 齐宁, 汪斌强, 王志明. 可重构服务承载网容错构建算法研究
+[J]. 电子与信息学报, 2012, 34(2): 468-473. doi:
+10.3724/SP.J.1146.2011. 00670]。被动式策略在
+网络故障后动态自适应地进行全网资源重分配，但
+路由重新收敛花费较多的时间而不可接受。因此目
+前故障快速恢复研究以主动式策略为主，通过提前
+对网络进行资源规划和预留，使得故障时能迅速切
+换，如基于多拓扑[SHAND M and BRYANT S. IP fast reroute framework[P]
+America]和基于备份路径的故障恢复技
+术。多拓扑技术需要配置多个拓扑子层，路由存储
+消耗大；基于备份路径的故障恢复技术提供端到端
+路径重路由，在全局范围内进行流量分配，易于基
+于现有协议实现。因此，备份路径技术是当前故障
+恢复领域研究的热点[Towards k-link failure resilient routing,R3: resilient
+routing reconfiguration,architecture for joint failure recovery and traffic
+engineering,Designing low-capacity backup
+networks for fast restoration[]。
 
+在满足delay 约束的同时达到两条路径总的
+花费(cost)最小.当给定的delay 约束针对两条路径的端到端延时总和时,问题被称为DCLDOP-I(delay
+constrained link disjoint optimal paths),当给定的delay 约束针对路径对中每条路径的端到端延时时,问题被称为
+DCLDOP-II.文献[Researches on the problem of link disjoint paths with QoS constraints]对DCLDOP-I 和DCLDOP-II 问题进行了建模,证明了这两种问题同属于NP 完全问题.文献
+[4]针对DCLDOP-I 问题提出了两种近似求解算法.文献[Constrained shortest link-disjoint paths selection: A network programming based approach]研究了总延时受限下的k 条cost 最小链路分离路径
+问题.文献[On the complexity of and algorithms for finding the shortest path with a disjoint]提出了Min-Min 问题,旨在求解两条满足QoS 约束的分离路径且满足较短的路径cost 最小.文献[Link-Disjoint shortest-delay path-pair computation algorithms for shared mesh restoration networks]
+通过求解总延时最小的链路分离路径对来解决单链路失效后的路由恢复问题.
 \section{网络故障恢复}
 \section{网络保护策略}
 \subsection{路径保护}
