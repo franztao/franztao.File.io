@@ -12,7 +12,7 @@
 %openright, openany 指定新的一章\chapter 是在奇数页（右侧）开头，还是直接紧跟着上 一页开头。report 缺省为openany，book 缺省为openright。【对article 无效】
 
 
-                                           % 如果论文超过60页 可以使用twoside 双面打印
+                                           % 如果论文超过60 页 可以使用twoside 双面打印
 \input{setup/package}                      % 定义本文所使用宏包
 \graphicspath{{figures/}}                  % 定义所有的.eps文件在figures子目录下
 \begin{document}                           % 开始全文
@@ -61,16 +61,13 @@
 
 \include{body/exordium}
 \include{body/survivability}
-\include{body/disjointpath}
+%\include{body/disjointpath}
 
-\include{body/SRLGdisjointpath}
-\include{body/timeComplexity}
-\include{body/experiment}
-
-
-
-\include{body/SurvivabelVirtualNetworkEmbed}
-\include{body/SurvivabelEmbeddedVirtualNetwork}
+%\include{body/SRLGdisjointpath}
+%\include{body/timeComplexity}
+%\include{body/experiment}
+%\include{body/SurvivabelVirtualNetworkEmbed}
+%\include{body/SurvivabelEmbeddedVirtualNpetwork}
 
 \include{body/summary}
 
@@ -84,10 +81,11 @@
 
 %%%%%%%%%%  参考文献  %%%%%%%%%%
 \defaultfont
-\bibliographystyle{HNUThesis}
+%\bibliographystyle{HNUThesisp}
+\bibliographystyle{plain}
 \phantomsection
 \addcontentsline{toc}{chapter}{参考文献}          % 参考文献加入到中文目录
-%\nocite{*}                                        % 若将此命令屏蔽掉，则未引用的文献不会出现在文后的参考文献中。
+%\nocite{*}                                        % 若将此命令屏蔽掉，则未引用的文献不会出现在文后的参考文献中。p
 \bibliography{reference}
 \include{appendix/acknowledgements}               % 致谢
 \include{appendix/publications}                   % 发表论文和参加科研情况说明
