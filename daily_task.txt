@@ -3,11 +3,10 @@ doing
 design pattern
 openstack
 
-
 Doing every day 
+CSAPP
 hum-sing method
 sing-write method
-CSAPP
 think out the mathamatic problem from tao's book 
 
 
