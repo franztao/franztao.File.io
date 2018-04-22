@@ -21,10 +21,11 @@ SRLG不相交路径在它们之间没有任何共同的风险资源，也就是�
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=7.2in]{figures/CompositeGraph}
-  \caption{(a) A graph with five SRLGs: $\mathbb{R}_{r_1}=\{e_1,e_9\}$,$\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$,$\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$,$\mathbb{R}_{r_4}=\{e_5,e_{13}\}$,$\mathbb{R}_{r_5}=\{e_{15},e_{18}\}$. (b)AP and BP in the graph. (c) The shortest weight path AP in the graph. $\mathbb{AP}=\{e_1,e_2,e_3,e_4,e_5,e_6,e_7,e_8\}$, $\mathbb{\mathbb{ER}}=\{e_9,e_{11},e_{17},e_{13},e_{19}\}$. (d)  Graph after deleting the links in $\mathbb{AP}$ and ${\mathbb{ER}}$. }
+  \caption{SCLS算法演示图 }
   \label{fig:CompositeGraph}
 \end{figure*}
 
+%现如今研究进展
 \section{原有算法概述}
 共享风险链接组(SRLG)是一组链路共享相同的一个组件，该组件的故障会导致在这个组里所有链接的发生故障。就路径保护而言，尽管某些链路或者节点不相交路径算法\cite{suurballe1984quick,bhandari1997optimal,li1990complexity,guo2003link,xu2004finding,beshir2011variants,guo2013finding,hu2003diverse} 已经提出来，SRLG不相交路径 问题是比较棘手的，而且这些原有研究是限制在一定领域的。比如当每个SRLG 只包含一条链路时，这个SRLG不相交路由问题可以简化为链路不相交路径问题，而通过节点不相交方法(node split method)\cite{ford2015flows}节点不相交路径问题可以转化为链路不相交路径问题。因为SRLG组通常包括的链路超过一条并且网络中的链路通常可以属于多个SRLG组里，以至于求一对SRLG 不相交路径问题比求一对链路或者节点不相交路径问题要困难得多。
 
@@ -41,7 +42,7 @@ Datta\cite{datta2008graph}提出方法是将SRLG不相交路径问题转化为�
 
 
 
-\section{整数规划形式化}
+%\section{整数规划形式化}
 \section{时间复杂度}
 \begin{theorem}
 \label{le:lemma1}
@@ -55,8 +56,8 @@ Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete的$\leq$C(
 \begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=3.0in]{figures/binarySearch}
-  \caption{Request optimal solution M through Binary search method }
+  \includegraphics[width=4.0in]{figures/binarySearch}
+  \caption{二进制搜索法求最优解实例}
   \label{fig:binarySearch}
 \end{figure}
 假设程序X在输入问题B时，如果问题B没有解，则程序Y立即停止，否则程序B继续执行并获得问题B的解，因此问题B可以归结为NP-hard问题。因此C(B)$\leq$NP-hard。
@@ -70,8 +71,8 @@ Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete的$\leq$C(
 \begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
-\includegraphics[width=2.8in]{figures/KSPproblem}
-  \caption{An example to illustrate the inefficiency of KSP}
+\includegraphics[width=4.0in]{figures/KSPproblem}
+  \caption{演示KSP算法效率低下的实例}
   \label{fig:KSPproblem}
 \end{figure}
 
@@ -101,7 +102,7 @@ Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete的$\leq$C(
 
 注意，我们不需要解决子问题${{\mathcal{P}}(\{ e_2,e_5\}, \emptyset)}$ 和 ${{\mathcal{P}}(\{ e_2\},\emptyset )}$，因为它们的解已经包含在其它的子问题中。第一个解空间由两个子问题${{\mathcal P}(\{ e_2,e_5,e_6\} ,\emptyset )}$ 和 ${{\mathcal P}(\{ e_2,e_5\} ,\{ e_6\} )}$组成。由于SRLG冲突链接集为$\mathbb{T}=\{e_2,e_5,e_6\}$，显然，子问题${{\mathcal P}(\{ e_2,e_5,e_6\} ,\emptyset )}$是没有解的。因此，${{\mathcal P}(\{ e_2,e_5\} ,\{ e_6\} )}$的解空间等于${{\mathcal{P}}(\{ e_2, e_5\}, \emptyset)}$的解空间。同样，${{\mathcal{P}}(\{ e_2\},\emptyset )}$的解空间包括${{\mathcal{P}}(\{ e_2\} \{ e_5\}, \emptyset)}$  和 ${{\mathcal{P}}(\{ e_2\} ,\{ e_5\} )}$的解空间。
 \begin{figure}[htbp]
-\small{
+\large{
 \begin{equation*}
 {\mathcal P}(\emptyset ,\emptyset )\left\{ {\begin{array}{*{20}{l}}
 {{\mathcal P}(\{ e_2\} ,\emptyset )\left\{ {\begin{array}{*{20}{l}}
@@ -115,7 +116,7 @@ Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete的$\leq$C(
 \end{array}} \right.
 \end{equation*}
 }
-\caption{Example to illustrate divide-and-conquer solution}
+\caption{演示分而治之解决方案的实例}
 \label{fig:DividedConquer}
 \end{figure}
 
@@ -151,8 +152,8 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
 \begin{figure}[tp]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=3.6in]{figures/FlowStarGraph}
-  \caption{New Graph $G^*$}\label{fig:FlowStarGraph}
+  \includegraphics[width=4.0in]{figures/FlowStarGraph}
+  \caption{图$G^*$实例}\label{fig:FlowStarGraph}
 \end{figure}
 
 
@@ -178,8 +179,8 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
 \begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=2.5in]{figures/FlowNetwork}\\
-  \caption{An example to illustrate max-flow min-cut theorem. Each link $e_i$ is labeled by $f_{e_i}/c_{e_i}$, where $f_{e_i}$ and $c_{e_i}$ denote the flow and capacity of link $e_i$, respectively.   }
+  \includegraphics[width=4.0in]{figures/FlowNetwork}\\
+  \caption{最大流最小割定理实例}
   \label{fig:FlowNetwork}
 \end{figure}
 
@@ -241,8 +242,8 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
 \begin{figure*}[htbp]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=3.8in]{figures/MinCutStarGraph}
-  \caption{Min cut of the network graph, $\mathbb{SR}_{e_1}=\{e_1, e_9\},\mathbb{SR}_{e_2}=\{e_2,e_3,e_4, e_{11},e_{17},e_{19}\},\mathbb{SR}_{e_3}=\{e_2,e_3, e_{19}\},\mathbb{SR}_{e_4}=\{e_2,e_4, e_{11},e_{17}\},\mathbb{SR}_{e_5}=\{e_5, e_{13}\},\mathbb{SR}_{e_6}=\{e_6\},\mathbb{SR}_{e_7}=\{e_7\} $ and $\mathbb{SR}_{e_8}=\{e_8\}$. $\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$. $\mathbb{B}_{e_1}=\emptyset,\mathbb{B}_{e_2}=\{e_{11},e_{19}\},\mathbb{B}_{e_3}=\{e_{19}\},\mathbb{B}_{e_4}=\{e_{11}\},\mathbb{B}_{e_5}=\{e_{13}\},\mathbb{B}_{e_6}=\{e_6\}$,$\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$.}\label{fig:MinCutStarGraph}
+  \includegraphics[width=4.5in]{figures/MinCutStarGraph}
+  \caption{图$G^*$的最小割实例}\label{fig:MinCutStarGraph}
   \label{fig:MinCutStarGraph}
 \end{figure*}
 
