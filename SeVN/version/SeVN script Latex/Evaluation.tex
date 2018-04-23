@@ -10,13 +10,18 @@ For any VN request, the number of VN nodes is randomly determined by a uniform d
 
 VN requests arrive randomly over a timespan of $\SubstrateNewtorkRunTimeInterval$ time slots and the inter-arrival time is
 assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN request follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot. A high request rate and long lease times ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated physically substrate node.
+%The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean requests per 1 time units).
+%The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average
 
-We assumed the relative cost of computing compared with bandwidth is $\RelativeCostbetweenComputingBandwidth$ according to \cite{armbrust2009above,yu2010survivable}, which means $\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$. The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using the GT-ITM tool \cite{zegura1996model}. The computing(bandwidth) resources of the substrate nodes (links) are real numbers uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and $\SubStrateEdgeBandwithMaximum$), respectively. To model the facility node failure scenario, we choose all substrate facility nodes of substrate network to fail one by one, and statistically calculating migration frequency in every $\SubStrateFacilityNodeFailDuration$ time units.
+We assumed the relative cost of computing compared with bandwidth is $\RelativeCostbetweenComputingBandwidth$ according to  \cite{armbrust2009above,yu2010survivable}, which means $\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$.
+%The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using the GT-ITM tool  \cite{zegura1996model}.
+The SN topologies used from SNDlib topology data \cite{orlowski2010sndlib}(could list all topology graph's information???).
+The computing(bandwidth) resources of the substrate nodes (links) are integer uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and $\SubStrateEdgeBandwithMaximum$), respectively. To model the facility node failure scenario, we choose all substrate facility nodes of substrate network to fail one by one, and statistically calculating migration frequency in every $\SubStrateFacilityNodeFailDuration$ time units.
 
 
 In our proposed star method for $\MyProblemAbrreviation$ problem, we employ a proactive failure dependent protection(FD) based $\MyProblemAbrreviation$ problem design with sufficient redundancy before embedding process in order to conquer the limitation of existing work, which consider the redundancy within the embedding process and failure independent protection based migration approach in resource efficiency.
 
-For performance comparisons, besides our scheme (named by $\MyAlgorithmMethodAbrreviation$), we also implemented another one resilient algorithms $\SecondAlgorithmMethodAbrreviation$\cite{yeow2011designing} as follows, $\SecondAlgorithmMethodAbrreviation$ algorithms connect links between backup and critical nodes, and backup and backup nodes, but not connect links between critical and critical nodes.
+For performance comparisons, besides our scheme (named by $\MyAlgorithmMethodAbrreviation$), we also implemented another one survivable algorithms $\SecondAlgorithmMethodAbrreviation$ \cite{yeow2011designing} as follows, $\SecondAlgorithmMethodAbrreviation$ algorithms connect links between backup and critical nodes, and backup and backup nodes, but not connect links between critical and critical nodes.
 
 when every node of substrate mapped with virtual node fail, a simple method is that augment a new node physical node for migrating the failure virtual node and connect new link with the failure link in terms of the failure physical node. we label the simple method $\FouthAlgorithmMethodAbrreviation$.
 
@@ -24,7 +29,7 @@ Moreover, We compare with a virtual network embedding request algorithm, where V
 
 
 
-Based on the resource of substrate network whether shared or non-shared\cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern.
+Based on the resource of substrate network whether shared or non-shared \cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern. The substrate resource corresponding augment backup demand of  every virtual network request with survivable guarantee  could be shared with each other.
 
 Every virtual network's request exist a lease time span, statistically record virtual or substrate network's performance metric in real-time situation. Because the experimental data of every algorithm performance metric fluctuate, we incrementally record experimental data of every virtual or substrate network performance metric, then average the experimental data by successful accepted virtual network embedding or survivable embedded virtual network  as denominator.
 
@@ -92,7 +97,7 @@ In this section, we evaluate the performance of the SeVN problem heuristic metho
 %Transition state interval in one simulation 50 0 0 requests
 %Stationary state interval in one simulation 10,0 0 0 requests
 
-Different measures\cite{fischer2013virtual} of heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding stress, and other measures as described in the follow. $A_{VN}$ denote at time t arrived virtual network request.Fig.\ref{fig:VirNetReqSurNetReq} show that the successful number of virtual network request  embedded into physical network denoted as $A_{eVN}$ and the successful number of embedded virtual network survivable request after embed backup resource denoted as $A_{SeVN}$.
+Different measures \cite{fischer2013virtual} of heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding stress, and other measures as described in the follow. $A_{VN}$ denote at time t arrived virtual network request. Fig.\ref{fig:VirNetReqSurNetReq} show that the successful number of virtual network request  embedded into physical network denoted as $A_{eVN}$ and the successful number of embedded virtual network survivable request after embed backup resource denoted as $A_{SeVN}$.
 
 \begin{figure}
   \centering
@@ -107,10 +112,10 @@ Different measures\cite{fischer2013virtual} of heuristic algorithms are presente
   \item \textbf{Path Length}: the path length metric measures the number of links between two interconnected virtual nodes, the number of links between two substrate nodes that are mapped to two interconnected virtual nodes.
 
   \item \textbf{Cost, Revenue, and Cost/Revenue}: Cost: Sum of node computing ability or link bandwidth resources being used for the embedding. Revenue: Sum of node computing ability or link bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.
-  \item \textbf{Stress}: Average number of virtual links/nodes that have been assigned to the substrate links/nodes or  substrate links/nodes.
+  \item \textbf{Stress}: Average number of virtual links/nodes that have been assigned to the substrate links/nodes .
  \item \textbf{Migration Frequency Ratio}: The number of migrations refers to the number of virtual nodes that need to be migrated to new facility nodes in case corresponding substrate nodes fail.
  \item \textbf{utilization}: Bandwidth utilization or computing utilization of substrate links/nodes, in each SN entity (node or link), the sum of the spent substrate resources due to the mapping of virtual entities divided by the total amount of resources.
- \item backup nodes number: Number of backups The number of backups metric counts the number of backup resources that are set up for a virtual entity. Several additional substrate entities can be reserved to serve as a replacement in case the entity hosting the virtual entity fails.
+ \item \textbf{backup nodes number}: The number of backups metric counts the number of backup resources that are set up for a virtual entity. Several additional substrate entities can be reserved to serve as a replacement in case the entity hosting the virtual entity fails.
 \end{itemize}
 %\begin{table*}
 %\label{tab:measure}

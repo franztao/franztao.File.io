@@ -40,8 +40,14 @@
 %\setlength\PreviewBorder{0mm}
 \usepackage{booktabs} % For formal tables
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue]{hyperref}
-\newcommand{\rev}[1]{\uwave{#1}}
 
+%最后介绍一个实用的工具宏包syntonly。加载这个宏包后，在导言区使用\syntaxonly 命
+%令，可令LATEX 编译后不生成DVI 或者PDF 文档，只排查错误，编译速度会快不少：
+%\usepackage{syntonly}
+%\syntaxonly
+
+
+\newcommand{\rev}[1]{\uwave{#1}}
 \newcommand{\revtao}[1]{\textcolor{orange}{{#1}}}%revise the text with blue color, you can use this one.
 %\newcommand{\rev}[1]{#1}
 %\renewcommand{\algorithmicrequire}{\textbf{Input:}}
@@ -63,9 +69,8 @@
 %\setcopyright{cagov}
 %\setcopyright{cagovmixed}
 
-\input{number}
+\include{Fig/number}
 \input{terminology}
-
 
 % DOI
 %\acmDOI{10.475/123_4}
@@ -178,6 +183,7 @@
 
 
 \maketitle
+%https://mp.weixin.qq.com/s/VDRd8g7TF5kGeAuYLSzRng
 %\input{Introduction}
 %\input{RelatedWork}
 %\input{Preliminaries}
@@ -194,7 +200,11 @@
 \input{SeVNBackEmbedFormulation}
 %\input{TimeComplexity}
 %\input{RefactorProof}
+
+%https://mp.weixin.qq.com/s/_0Evj0K6WRYAkvRpt6LDdQ
 \input{Evaluation}
+
+%https://mp.weixin.qq.com/s/l3Guu5V14geYGldUZveFgg
 %\input{Conclusion}
 
 %\bibliographystyle{ACM-Reference-Format}
