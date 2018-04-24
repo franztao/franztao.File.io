@@ -57,7 +57,7 @@
   \caption{未来互联网的资源配置}
   \label{fig:ResourceAllocationInFutureInternet}
 \end{figure}
-p
+
 虚拟网络嵌入问题涉及节点和链路中虚拟资源的分配。因此，它可以分为两个子问题：虚拟节点嵌入(VNoM)，其中虚拟节点必须在物理节点中分配。虚拟链路嵌入(VLiM)，其中连接这些虚拟节点的虚拟链路必须嵌入到物理网络中相应节点的路径。虚拟网络的一个 节点能够被嵌入到物理网络拓扑中的任意一个物理节点，并且一条虚拟链路也可能会被嵌入到物理网络的多条物理路径，因此，任意一个虚拟网络被嵌入到底层物理网络时，都会有多种嵌入方案。所以怎么把业务供应商的虚拟网络请求与物理网络进行嵌入就显得尤为重要。当虚拟网络的链路和节点有约束条件时，此时的嵌入算法属于NP难问题\cite{amaldi2016computational}，即使是考虑最简单的没有约束条件的情况，在虚拟 网络拓扑给定的情况下，也仍然是NP难问题\cite{amaldi2016computational}。所以现在在大多的研究中如表\ref{tab:TaxonomyOfConciseVNEApproach}所列，基本是利用启发式算法来求解虚拟网络嵌入问题尽量优化解决方案。
 
 
@@ -66,7 +66,7 @@ p
 
 VNE问题有多种不同变体。因此，文献中提出的所有VNE方法都可以根据它们是静态的还是动态的、集中的还是分布的、简洁的还是冗余的进行分类。这六个概念将在这里描述。
 \begin{enumerate}
-  \item \textbf{静态Static vs 动态Dynamic}：在大多数现实世界中，VNE必须作为网络问题来解决，也就是说，不会事先知道虚拟网络请求VNR的到来。相反，虚拟网络动态得到达系统，并且可以在网络中停留任意时间。为了实际起见，VNE算法必须在VNR到达时处理它们，而不是一次加入一组VNR(离线VNE)。 虽然原则上所有方法都可以在线操作，但静态VNE 方法并不考虑重新嵌入更多VNR之一的可能性，以提高SN中嵌入的性能。一些影响导致需要重新安置部分(甚至是完整的)虚拟网络：比如物理网络资源的破碎化，虚拟网络的变化，物理网络的故障等问题。
+  \item \textbf{静态Static vs 动态Dynamic}：在大多数现实世界中，VNE 必须作为网络问题来解决，也就是说，不会事先知道虚拟网络请求VNR 的到来。相反，虚拟网络动态得到达系统，并且可以在网络中停留任意时间。为了实际起见，VNE算法必须在VNR到达时处理它们，而不是一次加入一组VNR(离线VNE)。 虽然原则上所有方法都可以在线操作，但静态VNE 方法并不考虑重新嵌入更多VNR之一的可能性，以提高SN中嵌入的性能。一些影响导致需要重新安置部分(甚至是完整的)虚拟网络：比如物理网络资源的破碎化，虚拟网络的变化，物理网络的故障等问题。
 
       动态VNE方法试图重新配置嵌入的虚拟网络请求，以便重新组织资源分配并优化物理网络资源的使用。例如，图\ref{fig:RelocationMappedVNRsOnlineVNE}显示了在不同时间到达并离开物理网络的三个在线嵌入的VNR。如果物理网络资源不是第一次通过重新配置已嵌入的VNR2来去碎片，则它们中的最后一个VNR3不能嵌入到物理网络。
 
@@ -219,7 +219,18 @@ VNE问题有多种不同变体。因此，文献中提出的所有VNE方法都�
 %\end{tabular}
 %\end{table}
 
+
+
+
+
 \section{可生存虚拟网络嵌入算法}
+\subsection{共享vs非共享}
+可以通过在底层物理网络内集成回退资源来发挥VNE方面的可生存性性。可以为可能故障失效的某些特定主节点/链路建立备份节点/链路。在任何时候，必须保证网络拓扑的一致性，特别是关于被定义为对故障有可生存性的资源。对于用户来说，从故障中恢复应该是透明性的，也就是说，他不应该注意到网络切换到备份资源。即使在使用时间敏感的应用程序时，用户也不应觉察到到发生了错误。这尤其要求，为了选择备份资源，必须考虑主要实体的所有QoS要求。
+
+备份资源本身可以是专用的，也可以是共享的\cite{guo2011shared}。专用意味着每个虚拟网络都可以建立完整的备份网络和备份资源。完全致力于虚拟网络，相互独立。但是，这是资源效率低下的，因为对于每个虚拟资源都需要获得一个已经嵌入的专用底层实体。在某些情况下，共享和重用备份资源也是可以接受的，以便减少附加备份资源在底层物理网络上的占用。通常，较高程度的重用备份资源会导致可靠性降低，反之亦然。
+
+此外，(共享)备份资源可以预先分配(即在第一个虚拟网络嵌入请求到达之前)或“按需”(即为每个嵌入请求分配)。共享按需备份资源可以在嵌入时间分配，即每次虚拟网络请求到达\cite{guo2011shared,yeow2010designing,yu2011cost}时。然而，共享预分配算法在配置阶段定义了一些特定的备份资源，即在任何虚拟网络请求到达之前\cite{rahman2010survivable}。
+\subsection{主动保护vs被动恢复}
 根据是否对租户的虚拟网络提供备份资源，可以将SVNE算法划分为两类： 基于主动保护策略的算法和基于被动恢复策略的算法\cite{herker2013survey}。
 
 在基于主动保护策略的算法中，在嵌入虚拟网络请求前，为虚拟网络预置备份资源，以供后续故障恢复使用。该策略可以提供较高的虚拟网络可生存性保障， 但是对于备份资源消耗较大。代表性算法如:FI-EVN\cite{yu2011cost}、FD-EVN\cite{wang2014survivable} LC-SVNE\cite{hu2012location} 等。
@@ -228,49 +239,13 @@ VNE问题有多种不同变体。因此，文献中提出的所有VNE方法都�
 
 SVNE算法的两种备份策略均存在性能问题，其中主动保护策略需要提供虚拟网 络全部重要节点及其关联链路的备份资源，所以该策略的虚拟网络请求接受率较 低，被动恢复策略每次进行故障发生时需要使用现有网络资源进行故障恢复，故障恢复效率低下。
 
-总之，如表\ref{tab:survivableVirtualNetworkEmbedd}所示给出了可生存虚拟网络嵌入算法的总结。
-\begin{table}[h]
-\caption{可生存虚拟网络嵌入算法总结}\label{tab:survivableVirtualNetworkEmbedd}
-\vspace{0.5em}\centering\wuhao
-\begin{tabularx}{48em}{|*{4}{>{\centering\arraybackslash}X|}}
-\toprule[1.5pt]
-算法（论文）   & 故障类型  & 优化目标 & 处理机制  \\
-\midrule[1pt]
-Survivable virtual network embedding\cite{rahman2013svne} & 单个物理链路故障 & 为基础设施提供最大限度的收入 & 被动，故障后(Restoration)\\
-\hline
-Shared backup network provision for virtual network embedding\cite{guo2011shared} & 单个物理链路故障 & 最大化收益/VN接受率& 主动，故障前(Protection)\\
-\hline
-Migration based protection for virtual infrastructure survivability for link failure\cite{yu2011migration} & 单个物理链路故障 & 最小化成本 & Protection\\
-\hline
-QoSMap: Achieving Quality and Resilience through Overlay Construction\cite{shamsi2009qosmap} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
-\hline
-An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay}；An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
-\hline
-Cost efficient design of survivable virtual infrastructure to recover from facility node failures\cite{yu2011cost} & 单个虚拟节点故障& 最小化成本 & Protection\\
-\hline
-A novel two-step approach to surviving facility failures\cite{qiao2011novel} & 单个虚拟节点故障 & 尽量减少资源/总成本 & Protection\\
-\hline
-Survivable virtual infrastructure mapping in a federated computing and networking system under single regional failures\cite{yu2010survivable} & 单个区域故障 & 最小化成本 & Protection \\
-\hline
-Location-constrained survivable network virtualization\cite{hu2012location} & 单个虚拟节点故障 & 尽量减少资源 & Protection\\
-\hline
-Designing and embedding reliable virtual infrastructures\cite{yeow2010designing} & 单个物理节点故障 & 尽量减少所用资源 & Protection\\
-\hline
-Survivable virtual infrastructure mapping in virtualized data centers\cite{xu2012survivable} & 单个服务器故障 & 最小化运营成本& Protection\\
-\hline
-Adaptive virtual network provisioning\cite{houidi2010adaptive} & 单个节点或者链路故障 & 最小化通信成本 & Restoration\\
-\bottomrule[1.5pt]
-\end{tabularx}
-\vspace{\baselineskip}
-\end{table}
-
-\section{算法评价度量}
+\subsection{算法评价度量}
 可生存性虚拟网络嵌入算法的最终目标是实现网络运营收益最大化和成本消耗最小化。因此，为了实现网络运营收益最大化，需要在提高虚拟网络嵌入收益的同时，保障较高的故障恢复成功率和恢复效率以降低故障成本。
 
 度量标准对于评估成功嵌入的质量是非常重要的。它们用于比较不同的VNE方法，并量化优化方面的进展。在本文中，有关VNE的不同的度量被分成以下四大类别：
 
 通过对虚拟网络嵌入（VNE)算法文献的调研，选取了算法性能分析常用的四组评价指标作为实验性能参数，分别是：服务质量度量，成本相关度量，可生存性度量和其他度量。如表\ref{tab:MetricsForVirtualNetworkEmbedding}所示概述了本文讨论的各种指标。根据应用程序的场景，可以为大多数度量计算平均值、最大值或最小值。
-\begin{table}[htbp]
+\begin{table}[htb]
 \caption{虚拟网络嵌入的度量}\label{tab:MetricsForVirtualNetworkEmbedding}
 \vspace{0.5em}\centering\wuhao
 \begin{tabular}{lll}
@@ -302,6 +277,43 @@ Adaptive virtual network provisioning\cite{houidi2010adaptive} & 单个节点或
  & Active substrate nodes & 为了实现管理虚拟基础设施，必须打开的物理节点数\\
 \bottomrule[1.5pt]
 \end{tabular}
+\vspace{\baselineskip}
+\end{table}
+
+
+总之，如表\ref{tab:survivableVirtualNetworkEmbedd}所示给出了可生存虚拟网络嵌入算法的总结。
+\begin{table}[htb]
+\caption{可生存虚拟网络嵌入算法}\label{tab:survivableVirtualNetworkEmbedd}
+\vspace{0.5em}\centering\wuhao
+\begin{tabularx}{48em}{|*{4}{>{\centering\arraybackslash}X|}}
+\toprule[1.5pt]
+算法（论文）   & 故障类型  & 优化目标 & 处理机制  \\
+\midrule[1pt]
+Survivable virtual network embedding\cite{rahman2013svne} & 单个物理链路故障 & 为基础设施提供最大限度的收入 & 被动，故障后(Restoration)\\
+\hline
+Shared backup network provision for virtual network embedding\cite{guo2011shared} & 单个物理链路故障 & 最大化收益/VN接受率& 主动，故障前(Protection)\\
+\hline
+Migration based protection for virtual infrastructure survivability for link failure\cite{yu2011migration} & 单个物理链路故障 & 最小化成本 & Protection\\
+\hline
+QoSMap: Achieving Quality and Resilience through Overlay Construction\cite{shamsi2009qosmap} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
+\hline
+An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay}；An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
+\hline
+Cost efficient design of survivable virtual infrastructure to recover from facility node failures\cite{yu2011cost} & 单个虚拟节点故障& 最小化成本 & Protection\\
+\hline
+A novel two-step approach to surviving facility failures\cite{qiao2011novel} & 单个虚拟节点故障 & 尽量减少资源/总成本 & Protection\\
+\hline
+Survivable virtual infrastructure mapping in a federated computing and networking system under single regional failures\cite{yu2010survivable} & 单个区域故障 & 最小化成本 & Protection \\
+\hline
+Location-constrained survivable network virtualization\cite{hu2012location} & 单个虚拟节点故障 & 尽量减少资源 & Protection\\
+\hline
+Designing and embedding reliable virtual infrastructures\cite{yeow2010designing} & 单个物理节点故障 & 尽量减少所用资源 & Protection\\
+\hline
+Survivable virtual infrastructure mapping in virtualized data centers\cite{xu2012survivable} & 单个服务器故障 & 最小化运营成本& Protection\\
+\hline
+Adaptive virtual network provisioning\cite{houidi2010adaptive} & 单个节点或者链路故障 & 最小化通信成本 & Restoration\\
+\bottomrule[1.5pt]
+\end{tabularx}
 \vspace{\baselineskip}
 \end{table}
 
