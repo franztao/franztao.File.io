@@ -1,86 +1,6 @@
-
-\textbf{For $VirtualStar(v_2)$, as $v_3$ is originally hold by $s_3$, however, when physical node $s_1$ fails, we could migrate virtual node $v_3$ onto physical node $s_2$, as $s_2$ is setup virtual machine before, therefore, cost include the virtual link bandwidth cost $11$, and node capacity cost 5, and virtual machine migration cost $M_m$.}
-
-\textbf{Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal node mapping when physical node $s_1$ fails: $v_1 \rightarrow s_5$, $v_2 \rightarrow s_2$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$. The physical node $s_5$ begin setup and apply 2 node computing for virtual node $v_1$, and find three physical path corresponding virtual link $(v_1,v_2),(v_1,v_3),(v_1,v_4)$ with bandwidth constraints 4,5,3, respectively.}
-
-\begin{figure}
-\centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=3.5in]{Fig/StarRepresentationNode2}\\
-  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_2$ fail}\label{fig:StarRepresentationNode2}
-\end{figure}
-
-\begin{equation*}
-\tiny{
- {\begin{array}{*{20}{c}}
-&R_{S_{1}}&R_{S_{2}}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
-{L_{V_1}}&\fbox{4}&\infty&\infty&\infty&M_{m}&C_{s}+M_{m}+(2)+12&\infty\\
-L_{V_2}&\infty&\infty&\infty&\infty&\fbox{$M_{m}$+(1)+5}&\infty&C_{s}+M_{m}+(3)+10\\
-L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+(5)+11\\
-L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
-\end{array}}
-}
-\label{lab:Node2FaliureAlignmentMatrixNew}
-\end{equation*}
-
-%\begin{equation*}
-%\tiny{
-% {\begin{array}{*{20}{c}}
-%&{L_{V_1}}&L_{V_2}&L_{V_3}&L_{V_4}\\
-%R_{S_{1}}&\fbox{4}&\infty&\infty&\infty\\
-%R_{S_{2}}&\infty&\infty&\infty&\infty\\
-%R_{S_3}&\infty&\infty&\fbox{5}&\infty\\
-%R_{S_4}&\infty&\infty&\infty&\fbox{3}\\
-%R_{S_5}&M_{m}&\fbox{$M_{m}$+(1)+8}&\infty&\infty\\
-%R_{S_6}&C_{s}+M_{m}+(2)+12&\infty&\infty&C_{s}+M_{m}+(6)+3\\
-%R_{S_{7}}&\infty&C_{s}+M_{m}+(3)+10&C_{s}+M_{m}+(5)+11&\infty\\
-%\end{array}}
-%}
-%\label{lab:Node2FaliureAlignmentMatrixNew}
-%\end{equation*}
-
-\textbf{
-Fig.\ref{fig:StarRepresentationNode2} shows one example of such  bipartite graph with physical node $s_2$ fails after physical node $s_1$ failed. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node2FaliureAlignmentMatrixNew}).
-}
-
-
-\textbf{
-For $VirtualStar(v_1)$, as $v_1$ is originally hold by $s_1$, however, when physical node $s_2$ fails, we could find a alternate physical node $s_5$ as migrated node for virtual node $v_1$, and the physical node $s_5$ own backup node computation and edge bandwidth resource because former physical node $s_1$ failure situation, so that when physical node $s_2$ fail the edge that connect $VirtualStar(v_1)$ and $PhysicalStar(s_5)$ with the edge weight being $M_m$ .
-}
-
-\textbf{
-For $VirtualStar(v_2)$, as $v_2$ is originally hold by $s_2$, however, when physical node $s_2$ fails, we could find a alternate physical node $s_5$ as migrated node for virtual node $v_2$, and the physical node $s_5$ own backup node computation and edge bandwidth resource because former physical node $s_1$ failure situation, so that when physical node $s_2$ fail the edge that connect $VirtualStar(v_1)$ and $PhysicalStar(s_5)$ with the edge weight being $M_m+(1)+5$, the physical node $s_5$ just apply more 1 node computation resource for migrating virtual node $v_2$ for original backup node computation(2 node computation) resource of physical node $s_5$. There are a path between physical node $s_5$ and physical node $s_3$ mapping virtual node $v_3$, therefor, just apply 1 edge bandwidth to add the path physical node $s_5$ to physical node $s_3$ for satisfying the edge between virtual node $v_2$ and virtual node $v_3$, finally the cost of augmented path bandwidth is 1+4=5.
-}
-
-\textbf{Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal node mapping when physical node $s_2$ fails with physical node $s_1$ had been failed: $v_1 \rightarrow s_1$, $v_2 \rightarrow s_5$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$. The physical node $s_5$ had been setup and remain 2 backup node computing because of physical node $s_1$ failure, therefore, just apply more 1 node computing for virtual node $v_2$, and find three physical path corresponding virtual link $(v_1,v_2),(v_1,v_3),(v_1,v_4)$ with bandwidth constraints 4,5,3, respectively.}
-
-\begin{figure}
-\centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=3in]{Fig/StarRepresentationTwoFailure}\\
-  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_1$ and $s_2$ fail simultaneously}\label{fig:StarRepresentationTwoFailure}
-\end{figure}
-
-\begin{equation*}
-\tiny{
- {\begin{array}{*{20}{c}}
-&R_{S_1}&R_{S_2}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
-{L_{V_1}}&\infty&\infty&\infty&\infty&\fbox{$C_{s}+M_{m}$+(2)+12}&C_{s}++M_{m}+(2)+12&\infty\\
-L_{V_2}&\infty&\infty&\infty&\infty&C_{s}+M_{m}+(3)+10&\infty&\fbox{$C_{s}+M_{m}+(3)+10$}\\
-L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+(5)+11\\
-L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
-\end{array}}
-}
-\label{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}
-\end{equation*}
-
-\textbf{
-Fig.\ref{fig:StarRepresentationTwoFailure} shows one example of such  bipartite graph when physical node $s_1$ and $s_2$ fail simultaneously. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}).
-}
-
-
 \subsubsection{Dynamic Programming Mehtod}
 \label{lab:DynamicProgrammingEquation}
+
 \textbf{
 Although solving the ILP formulation will result in an “optimal” node mapping, its exponential time complexity makes such approach impractical for large quantity of virtual nodes situation. In this section, we describe an alternative using dynamic programming heuristic that has only a polynomial time complexity and, thus, is feasible for large quantity of virtual nodes situation.
 }
@@ -107,6 +27,7 @@ As shown in Fig.\ref{fig:DPIllustration} Line 6, when optimal weight sum of plac
 }
 
 \textbf{there are n+1 level's dynamic programming functions and there are $\prod_{i=1}^{m}C^i$ dynamic programming functions in every level. The time complexity of calculating every dynamic programming function is $O(m)$. Therefore, overall time complexity of the dynamic programming method is $n*\prod_{i=1}^{m}C^i*O(m)=O(n*m*\prod_{i=1}^{m}C^i)$. Additionally, for recording every level's virtual node's placement, the overall space complexity is $O[(n+1)*\prod_{i=1}^{m}C^i]$, which is, however, could be optimized to $O[\prod_{i=1}^{m}C^i]$, because when updating every level's dynamic programming function, the dynamic programming function only use back step level's dynamic programming function.}
+
 
 Placing the i-th virtual node where node computation capacity of every physical node is $x_1,x_2,x_3$, the optimal result $dp[i][{x_1}][{x_2}][{x_3}]$ is inferred from the optimal result of the former i-1 virtual nodes are succeed to be placed. For example, for requesting $dp[i][{x_1}][{x_2}][{x_3}]$, the state is inferred from $dp[i-1][{x_1-d_i}][{x_2}][{x_3}]$ when former i-1 virtual nodes are succeed to be placed and node computation capacity of every physical node is $x_1-d_i,x_2,\ldots,x_n$. The state of $dp[i-1][{x_1-d_i}][{x_2}][{x_3}]$ is optimal result when calculating $dp[i-1][{x_1-d_i}][{x_2}][{x_3}]$, and first physical node's node computation capacity $x_1-d_i+d_i$  of $dp[i][{x_1}][{x_2}][{x_3}]$ add $d_i$ because the i-th virtual node is placed into the first physical node.
 

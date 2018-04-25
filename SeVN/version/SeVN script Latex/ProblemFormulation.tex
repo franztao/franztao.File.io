@@ -41,7 +41,7 @@ For a virtual node $v_i$, a physical node $s_j$ can hold this virtual node only 
 
 %Denote the corresponding physical node that holds $v_i$ as $s_j$. Under node capacity constraint, we have $d_i\leq c_j$, that is, the node capacity request should be satisfied by the physical node. Besides capacity constraint, there is a location constraint should be satisfied on the physical node, that is, a virtual node ${v_i} \in V$ can only be provisioned on a physical node $s_j$ with ${f_i} \in {F_j}$. That is, the virtual function running on virtual node ${v_i}$ can be executed on physical node $s_j$. If a physical node $s_j$ satisfies both node capacity constraint and location constraint, the node mapping is feasible, and we denote such mapping as $\phi ({v_i}) = {s_j}$.
 
-For a virtual link $e_{ij}$ with its two virtual nodes are mapped to two physical nodes $s_{i'}$ and $s_{j'}$ (i.e., $\phi({v_i}) = {s_{i'}}$ and $\phi({v_j}) = {s_{j'}}$). Under link bandwidth constraint, if $d_{ij}\leq b_{i'j'}$ where $b_{i'j'}$ is the  available bandwidth  of the path connecting the physical nodes $s_{i'}$ and $s_{j'}$, virtual link  $e_{ij}$ can be mapped to the physical path $p_{\phi({v_i}) \phi({v_j})}$, we denote the feasible link mapping as $\rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})}$.
+For a virtual link $e_{ij}$ between its two virtual nodes are mapped to two physical nodes $s_{i'}$ and $s_{j'}$ (i.e., $\phi({v_i}) = {s_{i'}}$ and $\phi({v_j}) = {s_{j'}}$). Under link bandwidth constraint, if $d_{ij}\leq b_{i'j'}$ where $b_{i'j'}$ is the  available bandwidth  of the path connecting the physical nodes $s_{i'}$ and $s_{j'}$, virtual link  $e_{ij}$ can be mapped to the physical path $p_{\phi({v_i}) \phi({v_j})}$, we denote the feasible link mapping as $\rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})}$.
 
 Obviously, to find a feasible virtual network embedding, we should find two mapping functions $\phi$ and $\rho$ to map all the virtual nodes to physical nodes, and all the virtual links to physical paths.
 
@@ -112,7 +112,7 @@ VirtualStar(v_i)=(v_i, \phi(v_i), d_i, f_i, D_i, N_i)
 \end{equation}
 
 where $N_i$ is the neighbor node set of $v_i$ in the virtual network and ${D_i}$ denotes the bandwidth demand set associate with node $v_i$ with ${D_i} = \left\{ {{d_{ij}}|{v_j} \in {N_i}} \right\} $.
-Note that, VirtualStar($v_i$) includes the node mapping information $\phi(v_i)$. As we want to minimize the backup resource to provide the survivable network service, re-use the mapping before node failure may be a good choice to reduce the additional resource and make the system remain stable. In the virtual star structure, edges exist between the root node and its neighbor nodes, and no edge exists among its neighbor nodes.
+Note that, VirtualStar($v_i$) includes the node mapping information $\phi(v_i)$. As we want to minimize the backup resource to provide the survivable network service, re-use the mapping before node failure may be a good choice to reduce the additional resource and make the system remain stable. In the virtual star structure, edges exist between the root node and its neighbor nodes, but no edge exists among its neighbor nodes.
 
 The physical network is decomposed into physical local stars. Similarly, each physical local star associates with a physical node. Given physical node $s_j$, the corresponding physical local star is defined as an attributed, single-level, rooted tree and expressed as
 
@@ -130,7 +130,7 @@ Based on the virtual local star and physical virtual star, the virtual network a
 We build a bipartite graph $G=\{V_1,V_2,E\}$ to present the relationship between the virtual network and physical network.
 $V_1$ and $V_2$ are the vertex sets  representing the set of virtual stars and the set of physical stars, respectively. If VirtualStar($v_i$)'s virtual function $f_i$ can be executed by a physical node $s_j$ with ${f_i} \in {F_j}$, an edge $e(i,j)$ is added to the edge set $E$ to connect the VirtualStar($v_i$) and PhysicalStar($s_j$).
 
-Our goal is to minimize the backup resource to provide survivable service. To serve the goal, given edge $e(i,j)$, we define the edge weight $w(i,j)$  as the backup resource cost to map the virtual star($v_i$) to the physical star ($s_j$) when  node failure happens. According to whether the virtual node $v_i$ is mapped to the physical node $s_j$ before node fails, we define the edge weight in two different cases.
+Our goal is to minimize the backup resource to provide survivable service. To serve the goal, given edge $e(i,j)$, we define the edge weight $w(i,j)$  as the backup resource cost to map the virtual star($v_i$) to the physical star ($s_j$) when  node failure happens. According to whether the virtual node $v_i$ is mapped to the physical node $s_j$ before node fails, we define the edge weight$w(i,j)$ in two different cases.
 
 \begin{equation}
 \footnotesize
@@ -140,7 +140,7 @@ w(i,j) = \left\{ {\begin{array}{*{20}{c}}
 \end{array}} \right.
 \label{eq:edge weight}
 \end{equation}
-In (\ref{eq:edge weight}), $\theta$ is defined as follows.
+In Equ.(\ref{eq:edge weight}), $\theta$ is defined as follows.
 \begin{equation}
 \theta  = \left\{ {\begin{array}{*{20}{c}}
    {{C_s}} & {a = 0}  \\
@@ -154,7 +154,7 @@ In the second case (${v_i} \notin {\phi ^{ - 1}}({s_j})$), as the virtual node $
 
 
 
-Fig.\ref{fig:StarRepresentation} shows one example of such  bipartite graph when physical node $s_1$ fails. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node1FaliureAlignmentMatrixNew}).
+Fig.\ref{fig:StarRepresentation} shows one example of such  bipartite graph when physical node $s_1$ fails. The edge weight of this   bipartite graph can be shown in Matrix(\ref{lab:Node1FaliureAlignmentMatrixNew}).
 \begin{figure}
 \centering
 % Requires \usepackage{graphicx}
@@ -208,7 +208,7 @@ To provide survivable service, each virtual star (both the root virtual node and
 Assume virtual network consists of $n$ virtual nodes, thus $n$ virtual stars. The physical network consists of $m$ physical nodes, thus $m$ physical stars. In Eq(\ref{eq:indication}), we use bit binary $M_{ij}$ to denote whether  the $i$-th virtual star is mapped to the $j$-th physical star.
 \begin{equation}
 {M_{ij}} = \left\{ {\begin{array}{*{20}{c}}
-   1 & {map \ virtualstar(i) \  to  \ physicalstar(j)}  \\
+   1 & {map \ v_i \  to  \ s_j}  \\
    0 & {otherwise}  \\
 \end{array}} \right.
 \label{eq:indication}
@@ -223,7 +223,7 @@ When a physical node fails, to minimize the backup resource cost, the survivable
 \end{array}
 \label{eq:problem formulation}
 \end{equation}
-where ${\sum\limits_{i = 1}^n {\sum\limits_{j = 1}^m {{M_{ij}}{w_{ij}}} } }$ denotes the total backup resource  cost to map all the virtual stars to physical stars when physical nodes fails.  In (\ref{eq:problem formulation}), ${\sum\limits_{i = 1}^n {{d_i}{M_{ij}}}  \le {c_j}}$ is the physical node's capacity constraint, that is, even though multiple virtual nodes are allowed to be mapped to a physical node, the total capacity demand should not be larger than the capacity of the physical node. ${\sum\limits_{j = 1}^m {{M_{ij}}}  \le 1}$ indicates that one virtual star can be mapped to only one physical star.
+where ${\sum\limits_{i = 1}^n {\sum\limits_{j = 1}^m {{M_{ij}}{w_{ij}}} } }$ denotes the total backup resource  cost to map all the virtual stars to physical stars when physical nodes fails.  In Eq(\ref{eq:problem formulation}), ${\sum\limits_{i = 1}^n {{d_i}{M_{ij}}}  \le {c_j}}$ is the physical node's capacity constraint, that is, even though multiple virtual nodes are allowed to be mapped to a physical node, the total capacity demand should not be larger than the capacity of the physical node. ${\sum\limits_{j = 1}^m {{M_{ij}}}  \le 1}$ indicates that one virtual star can be mapped to only one physical star.
 
 Obviously, problem defined in (\ref{eq:problem formulation}) is an binary ILP problem, which is general an NP-complete problem according to Karp's 21 NP-complete problems\cite{karp1975computational}. %In following  Theorem 1, we validate the theorem.
 
@@ -238,9 +238,9 @@ If  there is only one physical node with $m=1$, our survivable virtual network e
 Although solving the ILP formulation will result in a minimum cost survival virtual network embedding, its exponential time complexity makes such approach impractical to embed a virtual network to a large  physical network. In this section, we propose a dynamic programming based algorithm that has only a polynomial time complexity and, thus, is feasible for practical network systems.
 
 
-To describe our dynamic programming based algorithm, we define  $dp[i][{x_1}][{x_2}] \ldots [{x_m}]$ to denote the best virtual star placement with the minimum backup resource cost to place the first $i$ ($0 \le i \le n $) virtual stars to the $m$ physical stars with their capacity  limit being $ x_1$, $ x_2$, $\ldots$, $x_m$ in the physical network.
+To describe our dynamic programming based algorithm, we define  $dp[i][{x_1}][{x_2}] \ldots [{x_m}]$ to denote the best virtual star placement with the minimum backup resource cost to have the first $i$ ($0 \le i \le n $) virtual stars placed to the $m$ physical stars with their capacity  limit being $ x_1$, $ x_2$, $\ldots$, $x_m$ in the physical network.
 
-The $i$-th virtual node star has the options to  be placed onto any one of the physical stars that are alive. Let $\theta (i,j)$ denote the backup resource cost to place the $i$-th virtual node star to the $j$-th physical node after the first $i-1$ virtual nodes are best placed. $\theta (i,j)$ is expressed as follows.
+The $i$-th virtual star has the options to  be placed onto any one of the physical stars that are alive. Let $\theta (i,j)$ denote the backup resource cost to place the $i$-th virtual node star to the $j$-th physical node after the first $i-1$ virtual nodes are best placed. $\theta (i,j)$ is expressed as follows.
 \begin{equation}
 \footnotesize
 \theta (i,j) = \left\{ {\begin{array}{*{20}{c}}
@@ -254,7 +254,7 @@ The $i$-th virtual node star has the options to  be placed onto any one of the p
 \end{equation}
 In (\ref{eq:place i to j}), if the capability limit of the  physical node $x_j$ is large than the capacity demand $d_i$ and the virtual function $f_i$ can be executed in the physical node ${f_i} \in {F_j}$,  $\theta (i,j)$ is the sum of   the cost under best virtual star placement to place the first $i-1$ ($0 < i \le n $) virtual stars to the $m$ physical stars  (i.e., $dp[i-1][{x_1} - {d_i}][{x_2}] \ldots [{x_m}]$) and the cost that mapping the virtual star ($v_i$) to physical star ($s_1$) (i.e., $w_{i1}$ ).
 
-Based on $\theta (i,j)$, $dp[i][{x_1}][{x_2}] \ldots [{x_m}]$ can be calculated through following dynamic programming function.
+Based on $\theta (i,j)$, $dp[i][{x_1}][{x_2}] \ldots [{x_m}]$ can be calculated through following dynamic programming formulation.
 \begin{equation}
 dp[i][{x_1}][{x_2}] \ldots [{x_m}] = min\{\theta (i,1),\theta (i,2),\ldots,\theta (i,j),\ldots,\theta (i,m)\}
 \label{eq:update function}
@@ -290,6 +290,16 @@ dp[i][{x_1}][{x_2}] \ldots [{x_m}] = min\{\theta (i,1),\theta (i,2),\ldots,\thet
 The pseudo-code of the dynamic programming based algorithm is shown in Alg.\ref{alg:DPAlg}.
 We further use an example in Fig.\ref{fig:DPIllustration} to illustrate the algorithm.
 
+
+\begin{figure}
+\centering
+% Requires \usepackage{graphicx}
+\includegraphics[width=4in]{Fig/DPIllustration}\\
+  \caption{Three virtual node, the first virtual node could be placed to first and second physical node,  the second virtual node could be placed to first and second physical node,  the third virtual node could only be placed to first physical node.  The  node computation capacity of first physical node is 5, the node computation capacity of second physical node is 4. $w_{ij}$=[1,2;3,1;1,$\infty$].}\label{fig:DPIllustration}
+\end{figure}
+
+
+
 For clear presentation, in this example, three virtual stars needed to be placed to two available physical stars to achieve the minimum backup resource cost. The available capacity under physical nodes are $c_1=5$ and $c_2=4$, respectively. The capacity demands of these three virtual stars are $d_1=2$, $d_2=1$, and $d_3=2$. The virtual functions required to be executed in these virtual stars are $f(1)=f_1$, $f(2)=f_1$, $f(3)=f_2$. The functions supported by these two physical nodes are $F(1)=\{f_1,f_2\}$ and $F(2)=\{f_1\}$.
 
 In Fig.\ref{fig:DPIllustration}, $x$ and $y$ axis denote the capacity limit of physical star $s_1$ and $s_2$, respectively. The  weight of edge connecting virtual stars to physical stars are $w_{11}=1$, $w_{12}=2$, $w_{21}=3$, $w_{22}=1$, $w_{31}=1$, $w_{32}=\infty$, respectively.
@@ -318,42 +328,33 @@ For example, as shown in Fig.\ref{fig:StarRepresentation} and Equ.(\ref{lab:Node
 0&0&1&0&0&0&0
 \end{array}} \right]$.
 
-\begin{figure}
-\centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=4in]{Fig/DPIllustration}\\
-  \caption{Three virtual node, the first virtual node could be placed to first and second physical node,  the second virtual node could be placed to first and second physical node,  the third virtual node could only be placed to first physical node.  The  node computation capacity of first physical node is 5, the node computation capacity of second physical node is 4. $w_{ij}$=[1,2;3,1;1,$\infty$].}\label{fig:DPIllustration}
-\end{figure}
-
-
-
 
 \begin{figure}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4in]{Fig/Node1Failure}\\
-  \caption{Node1Failure}\label{fig:Node1Failure}
+  \caption{Node $s_1$ Failure}\label{fig:Node1Failure}
 \end{figure}
 
 \begin{figure}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4in]{Fig/Node2Failure}\\
-  \caption{Node2Failure}\label{fig:Node2Failure}
+  \caption{Node $s_2$ Failure}\label{fig:Node2Failure}
 \end{figure}
 
 \begin{figure}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=2in]{Fig/Node3Failure}\\
-  \caption{Node3Failure}\label{fig:Node3Failure}
+  \caption{Node $s_3$ Failure}\label{fig:Node3Failure}
 \end{figure}
 
 \begin{figure}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=2in]{Fig/Node4Failure}\\
-  \caption{Node4Failure}\label{fig:Node4Failure}
+  \caption{Node $s_4$ Failure}\label{fig:Node4Failure}
 \end{figure}
 
 

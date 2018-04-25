@@ -14,7 +14,7 @@
 
                                            % 如果论文超过60 页 可以使用twoside 双面打印
 \input{setup/package}                      % 定义本文所使用宏包
-\graphicspath{{figures/}}                  % 定义所有的.eps文件在figures子目录下
+\graphicspath{{figures/}}                  % 定义所有的.eps文件在figures 子目录下
 \begin{document}                           % 开始全文
 \begin{CJK*}{UTF8}{song}                   % 开始中文字体使用
 \input{setup/format}                       % 完成对论文各个部分格式的设置
@@ -54,18 +54,17 @@
 %\newcommand{\del}[1]{\sout{#1}}  %revise the text
 %\newcommand{\del}[1]{}
 %\newcommand{\note}[1]{{\sffamily\itshape\bfseries\uline{#1}}}
-\newcommand{\CSLI}{SRLG Conflicting Link Set}
-\newcommand{\CI}{SCLS}
-\newcommand{\TopoNum}{7}
 
+\include{references/terminology}
+\include{figures/number}
 
 \include{body/exordium}
 %\include{body/survivability}
 %\include{body/disjointpath}
 
 \include{body/SRLGdisjointpath}
-%\include{body/timeComplexity}
-%\include{body/experiment}
+\include{body/timeComplexity}
+\include{body/experiment}
 
 \include{body/SurvivabelVirtualNetworkEmbed}
 \include{body/SurvivabelEmbeddedVirtualNetwork}

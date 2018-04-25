@@ -8,8 +8,11 @@ We first described the simulation setup, then present the simulation results.
 \subsubsection{Experimental Parameter}
 For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability $\VirtualNodenodeProbability$. The computing requirements on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$.
 
-VN requests arrive randomly over a timespan of $\SubstrateNewtorkRunTimeInterval$ time slots and the inter-arrival time is
-assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN request follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot. A high request rate and long lease times ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated physically substrate node.
+%VN requests arrive randomly over a timespan of $\SubstrateNewtorkRunTimeInterval$ time slots and the inter-arrival time is
+%assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN request follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot. 
+The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean \ requests per 1 time units).
+The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average
+A high request rate and long lease times ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated physically substrate node.
 %The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean requests per 1 time units).
 %The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average
 
@@ -31,10 +34,14 @@ Moreover, We compare with a virtual network embedding request algorithm, where V
 
 Based on the resource of substrate network whether shared or non-shared \cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern. The substrate resource corresponding augment backup demand of  every virtual network request with survivable guarantee  could be shared with each other.
 
+The backup resources themselves can be either dedicated or shared\cite{guo2011shared}. Dedicated means that for each virtual network a
+complete backup network can be set up and backup resources are fully dedicated to the virtual networks and independent from each other. However, this is resource inefficient, since for each virtual resource that gets embedded a dedicated substrate entity is needed. In some cases it might also be acceptable to share and reuse the backup resources in order to reduce the footprint on the substrate network caused by the additional
+backup resources. Usually, a higher degree of reused backup resources results in lower reliability, and vice versa.
+
 Every virtual network's request exist a lease time span, statistically record virtual or substrate network's performance metric in real-time situation. Because the experimental data of every algorithm performance metric fluctuate, we incrementally record experimental data of every virtual or substrate network performance metric, then average the experimental data by successful accepted virtual network embedding or survivable embedded virtual network  as denominator.
 
 
-All simulations are ran on a server, which is equipped with Intel(R) Xeon(R) CPU E5-2620 0 \@ 2.00GHz (24 Cores) and 32.00GB RAM.
+All simulations are ran on a server, which is equipped with Intel(R) Xeon(R) CPU E5-2620 2.00GHz (24 Cores) and 32.00GB RAM.
 
 %one Intel (R) i5-5200U CPU(2.20GHz) (24Cores) and 8.00GB RAM.
 

@@ -1,11 +1,11 @@
 %Regular papers (max. 12 page submission; 12 pages in proceedings): full paper describing a research contribution to dependable computing, including experimental work focused on implementation and evaluation of existing dependability techniques.
 %The number of pages indicated above includes everything: title page, text, references, figures, appendices, etc.
 %The first page must include the title of the paper, the type of the paper (Regular / Practical Experience / Tool), and a maximum 150-word abstract.
-
+%Pages should be numbered.
 
 %https://dsn2018.uni.lu/main-track-call-papers/
+%https://www.pdf-express.org/pr_choose2.asp
 
-%Pages should be numbered.
 
 \documentclass[10pt,conference]{IEEEtran}
 %\IEEEoverridecommandlockouts
@@ -31,8 +31,8 @@
 \usepackage{url}
 %\usepackage{CJK}
 \usepackage{amsthm}
-%\pagestyle{plain}
-\usepackage{geometry}
+\pagestyle{plain}
+
 \usepackage{tikz}
 \usepackage{setspace}
 %\usepackage[pdftex,active,tightpage]{preview}
@@ -41,24 +41,25 @@
 
 
 %\geometry{left=1.40cm,right=1.40cm,top=1.33cm,bottom=2.1cm}
-\linespread{0.986}
-\setlength{\abovedisplayskip}{0.5 mm}
-\setlength{\belowdisplayskip}{0.5 mm}
-\setlength{\abovecaptionskip}{0.0pt}
-\setlength{\belowcaptionskip}{0.0pt}
-\geometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.55cm}
+%\linespread{0.986}
+%\setlength{\abovedisplayskip}{0.5 mm}
+%\setlength{\belowdisplayskip}{0.5 mm}
+%\setlength{\abovecaptionskip}{0.0pt}
+%\setlength{\belowcaptionskip}{0.0pt}
+%\usepackage{geometry}
+%\geometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.55cm}
 
 
 %%\geometry{left=1.40cm,right=1.40cm,top=1.33cm,bottom=2.1cm}
-%%\linespread{0.986}
-%\setlength{\abovedisplayskip}{0.1 mm}
-%\setlength{\belowdisplayskip}{0.1 mm}
-%%\setlength{\abovecaptionskip}{0.0pt}
-%%\setlength{\belowcaptionskip}{0.0pt}
+\linespread{0.99}
+\setlength{\abovedisplayskip}{0.1 mm}
+\setlength{\belowdisplayskip}{0.1 mm}
+\setlength{\abovecaptionskip}{0.0pt}
+\setlength{\belowcaptionskip}{0.0pt}
 %%\titlespacing{\section}{0pt}{4pt}{0 pt}
 %%\titlespacing{\subsection}{0pt}{2pt}{0pt}
 %%\titlespacing{\subsubsection}{0pt}{2pt}{0pt}
-\usepackage[colorlinks,linkcolor=red,anchorcolor=blue]{hyperref}
+%\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,bookmarks=false]{hyperref}
 
 
 \newcommand{\songti}{\CJKfamily{song}}
@@ -71,8 +72,9 @@
 \newcommand{\note}[1]{{\sffamily\itshape\bfseries\uline{#1}}}
 %\newcommand{\note}[1]{}
 %\newcommand{\songti}{\CJKfamily{song}}
+
 %\newcommand{\rev}[1]{\textcolor{blue}{{#1}}}%revise the text with blue color, you can use this one.
-\newcommand{\revtao}[1]{\textcolor{orange}{{#1}}}%revise the text with blue color, you can use this one.
+\newcommand{\revtao}[1]{\textcolor{black}{{#1}}}%revise the text with blue color, you can use this one.
 %\newcommand{\revtao}[1]{\textcolor{black}{{#1}}}%revise the text with blue color, you can use this one.
 %\newcommand{\del}[1]{\sout{#1}}  %revise the text
 %\newcommand{\del}[1]{}
@@ -95,49 +97,15 @@
 \title{Divide And Conquer For Fast SRLG Disjoint Routing}
 \thanks{The work is supported  by the  National Natural Science Foundation of China under Grant Nos.61572184, 61725206, 61472130, 61472131, and 61772191,  Hunan Provincial Natural Science Foundation of China under Grant No.2017JJ1010,  Science and Technology Key Projects of Hunan Province under Grant No.2015TP1004 and No.2016JC2012,  U.S. ONR N00014-17-1-2730, NSF ECCS 1408247, CNS 1526843, and ECCS 1731238,  the open project funding (CASNDST201704) of CAS Key Lab of Network Data Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences, and the foundation of Key Laboratory of Machine Intelligence and Advanced Computing of the Ministry of Education under Grant No.MSC-201708A.}
 
-{
-\author{\IEEEauthorblockN{Kun Xie}
-\IEEEauthorblockA{College of Computer Science and\\ Electronic Engineering \\
-Hunan University\\
-Chang Sha, China \\
-xiekun@hnu.edu.cn}
-\and
-\IEEEauthorblockN{Heng Tao}
-\IEEEauthorblockA{College of Computer Science and\\ Electronic Engineering \\
-Hunan University\\
-Chang Sha, China\\
-franztaoheng@gmail.com}
-\and
-\IEEEauthorblockN{Xin Wang}
-\IEEEauthorblockA{Department of Electrical and\\ Computer Engineering \\
-Stony Brook University\\
-New York, USA \\
-x.wang@stonybrook.edu}
-\and
-\IEEEauthorblockN{Gaogang Xie}
-\IEEEauthorblockA{Institute of Computing Technology \\
-Chinese Academy of Sciences\\
-Bei Jing, China \\
-xie@ict.ac.cn}
-\and
-\IEEEauthorblockN{Jigang Wen}
-\IEEEauthorblockA{Institute of Computing Technology\\
-Chinese Academy of Sciences\\
-Bei Jing, China \\
-wenjigang@ict.ac.cn}
-\and
-\IEEEauthorblockN{Jiannong Cao}
-\IEEEauthorblockA{Department of computing \\
-The Hong Kong Polytechnic University\\
-Hong Kong, China \\
-csjcao@comp.polyu.edu.hk}
-\and
-\IEEEauthorblockN{Zheng Qin}
-\IEEEauthorblockA{College of Computer Science and\\ Electronic Engineering \\
-Hunan University\\
-Chang Sha, China \\
-zqin@hnu.edu.cn}
-}
+\author{Kun Xie$^1$, \emph{Member, IEEE}, Heng Tao$^1$, Xin Wang$^2$, \emph{Member, IEEE}, Gaogang Xie$^3$, \emph{Member, IEEE},\\
+Jigang Wen$^3$, Jiannong Cao$^4$, \emph{Fellow, IEEE}, Zheng Qin$^1$\\
+$^1$ College of Computer Science and Electronic Engineering, Hunan University, China\\
+$^2$ Department of Electrical and Computer Engineering, Stony Brook University, New York, USA\\
+$^3$ Institute of Computing Technology, Chinese Academy of Sciences, Bei Jing, China \\
+$^4$ Department of computing,The Hong Kong Polytechnic University,Hong Kong, China \\
+xiekun@hnu.edu.cn, franztaoheng@gmail.com, x.wang@stonybrook.edu, xie@ict.ac.cn, wenjigang@ict.ac.cn, \\
+csjcao@comp.polyu.edu.hk, zqin@hnu.edu.cn}
+
 
 \maketitle
 %\vspace{-3em}

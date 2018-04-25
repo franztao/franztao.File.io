@@ -2,18 +2,18 @@
 \section{Avoid  duplicately adding backup resource}
 
 
-Given one node fails, after applying Algorithm \ref{alg:DPAlg} to calculate the minimum additional resource, new physical node and physical path is added and involved to maintain the network service. If a physical node that does not hold any virtual node before node fail is added to be the backup node, we should set the physical node with $a=1$ to indicate that this node is involved to hold virtual already.
+Given one node fails, after applying Algorithm \ref{alg:DPAlg} to calculate the minimum additional resource, new physical node and physical path is added and involved to maintain the network service. If a physical node that does not hold any virtual node before node fail is added to be the backup node, we should set the physical node with $a=1$ to indicate that this physical node is involved to hold virtual already.
 
- As our survivable virtual network embedding problem wants to minimize the backup resource added when any one node fails instead of given one node failure, we should test each node fail one by one and add sufficient backup resource. As the backup resource only need when node fails,  the  backup resource  should be shared when different node fails. If we directly apply cost defined in (\ref{eq:edge weight}) to calculate the backup resources when another physical node fails, as cost defined in (\ref{eq:edge weight}) does not consider the backup resource sharing, it will result in a problem of duplicately adding backup resource.
+As our survivable virtual network embedding problem wants to minimize the backup resource added when any one node fails instead of given one node failure, we should test each node fail one by one and add sufficient backup resource. As the backup resource only need when node fails,  the  backup resource  should be shared when different node fails. If we directly apply cost defined in (\ref{eq:edge weight}) to calculate the backup resources when another physical node fails, as cost defined in (\ref{eq:edge weight}) does not consider the backup resource sharing, it will result in a problem of duplicately adding backup resource.
 
- To  solve this problem,  we add the  $M(j)$ to the physical star structure to denote the set of virtual nodes migrated into  physical node $s_j$ in the case of node failure.
+To  solve this problem,  we add the  $M(j)$ to the physical star structure to denote the set of virtual nodes migrated into  physical node $s_j$ in the case of node failure.
 
 
 \begin{equation}
 PhysicalStar(s_j)=(s_j, \phi^{-1}( s_j), c_j, F(j), \phi(N(\phi^{-1}( s_j))), a, M(j))
 \end{equation}
 
-As the backup resource should be added to only once, to facilitate expressing  this constraint, we define following constraint.
+As the backup resource should be added to only once, to facilitate expressing  this constraint, we define following equation.
 \begin{equation}
 \mu (x) = \left\{ {\begin{array}{*{20}{c}}
    x & {x > 0}  \\
@@ -34,14 +34,94 @@ w(i,j) = \left\{ {\begin{array}{*{20}{c}}
     \end{equation}
 \end{figure*}
 
-As shown in  eq(\ref{eq:new edge weight}), the resource cost is setting according to two cases.  If virtual node $v_i$ is originally hold by  physical server $s_j$ or $v_i$ is migrated to the physical server, that is, ${{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right)}$, when its neighbor $v_k \in N(i)$ fails with ${\phi \left( k \right) \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}$, the path bandwidth cost is ${\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$.
+As shown in  eq(\ref{eq:new edge weight}), the resource cost is setting according to two cases.  If virtual node $v_i$ is originally hold by  physical server $s_j$ or $v_i$ is migrated to the physical server, that is, ${{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right)}$, when its neighbor $v_k \in N(i)$ fails with ${\phi \left( k \right) \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}$, the path bandwidth cost is ${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$.
 
-Otherwise, the virtual node $v_i$ is not hold by the physical server and not migrated to the server in previous node fail test, besides the bandwidth cost ${\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$, the node capacity cost ${\lambda f({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, VM migrate cost ${\beta {M_m}}$ and $\theta$ should be counted for mapping the virtual star ($v_i$) to the physical server ($s_j$). In ${f({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, if the backup capacity already allocated ${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is larger than amount needed  in current mapping (i.e., $d_i$), no resource is needed, otherwise, the backup resource gap ${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is needed.
+Otherwise, the virtual node $v_i$ is not hold by the physical server and not migrated to the server in previous physical node fail test, besides the bandwidth cost ${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$, the node capacity cost ${\lambda * \mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, VM migrate cost ${\beta * {M_m}}$ and $\theta$ should be counted for mapping the virtual star ($v_i$) to the physical server ($s_j$). In ${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, if the backup capacity already allocated ${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is larger than amount needed  in current mapping (i.e., $d_i$), no additional resource is needed, otherwise, the backup resource gap ${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is needed.
 
-there are n+1 level's dynamic programming functions and there are $\prod_{i=1}^{m}C^i$ dynamic programming functions in every level. The time complexity of calculating every dynamic programming function is $O(m)$. Therefore, overall time complexity of the dynamic programming method is $n*\prod_{i=1}^{m}C^i*O(m)=O(n*m*\prod_{i=1}^{m}C^i)$. Additionally, for recording every level's virtual node's placement, the overall space complexity is $O[(n+1)*\prod_{i=1}^{m}C^i]$, which is, however, could be optimized to $O[\prod_{i=1}^{m}C^i]$, because when updating every level's dynamic programming function, the dynamic programming function only use back step level's dynamic programming function.
+.................................
 
 
- As shown in Fig.\ref{fig:StarRepresentationNode2} and Equ.(\ref{lab:Node2FaliureAlignmentMatrixNew}), the optimal $M_{ij}=\left[ {\begin{array}{*{20}{c}}
+For $VirtualStar(v_2)$, as $v_3$ is originally hold by $s_3$, however, when physical node $s_1$ fails, we could migrate virtual node $v_3$ onto physical node $s_2$, as $s_2$ is setup virtual machine before, therefore, cost include the virtual link bandwidth cost $11$, and node capacity cost 5, and virtual machine migration cost $M_m$.
+
+Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal node mapping when physical node $s_1$ fails: $v_1 \rightarrow s_5$, $v_2 \rightarrow s_2$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$. The physical node $s_5$ begin setup and apply 2 node computing for virtual node $v_1$, and find three physical path corresponding virtual link $(v_1,v_2),(v_1,v_3),(v_1,v_4)$ with bandwidth constraints 4,5,3, respectively.
+
+Fig.\ref{fig:StarRepresentationNode2} shows one example of such  bipartite graph with physical node $s_2$ fails after physical node $s_1$ failed. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node2FaliureAlignmentMatrixNew}).
+
+
+\begin{figure}
+\centering
+% Requires \usepackage{graphicx}
+\includegraphics[width=3.5in]{Fig/StarRepresentationNode2}\\
+  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_2$ fail}\label{fig:StarRepresentationNode2}
+\end{figure}
+
+\begin{equation*}
+\tiny{
+ {\begin{array}{*{20}{c}}
+&R_{S_{1}}&R_{S_{2}}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
+{L_{V_1}}&\fbox{4}&\infty&\infty&\infty&M_{m}&C_{s}+M_{m}+(2)+12&\infty\\
+L_{V_2}&\infty&\infty&\infty&\infty&\fbox{$M_{m}$+(1)+5}&\infty&C_{s}+M_{m}+(3)+10\\
+L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+(5)+11\\
+L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
+\end{array}}
+}
+\label{lab:Node2FaliureAlignmentMatrixNew}
+\end{equation*}
+
+%\begin{equation*}
+%\tiny{
+% {\begin{array}{*{20}{c}}
+%&{L_{V_1}}&L_{V_2}&L_{V_3}&L_{V_4}\\
+%R_{S_{1}}&\fbox{4}&\infty&\infty&\infty\\
+%R_{S_{2}}&\infty&\infty&\infty&\infty\\
+%R_{S_3}&\infty&\infty&\fbox{5}&\infty\\
+%R_{S_4}&\infty&\infty&\infty&\fbox{3}\\
+%R_{S_5}&M_{m}&\fbox{$M_{m}$+(1)+8}&\infty&\infty\\
+%R_{S_6}&C_{s}+M_{m}+(2)+12&\infty&\infty&C_{s}+M_{m}+(6)+3\\
+%R_{S_{7}}&\infty&C_{s}+M_{m}+(3)+10&C_{s}+M_{m}+(5)+11&\infty\\
+%\end{array}}
+%}
+%\label{lab:Node2FaliureAlignmentMatrixNew}
+%\end{equation*}
+
+For $VirtualStar(v_1)$, as $v_1$ is originally hold by $s_1$, however, when physical node $s_2$ fails, we could find a alternate physical node $s_5$ as migrated node for virtual node $v_1$, and the physical node $s_5$ own backup node computation and edge bandwidth resource because former physical node $s_1$ failure situation, so that when physical node $s_2$ fail the edge that connect $VirtualStar(v_1)$ and $PhysicalStar(s_5)$ with the edge weight being $M_m$ .
+
+
+For $VirtualStar(v_2)$, as $v_2$ is originally hold by $s_2$, however, when physical node $s_2$ fails, we could find a alternate physical node $s_5$ as migrated node for virtual node $v_2$, and the physical node $s_5$ own backup node computation and edge bandwidth resource because former physical node $s_1$ failure situation, so that when physical node $s_2$ fail the edge that connect $VirtualStar(v_1)$ and $PhysicalStar(s_5)$ with the edge weight being $M_m+(1)+5$, the physical node $s_5$ just apply more 1 node computation resource for migrating virtual node $v_2$ for original backup node computation(2 node computation) resource of physical node $s_5$. There are a path between physical node $s_5$ and physical node $s_3$ mapping virtual node $v_3$, therefor, just apply 1 edge bandwidth to add the path physical node $s_5$ to physical node $s_3$ for satisfying the edge between virtual node $v_2$ and virtual node $v_3$, finally the cost of augmented path bandwidth is 1+4=5.
+
+Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal node mapping when physical node $s_2$ fails with physical node $s_1$ had been failed: $v_1 \rightarrow s_1$, $v_2 \rightarrow s_5$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$. The physical node $s_5$ had been setup and remain 2 backup node computing because of physical node $s_1$ failure, therefore, just apply more 1 node computing for virtual node $v_2$, and find three physical path corresponding virtual link $(v_1,v_2),(v_1,v_3),(v_1,v_4)$ with bandwidth constraints 4,5,3, respectively.
+
+
+\begin{figure}
+\centering
+% Requires \usepackage{graphicx}
+\includegraphics[width=3in]{Fig/StarRepresentationTwoFailure}\\
+  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_1$ and $s_2$ fail simultaneously}\label{fig:StarRepresentationTwoFailure}
+\end{figure}
+
+\begin{equation*}
+\tiny{
+ {\begin{array}{*{20}{c}}
+&R_{S_1}&R_{S_2}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
+{L_{V_1}}&\infty&\infty&\infty&\infty&\fbox{$C_{s}+M_{m}$+(2)+12}&C_{s}++M_{m}+(2)+12&\infty\\
+L_{V_2}&\infty&\infty&\infty&\infty&C_{s}+M_{m}+(3)+10&\infty&\fbox{$C_{s}+M_{m}+(3)+10$}\\
+L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+(5)+11\\
+L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
+\end{array}}
+}
+\label{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}
+\end{equation*}
+
+
+Fig.\ref{fig:StarRepresentationTwoFailure} shows one example of such  bipartite graph when physical node $s_1$ and $s_2$ fail simultaneously. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}).
+
+
+\subsection{time complexity}
+
+There are n+1 level's dynamic programming  transfer functions and there are $\prod_{i=1}^{m}C^i$ dynamic programming functions in every level. The time complexity of calculating every dynamic programming function is $O(m)$. Therefore, overall time complexity of the dynamic programming method is $n*\prod_{i=1}^{m}C^i*O(m)=O(n*m*\prod_{i=1}^{m}C^i)$. Additionally, for recording every level's virtual node's placement, the overall space complexity is $O[(n+1)*\prod_{i=1}^{m}C^i]$, which is, however, could be optimized to $O[\prod_{i=1}^{m}C^i]$, because when updating every level of dynamic programming function, the dynamic programming function only use back one step level's dynamic programming function.
+
+
+As shown in Fig.\ref{fig:StarRepresentationNode2} and Equ.(\ref{lab:Node2FaliureAlignmentMatrixNew}), the optimal $M_{ij}=\left[ {\begin{array}{*{20}{c}}
 1&0&0&0&0&0&0\\
 0&0&0&1&0&0&0\\
 0&1&0&0&0&0&0\\

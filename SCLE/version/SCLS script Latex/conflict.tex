@@ -43,7 +43,7 @@ In Section \ref{subsec:Properties on the min-cut in the new graph $G^*$}, we wil
 \label{subsec:Properties on the min-cut in the new graph $G^*$}
 The max-flow min-cut theorem states that in a  network the maximum amount of flow passing from the source $s$ to the destination $d$ is equal to the total capacity of the links in the minimum cut, i.e. the smallest total capacity of the links which if removed would disconnect the destination $d$ from the source $s$.  Our algorithm will find the minimum SRLG Conflicting Link Set based on the min-cut of the graph.
 
-We will firstly show that some good properties of our rebuilt graph $G^*$ can serve as a base to find the minimum SRLG Conflicting Link Set.
+We will first show that some good properties of our rebuilt graph $G^*$ can serve as a base to find the minimum SRLG Conflicting Link Set.
 
 
 Let $\Phi$=${(\mathbb{S}},{\mathbb{D}})$ be a min-cut of $G^*$ and $\mathbb{L}_{\Phi}$  represent the \textbf{cut-set}. Fig.\ref{fig:MinCutStarGraph} shows the min-cut $\Phi$=${(\mathbb{S}},{\mathbb{D}})$ with ${\mathbb{S}}=\{s, 1, 2, 3, 4, 5, 9\}$,  ${\mathbb{D}}=\{6, 7, 8, d\}$, and $\mathbb{L}_{\Phi}=\{e_{11}, e_{13}, e_{19}, e_6\}$.
@@ -119,7 +119,7 @@ Therefore, the minimum SRLG Conflicting Link Set finding problem can be formulat
 
 The Set Cover Problem is usually an NP-hard problem with its complexity depending on the size of the elements (denoted by $n$). In our minimum SRLG Conflicting Link Set finding problem, $n=|\mathbb{L}_{\Phi}|$, that is, the edge number of cut set $\mathbb{L}_{\Phi}$. As this paper's focus is not to improve the solution of the set cover problem, we apply the algorithm proposed in \cite{chvatal1979greedy} with the complexity $O(log(|\mathbb{L}_{\Phi}|))$  to find the minimum SRLG Conflicting Link Set.
 
-\revtao{The number of subproblems to partition in our divide-and-conquer algorithm is determined by the size of the SRLG Conflicting Link Set, which is at most the hop number of the AP. The random graph of Erd{\"o}s, and R{\'e}nyi\cite{erdos1959random} is one of the best studied models of real-world networks such as Internet, social networks or biological networks. According to random graph theorem, the average distances (hops) between any two nodes in a random network are proportional to log(n) (not a large number), rather than $n$ where $n$ is the total number of vertexes. }
+\revtao{The number of subproblems to partition in our divide-and-conquer algorithm is determined by the size of the SRLG Conflicting Link Set, which is at most the hop number of the AP. The random graph of Erd{\"o}s, and R{\'e}nyi \cite{erdos1959random} is one of the best studied models of real-world networks such as Internet, social networks or biological networks. According to random graph theorem, the average distances (hops) between any two nodes in a random network are proportional to log($|\mathbb{\mathbb{V}}|$) (not a large number). }
 
 Usually, even for a large scale network, \revtao{the  AP with the shortest path does not have a large number of $n=|\mathbb{L}_{\Phi}|$}. Therefore, the cost to calculate the minimum SRLG Conflicting Link Set through the set cover is not large.
 

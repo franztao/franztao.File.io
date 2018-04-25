@@ -1,11 +1,11 @@
-\section{SeVN augment resource embed formulation}
-In this section, we refer that design procedure of augmented resource allocation  of SeVN graph, we also give out resource demand allocation method fitting for both FD-SeVN and FI-SeVN embedding, since the difference between FD-SeVN and FI-SeVN in embedding approach could be reconciled by a general resources sharing constraint. More details would be elaborated in the following part.
+\section{The complete survivable embedded virtual network algorithm}
+In this section, we first present that design procedure of augmented resource allocation  of SeVN graph, we also give out resource demand allocation method fitting for both FD-SeVN and FI-SeVN embedding, since the difference between FD-SeVN and FI-SeVN in embedding approach could be reconciled by a general resources sharing constraint. More details would be elaborated in the following part.
 
 Besides, with respect to the node embedding even and virtual links embedding, because not all the virtual links or not all their bandwidth would be employed simultaneously under single node failure, some virtual links could share substrate resources if they are embedded on the same substrate link, which would reduce the total substrate bandwidth needed.
 
 
 \subsection{Embed Augmented Backup Resource}
-From Sec.\ref{lab:DynamicProgrammingEquation}, we have obtained map relationship with respect to node $v_i$ failure, then compute out that every node should to be reallocated how much computation and every link should to be reallocate how much bandwidth in substrate network SN as shown in Fig.\ref{fig:AugmentResource}. As most virtual network embedding algorithm, node mapping phase had been completed with respect to our algorithm, the next procedure give out edge mapping phase. we use standard shortest path algorithm, dijkstra algorithm, for requesting path of substrate node with respect to every virtual network's node, then reallocate some bandwidth to this path of substrate network for this virtual network survivable request.
+From Sec.\ref{lab:DynamicProgrammingEquation}, we have obtained map relationship with respect to node $v_i$ failure, then compute out that every node should to be reallocated how much computation and every link should to be reallocated how much bandwidth in substrate network SN as shown in Fig.\ref{fig:AugmentResource}. As most virtual network embedding algorithm, node mapping phase had been completed with respect to our algorithm, the next procedure give out edge mapping phase. we use standard shortest path algorithm, dijkstra algorithm, for requesting path of substrate node with respect to every virtual network's node, then reallocate some bandwidth to this path of substrate network for this virtual network survivable request.
 
 \begin{figure}
   \centering
@@ -17,7 +17,7 @@ From Sec.\ref{lab:DynamicProgrammingEquation}, we have obtained map relationship
 Finally, we repeat the procedure of graph decomposition and multiple knapsack problem for each following node failure to construct the graph of final FD-SeVN. As shown in Fig.\ref{fig:FD}, partial augmented resource which is labeled consecutively with different color of the SeVN for each node failure is presented. It is worth noting that, every step of partial augmented resource is based on the previous step.
 
 \subsection{Algorithm procedure}
-In this section, we describe the whole our algorithm procedure of SeVN problem in Alg.\ref{lg:SeVNAlg}
+In this section, we describe complete our algorithm $\MyAlgorithmMethodAbrreviation$ procedure of SeVN problem in Alg.\ref{alg:SeVNAlg}
 \begin{algorithm}
 \label{alg:SeVNAlg}
 \caption{survivable embedded virtual network request algorithm}
