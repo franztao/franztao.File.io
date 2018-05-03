@@ -46,6 +46,12 @@ For $VirtualStar(v_2)$, as $v_3$ is originally hold by $s_3$, however, when phys
 Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal node mapping when physical node $s_1$ fails: $v_1 \rightarrow s_5$, $v_2 \rightarrow s_2$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$. The physical node $s_5$ begin setup and apply 2 node computing for virtual node $v_1$, and find three physical path corresponding virtual link $(v_1,v_2),(v_1,v_3),(v_1,v_4)$ with bandwidth constraints 4,5,3, respectively.
 
 Fig.\ref{fig:StarRepresentationNode2} shows one example of such  bipartite graph with physical node $s_2$ fails after physical node $s_1$ failed. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node2FaliureAlignmentMatrixNew}).
+As shown in Fig.\ref{fig:StarRepresentationNode2} and Equ.(\ref{lab:Node2FaliureAlignmentMatrixNew}), the optimal $M_{ij}=\left[ {\begin{array}{*{20}{c}}
+1&0&0&0&0&0&0\\
+0&0&0&1&0&0&0\\
+0&1&0&0&0&0&0\\
+0&0&1&0&0&0&0
+\end{array}} \right]$.
 
 
 \begin{figure}
@@ -92,13 +98,9 @@ For $VirtualStar(v_2)$, as $v_2$ is originally hold by $s_2$, however, when phys
 Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal node mapping when physical node $s_2$ fails with physical node $s_1$ had been failed: $v_1 \rightarrow s_1$, $v_2 \rightarrow s_5$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$. The physical node $s_5$ had been setup and remain 2 backup node computing because of physical node $s_1$ failure, therefore, just apply more 1 node computing for virtual node $v_2$, and find three physical path corresponding virtual link $(v_1,v_2),(v_1,v_3),(v_1,v_4)$ with bandwidth constraints 4,5,3, respectively.
 
 
-\begin{figure}
-\centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=3in]{Fig/StarRepresentationTwoFailure}\\
-  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_1$ and $s_2$ fail simultaneously}\label{fig:StarRepresentationTwoFailure}
-\end{figure}
 
+\subsection{multiple physical node failure}
+\label{sec:multiplePhysicalNodeFailure}
 \begin{equation*}
 \tiny{
  {\begin{array}{*{20}{c}}
@@ -111,19 +113,16 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 }
 \label{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}
 \end{equation*}
-
-
-Fig.\ref{fig:StarRepresentationTwoFailure} shows one example of such  bipartite graph when physical node $s_1$ and $s_2$ fail simultaneously. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}).
-
+Considering multiple physical node failure situation, the problem is extention of our method.Fig.\ref{fig:StarRepresentationTwoFailure} shows one example of such  bipartite graph when physical node $s_1$ and $s_2$ fail simultaneously. The edge weight of this   bipartite graph can be shown in  Eq(\ref{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}).
+\begin{figure}
+\centering
+% Requires \usepackage{graphicx}
+\includegraphics[width=3in]{Fig/StarRepresentationTwoFailure}\\
+  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_1$ and $s_2$ fail simultaneously}\label{fig:StarRepresentationTwoFailure}
+\end{figure}
 
 \subsection{time complexity}
 
 There are n+1 level's dynamic programming  transfer functions and there are $\prod_{i=1}^{m}C^i$ dynamic programming functions in every level. The time complexity of calculating every dynamic programming function is $O(m)$. Therefore, overall time complexity of the dynamic programming method is $n*\prod_{i=1}^{m}C^i*O(m)=O(n*m*\prod_{i=1}^{m}C^i)$. Additionally, for recording every level's virtual node's placement, the overall space complexity is $O[(n+1)*\prod_{i=1}^{m}C^i]$, which is, however, could be optimized to $O[\prod_{i=1}^{m}C^i]$, because when updating every level of dynamic programming function, the dynamic programming function only use back one step level's dynamic programming function.
 
 
-As shown in Fig.\ref{fig:StarRepresentationNode2} and Equ.(\ref{lab:Node2FaliureAlignmentMatrixNew}), the optimal $M_{ij}=\left[ {\begin{array}{*{20}{c}}
-1&0&0&0&0&0&0\\
-0&0&0&1&0&0&0\\
-0&1&0&0&0&0&0\\
-0&0&1&0&0&0&0
-\end{array}} \right]$.

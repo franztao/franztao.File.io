@@ -158,5 +158,8 @@ any problem in computer science can be sloved by another layer of indirecition
 （2）如何分析和刻画博弈中参与者的自私行为与系统整体性能之间的关系；
 （3）如何设计一个合理的机制使得其系统在实际运行中能够真正实现整体利益最大化。
 
+有哪些堪称「神器」，却鲜为人知的软件？
+https://www.zhihu.com/question/36546814/answer/376735169
+
 
 

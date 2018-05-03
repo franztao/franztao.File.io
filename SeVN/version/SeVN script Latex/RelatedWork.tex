@@ -1,11 +1,9 @@
 \section{Related work}
+\label{sec:relatedWork}
+Network embedding problem has been extensively studied in the literature\cite{fischer2013virtual} (see \cite{lischka2009virtual,houidi2008distributed,chowdhury2009virtual} and the references therein). For example, the authors of \cite{lischka2009virtual} viewed the networking embedding process as an extension of the traditional Subgraph Isomorphism problem and hence proposed an adapted solution. The study in \cite{houidi2008distributed} is the first work that explored the protocol/agorithm to implement the network embedding in a distributed manner. In \cite{chowdhury2009virtual}, the network embedding is transformed into the network flow problem. None of above studies, however, have taken the network survivability into
+account.
 
-
-
-Meanwhile some works address node fault tolerance at the virtualization level. Bressoud \cite{bressoud1996hypervisor} was the first few to introduce fault tolerance at the hypervisor. Two virtual slices residing on the same physical node can be made to operate in sync through the hypervisor on the same physical node. Others \cite{wang2008virtual,cully2008remus} have made progress for the virtual slices to be duplicated and migrated over a network. Various duplication techniques and migration protocols were proposed for different types of applications (web servers, game servers, and benchmarking applications) \cite{wang2008virtual,cully2008remus} and Kemari \cite{tamura2008kemari} are two other systems that allows for state synchronization between two virtual nodes for full, dedicated
-redundancy. However, these works focus on the practical issues, and do not address the resource allocation issue. VNsnap \cite{kangarlou2009vnsnap} is another method to take static snapshots of an entire virtual infrastructure to some reliable storage, in order to recover from failures. This can be stored as reliably
-in a distributed manner as replicas \cite{chang2008bigtable}, or as parities \cite{dimakis2006decentralized,yeow2011highly}. VNsnap does not address synchronization, nor guarantee sufficient resources for recovery from snapshots. Fundamentally, there are methods to construct topologies for redundant nodes that address both nodes and links reliability \cite{ajtai1992fault,dutt1997node}. Based on some input graph, additional links are introduced such that the least number is needed. However, a node failure, in this case, may involve migrations among the remaining nodes to preserve the original topology. This may not be suitable in a scenario where migrations
-may disrupt other running parts of the network.
+%Meanwhile some works address node fault tolerance at the virtualization level. Bressoud \cite{bressoud1996hypervisor} was the first few to introduce fault tolerance at the hypervisor. Two virtual slices residing on the same physical node can be made to operate in sync through the hypervisor on the same physical node. Others \cite{wang2008virtual,cully2008remus} have made progress for the virtual slices to be duplicated and migrated over a network. Various duplication techniques and migration protocols were proposed for different types of applications (web servers, game servers, and benchmarking applications) \cite{wang2008virtual,cully2008remus} and Kemari \cite{tamura2008kemari} are two other systems that allows for state synchronization between two virtual nodes for full, dedicated redundancy. However, these works focus on the practical issues, and do not address the resource allocation issue. VNsnap \cite{kangarlou2009vnsnap} is another method to take static snapshots of an entire virtual infrastructure to some reliable storage, in order to recover from failures. This can be stored as reliably in a distributed manner as replicas \cite{chang2008bigtable}, or as parities \cite{dimakis2006decentralized,yeow2011highly}. VNsnap does not address synchronization, nor guarantee sufficient resources for recovery from snapshots. Fundamentally, there are methods to construct topologies for redundant nodes that address both nodes and links reliability \cite{ajtai1992fault,dutt1997node}. Based on some input graph, additional links are introduced such that the least number is needed. However, a node failure, in this case, may involve migrations among the remaining nodes to preserve the original topology. This may not be suitable in a scenario where migrations may disrupt other running parts of the network.
 
 %Our problem involves virtual network embedding [8, 18]
 %with added node and link redundancy for reliability. Our
@@ -17,5 +15,20 @@ may disrupt other running parts of the network.
 %not use path-splitting for embedding reliability is [16].
 
 %Zhang et al. [7,8] have considered substrate resource sharing among multiple virtual networks. However, their method only con- siders substrate resource sharing within the same priority class and does not consider sharing among different priority classes while at the same time satisfying the different latency require- ments. Thus, the method cannot be applied to the VNE problem where substrate resource sharing among multiple priority classes is required within each requested virtual network. This paper pro- poses a heuristic VNE method to minimize the required amount of substrate resources due to fair substrate resource sharing among multiple virtual networks, while considering the existence of mul- tiple priority classes that share the substrate resources with one another within each virtual network. Since substrate resource shar- ing among multiple virtual networks is expected to occur on the substrate link bandwidth more frequently, the proposed heuris- tic method prioritizes virtual link assignment rather than virtual node assignment, in contrast to most of the existing heuristic methods.
+
+%Y. Wang\cite{wang2008virtual} considered the use of virtualized router as a management primitive that can be used to migrate routers for maximal reliability.
+
+
+Survivable network design has been a fruitful area for
+optical and Multiprotocol Label Switching (MPLS) networks
+\cite{dgrover2004mesh,liu2001approximating}. However, the problems studied there are an offline
+version and/or assume the traffic demand matrix has been
+available in advance. Under the unpredicted arrival and demand
+pattern of VN requests, the problem of provisioning the
+backup networks becomes very challenging. The complexity
+of the available solutions for the survivable network design
+is typically prohibitive for online invoking, especially when
+practical considerations such as the number limit and the hop count
+limit of the backup paths are taken into account.
 
 

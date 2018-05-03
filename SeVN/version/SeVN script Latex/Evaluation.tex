@@ -6,47 +6,68 @@ We first described the simulation setup, then present the simulation results.
 \subsection{Simulation setup}
 
 \subsubsection{Experimental Parameter}
-For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability $\VirtualNodenodeProbability$. The computing requirements on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$.
+For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability of $\VirtualNodenodeProbability$. The computing demand on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$.
 
 %VN requests arrive randomly over a timespan of $\SubstrateNewtorkRunTimeInterval$ time slots and the inter-arrival time is
-%assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN request follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot. 
+%assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN request follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot.
 The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean \ requests per 1 time units).
-The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average
-A high request rate and long lease times ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated physically substrate node.
+The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average.
+A high request rate and long lease time ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated physically substrate node.
 %The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean requests per 1 time units).
 %The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average
 
-We assumed the relative cost of computing compared with bandwidth is $\RelativeCostbetweenComputingBandwidth$ according to  \cite{armbrust2009above,yu2010survivable}, which means $\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$.
+We assumed the relative cost of computing demand  compared with bandwidth demand is $\RelativeCostbetweenComputingBandwidth$ according to  \cite{armbrust2009above,yu2010survivable}, which means $\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$.
 %The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using the GT-ITM tool  \cite{zegura1996model}.
-The SN topologies used from SNDlib topology data \cite{orlowski2010sndlib}(could list all topology graph's information???).
+The SN topologies used from SNDlib topology data \cite{orlowski2010sndlib}as shown in Tab.\ref{tab:SNDlibTopo}.
 The computing(bandwidth) resources of the substrate nodes (links) are integer uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and $\SubStrateEdgeBandwithMaximum$), respectively. To model the facility node failure scenario, we choose all substrate facility nodes of substrate network to fail one by one, and statistically calculating migration frequency in every $\SubStrateFacilityNodeFailDuration$ time units.
+\begin{table}[htb]
+\centering
+\caption{SNDlib topology data}\label{tab:SNDlibTopo}
+\begin{tabular}{|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  name & node & edge \\
+  \hline
+  cost266& 37& 57\\
+  geant& 22& 36\\
+  germany50& 50& 88\\
+  giul39& 39& 172\\
+  janos-us-ca& 39& 122\\
+  janos-us& 26& 84\\
+  nobel-eu& 28& 41\\
+  norway& 27& 51\\
+  pioro40& 40& 89\\
+  ta1& 24& 55\\
+  ta2& 65& 108\\
+  zib54& 54& 81\\
+  \hline
 
+\end{tabular}
+\end{table}
 
-In our proposed star method for $\MyProblemAbrreviation$ problem, we employ a proactive failure dependent protection(FD) based $\MyProblemAbrreviation$ problem design with sufficient redundancy before embedding process in order to conquer the limitation of existing work, which consider the redundancy within the embedding process and failure independent protection based migration approach in resource efficiency.
+%In our proposed star decomposition method for $\MyProblemAbrreviation$ problem, we employ a proactive failure dependent protection(FD) based $\MyProblemAbrreviation$ problem design with sufficient redundancy before embedding process in order to conquer the limitation of existing work, which consider the redundancy within the embedding process and failure independent protection based migration approach in resource efficiency.
 
-For performance comparisons, besides our scheme (named by $\MyAlgorithmMethodAbrreviation$), we also implemented another one survivable algorithms $\SecondAlgorithmMethodAbrreviation$ \cite{yeow2011designing} as follows, $\SecondAlgorithmMethodAbrreviation$ algorithms connect links between backup and critical nodes, and backup and backup nodes, but not connect links between critical and critical nodes.
+For performance comparisons, besides our scheme (named by $\MyAlgorithmMethodAbrreviation$), we also implemented other survivable algorithms $\SecondAlgorithmMethodAbrreviation$ \cite{yeow2011designing} as follows:
+\begin{itemize}
+  \item $\SecondAlgorithmMethodAbrreviation$ : algorithm connect links between backup and critical nodes, between backup and backup nodes, but not connect links between critical and critical nodes. critical node denote the former physical node which is embedded with virtual nodes. backup node denote the augmented nodes.
+  \item $\FouthAlgorithmMethodAbrreviation$: When every node of substrate mapped with virtual node fail, a simple method is that augment a new node physical node for migrating the failure virtual node and connect new link with the failure link in terms of the failure physical node.
+\end{itemize}
 
-when every node of substrate mapped with virtual node fail, a simple method is that augment a new node physical node for migrating the failure virtual node and connect new link with the failure link in terms of the failure physical node. we label the simple method $\FouthAlgorithmMethodAbrreviation$.
+Moreover, We compare with a virtual network embedding algorithm\cite{liu2011completing} which is the embedding method when virtual network request firstly arrived, where VN do not have survivability requirement, and the virtual network embedding request (labeled $\ThirdAlgorithmMethodAbrreviation$) as a baseline to gauge the amount of augmented resources consumed for survivability, label "algorithm shared" or "algorithm Noshared" in experimental evaluation figures. We supposed that when a virtual network is embedded in substrate network, the successful survivable guarantee has been supposed  with respect to algorithm $\ThirdAlgorithmMethodAbrreviation$.
 
-Moreover, We compare with a virtual network embedding request algorithm, where VN do not have survivability requirement, and the virtual network embedding request (labeled $\ThirdAlgorithmMethodAbrreviation$) as a baseline to gauge the amount of augmented resources consumed for survivability. We supposed that when a virtual network is embedded in substrate network, the survivable guarantee has been successful with respect to algorithm $\ThirdAlgorithmMethodAbrreviation$.
-
-
-
-Based on the resource of substrate network whether shared or non-shared \cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern. The substrate resource corresponding augment backup demand of  every virtual network request with survivable guarantee  could be shared with each other.
-
-The backup resources themselves can be either dedicated or shared\cite{guo2011shared}. Dedicated means that for each virtual network a
+Based on the resource of substrate network whether shared or non-shared(dedicated) \cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern. The substrate resource corresponding augment backup demand of  every virtual network request with survivable guarantee  could be shared with each other. Dedicated means that for each virtual network a
 complete backup network can be set up and backup resources are fully dedicated to the virtual networks and independent from each other. However, this is resource inefficient, since for each virtual resource that gets embedded a dedicated substrate entity is needed. In some cases it might also be acceptable to share and reuse the backup resources in order to reduce the footprint on the substrate network caused by the additional
 backup resources. Usually, a higher degree of reused backup resources results in lower reliability, and vice versa.
 
-Every virtual network's request exist a lease time span, statistically record virtual or substrate network's performance metric in real-time situation. Because the experimental data of every algorithm performance metric fluctuate, we incrementally record experimental data of every virtual or substrate network performance metric, then average the experimental data by successful accepted virtual network embedding or survivable embedded virtual network  as denominator.
+Every virtual network's request exist a life lease time span, statistically record virtual or substrate network's performance metric in real-time situation. Because the experimental data of every algorithm's performance metric fluctuate, we incrementally record experimental data of every virtual or substrate network performance metric, then average the experimental data by successful accepted virtual network embedding or survivable embedded virtual network  as denominator.
 
 
-All simulations are ran on a server, which is equipped with Intel(R) Xeon(R) CPU E5-2620 2.00GHz (24 Cores) and 32.00GB RAM.
+All simulations ran on a server, which is equipped with Intel(R) Xeon(R) CPU E5-2620 2.00GHz (24 Cores) and 32.00GB RAM.
 
 %one Intel (R) i5-5200U CPU(2.20GHz) (24Cores) and 8.00GB RAM.
 
 \subsubsection{Performance Metric}
-In this section, we evaluate the performance of the SeVN problem heuristic method $\MyAlgorithmMethodAbrreviation$ when allocating resources with considering all virtual nodes. In particular, we focus on the resource usage of the physical infrastructure and virtual network request, and the admission rates of survivable eVN  requests.
+In this section, we evaluate the performance of the SeVN problem heuristic method $\MyAlgorithmMethodAbrreviation$ when allocating resources with considering all virtual nodes. In particular, we focus on the resource usage of the physical infrastructure and virtual network request, and the acceptable rates of survivable eVN  requests.
 
 %The arrivals of VN requests are modeled by a Poisson process (with mean of 10 requests per 100 time units). The duration of the requests follows an exponential distribution with 1000 time units on average.
 
@@ -104,7 +125,9 @@ In this section, we evaluate the performance of the SeVN problem heuristic metho
 %Transition state interval in one simulation 50 0 0 requests
 %Stationary state interval in one simulation 10,0 0 0 requests
 
-Different measures \cite{fischer2013virtual} of heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding stress, and other measures as described in the follow. $A_{VN}$ denote at time t arrived virtual network request. Fig.\ref{fig:VirNetReqSurNetReq} show that the successful number of virtual network request  embedded into physical network denoted as $A_{eVN}$ and the successful number of embedded virtual network survivable request after embed backup resource denoted as $A_{SeVN}$.
+Different measures \cite{fischer2013virtual} of heuristic algorithms are presented in this section in terms of average acceptance ratio, embedding stress, and other measures as described in the follow.
+
+$A_{VN}$ denote at time t arrived virtual network request number. Fig.\ref{fig:VirNetReqSurNetReq} show that the successful number of virtual network request  embedded into physical network denoted as $A_{eVN}$ and the successful number of embedded virtual network survivable request after embed backup resource denoted as $A_{SeVN}$.
 
 \begin{figure}
   \centering
@@ -121,8 +144,8 @@ Different measures \cite{fischer2013virtual} of heuristic algorithms are present
   \item \textbf{Cost, Revenue, and Cost/Revenue}: Cost: Sum of node computing ability or link bandwidth resources being used for the embedding. Revenue: Sum of node computing ability or link bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.
   \item \textbf{Stress}: Average number of virtual links/nodes that have been assigned to the substrate links/nodes .
  \item \textbf{Migration Frequency Ratio}: The number of migrations refers to the number of virtual nodes that need to be migrated to new facility nodes in case corresponding substrate nodes fail.
- \item \textbf{utilization}: Bandwidth utilization or computing utilization of substrate links/nodes, in each SN entity (node or link), the sum of the spent substrate resources due to the mapping of virtual entities divided by the total amount of resources.
- \item \textbf{backup nodes number}: The number of backups metric counts the number of backup resources that are set up for a virtual entity. Several additional substrate entities can be reserved to serve as a replacement in case the entity hosting the virtual entity fails.
+ \item \textbf{Utilization}: Bandwidth utilization or computing utilization of substrate links/nodes, in each SN entity (node or link), the sum of the spent substrate resources due to the mapping of virtual entities divided by the total amount of resources.
+ \item \textbf{Backup nodes number}: The number of backups metric counts the number of backup resources that are set up for a virtual entity. Several additional substrate entities can be reserved to serve as a replacement in case the entity hosting the virtual entity fails.
 \end{itemize}
 %\begin{table*}
 %\label{tab:measure}
