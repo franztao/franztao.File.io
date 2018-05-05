@@ -40,7 +40,7 @@
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4in]{figures/VirtualNetworkEmbedding}\\
-\caption{节点映射$v_1\rightarrow s_1, v_2\rightarrow s_2, v_3\rightarrow s_3, v_4\rightarrow s_4$,链路映射$e_{12}\rightarrow l_{12},e_{23}\rightarrow l_{23},e_{13}\rightarrow l_{13},e_{14}\rightarrow l_{14}$.}\label{fig:VirtualNetworkEmbedding}
+\caption{节点映射和链路映射的实例}\label{fig:VirtualNetworkEmbedding}
 \end{figure}
 \subsection{可生存性虚拟网络嵌入}
 由于恶意攻击、自然灾害、无意中断电缆、计划维护、设备故障、物理节点承载的虚拟节点可能会遭受不可避免的故障。当单个或多个物理网络组件发生故障时，VN 中可能会发生故障，从而造成财务损失。一般来说，多个物理节点的同时失效是相互独立的，单个节点的失效通常发生在大多数时间\cite{yeow2010designing}。本文研究了单节点失效的可生存性虚拟网络嵌入问题。在本章中，我们将讨论如何将我们的算法扩展到多节点故障的场景中。
@@ -55,12 +55,12 @@
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=4.0in]{figures/One2OneProtection}\\
+\includegraphics[width=4.5in]{figures/One2OneProtection}\\
 \caption{1+1-保护机制}\label{fig:One2OneProtection}
 \end{figure}
-\section{基于问题公式的图分解}
+\section{图分解}
 可生存性虚拟网络嵌入需要添加备份资源，以保证当任何一个物理节点失效时，剩余的物理资源加上备份资源仍然可以支持原先的虚拟网络请求。为了便于在节点失效时找到可行的嵌入，本节首先对虚拟网络进行分解，物理网络以星型结构为基础的局部组件。在此基础上，提出了一种新的二分图，并将具有最小备份资源的可生存性虚拟网络嵌入问题转化为一个基于定义良好的二分图的虚拟星图分配问题。
-\subsection{星型图分解}
+\subsection{基于星型图的分解}
 将虚拟网络分解为虚拟局部星型图。每个虚拟局部星型图与一个虚拟节点相关联。给出虚拟节点$v_i$，相应的虚拟局部星型图被定义为属性化单层根树，并如公式\ref{eq:virtualstar} 所示。
 
 \begin{equation}
@@ -107,7 +107,7 @@ w(i,j) = \left\{ {\begin{array}{*{20}{c}}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4.5in]{figures/StarRepresentation}\\
-  \caption{当物理节点$s_1$ 失效时PhysicalStar($s_j$)和VirtualStar($v_i$)的组件}\label{fig:StarRepresentation}
+  \caption{当物理节点$s_1$ 失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\label{fig:StarRepresentation}
 \end{figure}
 
 \begin{equation*}
@@ -246,7 +246,7 @@ M_{ij}=\left[ {\begin{array}{*{20}{c}}
 \end{array}} \right]
 \label{eq:StarRepresentationMatrix}
 \end{equation}
-\section{巧妙避免添加备份资源}
+\section{添加备份资源的略}
 如果一个节点失败，则在应用算法\ref{alg:DPAlg} 计算最小额外资源后，添加新的物理节点和物理路径来维护网络可生存性服务。如果不包含任何虚拟节点的物理节点在节点失效前就已经添加为备份节点，我们应该将这个物理节点设置为a=1，以指示该物理节点已经容纳过虚拟节点。
 
 由于我们的可生存性虚拟网络嵌入问题是为了在任何一个节点失效时最小化增加的备份资源，而不是给定的一个节点故障，我们应该逐一测试每个节点的故障，并添加足够的备份资源。作为备份资源只需要当节点失效时，备份资源应在不同节点失效时共享。如果我们直接应用公式\ref{eq:edge weight}中定义的成本来计算另一个物理节点失效时的备份资源，因为公式\ref{eq:edge weight}中定义的成本不考虑备份资源共享，则会导致重复添加备份资源的问题。
@@ -299,25 +299,24 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \label{lab:Node2FaliureAlignmentMatrixNew}
 \end{equation*}
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 % Requires \usepackage{graphicx}
-\includegraphics[width=4in]{figures/StarRepresentationNode2}\\
-  \caption{当物理节点$s_2$ 失效时PhysicalStar($s_j$)和VirtualStar($v_i$)的组件)}\label{fig:StarRepresentationNode2}
-\end{figure}
-
-\begin{figure}
-\centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=3in]{figures/StarRepresentationTwoFailure}\\
-  \caption{当物理节点$s_1$和$s_2$同时失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\ label{fig:StarRepresentationTwoFailure}
+\includegraphics[width=4.5in]{figures/StarRepresentationNode2}\\
+  \caption{当物理节点$s_2$ 失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\label{fig:StarRepresentationNode2}
 \end{figure}
 
 \section{多节点故障情形}
 \label{sec:multiplePhysicalNodeFailure}
 如图\ref{fig:StarRepresentationTwoFailure}所示给出了当物理节点$s_1$和$s_2$ 同时失效时星型二分图的一个例子。这种二分图的边权矩阵可以用矩阵\ref{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}表示。
+\begin{figure}[htb]
+\centering
+% Requires \usepackage{graphicx}
+\includegraphics[width=3.8in]{figures/StarRepresentationTwoFailure}\\
+  \caption{当物理节点$s_1$和$s_2$同时失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\label{fig:StarRepresentationTwoFailure}
+\end{figure}
 \begin{equation*}
-\tiny{
+\small{
  {\begin{array}{*{20}{c}}
 &R_{S_1}&R_{S_2}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
 {L_{V_1}}&\infty&\infty&\infty&\infty&\fbox{$C_{s}+M_{m}$+(2)+12}&C_{s}++M_{m}+(2)+12&\infty\\
@@ -332,21 +331,21 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 在这一部分中，我们首先给出了SeVN图的增广资源分配过程。下面将详述更多细节。
 
 此外，对于节点嵌入和虚拟链路嵌入，由于单个节点失效时并不是所有的虚拟链路或它们的带宽都会同时使用，所以如果将虚拟链路嵌入在同一底层物理链路上，则一些虚拟链路可以共享底层物理资源。减少总底层物理带宽所需。简单地说，底层物理链路对应不同虚拟网络节点失效时可生存性请求的备份带宽可以相互共享。
-\subsection{将增强备份资源嵌入到底层网络中}
+\subsection{将增广的备份资源嵌入到底层网络中}
 
 从节\ref{lab:DynamicProgrammingEquation}中，我得到了节点$v_i$失效的节点映射和链路映射关系，和计算出每个节点需要重新分配的计算量，以及每个链路在底层物理网络SN 中应该重新分配的带宽，如图\ref{fig:AugmentResource}所示。分别在物理节点$s_1,s_2,s_3,s_4,s_5,s_6,s_7$中增加计算资源0、2、0、0、3、6、0。查找带宽分别为1，4，6，3，6，6与物理路径$p_{s_1s_2},p_{s_1s_3},p_{s_1s_5},p_{s_1s_6},p_{s_2s_5}$对应的五条路径。尽管虚拟网络嵌入算法很多，但相对于我们的算法，节点映射阶段已经完成，接下来的步骤描述了链路映射阶段。我们使用标准最短路径算法Dijkstra 算法\cite{skiena1990dijkstra}来请求底层物理节点的扩展路径，并为这种虚拟网络生存的请求的部分带宽重新分配给这些路径。一些研究\cite{yu2008rethinking}集中在路径嵌入和路径分割嵌入，以实现高的链路利用率、链路压力和其他目标，但本文没有重点讨论链路映射问题。
 \begin{figure}[htb]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=4in]{figures/AugmentResource}\\
-  \caption{增广的资源图}\label{fig:AugmentResource}
+  \includegraphics[width=3.5in]{figures/AugmentResource}\\
+  \caption{增广的备份资源图}\label{fig:AugmentResource}
 \end{figure}
 最后，迭代的重复图分解过程和多背包问题求解过程，处理每个嵌入虚拟节点的物理节点失效情况，重新构造增强图，以保证虚拟网络的生存请求。如图\ref{fig:Node4Failure}所示，连续使用不同颜色标记SeVN的部分增广资源并且连续显示每个节点故障。值得注意的是，部分增广资源的每一步都是基于前一步的资源增强。
 \begin{figure}[htb]
 \centering
 % Requires \usepackage{graphicx}
-\includegraphics[width=4in]{figures/Node4Failure}\\
-  \caption{节点$s_4$的失效}\label{fig:Node4Failure}
+\includegraphics[width=3.5in]{figures/Node4Failure}\\
+  \caption{节点$s_4$失效实例}\label{fig:Node4Failure}
 \end{figure}
 \subsection{算法步骤}
 在本节中，我们描述了SeVN问题完整的算法步骤，如伪码\ref{alg:SeVNAlg} 所示
@@ -355,19 +354,19 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \caption{可生存性虚拟网络嵌入算法}
 \begin{algorithmic}[1]
 \REQUIRE $G (V,E)$：虚拟网络请求; $G (S,L)$：物理网络。
-\ENSURE Generate SeVN and embed SeVN augment resource into substrate network.
-\STATE embed Virtual Network $G^V$ into Substrate Network $G^S$\cite{liu2011completing}.
-\STATE extract embedded virtual network eVN $G\left( {\hat S,\hat L} \right)$ from SN corresponding to this VN embedding request
+\ENSURE 生成SeVN并增加资源将SeVN嵌入到底层物理网络中。
+\STATE 将虚拟网络$G^V$ 嵌入\cite{liu2011completing}到底层网络$G^S$中
+\STATE 从与此VN嵌入请求对应的SN中提取嵌入的虚拟网络eVN$G\left( {\hat S,\hat L} \right)$
 %\STATE AllMinimumCycle($G(V,E)$)
-\FORALL{$v_i$ such that $v_i\in G\left( {\hat S,\hat L} \right)$}
-\STATE Decompose eVN $G\left( {\hat S,\hat L} \right)$ into two star structure sets $VirtualStar(v_i)$ and $PhysicalStar(s_j)$ from graph $G\left( {\hat S,\hat L} \right)$.
-\STATE Construct items based star structure set $VirtualStar(v_i)$.
-\STATE Construct knapsacks based star structure set $PhysicalStar(s_j)$ from embedded virtual network eVN.
-\STATE Construct edge cost matrix based equation\ref{eq:new edge weight}.
-\STATE Solve multiple knapsack problem through dynamic programming in Sec.\ref{lab:DynamicProgrammingEquation}.
-\STATE Add new nodes, connect new edges, re-allocate node computing and edge's bandwidth into $G\left( {\hat S,\hat L} \right)$ to construct new graph $G\left( {\hat S,\hat L} \right)$.
+\FORALL{$v_i$ 并且 $v_i\in G\left( {\hat S,\hat L} \right)$}
+\STATE  从图 $G\left( {\hat S,\hat L} \right)$中分解 eVN $G\left( {\hat S,\hat L} \right)$ 成两个星型结构集 $VirtualStar(v_i)$ 和 $PhysicalStar(s_j)$
+\STATE 构建items根据星型结构集 $VirtualStar(v_i)$.
+\STATE 构建knapsacks根据星型结构集$PhysicalStar(s_j)$
+\STATE 构建边权值矩阵\ref{eq:new edge weight}.
+\STATE 根据节\ref{lab:DynamicProgrammingEquation}所描述的动态规划方法解决多背包问题
+\STATE 添加新节点，连接新的边，重新分配节点计算资源和链路的带宽资源到$G\left( {\hat S,\hat L} \right)$中构建新的$G\left( {\hat S,\hat L} \right)$
 \ENDFOR
-\STATE Embed augmented resource or startup new nodes from SeVN $G\left( {\hat S,\hat L} \right)$ into substrate network $G(S,L)$
+\STATE 从 $G\left( {\hat S,\hat L} \right)$中嵌入增广资源到物理网络$G(S,L)$
 \end{algorithmic}
 \end{algorithm}
 \section{时间复杂度}
@@ -407,7 +406,7 @@ VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求�
 \end{tabular}
 \end{table}
 
-为了进行性能比较，除了我提出的方案(由$\MyAlgorithmMethodAbrreviation$命名)之外，我还实现了其他可生存的算法$\SecondAlgorithmMethodAbrreviation$ \cite{yeow2011designing}如下：
+为了进行性能比较，除了我提出的方案(由$\MyAlgorithmMethodAbrreviation$命名)之外，我还实现了其他可生存的算法$\SecondAlgorithmMethodAbrreviation$  \cite{yeow2010designing}如下：
 \begin{enumerate}
   \item $\SecondAlgorithmMethodAbrreviation$ ：算法将备份节点与关键节点之间、备份节点与备份节点之间的连接起来，而不连接关键节点与关键节点之间，关键节点表示嵌入物理节点中的虚拟节点，备份节点表示的增广节点。
   \item $\FouthAlgorithmMethodAbrreviation$：当与虚拟节点映射的底层物理上的每个节点失效时，一种简单的方法是增加一个新的物理节点，用于迁移失败的虚拟节点，并将新的链路与失败的物理节点连接起来。
@@ -451,7 +450,7 @@ $A_{VN}$表示到达时间$t$虚拟网络请求数。如图\ref{fig:VirNetReqSur
 \end{figure}
 \subsection{活动节点}
 \subsection{路径长度}
-\subsection{成本、收入和成本/收入}
+\subsection{成本、收入和成本/收入比}
 \subsection{压力}
 \subsection{迁移频率比}
 \subsection{效用}

@@ -26,7 +26,7 @@
 \csupervisor{谢鲲~教授} %导师姓名
 \elevel{Professor} %导师职称
 \cchair{~~~~~~~~}
-\ddate{~~~~~~~~年~~~~月~~~~日}
+\ddate{~~~~2018年~~~5月~~~19日}
 \edate{April,~2018}
 \untitle{湖~~南~~大~~学}
 \declaretitle{学位论文原创性声明}
@@ -46,39 +46,43 @@
 %\cdate{\CJKdigits{\the\year} 年\CJKnumber{\the\month} 月 \CJKnumber{\the\day} 日}
 % 如需改成二零一二年四月二十五日的格式，可以直接输入，即如下所示
 % \cdate{二零一二年四月二十五日}
-\cdate{~~~~~~~~年~~~~月~~~~日} % 此日期显示格式为阿拉伯数字 如2012 年4 月25 日
+\cdate{~~~~2018年~~~5月~~~8日} % 此日期显示格式为阿拉伯数字 如2012 年4 月25 日
 \cabstract{
-现今网络规模越来越大，业务也在不断地扩展，传统的网络架构及技术己经无法满足快速配置、按需调动等要求，软件定义网络（SDN）就是为了应对现有网络无法解决的问题而被提出来的。为了使管理更加灵活高效，SDN架构将控制平面与转发平面进行了解耦分离，并且具有可编程特性。另外，利用网络功能虚拟化将网络资源进行虚拟化在很大程度上也可以解决现有网络无法解决的问题，用户的多个虚拟网络可以同时存在于一个底层物理网络上，它们依据不同的嵌入算法向底层物理网络映射，嵌入的虚拟网络会共享底层物理网络的资源。
+现如今网络整体规模和网络功能类型复杂度越来越大，5G、VR技术等对网络性能需求不断提高，传统的网络架构己经无法满足按需调动、快速配置等需求，软件定义网络（SDN）的提出就是为了应对现有网络架构无法解决的问题和网络性能瓶颈的限制。利用网络功能虚拟化(NFV)技术将网络资源进行虚拟化，在很大程度上可以解决现有网络无法解决的问题和到达现有网络无法达到的网络性能需求。网络服务运行在实际的物理设备上，这将必然产生不可避免的网络故障，SDN/NFV新型的网络架构在网络的可生存性领域比传统网络架构更加高效灵活的检测、处理和恢复网络故障。
 
-SDN作为新型网络架构，控制层与转发层分离将推动实现传统网络无法实现或者较难实现的网络业务，传统网络的路由算法只在源节点和目的节点之间提供一条Qos路径，这一做法已不能满足在网络连接出现故障时保持业务持续不间断地进行这一可生存性保护需求。SDN在光网络和Overlay网络中高效实现分离路径算法，试图在源节点和目的节点之间寻找满足一定Qos 约束的分离路径（链路分离,节点分离或SRLG分离），一条主用路径，另一条备用路径。当主用路径出现故障时，将其承载的业务流转换到备用路径上，从而实现快速的业务恢复。因此，分离路径算法研究有很重要的实用价值。
+传统分布式网络通过复杂的MPLS协议来实现对源节点和目的节点之间提供多条QoS路径，以提高网络的可生存性，这一做法已不能满足在网络连接出现故障时保持业务高效灵活迅速的提供可生存性保护需求。SDN 在光网络和Overlay网络应用中高效实现不相交路径算法，快速的在源节点和目的节点之间寻找满足一定QoS约束的不相交路径（链路不相交,节点不相交或SRLG 不相交）。当主用路径出现故障时，将其承载的业务流转换到备用路径上，从而实现快速的业务恢复。因此，快速不相交路径算法的研究具有很高的实用价值。
 
-SDN作为新型网络架构，网络虚拟化作为未来网络研究的重要领域，两者的结合具有很高的研究意义。现在看来，SDN 适合的领域应该是数据中心网络虚拟化的应用。在网络虚拟化过程中，不可避开的技术就是嵌入算法以及可生存性保护的研究，嵌入算法主要是考虑虚拟网络节点和链路向底层物理网络的映射，如何为虚 拟网络在底层物理网中找到满足条件且最优的路径；负责可生存性保护可以保证底层物理网资源失效的情况下，原本虚拟网络业务正常运行。
+SDN作为新型网络架构，网络虚拟化作为未来网络研究的重要领域，两者的结合具有很高的研究意义。在网络虚拟化过程中，不可避开的技术就是虚拟网络嵌入算法以及可生存性保护的研究，嵌入算法主要是考虑虚拟网络节点和链路向底层物理网络的映射，如何为虚拟网络在底层物理网中找到满足条件且最优的嵌入，并且可生存性保护需求可以保证底层物理网资源失效的情况下，保证原本虚拟网络业务正常运行。
 
-本文结合实际项目，基于SDN/NFV网络架构以可生存性算法作为课题的研究方向， 主要研究了以下四个方面的内容：
+本文结合实际项目，基于SDN/NFV网络架构下以可生存性算法作为课题的研究方向，主要研究了以下四个方面的内容：
 
-首先，研究网络可生存性技术，对网络故障失效环境进行了研究，并且探讨了已有各种情形的路径保护算法。
+首先，研究网络可生存性技术，对网络故障失效环境进行了研究，并且探讨了已有各种情形的路径保护算法和不相交路径算法。
 
-其次，光网络和Overlay网络中，考虑共享风险链路组分离的约束条件，在SRLG分离路由算法设计中，提出一个特殊的边分而治之集，通过创新的容量设置获得这个集合，分而治之的解决SRLG分离路由算法，并且都与己有算法进行了对比分析。
+其次，光网络和Overlay网络中，考虑共享风险链路组（SRLG）不相交的约束条件，提出一个特殊的边集合，通过创新性的容量设置来获得这个边集合，以这个边集合来分而治之的解决SRLG不相交路由问题，并且与己有算法进行了对比分析，提出的算法优于现有其它算法。
 
 其次，研究SDN虚拟网络技术，对SDN网络虚拟化的环境进行了研究，并且探讨了虚拟网络向底层物理网进行映射时的不同嵌入算法和可生存性嵌入算法。
 
-最后，在虚拟网络向底层物理网络映射时，考虑节点和链路的映射以及可生存性嵌入算法的设计，在可生存性嵌入算法的设计中，考虑到节点带有特定功能约束的条件，本文结合已有算法的不足，设计出虚拟网络分割嵌入的动态规划方法，并且都与己有算法进行了对比分析。
-
+最后，在虚拟网络向底层物理网络映射时，考虑节点和链路映射以及可生存性嵌入算法的设计，在可生存性嵌入算法的设计中，考虑到节点带有特定功能约束条件，本文结合已有算法的不足，设计出星型分割动态规划分配的可生存性虚拟网络嵌入算法，并且都与己有算法进行了对比分析，提出的算法优于现有其它算法。
 }
 %中文摘要应将学位论文的内容要点简短明了地表达出来，约500~800字左右（限一页），字体为宋体小四号。内容应包括工作目的、研究方法、成果和结论。要突出本论文的创新点，语言力求精炼。为了便于文献检索，应在本页下方另起一行注明论文的关键词（3-7个）。
-\ckeywords{软件定义网络；~~网络功能虚拟；~~分离路径；~~虚拟网络嵌入；~~可生存性}
-\eabstract{The network size is growing, and the business is constantly expanding at present, thus resulting in that the traditional network architecture and technology have been unable to meet the on-demand transfer、rapid configuration and other requirements，then, SDN is put forward to deal with this situation. SDN is an innovative network architecture, in order to make the management more flexible, it's forwarding plane and control plane are independent of each other. What’s more，it has an excellent feature of good programming. In addition, virtualization of network resources can also solve this problem to a large extent, the users' multiple virtual networks can exist on the underlying physical network, they will be mapped into the underlying physical network based on different mapping algorithms and these virtual networks can share the underlying network resources.
+\ckeywords{软件定义网络；~~网络功能虚拟化；~~不相交路径；~~虚拟网络嵌入；~~ 可生存性；~~风险共享链路组}
+\eabstract{Nowadays, the overall scale of the network and the complexity of the network function type are becoming more and more complex. The demand for network performance is constantly increasing for 5G and VR technology, and the traditional network architecture has been unable to meet the needs of on-demand deployment and rapid configuration. Software defined Network (SDN) is proposed to deal with the existing network architecture can not solve the problems and network performance bottlenecks. Virtualization of network resources by using network function virtualization technology can, to a large extent,solve the problems that cannot be solved by the existing network, and reach the network performance requirements that the existing network cannot achieve. Network services run on actual physical devices, which will inevitably lead to inevitable network failures. SDN / NFV new-style network architecture is more efficient and flexible to detect, deal with and recover network failures than traditional network architecture in the field of network survivability.
 
-SDN is now as new network architecture, and the network virtualization is considered as an important area of future network research, the combination of the two technologies is of great significance. It appears that the most suitable area for SDN should be the application of network virtualization in the data center. In the process of network virtualization, the unavoidable technologies are the mapping algorithm and load balancing research. The mapping algorithm mainly considers the virtual network nodes and links mapping to the underlying physical network nodes and links, thus finding the appropriate underlying physical network to meet the conditions of virtual networks and find the excellent routing path. On the other hand, the load balancing can guarantee the efficient utilization of the underlying physical network resources.
+Traditional distributed network provides multiple QoS paths between source node and destination node through complex MPLS protocol, which improves the survivability of the network. This approach can no longer meet the requirement of maintaining efficient, flexible and fast survivability protection in the event of network connection failure. SDN can efficiently implement disjoint path algorithm in optical network and Overlay network applications. A disjoint path (link disjoint, node disjoint or SRLG disjoint) that satisfies certain QoS constraints is quickly found between the source node and the destination node. When the main path fails, the service flow is transferred to the backup path to achieve fast service recovery. Therefore, the research of fast disjoint path algorithm has high practical value.
 
-This thesis researches on the SDN virtual network routing technology as an import research direction, and combined with the actual project. The main study of the content are as follows:
+SDN as a new network architecture, network virtualization as an important field of network research in the future, the combination of the two has very high research significance. In the process of network virtualization, the technology that can not be avoided is the virtual network embedding algorithm and the research of survivability protection. The virtual network embedding algorithm mainly considers the virtual network nodes and links mapping to the underlying physical network. how to find the optimal embedding for the virtual network in the underlying physical network, and the survivability protection requirements can guarantee the failure of the underlying physical network resources to ensure the normal operation of the original virtual network service.
 
-Firstly, the SDN virtual network technology is researched, and then the author discusses the environment of SDN network virtualization. Furthermore, the different mapping algorithms of virtual network mapped to the underlying physical network are discussed.
+In this paper, combining with the actual project, based on the research direction of survivability algorithm under the SDN/NFV network architecture, the following four aspects are mainly studied:
 
-pSecondly, in the processes of virtual network mapping to the underlying physical network, taking into account the mapping of nodes and links and also the design
+Firstly, the network survivability technology is studied, and the fault failure environment is studied, and the existing path protection algorithms and disjoint path algorithms are discussed.
 
+Secondly, in optical networks and Overlay networks, a special edge set is proposed considering the disjoint constraint of shared risk link group SRLG, and the edge set is obtained by innovative capacity setting. This edge set is used to solve the SRLG disjoint routing problem, and it is compared with the existing algorithms. The proposed algorithm is superior to other existing algorithms.
 
-Ensuring transmission survivability is a crucial problem for high-speed networks. Path protection is a fast and capacity-efficient approach for increasing the availability of end-to-end connections. The emerging SDN infrastructure makes it feasible to provide diversity routing in a practical network. For more robust path protection, it is desirable to provide an alternative path that does not share any risk resource with the active path. We consider finding the SRLG-Disjoint paths, where a Shared Risk Link Group (SRLG) is a group of network links that share a common physical resource whose failure will cause the failure of all links of the group. Since the traffic is carried on the active path most of time, it is useful that the weight of the shorter path of the disjoint path pair is minimized, and we call it  Min-Min SRLG-Disjoint routing problem. We prove this problem is NP-complete. The key issue faced by SRLG-Disjoint routing is the trap problem, where the SRLG-disjoint backup path (BP) can not be found after an active path (AP) is decided. Based on the min-cut of the graph, we  design an  efficient algorithm that can  take advantage of existing search results to quickly look for the SRLG-Disjoint path pair. Our performance studies demonstrate that our algorithm can outperform other approaches with a higher routing performance while also at a much faster speed.}
-\ekeywords{Software Defined Network;~~Network Function Virtualization;~~Disjoint Path;~~ Virtual Network Embedding;~~Survivability}
+Thirdly, the SDN virtual network technology is studied, the environment of SDN network virtualization is studied, and the different embedding algorithms and survivability embedding algorithms are discussed when the virtual network maps to the underlying physical network.
+
+Finally, when the virtual network is mapped to the underlying physical network, the design of node and link mapping and survivability embedding algorithm is considered. In the design of survivability embedding algorithm, the condition that nodes have specific functional constraints is considered. Considering the shortcomings of the existing algorithms, this paper designs a survivability virtual network embedding algorithm for star partitioning dynamic programming assignment, and compares it with the existing algorithms. The proposed algorithm is superior to other existing algorithms.
+
+}
+\ekeywords{Software Defined Network(SDN);~~Network Function Virtualization(NFV);~~Disjoint Path;~~ Virtual Network Embedding(VNE);~~Survivability;~~Shared Risk Link Group(SRLG)}
 \makecover
 \clearpage
