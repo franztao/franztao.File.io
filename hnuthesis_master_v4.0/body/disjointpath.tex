@@ -257,26 +257,25 @@ A_t=1-\prod_k(1-A_k)
 \end{definition}
 风险组里的资源可以是节点而不一定是链路，这就引申出共享风险节点组不相交路径问题。共享风险节点组不相交路径可以通过节点转移方法成共享风险链路组不相交路径问题。
 
-\subsection{概率共享风险链路组}
-当前的链路故障恢复算法大多是针对独立故障的，而事实上有时候链路故障并不是完全独立的，比如当底层光纤链路故障时，由其承载的多条逻辑链路可能会同时失效，即链路故障之间存在概率关联。当SRLG 中的一条链路失效时，该组中其它链路以100\%的概率出现失效。但实际上关联故障并非100\%绝对关联，拥有关联故障的两条链路中的一条链路发生故障时，另一条链路只是以某一概率发生故障。为此，我们给出了概率共享风险链路组概念，在传统的SRLG 模型中加入故障关联概率来表示拥有一定概率关联的故障模型。
-\begin{definition}[概率共享风险链路组(Probabilistically Shared Risk Link Group, PSRLG)]
-设$\mathbb{R}$为SRLG集合，当任意事件$r\in\mathbb{R}$发生时，故障发生概率不为0的链路集合构成事件r的PSRLG，如式\ref{equ:PSRLG}所示。
-\begin{equation}\label{equ:PSRLG}
-  r_{PSRLG}=\{e_{i,j}\in \mathbb{E}:p_r(i,j)\neq 0\}
-\end{equation}
-其中$p_r(i,j)$为SRLG事件r发生时链路$e_{i,j}$发生故障
-的概率。
-\end{definition}
-链路$e_{i,j}$与链路$e_{u,v}$之间存在故障关联是指当某事件r发生时，$p_r(i,j)\neq 0$且$p_r(u,v)\neq 0$。而传统的SRLG 模型中，链路$e_{i,j}$与链路$e_{u,v}$之间存在故障关联是指事件r发生时，$p_r(i,j)=1$ 且$p_r(u,v)=1$，显然传统的SRLG 模型只是概率关联模型的一个特例。利用概率关联故障模型可以更加真实地刻画关联故障的特点。用$p_r$表示事件r发生概率，链路$e_{i,j}$和$e_{u,v}$存在故障关联时，各自发生故障的概率分别用$p_{u,v}$和$p_{i,j}$
-表示。
-\begin{equation}\label{equ:PSRLpuv}
-  p_{u,v}=p_r*p_r(u,v)
-\end{equation}
-\begin{equation}\label{equ:PSRLpij}
-  p_{i,j}=p_r*p_r(i,j)
-\end{equation}
-根据式\ref{equ:PSRLpuv}和式\ref{equ:PSRLpij}，只有当$p_r\neq 0$时， $p_{u,v}$与$p_{i,j}$不为0，即链路$e_{i,j}$与$e_{u,v}$存在故障关联时各自发生故障的概率同时受到事件r 的影响。利用概率关联故障模型可以方便地得到存在关联故障链路发生故障
-的概率。
+%\subsection{概率共享风险链路组}
+%当前的链路故障恢复算法大多是针对独立故障的，而事实上有时候链路故障并不是完全独立的，比如当底层光纤链路故障时，由其承载的多条逻辑链路可能会同时失效，即链路故障之间存在概率关联。当SRLG 中的一条链路失效时，该组中其它链路以100\%的概率出现失效。但实际上关联故障并非100\%绝对关联，拥有关联故障的两条链路中的一条链路发生故障时，另一条链路只是以某一概率发生故障。为此，我们给出了概率共享风险链路组概念，在传统的SRLG 模型中加入故障关联概率来表示拥有一定概率关联的故障模型。
+%\begin{definition}[概率共享风险链路组(Probabilistically Shared Risk Link Group, PSRLG)]
+%设$\mathbb{R}$为SRLG集合，当任意事件$r\in\mathbb{R}$发生时，故障发生概率不为0的链路集合构成事件r的PSRLG，如式\ref{equ:PSRLG}所示。
+%\begin{equation}\label{equ:PSRLG}
+%  r_{PSRLG}=\{e_{i,j}\in \mathbb{E}:p_r(i,j)\neq 0\}
+%\end{equation}
+%其中$p_r(i,j)$为SRLG事件r发生时链路$e_{i,j}$发生故障
+%的概率。
+%\end{definition}
+%链路$e_{i,j}$与链路$e_{u,v}$之间存在故障关联是指当某事件r发生时，$p_r(i,j)\neq 0$且$p_r(u,v)\neq 0$。而传统的SRLG 模型中，链路$e_{i,j}$与链路$e_{u,v}$之间存在故障关联是指事件r发生时，$p_r(i,j)=1$ 且$p_r(u,v)=1$，显然传统的SRLG 模型只是概率关联模型的一个特例。利用概率关联故障模型可以更加真实地刻画关联故障的特点。用$p_r$表示事件r发生概率，链路$e_{i,j}$和$e_{u,v}$存在故障关联时，各自发生故障的概率分别用$p_{u,v}$和$p_{i,j}$
+%表示。
+%\begin{equation}\label{equ:PSRLpuv}
+%  p_{u,v}=p_r*p_r(u,v)
+%\end{equation}
+%\begin{equation}\label{equ:PSRLpij}
+%  p_{i,j}=p_r*p_r(i,j)
+%\end{equation}
+%根据式\ref{equ:PSRLpuv}和式\ref{equ:PSRLpij}，只有当$p_r\neq 0$时， $p_{u,v}$与$p_{i,j}$不为0，即链路$e_{i,j}$与$e_{u,v}$当存在故障关联时同时受到事件$r$的影响各自发生故障的概率。利用概率关联故障模型我们可以非常方便地得到存在关联故障链路发生故障的概率。
 
 %\section{共享风险节点组不相交路径}
 \section{本章小结}
@@ -301,7 +300,7 @@ A_t=1-\prod_k(1-A_k)
 \hline
 不相交路径对 & 路径不共享公共链路或节点(路径间可能有不同的源节点和目标节点)。 & 在芯片上互连指定的通道，没有任何不同引脚的电线相互接触 & 当$k\geq2$在一般有向网络中为NP-hard\cite{fortune1980directed}，但在无向网络\cite{robertson1995graph}、有向平面网络\cite{schrijver1994finding}和有向无圈网络中\cite{fortune1980directed} 是多项式可解的 \\
 \hline
-风险共享链路组不相交路径 & 路径不共享共同的风险组 & 确保不同的不相交路径不使用属于光网络中同一管道的链路。 & NP-hard\cite{hu2003diverse}和难以近似\cite{coudert2007shared}，除非所有SRLG遵循星型性质且所有SRLG的数目为常数\cite{bermond2013srlg}，或当所有SRLG遵循星性且最大节点度最多为4\cite{bermond2013srlg} 时，或者当所有SRLG遵循星型性质且网络是有向无圈图\cite{bermond2013srlg}时，或在特定跨度共享拓扑\cite{bhandari1994optimal}中\\
+风险共享链路组不相交路径 & 路径不共享共同的风险组 & 确保不同的不相交路径不使用属于光网络中同一管道的链路。 & NP-hard\cite{hu2003diverse} 和难以近似\cite{coudert2007shared}，除非所有SRLG遵循星型性质且所有SRLG的数目为常数\cite{bermond2013srlg}，或当所有SRLG遵循星性且最大节点度最多为4\cite{bermond2013srlg} 时，或者当所有SRLG遵循星型性质且网络是有向无圈图\cite{bermond2013srlg}时，或在特定跨度共享拓扑\cite{bhandari1994optimal}中\\
 \bottomrule[1.5pt]
 \end{tabularx}
 \vspace{\baselineskip}

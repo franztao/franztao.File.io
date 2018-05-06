@@ -4,10 +4,10 @@
 \subsection{虚拟网络嵌入}
 我们将\textbf{虚拟网络}VN表示为无向图$G (V,E)$，其中$V$ 和$E$ 分别是虚拟节点和虚拟链路的集合。每个虚拟链路$e_{ij}$具有带宽需求$d_{ij}$。 每个虚拟节点$v_i$ 具有计算容量需求$d_i$。 对于虚拟节点$v_i$，需要在虚拟节点上执行的虚拟功能表示为$f(i)$。如图\ref{fig:VirtualNetworkRequest} 所示虚拟网络$G (V,E)$ 具有虚拟节点集$V=\{v_1,v_2,v_3,v_4\}$ 和虚拟边集$E= \{e_{12},e_{13},e_{14},e_{23}\}$。需要在这些虚拟节点上执行的虚拟函数是$f(1)=f_1$, $f(2)=f_2$, $f(3)=f_3$, $f(4)=f_4$。
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
-\includegraphics[width=3.5in]{figures/VirtualNetworkRequest}\\
+\includegraphics[width=3.0in]{figures/VirtualNetworkRequest}\\
 \caption{虚拟网络请求$G(V,E)$
 }\label{fig:VirtualNetworkRequest}
 \end{figure}
@@ -15,10 +15,10 @@
 我们将底层\textbf{物理网络}建模为一个无向图$G (S,L)$，其中$S$ 和$L$ 分别是物理节点和物理链路的集合。对于物理节点$s_i$，我们使用$F(i)$ 和$c_i$分别表示可以在该节点上执行的一组可行的虚拟功能和可用的计算能力。每个物理链路$l_{ij}$ 都有可用带宽$b_{ij}$。如图\ref{fig:PhysicalNetwork}所示的物理网络$G (S,L)$，物理节点集合$S=\{s_1,s_2,s_3,s_4,s_5,s_6,s_7,s_8\}$，链路集合$L=\{l_{12},l_{13},l_{14},l_{15},l_{23},l_{25},l_{35},l_{36},l_{37},l_{47},l_{58}\}$，
 每一个物理节点的可行的虚拟功能$F(1)=\{f_1\}$, $F(2)=\{f_2,f_3\}$, $F(3)=\{f_3\}$, $F(4)=\{f_4\}$, $F(5)=\{f_1,f_2\}$, $F(6)=\{f_1,f_4\}$, $F(7)=\{f_2,f_3\}$,$F(8)=\{f_2\}$。
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
-\includegraphics[width=4in]{figures/PhysicalNetwork}\\
+\includegraphics[width=3.8in]{figures/PhysicalNetwork}\\
 \caption{底层物理网络$G(S,L)$}\label{fig:PhysicalNetwork}
 \end{figure}
 
@@ -29,14 +29,14 @@
 
 显然，为了找到一个可行的虚拟网络嵌入，我们需要找到两个映射函数$\phi$ 和$\rho$来将所有虚拟节点映射到物理节点，以及将所有虚拟链路映射到物理路径。
 
-如图\ref{fig:VirtualNetworkEmbedding}所示一个可行的虚拟网络嵌入，将图\ref{fig:VirtualNetworkRequest}中的虚拟网络嵌入到图\ref{fig:PhysicalNetwork}中的物理网络中，其中虚拟节点$v_1$嵌入到物理节点$s_1$，虚拟节点$v_2$嵌入到物理节点$s_2$，虚拟节点$v_3$ 嵌入到物理节点$s_3$，虚拟节点$v_4$嵌入到物理节点$s_4$。 在图\ref{fig:PhysicalNetwork} 中，我们还展示了在这样映射之后物理网络中已经占用的和可用的资源。例如，对于物理节点$s_1$，其占用的计算容量为2，可用容量为5。
+如图\ref{fig:VirtualNetworkEmbedding}所示一个可行的虚拟网络嵌入，将图\ref{fig:VirtualNetworkRequest}中的虚拟网络嵌入到图\ref{fig:PhysicalNetwork} 中的物理网络中，其中虚拟节点$v_1$嵌入到物理节点$s_1$，虚拟节点$v_2$嵌入到物理节点$s_2$，虚拟节点$v_3$ 嵌入到物理节点$s_3$，虚拟节点$v_4$嵌入到物理节点$s_4$。 在图\ref{fig:PhysicalNetwork} 中，我们还展示了在这样映射之后物理网络中已经占用的和可用的资源。例如，对于物理节点$s_1$，其占用的计算容量为2，可用容量为5。
 
 给定VN请求$G(V,E)$和物理网络$G(S,L)$，对于可行映射，我们将映射的物理图表示为$G\left( {\hat S,P} \right)$，其中$\hat S$是容纳虚拟节点的物理节点集，其中$\hat S = \{ {s_{i'}}:\phi({v_i}) = {s_{i'}},for\ \ {\rm{ }}all\ {v_i} \in V,{s_{i'}} \in S\}$ 和$P$ 是路径集，其中每个路径都持有一个虚拟链路$P = \{ p_{\phi({v_i}) \phi({v_j})}:\rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})}{\rm{ }}, for\ all,{e_{ij}} \in E\}$。由于每个虚拟链路对应一个物理网络路径，该路径由多个物理链路组成，因此我们还将$G\left( {\hat S,\hat L} \right)$表示为占领的物理网络$\hat L = \{ {l_{pg}}:{l_{pg}} \in {p_{s_{i'}s_{j'}}}, \rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})},for\ all\ {e_{ij}} \in E,{l_{pg}} \in L\}$。
 
 已经有了许多关于虚拟网络嵌入问题\cite{fischer2013virtual}的研究;，因为本文的重点不是虚拟网络嵌入算法，我们采用了\cite{lischka2009virtual} 中的算法作为基本的虚拟网络嵌入算法。
 
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4in]{figures/VirtualNetworkEmbedding}\\
@@ -53,7 +53,7 @@
 
 1+1保护方案虽然实现简单，但需要大量的备份资源提去算法的目的是以最小的备份资源成本提供可生存性的网络服务。
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=4.5in]{figures/One2OneProtection}\\
 \caption{1+1-保护机制}\label{fig:One2OneProtection}
@@ -69,7 +69,7 @@ VirtualStar(v_i)=(v_i, \phi(v_i), d_i, f_i, D_i, N_i)
 \end{equation}
 
 
-其中，$N_i$是虚拟网络中的相邻节点集，并与节点$v_i$相关联的带宽需求集${D_i} = \left\{ {{d_{ij}}|{v_j} \in {N_i}} \right\} $。 注意，VirtualStar($v_i$)包括节点映射信息$\phi(v_i)$。 因为我们希望最小化备份资源以提供可生存性的网络服务，在节点失效前重复使用映射可能减少额外资源，使系统保持稳定的一个很好的选择。在虚拟星型图结构中，根节点和它的邻居节点存在链路，但是根节点的邻居节点之间不存在链路。
+其中，$N_i$是虚拟网络中的相邻节点集，并与节点$v_i$相关联的带宽需求集${D_i} = \left\{ {{d_{ij}}|{v_j} \in {N_i}} \right\} $。 注意，VirtualStar($v_i$) 包括节点映射信息$\phi(v_i)$。 因为我们希望最小化备份资源以提供可生存性的网络服务，在节点失效前重复使用映射可能减少额外资源，使系统保持稳定的一个很好的选择。在虚拟星型图结构中，根节点和它的邻居节点存在链路，但是根节点的邻居节点之间不存在链路。
 
 物理网络被分解为物理局部星型图。同样，每个物理局部星型图与一个物理节点相关联。给定物理节点$s_j$，对应的物理局部星型图被定义为属性化单层根树，并表示如公式\ref{eq:physicalstar}所示。
 \begin{equation}
@@ -189,7 +189,7 @@ dp[i][{x_1}][{x_2}] \ldots [{x_m}] = min\{\theta (i,1),\theta (i,2),\ldots,\thet
 基于动态规划的算法如伪码\ref{alg:DPAlg}所示。我们还以如图\ref{fig:DPIllustration}所示中的一个例子来说明该算法。
 
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=5in]{figures/DPIllustration}\\
@@ -279,11 +279,11 @@ w(i,j) = \left\{ {\begin{array}{*{20}{c}}
     \end{equation}
 \end{figure*}
 
-否则，在原先节点失效的测试前这个虚拟节点$v_i$ 没有被一个物理节点持有和迁移到其他物理节点，除了这个带宽成本为${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$，节点的容量成本为${\lambda * \mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$，虚拟服务器迁移的代价为${\beta * {M_m}}$ 和 $\theta$是从映射虚拟星型图$v_i$ 到物理星型图$s_j$的代价。如${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$ 而言，如果备份容量已分配的最大值${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$大于当前映射(即$d_i$)，不需要任何资源，否则，备份资源还缺少${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$。
+否则，在原先节点失效的测试前这个虚拟节点$v_i$ 没有被一个物理节点持有和迁移到其他物理节点，除了这个带宽成本为${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$，节点的容量成本为${\lambda * \mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$，虚拟服务器迁移的代价为${\beta * {M_m}}$ 和 $\theta$是从映射虚拟星型图$v_i$ 到物理星型图$s_j$ 的代价。如${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$ 而言，如果备份容量已分配的最大值${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$大于当前映射(即$d_i$)，不需要任何资源，否则，备份资源还缺少${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$。
 
 对于$VirtualStar(v_2)$，由于$v_3$最初由$s_3$ 持有，但是当物理节点$s_1$ 失效时，我们可以将虚拟节点$v_3$迁移到物理节点$s_2$，因为$s_2$ 是以前已经安装过虚拟机，因此，成本包括虚拟链路带宽成本$11$，节点容量成本5，虚拟机迁移成本$M_m$。
 
-基于节\ref{lab:DynamicProgrammingEquation}的方法，在物理节点$s_1$失效时得到最佳节点映射：$v_1 \rightarrow s_5$, $v_2 \rightarrow s_2$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$。 物理节点$s_5$ 开始为虚拟节点$v_1$建立和应用2个节点计算资源，并分别找到带宽约束为4、5、3 的对应的虚拟链路$(v_1,v_2),(v_1,v_3),(v_1,v_4)$ 的三个物理路径。
+基于节\ref{lab:DynamicProgrammingEquation}的方法，在物理节点$s_1$失效时得到最佳节点映射：$v_1 \rightarrow s_5$, $v_2 \rightarrow s_2$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$。 物理节点$s_5$ 开始为虚拟节点$v_1$ 建立和应用2个节点计算资源，并分别找到带宽约束为4、5、3 的对应的虚拟链路$(v_1,v_2),(v_1,v_3),(v_1,v_4)$ 的三个物理路径。
 
 如图\ref{fig:StarRepresentationNode2}展示了二分图的一个例子，物理节点$s_2$ 在物理节点$s_1$ 失效之后再失效。这个二分图的边权矩阵可以用矩阵\ref{lab:Node2FaliureAlignmentMatrixNew}表示。
 \begin{equation*}
@@ -299,7 +299,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \label{lab:Node2FaliureAlignmentMatrixNew}
 \end{equation*}
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4.5in]{figures/StarRepresentationNode2}\\
@@ -309,7 +309,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \section{多节点故障情形}
 \label{sec:multiplePhysicalNodeFailure}
 如图\ref{fig:StarRepresentationTwoFailure}所示给出了当物理节点$s_1$和$s_2$ 同时失效时星型二分图的一个例子。这种二分图的边权矩阵可以用矩阵\ref{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}表示。
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=3.8in]{figures/StarRepresentationTwoFailure}\\
@@ -334,19 +334,34 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \subsection{将增广的备份资源嵌入到底层网络中}
 
 从节\ref{lab:DynamicProgrammingEquation}中，我得到了节点$v_i$失效的节点映射和链路映射关系，和计算出每个节点需要重新分配的计算量，以及每个链路在底层物理网络SN 中应该重新分配的带宽，如图\ref{fig:AugmentResource}所示。分别在物理节点$s_1,s_2,s_3,s_4,s_5,s_6,s_7$中增加计算资源0、2、0、0、3、6、0。查找带宽分别为1，4，6，3，6，6与物理路径$p_{s_1s_2},p_{s_1s_3},p_{s_1s_5},p_{s_1s_6},p_{s_2s_5}$对应的五条路径。尽管虚拟网络嵌入算法很多，但相对于我们的算法，节点映射阶段已经完成，接下来的步骤描述了链路映射阶段。我们使用标准最短路径算法Dijkstra 算法\cite{skiena1990dijkstra}来请求底层物理节点的扩展路径，并为这种虚拟网络生存的请求的部分带宽重新分配给这些路径。一些研究\cite{yu2008rethinking}集中在路径嵌入和路径分割嵌入，以实现高的链路利用率、链路压力和其他目标，但本文没有重点讨论链路映射问题。
-\begin{figure}[htb]
-  \centering
-  % Requires \usepackage{graphicx}
-  \includegraphics[width=3.5in]{figures/AugmentResource}\\
-  \caption{增广的备份资源图}\label{fig:AugmentResource}
-\end{figure}
-最后，迭代的重复图分解过程和多背包问题求解过程，处理每个嵌入虚拟节点的物理节点失效情况，重新构造增强图，以保证虚拟网络的生存请求。如图\ref{fig:Node4Failure}所示，连续使用不同颜色标记SeVN的部分增广资源并且连续显示每个节点故障。值得注意的是，部分增广资源的每一步都是基于前一步的资源增强。
-\begin{figure}[htb]
+
+\begin{figure}[htbp]
 \centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=3.5in]{figures/Node4Failure}\\
-  \caption{节点$s_4$失效实例}\label{fig:Node4Failure}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/AugmentResource}
+\caption{增广的备份资源图}\label{fig:AugmentResource}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/Node4Failure}
+\caption{节点$s_4$失效实例}\label{fig:Node4Failure}
+\end{minipage}\vspace{\baselineskip}
 \end{figure}
+
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=3.0in]{figures/AugmentResource}\\
+%  \caption{增广的备份资源图}\label{fig:AugmentResource}
+%\end{figure}
+最后，迭代的重复图分解过程和多背包问题求解过程，处理每个嵌入虚拟节点的物理节点失效情况，重新构造增强图，以保证虚拟网络的生存请求。如图\ref{fig:Node4Failure}所示，连续使用不同颜色标记SeVN的部分增广资源并且连续显示每个节点故障。值得注意的是，部分增广资源的每一步都是基于前一步的资源增强。
+%\begin{figure}[htbp]
+%\centering
+%% Requires \usepackage{graphicx}
+%\includegraphics[width=3.0in]{figures/Node4Failure}\\
+%  \caption{节点$s_4$失效实例}\label{fig:Node4Failure}
+%\end{figure}
 \subsection{算法步骤}
 在本节中，我们描述了SeVN问题完整的算法步骤，如伪码\ref{alg:SeVNAlg} 所示
 \begin{algorithm}
@@ -376,7 +391,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \section{仿真配置与评价指标}
 首先描述了仿真配置，然后给出了评价指标。
 \subsection{实验环境}
-对于任何VN请求，VN节点的数目是由3到10之间的均匀分布随机得到的，每一对虚拟节点都是以概率0.5 随机连接的。VN节点的计算需求从1到5 之间随机分布，并且VN上的带宽从1到10之间随机分布。
+对于任何VN请求，VN节点的数目是由3到10之间的均匀分布随机得到的，每一对虚拟节点都是以概率0.5 随机连接的。VN节点的计算需求从1到5 之间随机分布，并且VN 上的带宽从1到10之间随机分布。
 
 VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求的持续时间服从指数分布，平均100个时间单位，高的请求率和较长的租用时间保证了物理基础设施的高利用率。
 
@@ -420,40 +435,190 @@ VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求�
 
 所有仿真都运行在服务器上，服务器配置为Intel(R) Xeon(R) CPU E5-2620 2.00GHz (24 Cores) 和 32.00GB RAM。
 \subsection{评价指标}
-在这一部分中，我考虑所有虚拟节点的情况下，评估了SeVN问题启发式方法$\MyAlgorithmMethodAbrreviation$在分配资源时的性能。我们特别关注物理基础设施和虚拟网络请求的资源使用情况，以及可生存的eVN请求的可接受率。
-
-$A_{VN}$表示到达时间$t$虚拟网络请求数。如图\ref{fig:VirNetReqSurNetReq}所示嵌入到物理网络中的虚拟网络请求的成功数目表示为$A_{eVN}$，以及嵌入备份资源表示为$A_{SeVN}$之后的嵌入式虚拟网络存活请求的成功数目。
-
-本节介绍了启发式算法在平均接受率、嵌入压力和其他度量方面的不同度量\cite{fischer2013virtual}如下所述。
-
-
+本节介绍了启发式算法在平均接受率、活动节点和其他度量方面的不同度量\cite{fischer2013virtual}如下所述。
 \begin{enumerate}
-  \item 接受率：与阻塞概率的概念相反。虚拟网络请求的比率成功嵌入物理网络的虚拟网络，表示为$A_{eVN}/A_{VN}$。为可生存性保证而成功扩展和嵌入到物理网络表示为$A_{SeVN}/A_{VN}$，当虚拟网络嵌入到底层网络中时该虚拟网络成功可生存性保护的比率被表示为$A_{SeVN}/A_{eVN}$。
-  \item 活动节点：表示底层物理网络开启的节点数和可生存嵌入式虚拟网络请求节点数。这种度量在节能的VNE算法中特别有用。
-  \item 路径长度：路径长度度量两个互连虚拟节点之间的链路数量，以及映射到两个互连虚拟节点的两个底层节点之间的链路数量。
-  \item 成本、收入和成本/收入：成本：用于嵌入的节点计算能力或链路带宽资源之和。收益：虚拟网络的节点计算能力或链路带宽需求之和。成本/收入：这个比率表示虚拟化开销。
-  \item 压力：分配给底层物理链路/节点的虚拟链路/节点的平均数量。
-  \item 迁移频率比：迁移的数量是指在相应的底层物理节点失效时需要迁移到新的设备节点的虚拟节点数量。
-  \item 效用：底层物理链路/节点的带宽利用率或计算利用率，在每个SN实体(节点或链路)中，由于虚拟实体的映射而消耗的底层物理资源之和除以资源总量。
-  \item 备份节点数：备份度量的数量对虚拟实体建立的备份资源的数量进行计数。在托管虚拟实体的实体失效的情况下，可以保留多个附加的底层物理实体作为替换。
+  \item 接受率：与阻塞概率的概念相反。虚拟网络请求的比率是成功嵌入物理网络的虚拟网络请求数数除以虚拟网络嵌入请求数，表示为$A_{eVN}/A_{VN}$。为可生存性保证而成功增广和嵌入到物理网络的虚拟网络请求数表示为$A_{SeVN}/A_{VN}$，当虚拟网络嵌入到底层网络中时该虚拟网络成功可生存性保护的比率被表示为$A_{SeVN}/A_{eVN}$。
+  \item 活动节点：表示底层物理网络开启的节点数和可生存性虚拟网络的节点数，这种度量在节能的VNE算法中特别有用。
+  \item 链路或路径长度：链路长度度量虚拟网络中链路的数量，和路径长度度量是两个互连虚拟节点映射到两个底层节点之间的物理链路数量。
+  \item 成本、收入和成本/收益：成本：使用的物理网络节点计算能力或链路带宽资源。收益：虚拟网络的节点计算能力或链路带宽需求。成本/收益：这个比率表示虚拟化开销。
+%  \item 压力：分配给底层物理链路/节点的虚拟链路/节点的平均数量。
+%  \item 迁移频率比：迁移的数量是指在相应的底层物理节点失效时需要迁移到新的设备节点的虚拟节点数量。
+%  \item 效用：底层物理链路/节点的带宽利用率或计算利用率，在每个SN 实体(节点或链路)中，由于虚拟实体的映射而消耗的底层物理资源之和除以资源总量。
+%  \item 备份节点数：备份度量的数量对虚拟实体建立的备份资源的数量进行计数。在托管虚拟实体的实体失效的情况下，可以保留多个附加的底层物理实体作为替换。
 \end{enumerate}
+
+
+$A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReqSurNetReq} 所示，嵌入到物理网络中的虚拟网络请求的成功数目表示为$A_{eVN}$，以及成功增广资源并且嵌入到物理网络中表示为$A_{SeVN}$。
+%\begin{figure}
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/VirNetReqSurNetReq}\\
+%  \caption{成功的VNE请求数和成功的SVNE请求数}\label{fig:VirNetReqSurNetReq}
+%\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/AcceptionRatio}\\
+%  \caption{接受率}\label{fig:AcceptionRatio}
+%\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/VirNetReqSurNetReq}
+\caption{成功的VNE请求数和成功的SVNE请求数}\label{fig:VirNetReqSurNetReq}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/AcceptionRatio}
+\caption{接受率}\label{fig:AcceptionRatio}
+\end{minipage}\vspace{\baselineskip}
+\end{figure}
+
+考虑所有虚拟节点的情况下，评估了SeVN问题启发式方法$\MyAlgorithmMethodAbrreviation$在分配资源时的性能。我们特别关注物理网络使用的资源和虚拟网络请求的资源情况，以及可生存虚拟网络请求的可接受率。
 \section{算法性能评估及比较}
 \subsection{接受率}
-在这一部分中，嵌入式VN的可生存性请求对于SeVN问题的接受率。此外，VN的接受率没有可生存性要求。作为标准比较算法来度量用于可生存性的额外资源消耗量对SN服务供应能力的影响。
+在这一部分中，如图\ref{fig:AcceptionRatio}所示比较了SeVN问题不同算法可生存性虚拟请求的接受率。此外，$\ThirdAlgorithmMethodAbrreviation$是所有其它算法前期的虚拟嵌入算法，在可生存性增广嵌入过程中，我们假设算法$\ThirdAlgorithmMethodAbrreviation$没有可生存性资源增广而已经达到可生存性功能需求。以$\ThirdAlgorithmMethodAbrreviation$作为标准比较算法来度量其它算法的性能，特别是可生存性需求导致的对底层物理网络额外资源消耗量。
+%由于到达的VN请求没有足够的底层物理资源，在200次单元时间之前，接受率迅速下降。
+如图\ref{fig:AcceptionRatio}所示，当系统中运行到250单元时间后接受率相对稳定和保持一致，$\MyAlgorithmMethodAbrreviation$ 算法比$\SecondAlgorithmMethodAbrreviation$ 算法有更高的接受率，接受率提高了近4\%，这是因为$\MyAlgorithmMethodAbrreviation$算法当可生存性需求时资源增广分配过程中比$\SecondAlgorithmMethodAbrreviation$ 算法消耗更少的底层资源。 $\MyAlgorithmMethodAbrreviation$-NoShared 比$\MyAlgorithmMethodAbrreviation$-Shared的接受率低，直观地说，这是因为$\MyAlgorithmMethodAbrreviation$-NoShared的为了可生存性的保证而需要更多的资源，备份资源之间都相互不共享，为了可生存性需求而资源增广都需要申请大量的额外资源，由于冗余资源消耗的原因，接受率至少比$\MyAlgorithmMethodAbrreviation$-Shared 损失了6\%。
 
-如图\ref{fig:AcceptionRatio}所示，由于到达的VN请求没有足够的底层物理资源，在200次单元时间之前，接受率迅速下降。当系统中运行的VN请求数量在400 次单元时间之后稳定时，接受率将保持一致。如图\ref{fig:AcceptionRatio}所示描述了$\MyAlgorithmMethodAbrreviation$比$\SecondAlgorithmMethodAbrreviation$ 算法更高的接受率，无需资源共享。特别是，与$\SecondAlgorithmMethodAbrreviation$-Shared比较，$\MyAlgorithmMethodAbrreviation$-Shared的接受率提高了近6\%。 直观地说，这是因为对$\MyAlgorithmMethodAbrreviation$-NoShared嵌入，备份节点与大量资源相关联，因为它必须模拟每个节点。一旦失败，备份节点的嵌入就容易受到攻击。然而，由于冗余资源消耗的原因，接受率至少比$\MyAlgorithmMethodAbrreviation$-Shared损失了6\%。
-\begin{figure}
-  \centering
-  % Requires \usepackage{graphicx}
-  \includegraphics[width=4in]{figures/AcceptionRatio}\\
-  \caption{接受率}\label{fig:AcceptionRatio}
-\end{figure}
 \subsection{活动节点}
-\subsection{路径长度}
+为了承载所有虚拟网络而需要使用的逻辑节点数如图\ref{fig:ActiveNodeAverageVirtualNetwork}所示，$\MyAlgorithmMethodAbrreviation$ 算法比其它算法使用更少的虚拟节点数这将使得$\MyAlgorithmMethodAbrreviation$ 算法比其它算法消耗更少的底层资源。
+
+如图\ref{fig:ActiveNodeAverageSubstrateNetwork}所示，为了承载所有虚拟网络而需要启动和被嵌入虚拟节点的底层物理网络节点数，底层物理网络需要启动节点数与底层物理网络上承接的虚拟网络路径的平均长度有关，因为使用额外的节点来转发端节点之间的通信数据，因此，选择未启动的节点来转发数据的概率增加了。在能源效率方面，嵌入所需的底层物理网络节点数可以粗略估计能源消耗。
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/ActiveNodeAverageSubstrateNetwork}\\
+%  \caption{底层物理网络平均启动的节点数}\label{fig:ActiveNodeAverageSubstrateNetwork}
+%\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/ActiveNodeSubVir2VirNet}\\
+%  \caption{底层物理网络启动的节点数与虚拟网络虚拟节点数之比}\label{fig:ActiveNodeSubVir2VirNet}
+%\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/ActiveNodeAverageVirtualNetwork}\\
+%  \caption{虚拟网络的平均虚拟节点数}\label{fig:ActiveNodeAverageVirtualNetwork}
+%\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/ActiveNodeAverageVirtualNetwork}
+\caption{虚拟网络的平均虚拟节点数}\label{fig:ActiveNodeAverageVirtualNetwork}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/ActiveNodeAverageSubstrateNetwork}
+\caption{底层物理网络平均启动的节点数}\label{fig:ActiveNodeAverageSubstrateNetwork}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/ActiveNodeSubVir2VirNet}
+\caption{底层物理网络启动的节点数与虚拟网络虚拟节点数之比}\label{fig:ActiveNodeSubVir2VirNet}
+\end{minipage}\vspace{\baselineskip}
+\end{figure}
+底层物理网络启动的节点数与虚拟网络的虚拟节点数之比如图\ref{fig:ActiveNodeSubVir2VirNet}所示。
+
+
+\subsection{链路与路径长度}
+为了承载所有虚拟网络而需要使用的虚拟链路数如图\ref{fig:PathLengthAverageVirtualNetwork}所示，虚拟网络链路对应的物理路径越长，就需要为嵌入虚拟链路预留更多的资源。由于作为路径的一部分所以每个底层物理网络节点(接收节点除外)都需要一些时间来转发通过该路径发送的包，因此服务质量受路径长度的影响。通常，包延迟随着路径长度的增加而增加。
+
+为了承载所有虚拟网络而需要使用的底层物理网络链路数如图\ref{fig:PathLengthAverageSubstrateNetwork}所示。
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/PathLengthAverageSubstrateNetwork}\\
+%  \caption{物理网络链路数}\label{fig:PathLengthAverageSubstrateNetwork}
+%\end{figure}
+物理网络链路数与虚拟网络链路数之比如图\ref{fig:PathLengthSubVir2VirNet}所示。
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/PathLengthSubVir2VirNet}\\
+%  \caption{物理网络链路数与虚拟网络链路数之比}\label{fig:PathLengthSubVir2VirNet}
+%\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/PathLengthAverageVirtualNetwork}\\
+%  \caption{虚拟网络链路数}\label{fig:PathLengthAverageVirtualNetwork}
+%\end{figure}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/PathLengthAverageVirtualNetwork}
+\caption{虚拟网络链路数}\label{fig:PathLengthAverageVirtualNetwork}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/PathLengthAverageSubstrateNetwork}
+\caption{物理网络链路数}\label{fig:PathLengthAverageSubstrateNetwork}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/PathLengthSubVir2VirNet}
+\caption{物理网络链路数与虚拟网络链路数之比}\label{fig:PathLengthSubVir2VirNet}
+\end{minipage}\vspace{\baselineskip}
+\end{figure}
+我提出的算法$\MyAlgorithmMethodAbrreviation$ 获得的虚拟网络链路数和物理网络链路数与算法$\ThirdAlgorithmMethodAbrreviation$最接近，算法$\MyAlgorithmMethodAbrreviation$比其它算法$\SecondAlgorithmMethodAbrreviation$和$\FouthAlgorithmMethodAbrreviation$ 具有更优的虚拟网络链路数和物理网络链路数。
 \subsection{成本、收入和成本/收入比}
-\subsection{压力}
-\subsection{迁移频率比}
-\subsection{效用}
-\subsection{备份节点数}
+在本工作中，成本是为满足SEVN可生存性需求而消耗的底层物理资源(即所有底层物理设备节点的节点计算能力、所有光纤链路上的链路带宽)。
+%底层物理网络实时消耗的成本如图\ref{fig:CostCurrentAverageSubstrateNetwork} 所示。
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/CostCurrentAverageSubstrateNetwork}\\
+%  \caption{底层物理网络实时消耗的成本}\label{fig:CostCurrentAverageSubstrateNetwork}
+%\end{figure}
+底层物理网络消耗资源的平均成本如图\ref{fig:CostAccumulateAverageSubstrateNetwork}所示。
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/CostAccumulateAverageSubstrateNetwork}
+\caption{底层物理网络消耗资源的平均成本}\label{fig:CostAccumulateAverageSubstrateNetwork}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/RevenueAccumulateAverageVirtualNetwork}
+\caption{虚拟网络获得需求的平均收益}\label{fig:RevenueAccumulateAverageVirtualNetwork}
+\end{minipage}\vspace{\baselineskip}
+\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/CostAccumulateAverageSubstrateNetwork}\\
+%  \caption{底层物理网络消耗资源的平均成本}\label{fig:CostAccumulateAverageSubstrateNetwork}
+%\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/RevenueAccumulateAverageVirtualNetwork}\\
+%  \caption{虚拟网络获得需求的平均收益}\label{fig:RevenueAccumulateAverageVirtualNetwork}
+%\end{figure}
+我提出的算法$\MyAlgorithmMethodAbrreviation$ 获得的成本和收益与算法$\ThirdAlgorithmMethodAbrreviation$最接近，算法$\MyAlgorithmMethodAbrreviation$比其它算法$\SecondAlgorithmMethodAbrreviation$和$\FouthAlgorithmMethodAbrreviation$ 具有更优的成本和收益。
+%虚拟网络实时的平均收益如图\ref{fig:RevenueAverageCurrentVirtualNetwork} 所示。
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=4in]{figures/RevenueAverageCurrentVirtualNetwork}\\
+%  \caption{虚拟网络实时的平均收益}\label{fig:RevenueAverageCurrentVirtualNetwork}
+%\end{figure}
+虚拟网络的平均收益如图\ref{fig:RevenueAccumulateAverageVirtualNetwork}所示。
+
+
+%\subsection{压力}
+%\subsection{迁移频率比}
+%\subsection{效用}
+%\subsection{备份节点数}
+
 \section{本章小节}
 本节提出了一种有效的算法$\MyAlgorithmMethodAbrreviation$，用于解决在具有可生存性保证请求的嵌入虚拟网络中，通过冗余节点和链路来有效地分配SeVN问题的增广资源(启动新的物理节点、链路带宽或节点计算)。资源分配方法考虑的是冗余节点是被动的还是主动的，只要在从故障恢复时有充足的资源可用。由于一个物理基础设施(底层网络)承载多个VN，因此在VN之间共享冗余节点是更有效的资源。若要减少分配给可生存性保证的资源，请执行以下操作。我们引入了一种启发式方法来共享这些独立的和相关的故障类型，并在星型构造分解和动态规划的基础上实现了资源的最优分配。我们的算法采用了一种新的资源分配方法来减少新的启动主机，在有限的进程时间内最小化资源，而且即使问题的规模相对较小，线性规划也无法计算出最优解。仿真结果表明，该算法在节约资源、实现高接受率、高资源利用率和低启动节点数量等方面具有显著的效果。
