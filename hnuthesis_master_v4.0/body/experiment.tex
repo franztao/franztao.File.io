@@ -52,11 +52,11 @@ SRLG边比率 & 9.66\% & 6.16\% &   6.18\% &   14.94\%    &   22.55\%  &  9.65\%
 从\ref{subsec:Complexity analysis}节分析，在KSP下求第一条$K$最短路的计算复杂度是$2^{|\mathbb{E}|}\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$，最坏的情况下这将是$K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$。与分析一致，当我们使用7个拓扑运行KSP，没有仿真结果能在1 小时内返回，而其他算法则可以在11 秒内。计算时间长使得KSP难以在实践中使用。因此，我们不在结果显示KSP。
 \begin{enumerate}
   \item 路径权重：如图\ref{fig:normalization weitgh sum}所示，显示AP路径权重、BP路径权重和AP和BP的总和路径权重。显然，所有的算法SCLS、CoSE、ILP和IQCP实现了相同的AP路径权重。但是不同的算法有不同的BP权重，因此它们有不同的路径权重和。因为所有算法都解决了SRLG不相交路径对问题，尽管他们发现不同的SRLG不相交路径对，它们都能达到找到最小权重相等的AP路径。然而，这两个基于整数线性规划的算法，ILP 和IQCP，主要是找到最小化AP的权重但是其随意找到其它任何SRLG不相交路径BP，因此这两个算法搜索到的BP路径是不同的。
-  \item 路径跳数：图\ref{fig:normalization weitgh sum}显示AP路径跳数、BP 路径跳数和AP和BP路径跳数之和，因为所有算法的目标都是最小化SRLG不相交路径对的最小路径权重。在路径跳数中，它们具有相同的AP权重(如图\ref{fig:normalization weitgh sum}所示)但是他们有不同的AP路径跳数(如图\ref{fig:normalization hop} 所示)。尽管所有算法的AP路径权重都小于BP路径权重如图\ref{fig:normalization weitgh sum}所示，在图\ref{fig:normalization hop}中，AP跳数可能并不总是少于BP路径跳数。
+  \item 路径跳数：图\ref{fig:normalization weitgh sum}显示AP路径跳数、BP 路径跳数和AP和BP路径跳数之和，因为所有算法的目标都是最小化SRLG不相交路径对的最小路径权重。在路径跳数中，它们具有相同的AP权重(如图\ref{fig:normalization weitgh sum} 所示)但是他们有不同的AP路径跳数(如图\ref{fig:normalization hop} 所示)。尽管所有算法的AP路径权重都小于BP路径权重如图\ref{fig:normalization weitgh sum}所示，在图\ref{fig:normalization hop}中，AP跳数可能并不总是少于BP路径跳数。
   \item 运行时间：如图\ref{fig:normalization runtime}所示，通过改变使用的CPU核数来展示不同算法下的运行时间。由于CoSE下的运行时明显大于其他算法的运行时，为了更清楚地展示其他算法的结果，我们在图\ref{fig:Runtime_noKSP_noCOSE} 中通过排除CoSE来进一步绘制运行时间的结果。由于ILP和IQCP不是并行算法，这些算法在不同核数下的运行时间大致相等。我们的SCLS和CoSE的运行时间随着处理器核数的增加而减少，因为这两种算法可以将原问题划分为多个子问题来并行执行，并利用多核CPU的并行性来加快路径搜索的速度，虽然CoSE是一种并行算法，但计算时间比ILP和IQCP 还要大。一些可能的原因包括：1)在CoSE中冲突SRLG集合的搜索过程效率不高；2)由于一个SRLG 通常包含多条链路，基于冲突SRLG问题的划分将带来大量的子问题需要解决，这也将带来大量的计算量。与CoSE不同的是，当AP上遇到陷阱问题时我们的SCLS根据图中的最小割集理论来求SRLG冲突链路集，并达到图\ref{fig:normalization runtime}中所示的最低时间消耗。这说明了我们的冲突链路集查找算法是有效的，并且我们提出的分治算法和基于SRLG冲突链路集的智能AP搜索过程，可以大大降低计算量。
-   \item   算法加速比：如图\ref{fig:Multiple}所示，我们进一步比较了它们的计算速度。特别地，为了找出使用不同算法寻找所需路径时所获得的加速比，我们使用CoSE作为基准算法，并设置$alg_1$ =CoSE。与图\ref{fig:normalization runtime}中的结果相似，在图\ref{fig:Multiple} 中SCLS的加速度是CoSE的1000倍以上。在图\ref{fig:Multiple} 中由于CoSE的运行速度明显小于其他算法，很难在图\ref{fig:Multiple}中观察到，我们在图\ref{fig:MultipleNoSCLS}中排除了最大的SCLS数据来进一步绘制了算法加速比结果。
+   \item   算法加速比：如图\ref{fig:Multiple}所示，我们进一步比较了它们的计算速度。特别地，为了找出使用不同算法寻找所需路径时所获得的加速比，我们使用CoSE作为基准算法，并设置$alg_1$ =CoSE。与图\ref{fig:normalization runtime}中的结果相似，在图\ref{fig:Multiple} 中SCLS的加速度是CoSE的1000倍以上。在图\ref{fig:Multiple} 中由于CoSE的运行速度明显小于其他算法，很难在图\ref{fig:Multiple}中观察到，我们在图\ref{fig:MultipleNoSCLS}中排除了最大的SCLS 数据来进一步绘制了算法加速比结果。
    \item 核加速比:与使用算法加速比来比较所有算法的总体运行速度不同，这个度量“核加速比”是来评估CPU中的核数如何影响给定算法的运行速度。图\ref{fig:Speedup}绘制了所有实现的算法的核加速比。算法ILP和IQCP下的核加速比在任意核数下近似等于1，因为它们不是并行算法。当核数小于4 时，我们的SCLS的核心加速比随着核数的增加而增加，当超过4核时，SCLS 的核心加速比保持稳定，说明4核对SCLS是足够的。这一结果与Amdahl定律\cite{amdahl1967validity}是一致的，即理论核加速比确定的上界限定于问题的规模大小。但是，即使核心数等于8，CoSE下的核加速比也继续增加，这是数字4的两倍。结果表明，即使是8核CPU也不能满足COSE的并行性要求.这是因为CoSE发现的冲突SRLG集包含了大量的链路，这进一步导致了大量的子问题，从而导致了较大的问题规模和计算成本。
-    \item 效率：与图\ref{fig:Speedup}相似，随着更多的核增多效率值会降低，因为一个大的核心数会带来更多的成本来协调进程。如图\ref{fig:Efficiency}所示，所有算法的效率值都随着核心数的增加而降低。与图\ref{fig:Speedup}中的结果一致，由于CoSE引入的子问题比我们的SCLS多，在核心数达到4之后，CoSE下的效率大于SCLS。然而，如图\ref{fig:Multiple}所示我们的SCLS实现了更大的算法加速比。
+    \item 效率：与图\ref{fig:Speedup}相似，随着更多的核增多效率值会降低，因为一个大的核心数会带来更多的成本来协调进程。如图\ref{fig:Efficiency}所示，所有算法的效率值都随着核心数的增加而降低。与图\ref{fig:Speedup}中的结果一致，由于CoSE 引入的子问题比我们的SCLS多，在核心数达到4之后，CoSE下的效率大于SCLS。然而，如图\ref{fig:Multiple}所示我们的SCLS实现了更大的算法加速比。
 \end{enumerate}
 
 全部仿真结果表明，在搜索速度较快的情况下，SCLS算法的性能优于其他算法，因为我们算法发现的冲突链路集可以方便有效的执行并行算法并且计算量小。
@@ -126,5 +126,6 @@ SRLG边比率 & 9.66\% & 6.16\% &   6.18\% &   14.94\%    &   22.55\%  &  9.65\%
  \label{fig:Efficiency}
 \end{minipage}
 \end{figure*}
-
+\section{小结}
+本章提出了一种创新的分而治之算法，该算法能在遇到陷阱问题时将原有的min-min SRLG 不相交路由问题划分为多个并行执行子问题。与现有技术相比，这样的解决方案在搜索过程可以利用现有的AP 搜索结果，并且并行执行来加快路径查找。
 
