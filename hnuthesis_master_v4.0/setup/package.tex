@@ -60,7 +60,7 @@
 
 %如果您的pdf制作中文书签有乱码使用如下命令，就可以解决了
 \usepackage[unicode,               % pdflatex, pdftex 这里决定运行文件的方式不同
-            pdfstartview=FitH
+            pdfstartview=FitH,
             %CJKbookmarks=true,
             bookmarksnumbered=true,
             bookmarksopen=true,
@@ -72,5 +72,5 @@
             urlcolor=black,
             breaklinks=true
             ]{hyperref}
-%%\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,bookmarks=false]{hyperref}
+%%\usepackage[colorlinks,bookmarksnumbered=true,linkcolor=red,anchorcolor=blue,bookmarks=false]{hyperref}
 
