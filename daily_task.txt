@@ -1,14 +1,11 @@
 ﻿---------------
 doing 
+ppt
 design pattern
 openstack
+springboot
 
-5.12第一批答辩
-
-下周一（5月14日）下午我们2018届毕业生集体拍毕业照
-
-湖南大学 南校区 中楼306教室
-9-16周：星期五3-4节(10:00-11:40)
+湖南大学 南校区 中楼306教室 9-16周：星期五3-4节(10:00-11:40)
 
 Doing every day 
 CSAPP
@@ -24,5 +21,7 @@ when i read some post,then i should auto-translate it before scanning it.
 basketball
 http://m.kekenet.com/Article/201709/524557.shtml
 https://mp.weixin.qq.com/s/fzYCoiIefuTSSYcVwbLJXw
+
+
 
 

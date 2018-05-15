@@ -278,7 +278,7 @@ A_t=1-\prod_k(1-A_k)
 %根据式\ref{equ:PSRLpuv}和式\ref{equ:PSRLpij}，只有当$p_r\neq 0$时， $p_{u,v}$与$p_{i,j}$不为0，即链路$e_{i,j}$与$e_{u,v}$当存在故障关联时同时受到事件$r$的影响各自发生故障的概率。利用概率关联故障模型我们可以非常方便地得到存在关联故障链路发生故障的概率。
 
 %\section{共享风险节点组不相交路径}
-\section{本章小结}
+\section{小结}
 如表\ref{tab:disjointPath}概述了所考虑的不相交路径问题的变体。每个问题都根据其约束条件、实际应用和时间复杂度进行分类。
 
 \begin{table}[htb]
@@ -298,7 +298,7 @@ A_t=1-\prod_k(1-A_k)
 \hline
 地区不相交路径 & 路径不能受到直径D的单一地区失效的影响(除了包括源或目标节点失效) & 确保地区灾难不会同时影响不同不相交的道路 & NP-hard和很难有近似算法\cite{trajanovski2015finding}，除非所有成对的网络节点距离大于$D$\\
 \hline
-不相交路径对 & 路径不共享公共链路或节点(路径间可能有不同的源节点和目标节点)。 & 在芯片上互连指定的通道，没有任何不同引脚的电线相互接触 & 当$k\geq2$在一般有向网络中为NP-hard\cite{fortune1980directed}，但在无向网络\cite{robertson1995graph}、有向平面网络\cite{schrijver1994finding}和有向无圈网络中\cite{fortune1980directed} 是多项式可解的 \\
+不相交路径对 & 路径不共享公共链路或节点(路径间可能有不同的源节点和目标节点)。 & 在芯片上互连指定的通道，没有任何不同引脚的电线相互接触 & 当$k\geq2$在一般有向网络中为NP-hard\cite{fortune1980directed}，但在无向网络\cite{robertson1995graph}、 有向平面网络\cite{schrijver1994finding}和有向无圈网络中\cite{fortune1980directed} 是多项式可解的 \\
 \hline
 风险共享链路组不相交路径 & 路径不共享共同的风险组 & 确保不同的不相交路径不使用属于光网络中同一管道的链路。 & NP-hard\cite{hu2003diverse} 和难以近似\cite{coudert2007shared}，除非所有SRLG遵循星型性质且所有SRLG的数目为常数\cite{bermond2013srlg}，或当所有SRLG遵循星性且最大节点度最多为4\cite{bermond2013srlg} 时，或者当所有SRLG遵循星型性质且网络是有向无圈图\cite{bermond2013srlg}时，或在特定跨度共享拓扑\cite{bhandari1994optimal}中\\
 \bottomrule[1.5pt]

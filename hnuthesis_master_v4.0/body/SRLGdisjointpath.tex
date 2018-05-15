@@ -1,6 +1,7 @@
 \chapter{共享风险链路组不相交路径对问题}
 
 \section{问题描述}
+\subsection{问题定义}
 SRLG不相交路径在它们之间没有任何共同的风险资源，也就是说，由于风险而导致的路径失败不会影响其他路径。图\ref{fig:CompositeGraph}(b)显示两条SRLG 不相交路径对，表示为AP 和BP。因为这两条路径没有共同的风险资源，如果AP 失败，BP仍然可以工作。本章主要讨论了两条不相交的路径，即可以描述如下。
 
 \textbf{Min-Min SRLG不相交路径对问题}。给定一个图$G(V,E)$，每条链路$e_i\in \mathbb{E}$ 相关联一个权重$w_{e_i}$，一个源节点$s$和一个目的节点$d$，找到一对$s$ 到$d$ 的SRLG不相交路径对(表示为AP和BP)，而且要求这两条不相交路径中路径权重较小的那条路径权重最小化，形式化如下：
@@ -24,9 +25,102 @@ SRLG不相交路径在它们之间没有任何共同的风险资源，也就是�
   \label{fig:CompositeGraph}
 \end{figure*}
 
-%现如今研究进展
+\subsection{问题的线性规划方程}
+首先介绍了线性规划的一些必要的定义。
+
+$\textbf{0}=[0,0,\ldots,0]^T$，零列向量。
+
+$\textbf{1}=[1,1,\ldots,1]^T$，单位列向量。
+
+
+$w=[w_e]_{e\in \mathbb{E}}$ 边权重的行向量，其中边的权重$w_e$($e\in \mathbb{E}$)。
+
+$u=[u_v]^T_{v\in \mathbb{V}}$ 源目标列向量,其中
+${\rm{u_v}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ v = s}\\
+{ - 1}&{if\ v = d}\\
+0&{otherwise}
+\end{array}} \right.$
+
+$A=[a_{v,e}]_{\mathbb{V}\times \mathbb{E}}$ 节点边关联矩阵，其中
+
+${\rm{a_{v,e}}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ edge\ e\ originates\ from\ node\ v}\\
+{ - 1}&{if\ edge\ e\ terminates\ at\ node\ v}\\
+0&{otherwise}
+\end{array}} \right.$
+
+$H=[h_{r,e}]_{R\times E}$ 风险边关联矩阵, 其中
+
+${\rm{h_{r,e}}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ edge\ e \in \mathbb{R}_r}\\
+0&{otherwise}
+\end{array}} \right.$
+
+$x_i=[x_{i,e}]^T_{e\in \mathbb{E}}$ 边决策变量的列向量 包含在路径$i=AP,BP$, 其中
+
+${x_{i,e}} = \left\{ {\begin{array}{*{20}{c}}
+1&{if\ edge\ e \in path\ p_i}\\
+0&{otherwise}
+\end{array}} \right.$
+
+
+从s到d的两条SRLG不相交路径最小路径权重最小化的问题，可以表示为下面的ILP问题。
+
+\begin{equation*}
+\begin{array}{*{20}{c}}
+   {\mathop {minimize}\limits_{AP,BP} } & {\min \left( {{\sum\limits_{e\in \mathbb{E}}w_e*x_{AP,e}},{\sum\limits_{e\in \mathbb{E}}w_e*x_{BP,e}}} \right)}\\
+   {subject\ to} & A\times x_i=u,(i=AP,BP)& (1) \\
+   {} & x_{AP}+x_{BP}\leq \textbf{1}& (2)\\
+   {} & (h_{r}\times x_{AP}^T)+h_{r}\times x_{BP}^T \leq \textbf{1}& (3) \\
+   {} & (1\leq r \leq \mathbb{R})
+\end{array}
+\label{eq:problem definition}
+\end{equation*}
+
+
+
+从s到d的两条SRLG不相交路径最小路径权重最小化的问题，可以表示为下面的IQCP问题。
+
+\begin{equation*}
+\begin{array}{*{20}{c}}
+   {\mathop {minimize}\limits_{AP,BP} } & {\min \left( {{\sum\limits_{e\in \mathbb{E}}w_e*x_{AP,e}},{\sum\limits_{e\in \mathbb{E}}w_e*x_{BP,e}}} \right)}  \\
+   {subject\ to} & A\times x_i=u,(i=AP,BP)& (1) \\
+   {} & x_{AP}+x_{BP}\leq \textbf{1}& (2)\\
+   {} & H\times x_{AP}\times x_{BP}^T\times H^T = \textbf{0}& (4)\\
+\end{array}
+\label{eq:problem definition}
+\end{equation*}
+
+约束(1)保证了基于$x_i$选择的边组成一条从s到d的路径。
+
+约束(2)保证这两条路径是边不相交的。
+
+约束(3)(4)保证这两条路径是SRLG不相交的。
+
+\subsection{复杂度规模}
+\begin{theorem}
+\label{le:lemma1}
+    Min-Min SRLG-不相交路径对问题是 NP-complete问题.
+\end{theorem}
+\begin{proof}
+根据\cite{bhatia2006finding}，Min-Min链路不相交路径对问题是NP-complete 的。Min-Min链路不相交路径问题是Min-Min SRLG不相交路径问题的子问题。设
+Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete$\leq$C(A).
+
+为了求Min-Min SRLG不相交路径问题的时间复杂度，我们首先假设了一个问题B(问题B的复杂度表示为C(B))，当找到两条的SRLG不相交路径并且路径较小的路径其权重小于或等于M(M 是大于零的整数)。Min-Min SRLG不相交路径问题A 与问题B等价，我们知道M必须大于零并且小于$\sum\limits_{e_i\in \mathbb{E}}w_{e_i}$。例如，我们假设0≤M≤10 和m=6 是最优解，通过经典的二分法（binary search method)其时间复杂度为O(log(N))，如图\ref{fig:binarySearch}所示，通过二分法我们得到了两条不相交的路径，较小的路径其权重为m，因此问题A与 问题B等价。
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=4.0in]{figures/binarySearch}
+  \caption{二分法求最优解实例}
+  \label{fig:binarySearch}
+\end{figure}
+假设程序X在输入问题B时，如果问题B没有解，则程序Y立即停止，否则程序B继续执行并获得问题B的解，因此问题B 可以归结为NP-hard问题。因此C(B)$\leq$NP-hard。
+
+此外，给定任意两条路径，很容易在多项式时间内判别这两条路径是否为SRLG 不相交路径，较小的路径其权重小于或等于M，从而使得C(B)$\leq$NP-complete。 当B的复杂度等于A时，我们有C(A)=C(B)$\leq$NP-complete。因此，A=NP-complete。
+\end{proof}
 \section{原有算法概述}
-共享风险链路组(SRLG)是一组链路共享相同的一个组件，该组件的故障会导致在这个组里所有链路同时发生故障。就路径保护而言，尽管某些链路或者节点不相交路径算法\cite{suurballe1984quick,bhandari1997optimal,li1990complexity,guo2003link,xu2004finding,beshir2011variants,guo2013finding,hu2003diverse} 已经提出来，SRLG不相交路径问题是比较棘手的，而且这些原有研究是限制在一定领域的。比如当每个SRLG 只包含一条链路时，这个SRLG不相交路由问题可以简化为链路不相交路径问题，而通过节点分裂方法(node split method)\cite{ford2015flows}节点不相交路径问题可以转化为链路不相交路径问题。因为SRLG组通常包括的链路超过一条，并且网络中的链路通常可以属于多个SRLG组里，以至于求一对SRLG 不相交路径问题比求一对链路或者节点不相交路径问题要困难得多。
+共享风险链路组(SRLG)是一组链路共享相同的一个组件，该组件的故障会导致在这个组里所有链路同时发生故障。就路径保护而言，尽管某些链路或者节点不相交路径算法\cite{li1990complexity,guo2003link,xu2004finding,beshir2011variants,hu2003diverse} 已经提出来，SRLG不相交路径问题是比较棘手的，而且这些原有研究是限制在一定领域的。比如当每个SRLG 只包含一条链路时，这个SRLG不相交路由问题可以简化为链路不相交路径问题，而通过节点分裂方法(node split method)\cite{ford2015flows}节点不相交路径问题可以转化为链路不相交路径问题。因为SRLG组通常包括的链路超过一条，并且网络中的链路通常可以属于多个SRLG组里，以至于求一对SRLG 不相交路径问题比求一对链路或者节点不相交路径问题要困难得多。
 
 为了解决SRLG不相交路径问题，一种可能的方法是0-1整数线性规划(ILP)\cite{hu2003diverse}，通过分支限界法（branch-and-bound）来搜索选择最优的主路径和备份路径。该方法时间复杂度高，不适用于大型网络。为了降低算法的复杂度，基于APF的启发式算法\cite{oki2002disjoint,li2002fiber,eppstein1998finding}能够求Min-Min SRLG 不相交路径问题的近似最优解。首先使用Dijkstra算法(或任何其他最短路径算法)求出主路径，求主路径时不考虑其相应的备用路径情况，在删除AP沿线的链路并且与AP共风险的节点和链路后，再利用最短路算法求的备用路径。
 
@@ -40,28 +134,6 @@ Datta\cite{datta2008graph}提出方法是将SRLG不相交路径问题转化为�
 
 
 
-%\section{整数规划形式化}
-\section{复杂度规模}
-\begin{theorem}
-\label{le:lemma1}
-    Min-Min SRLG-不相交路径对问题是 NP-complete问题.
-\end{theorem}
-\begin{proof}
-根据\cite{bhatia2006finding}，Min-Min链路不相交路径对问题是NP-complete 的。Min-Min链路不相交路径问题是Min-Min SRLG不相交路径问题的子问题。设
-Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete$\leq$C(A).
-
-为了求Min-Min SRLG不相交路径问题的时间复杂度，我们首先假设了一个问题B(问题B的复杂度表示为C(B))，当找到两条的SRLG不相交路径并且路径较小的路径其权重小于或等于M(M是大于零的整数)。Min-Min SRLG不相交路径问题A 与问题B等价，我们知道M必须大于零并且小于$\sum\limits_{e_i\in \mathbb{E}}w_{e_i}$。例如，我们假设0≤M≤10 和m=6 是最优解，通过经典的二分法（binary search method)其时间复杂度为O(log(N))，如图\ref{fig:binarySearch}所示，通过二分法我们得到了两条不相交的路径，较小的路径其权重为m，因此问题A与 问题B等价。
-\begin{figure}[htbp]
-  \centering
-  % Requires \usepackage{graphicx}
-  \includegraphics[width=4.0in]{figures/binarySearch}
-  \caption{二进制搜索法求最优解实例}
-  \label{fig:binarySearch}
-\end{figure}
-假设程序X在输入问题B时，如果问题B没有解，则程序Y立即停止，否则程序B继续执行并获得问题B的解，因此问题B 可以归结为NP-hard问题。因此C(B)$\leq$NP-hard。
-
-此外，给定任意两条路径，很容易在多项式时间内判别这两条路径是否为SRLG 不相交路径，较小的路径其权重小于或等于M，从而使得C(B)$\leq$NP-complete。 当B的复杂度等于A时，我们有C(A)=C(B)$\leq$NP-complete。因此，A=NP-complete。
-\end{proof}
 \section{陷阱问题}
 \label{sec:trapproblem}
 基于APF的启发式算法可能会陷入“陷阱”问题。也就是说，当一个AP被确定时，即使网络中确实存在一对不相交路径对，它也可能无法找到SRLG不相交的BP路径。图ref{fig:CompositeGraph}.(c),(d)说明了陷阱问题，虚线表示一条AP 路径，其链路集为$\mathbb{AP}=\{e_1,e_2,e_3$ $,e_4,e_5,e_6,e_7,e_8\}$，在删除AP上的链路和与AP 共享风险的链路后，图\ref{fig:CompositeGraph}.(d) 所示的不存在从s到d的路径，因此找不到BP。
@@ -78,7 +150,7 @@ Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete$\leq$C(A).
 
 \section{分而治之的快速SRLG不相交路径对算法}
 当一个陷阱问题发生，并且对于给定的AP没有SRLG不相交路径BP时，AP中可能存在一个子链路集，这样任何通过这个链路集里所有的这些“问题”链路的AP都不能找到一条相对应SRLG不相交BP路径，我们称之为\textbf{SRLG冲突链路集}。与KSP 不同，当最短AP路径遇到陷阱问题时，我们将通过两个主要步骤来解决这个问题。如图\ref{fig:KSPproblem} 所示的例子中，我们将首先找到图\ref{fig:KSPproblem} 中的SRLG冲突链路集合，然后应用分而治之算法将原问题划分为两个子问题$\mathcal{P}(\emptyset,\{e_1\})$和 $\mathcal{P}(\{e_1\},\{e_2\})$。 这两个子问题可以在多核CPU平台上并行执行，快速得到SRLG不相交路径对。
-\subsection{分而治之}
+\subsection{分而治之机制}
 在得到SRLG冲突链路集后，设计了一种分而治之的算法，将原Min-Min SRLG不相交路径问题划分为多个子问题，并行执行，加快求SRLG不相交路径对的过程。
 
 为了便于问题划分，我们首先定义了两个不相交的链路集合$\mathbb{I}$和$\mathbb{O}$，其中称$\mathbb{I}$为包含集集合，$\mathbb{O}$称为排除集集合。由$\mathcal{P}({\mathbb{I},\mathbb{O}})$表示的Min-Min SRLG不相交问题，用于寻找一对AP和BP，其中AP是所有可能的AP中最短的，其中路径$AP$必须经过$\mathbb{I}$集合里的所有链路和不经过$\mathbb{O}$集合里的所有链路。
@@ -124,7 +196,7 @@ Min-Min SRLG不相交路径问题的复杂性为C(A)，则NP-complete$\leq$C(A).
 
 \subsection{SRLG冲突链路集合}
 在本节中，我将描述了如何找到一个SRLG冲突链路集合，当在网络$G$中给定一个AP 路径并且没有SRLG 不相交的BP路径。
-\subsubsection{通过新奇的边容量设置准则构造一个新图$G^*$}
+\subsubsection{创新的边容量设置准则}
 如\ref{subsubsec:maxFlow}节介绍的，如果在图G中去除所有在边割集$\mathbb{\mathbb{L}}_{\Phi}$ 的所有边，则$|f| = 0$。也就是说，不存在任何流能从$s$到$d$。在本文中，我们试图基于割集的概念找到SRLG冲突链路集合。如果AP从s到d流通，经过的链路与割集$\mathbb{\mathbb{L}}_{\Phi}$ 共享风险，则找不到任何与其对应的SRLG不相交路径BP，因为没有一条在割集中的链路可以被BP 选择。
 
 基于割集基础为了找到SRLG 冲突链路集，我们构造了一个新图$G^*$ ，如下所示。
@@ -157,7 +229,7 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
 
 
 
-\subsubsection{最小割最大网络流定理}
+\subsubsection{最小割最大流定理}
 \label{subsubsec:maxFlow}
 设$G=(\mathbb{\mathbb{V}},\mathbb{\mathbb{E}})$是一个网络(其中$\mathbb{\mathbb{V}}$是$|\mathbb{\mathbb{V}}|$个节点的集合，$\mathbb{\mathbb{E}}$是$|\mathbb{\mathbb{E}}|$条链路的集合)，其中$s\in \mathbb{V}$和$d\in \mathbb{V}$分别指源节点和终节点。链路$e_i$ 的\textbf{容量}表示该条链路的最大流量。链路的流$f_{e_i}$应该满足以下两个限制：
 \begin{enumerate}
@@ -192,7 +264,7 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
     %note:draw a picture to describe the proof
 \end{lemma}
 \begin{proof}
-用矛盾法证明这条引理。假设对于某条路径AP，有另一条路径从$s$到$d$ 在图$G^*$中不与AP共享风险，即这条路径不通过$\mathbb{AP}$ 或者 $\mathbb{\mathbb{ER}}$的任何一条链路。可以很容易得出这样的结论，这条路径是与路径AP对应的SRLG不相交路径BP。这与AP没有对应的SRLG不相交路径的说法相矛盾。
+用矛盾法证明这条引理。假设对于某条路径AP，有另一条路径从$s$到$d$ 在图$G^*$中不与AP共享风险，即这条路径不通过$\mathbb{AP}$ 或者 $\mathbb{\mathbb{ER}}$的任何一条链路。可以很容易得出这样的结论，这条路径是与路径AP对应的SRLG不相交路径BP。这与AP 没有对应的SRLG不相交路径的说法相矛盾。
 \end{proof}
 
 \begin{lemma}
@@ -222,7 +294,7 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
 \begin{proof}
     如果在图$G$中一个单元流阻塞了全部边割集$\mathbb{L}_{\Phi}$的所有边，则在原图中没有流能使用边割集$\mathbb{L}_{\Phi}$ 里的边和没有任何流能经过这个图的割$\Phi$。
 \end{proof}
-定理\ref{th:block flow}提供了找到SRLG冲突链路集的可能性。即当AP路径遇到陷阱问题时，我们找到$\mathbb{AP}$ 路径边集的子集能够阻塞原有在边割集$\mathbb{L}_{\Phi}$的所有边，所以这个子集合即为SRLG 冲突链路集。当一条路径包含SRLG冲突链路集里的所有边，则没有任何流能经过割集$\Phi$，因此没有与其对应的SRLG不相交路径BP。
+定理\ref{th:block flow}提供了找到SRLG冲突链路集的可能性。即当AP路径遇到陷阱问题时，我们找到$\mathbb{AP}$ 路径边集的子集能够阻塞原有在边割集$\mathbb{L}_{\Phi}$ 的所有边，所以这个子集合即为SRLG 冲突链路集。当一条路径包含SRLG冲突链路集里的所有边，则没有任何流能经过割集$\Phi$，因此没有与其对应的SRLG不相交路径BP。
 
 \subsubsection{SRLG冲突链路集的集合覆盖问题}
 \label{subsec:Set cover problem for SRLG Conflicting Link Set}
@@ -234,7 +306,7 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
 
 对每条在AP上的路径$e_i$，我们定义每条边的cut-block-link集合为${\mathbb{B}_{{e_i}}} = \mathbb{SR}_{{e_i}} \cap \mathbb{L}_{\Phi}$，这个集合是边割集$\mathbb{L}_{\Phi}$的子集，能通过$e_i$ 而堵塞这个集合的所有边。
 
-因此，最小SRLG冲突链路集问题可以定义为一个集合覆盖问题：给定$\mathbb{AP}$(路径AP上的链路集合)、边割集$\mathbb{L}_{\Phi}$和cut-block-link集合${\mathbb{B}_{{e_1}}},{\mathbb{B}_{{e_2}}}, \cdots ,{\mathbb{B}_{{e_{|\mathbb{AP}|}}}}$。 我们求出最小cut-block-link集合集，其交集是边割集$\mathbb{L}_{\Phi}$，即最小规模的$\mathbb{T} \subseteq \{e_i| e_i\in \mathbb{AP}\}$ 以至于 ${ \cup_{e_i \in \mathbb{T}}}{\mathbb{B}_{e_i}} = \mathbb{L}_{\Phi}$。
+因此，最小SRLG冲突链路集问题可以定义为一个集合覆盖问题：给定$\mathbb{AP}$(路径AP 上的链路集合)、边割集$\mathbb{L}_{\Phi}$和cut-block-link集合${\mathbb{B}_{{e_1}}},{\mathbb{B}_{{e_2}}}, \cdots ,{\mathbb{B}_{{e_{|\mathbb{AP}|}}}}$。 我们求出最小cut-block-link集合集，其交集是边割集$\mathbb{L}_{\Phi}$，即最小规模的$\mathbb{T} \subseteq \{e_i| e_i\in \mathbb{AP}\}$ 以至于 ${ \cup_{e_i \in \mathbb{T}}}{\mathbb{B}_{e_i}} = \mathbb{L}_{\Phi}$。
 
 
 \begin{figure*}[htbp]
@@ -245,9 +317,9 @@ $r_P$表示影响路径$P$上的风险集合，即$r_P=\{r\in \mathbb{R}$: 路�
   \label{fig:MinCutStarGraph}
 \end{figure*}
 
-集合覆盖问题通常是一个NP-hard问题。它的复杂性取决于元素的大小(表示($N$)。 在我们的最小SRLG 冲突链路集问题中，$n=|\mathbb{L}_{\Phi}|$，即割集$\mathbb{L}_{\Phi}$的边数。因为本文的重点不是改进集合覆盖问题算法，我们应用\cite{chvatal1979greedy}中提出的算法。在复杂度$O(log(|\mathbb{L}_{\Phi}|))$的情况下求出最小的SRLG 冲突链路集，通常即使是在大规模的网络，最短的路径作为AP都没有大跳数$n=|\mathbb{L}_{\Phi}|$。因此，用集合覆盖问题来求最小值SRLG冲突链路集代价不是很大。
+集合覆盖问题通常是一个NP-hard问题。它的复杂性取决于元素的大小(表示($N$)。 在我们的最小SRLG 冲突链路集问题中，$n=|\mathbb{L}_{\Phi}|$，即割集$\mathbb{L}_{\Phi}$ 的边数。因为本文的重点不是改进集合覆盖问题算法，我们应用\cite{chvatal1979greedy} 中提出的算法。在复杂度$O(log(|\mathbb{L}_{\Phi}|))$的情况下求出最小的SRLG 冲突链路集，通常即使是在大规模的网络，最短的路径作为AP都没有大跳数$n=|\mathbb{L}_{\Phi}|$。因此，用集合覆盖问题来求最小值SRLG冲突链路集代价不是很大。
 
-为了说明如何找到最小SRLG冲突链路集，如图\ref{fig:MinCutStarGraph} 所展示了一个例子，求最小$\Phi(\mathbb{S},\mathbb{D})$， $\mathbb{S}=\{s, 1, 2, 3, 4, 5, 9\}$和$\mathbb{D}=\{d, 6, 7, 8\}$，边割集$\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$。对于AP路径上的所有链路，cut-block-link集合是：$\mathbb{B}_{e_1}=\emptyset$, $\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$, $\mathbb{B}_{e_3}=\{e_{19}\}$, $\mathbb{B}_{e_4}=\{e_{11}\}$, $\mathbb{B}_{e_5}=\{e_{13}\}$, $\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$。 为了覆盖$\mathbb{L}_{\Phi}$，最少的cut-block-link集合是$\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$,$\mathbb{B}_{e_5}=\{e_{13}\}$,$\mathbb{B}_{e_6}=\{e_6\}$。 因此，最小SRLG冲突链路集是$\mathbb{T}=\{e_2, e_5, e_6 \}$。
+为了说明如何找到最小SRLG冲突链路集，如图\ref{fig:MinCutStarGraph} 所展示了一个例子，求最小$\Phi(\mathbb{S},\mathbb{D})$， $\mathbb{S}=\{s, 1, 2, 3, 4, 5, 9\}$和$\mathbb{D}=\{d, 6, 7, 8\}$，边割集$\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$。对于AP路径上的所有链路，cut-block-link集合是：$\mathbb{B}_{e_1}=\emptyset$, $\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$, $\mathbb{B}_{e_3}=\{e_{19}\}$, $\mathbb{B}_{e_4}=\{e_{11}\}$, $\mathbb{B}_{e_5}=\{e_{13}\}$, $\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$。 为了覆盖$\mathbb{L}_{\Phi}$，最少的cut-block-link 集合是$\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$,$\mathbb{B}_{e_5}=\{e_{13}\}$,$\mathbb{B}_{e_6}=\{e_6\}$。 因此，最小SRLG冲突链路集是$\mathbb{T}=\{e_2, e_5, e_6 \}$。
 
 如图\ref{fig:MinCutStarGraph}所示的例子中，虽然$|\mathbb{L}_{\Phi}|=4$，但是最小SRLG冲突链路集$|\mathbb{T}|=|\{e_2, e_5, e_6 \}|=3$是小于$|\mathbb{L}_{\Phi}|=4$。这是因为$e_2$属于$\mathbb{R}_{r_2}$ 和$\mathbb{R}_{r_3}$，并能阻塞在割集$\mathbb{L}_{\Phi}$中的两条链路$e_{11}$ 和$e_{19}$
 
@@ -327,8 +399,10 @@ CoSE试图找到一个冲突的SRLG集合，而不是一个冲突链路集。但
 
 对于KSP算法\cite{eppstein1998finding}，路径查找复杂度为$K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$，其中K是在发现SRLG不相交路径对之前应该测试的路径次数。然而，由于KSP没有从前面的路径搜索过程利用前面的信息，在最坏的情况下，KSP可能尝试从源节点$s$到目的节点$d$的所有路径。因此，最糟糕的K值是$2^{|\mathbb{E}|}$，这会带来很大的计算成本。
 
-\section{实验环境与评价指标}
-因为我们找不到任何拓扑带有SRLG链路属性，所以我们通过注入SRLG信息生成一个合成的数据集。拓扑数据有$\TopoNum$种不同的拓扑，具有不同的节点数目、链路数目、链路权重(表示链路的延迟或其他参数)，如表\ref{tab:AllSample}所示显示了拓扑的基本属性。这7个拓扑中的节点、链路)。
+\section{仿真配置与评价指标}
+\subsection{仿真配置}
+
+因为我们找不到任何拓扑带有SRLG链路属性，所以我们通过注入SRLG信息生成一个合成的数据集。拓扑数据有$\TopoNum$种不同的拓扑，具有不同的节点数目、链路数目、链路权重(表示链路的延迟或其他参数)，如表\ref{tab:AllSample}所示显示了拓扑的基本属性。这7 个拓扑中的节点、链路)。
 
 \begin{table*}[htbp]
 \caption{SRLG拓扑数据}
@@ -350,20 +424,20 @@ SRLG边比率 & 9.66\% & 6.16\% &   6.18\% &   14.94\%    &   22.55\%  &  9.65\%
 
 为了进行性能比较，除了我们的算法(名为\CI)，我们还实现了另外四个SRLG不相交路径对算法。算法如下：
 \begin{enumerate}
-  \item ILP：\cite{hu2003diverse} 中的工作旨在寻找SRLG不相交路径对。通过整数线性规划方程使这两条路径总的权重最小化。我们没有找到其他通过整数线性规划方程寻找Min-Min SRLG不相交路径对的方法的研究。因此，从\cite{hu2003diverse}的整数规划方程，通过改变目标函数构造Min-Min SRLG 不相交路径对问题的整数线性规划方程。
-  \item IQCP：因为任意0−-1整数线性规划方程，其中所有变量为0或1，原问题的整数线性规划方程可以表示为一个二次约束方程，我们还设计了Min-Min SRLG 不相交路径问题成一个整数二次约束规划(IQCP)\cite{hu2003diverse}。
+  \item ILP\cite{hu2003diverse}： 中的工作旨在寻找SRLG不相交路径对。通过整数线性规划方程使这两条路径总的权重最小化。我们没有找到其他通过整数线性规划方程寻找Min-Min SRLG不相交路径对的方法的研究。因此，从\cite{hu2003diverse} 的整数规划方程，通过改变目标函数构造Min-Min SRLG 不相交路径对问题的整数线性规划方程。
+  \item IQCP\cite{hu2003diverse}：因为任意0−-1整数线性规划方程，其中所有变量为0或1，原问题的整数线性规划方程可以表示为一个二次约束方程，我们还设计了Min-Min SRLG 不相交路径问题成一个整数二次约束规划(IQCP)\cite{hu2003diverse}。
   \item KSP\cite{eppstein1998finding}：它在源节点$s$和目的节点$d$中找到第K短路作为候选AP路径，一个接一个地测试候选的AP路径是否有相应的SRLG不相交路径BP，直到我们发现了这样的BP，算法才结束。
   \item CoSE\cite{rostami2007cose}：当AP遇到陷阱问题时，CoSE尝试进行简单而详尽的搜索，以找到一个SRLG集合。任何AP路径通过这个SRLG集都无法找到SRLG不相交的BP路径。基于这个SRLG集合，它划分原问题并设计算法来求SRLG不相交路径对。
 \end{enumerate}
 
-
+\subsection{评价指标}
 前两者(ILP和IQCP)是基于整数规划模型的。在我们的实现中，工具GUROBI 7.0\cite{optimization2012gurobi}用于解决这两个整数规划问题。六种性能指标用于评估不同的SRLG分路径算法：
 \begin{itemize}
   \item 路径权重：路径中链路权重的总和。
   \item 路径跳数：路径中的跳数。
   \item 运行时间：查找SRLG不相交路径对的归一化平均时间。
   \item 算法加速比：给定两种不同的算法($alg_1$ 和$alg_2$)的计算时间，表示为$T_1$ 和 $T_2$，算法$alg_1$对于算法$alg_2$计算时间上的加速比是$alg_1$: ${S_{1 - 2}} = T_1/T_2$。
-  \item 核加速比：并行程序的核心加速比\cite{grama2003introduction}通常定义为$S_P=\frac{T_1}{T_p}$，其中p是处理器内核和$T_1$和$T_p$表示在1核和$p$核上的运行时间。
+  \item 核加速比：并行程序的核心加速比\cite{grama2003introduction} 通常定义为$S_P=\frac{T_1}{T_p}$，其中p是处理器内核和$T_1$和$T_p$表示在1核和$p$核上的运行时间。
   \item 效率\cite{grama2003introduction}：定义为$E_p=\frac{S_p}{p}=\frac{T_1}{pT_p}$，它是百分比(0，1)的范围内。
 
 
@@ -375,14 +449,14 @@ SRLG边比率 & 9.66\% & 6.16\% &   6.18\% &   14.94\%    &   22.55\%  &  9.65\%
 我们通过在拓扑数据集里注入SRLG链路属性产生了两种SRLG类型，星型类型和非星型类型。在光纤网络中，SRLG是星型类型，而在其他网络类型中，例如一个Overlay网络中，SRLG可以是非星型的。每个SRLG组是通过随机选择2-5链路组成的。在五种SRLG不相交路径对算法中，只有CoSE和我们SCLS是并行算法。尽管ILP、IQCP和KSP不是并行算法，我们仍然在实现它们来体现出我算法设计所获得的速度增益，归一化\cite{tax2000feature}所有拓扑数据的结果为最终结果。
 
 
-\section{算法性能评估及比较}
+\subsection{算法性能评估及比较}
 从\ref{subsec:Complexity analysis}节分析，在KSP下求第一条$K$最短路的计算复杂度是$2^{|\mathbb{E}|}\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$，最坏的情况下这将是$K\times ((|\mathbb{E}|+|\mathbb{V}|)\times log(|\mathbb{V}|))$。与分析一致，当我们使用7个拓扑运行KSP，没有仿真结果能在1 小时内返回，而其他算法则可以在11 秒内。计算时间长使得KSP难以在实践中使用。因此，我们不在结果显示KSP。
 \begin{enumerate}
-  \item 路径权重：如图\ref{fig:normalization weitgh sum}所示，显示AP路径权重、BP路径权重和AP和BP的总和路径权重。显然，所有的算法SCLS、CoSE、ILP和IQCP实现了相同的AP路径权重。但是不同的算法有不同的BP权重，因此它们有不同的路径权重和。因为所有算法都解决了SRLG不相交路径对问题，尽管他们发现不同的SRLG不相交路径对，它们都能达到找到最小权重相等的AP路径。然而，这两个基于整数线性规划的算法，ILP 和IQCP，主要是找到最小化AP的权重但是其随意找到其它任何SRLG不相交路径BP，因此这两个算法搜索到的BP路径是不同的。
+  \item 路径权重：如图\ref{fig:normalization weitgh sum}所示，显示AP路径权重、BP路径权重和AP和BP的总和路径权重。显然，所有的算法SCLS、CoSE、ILP和IQCP 实现了相同的AP路径权重。但是不同的算法有不同的BP权重，因此它们有不同的路径权重和。因为所有算法都解决了SRLG不相交路径对问题，尽管他们发现不同的SRLG不相交路径对，它们都能达到找到最小权重相等的AP路径。然而，这两个基于整数线性规划的算法，ILP 和IQCP，主要是找到最小化AP的权重但是其随意找到其它任何SRLG不相交路径BP，因此这两个算法搜索到的BP路径是不同的。
   \item 路径跳数：图\ref{fig:normalization weitgh sum}显示AP路径跳数、BP 路径跳数和AP和BP路径跳数之和，因为所有算法的目标都是最小化SRLG不相交路径对的最小路径权重。在路径跳数中，它们具有相同的AP权重(如图\ref{fig:normalization weitgh sum} 所示)但是他们有不同的AP路径跳数(如图\ref{fig:normalization hop} 所示)。尽管所有算法的AP路径权重都小于BP路径权重如图\ref{fig:normalization weitgh sum}所示，在图\ref{fig:normalization hop}中，AP跳数可能并不总是少于BP路径跳数。
-  \item 运行时间：如图\ref{fig:normalization runtime}所示，通过改变使用的CPU核数来展示不同算法下的运行时间。由于CoSE下的运行时明显大于其他算法的运行时，为了更清楚地展示其他算法的结果，我们在图\ref{fig:Runtime_noKSP_noCOSE} 中通过排除CoSE来进一步绘制运行时间的结果。由于ILP和IQCP不是并行算法，这些算法在不同核数下的运行时间大致相等。我们的SCLS和CoSE的运行时间随着处理器核数的增加而减少，因为这两种算法可以将原问题划分为多个子问题来并行执行，并利用多核CPU的并行性来加快路径搜索的速度，虽然CoSE是一种并行算法，但计算时间比ILP和IQCP 还要大。一些可能的原因包括：1)在CoSE中冲突SRLG集合的搜索过程效率不高；2)由于一个SRLG 通常包含多条链路，基于冲突SRLG问题的划分将带来大量的子问题需要解决，这也将带来大量的计算量。与CoSE不同的是，当AP上遇到陷阱问题时我们的SCLS根据图中的最小割集理论来求SRLG冲突链路集，并达到图\ref{fig:normalization runtime}中所示的最低时间消耗。这说明了我们的冲突链路集查找算法是有效的，并且我们提出的分治算法和基于SRLG冲突链路集的智能AP搜索过程，可以大大降低计算量。
-   \item   算法加速比：如图\ref{fig:Multiple}所示，我们进一步比较了它们的计算速度。特别地，为了找出使用不同算法寻找所需路径时所获得的加速比，我们使用CoSE作为基准算法，并设置$alg_1$ =CoSE。与图\ref{fig:normalization runtime}中的结果相似，在图\ref{fig:Multiple} 中SCLS的加速度是CoSE的1000倍以上。在图\ref{fig:Multiple} 中由于CoSE的运行速度明显小于其他算法，很难在图\ref{fig:Multiple}中观察到，我们在图\ref{fig:MultipleNoSCLS}中排除了最大的SCLS 数据来进一步绘制了算法加速比结果。
-   \item 核加速比:与使用算法加速比来比较所有算法的总体运行速度不同，这个度量“核加速比”是来评估CPU中的核数如何影响给定算法的运行速度。图\ref{fig:Speedup}绘制了所有实现的算法的核加速比。算法ILP和IQCP下的核加速比在任意核数下近似等于1，因为它们不是并行算法。当核数小于4 时，我们的SCLS的核心加速比随着核数的增加而增加，当超过4核时，SCLS 的核心加速比保持稳定，说明4核对SCLS是足够的。这一结果与Amdahl定律\cite{amdahl1967validity}是一致的，即理论核加速比确定的上界限定于问题的规模大小。但是，即使核心数等于8，CoSE下的核加速比也继续增加，这是数字4的两倍。结果表明，即使是8核CPU也不能满足COSE的并行性要求.这是因为CoSE发现的冲突SRLG集包含了大量的链路，这进一步导致了大量的子问题，从而导致了较大的问题规模和计算成本。
+  \item 运行时间：如图\ref{fig:normalization runtime}所示，通过改变使用的CPU核数来展示不同算法下的运行时间。由于CoSE下的运行时明显大于其他算法的运行时，为了更清楚地展示其他算法的结果，我们在图\ref{fig:Runtime_noKSP_noCOSE} 中通过排除CoSE来进一步绘制运行时间的结果。由于ILP和IQCP不是并行算法，这些算法在不同核数下的运行时间大致相等。我们的SCLS和CoSE的运行时间随着处理器核数的增加而减少，因为这两种算法可以将原问题划分为多个子问题来并行执行，并利用多核CPU的并行性来加快路径搜索的速度，虽然CoSE 是一种并行算法，但计算时间比ILP和IQCP 还要大。一些可能的原因包括：1)在CoSE中冲突SRLG集合的搜索过程效率不高；2)由于一个SRLG 通常包含多条链路，基于冲突SRLG问题的划分将带来大量的子问题需要解决，这也将带来大量的计算量。与CoSE不同的是，当AP上遇到陷阱问题时我们的SCLS根据图中的最小割集理论来求SRLG冲突链路集，并达到图\ref{fig:normalization runtime}中所示的最低时间消耗。这说明了我们的冲突链路集查找算法是有效的，并且我们提出的分治算法和基于SRLG冲突链路集的智能AP搜索过程，可以大大降低计算量。
+   \item   算法加速比：如图\ref{fig:Multiple}所示，我们进一步比较了它们的计算速度。特别地，为了找出使用不同算法寻找所需路径时所获得的加速比，我们使用CoSE作为基准算法，并设置$alg_1$ =CoSE。与图\ref{fig:normalization runtime}中的结果相似，在图\ref{fig:Multiple} 中SCLS的加速度是CoSE的1000 倍以上。在图\ref{fig:Multiple} 中由于CoSE的运行速度明显小于其他算法，很难在图\ref{fig:Multiple}中观察到，我们在图\ref{fig:MultipleNoSCLS}中排除了最大的SCLS 数据来进一步绘制了算法加速比结果。
+   \item 核加速比:与使用算法加速比来比较所有算法的总体运行速度不同，这个度量“核加速比”是来评估CPU中的核数如何影响给定算法的运行速度。图\ref{fig:Speedup} 绘制了所有实现的算法的核加速比。算法ILP和IQCP下的核加速比在任意核数下近似等于1，因为它们不是并行算法。当核数小于4 时，我们的SCLS的核心加速比随着核数的增加而增加，当超过4核时，SCLS 的核心加速比保持稳定，说明4 核对SCLS是足够的。这一结果与Amdahl定律\cite{amdahl1967validity}是一致的，即理论核加速比确定的上界限定于问题的规模大小。但是，即使核心数等于8，CoSE下的核加速比也继续增加，这是数字4 的两倍。结果表明，即使是8核CPU也不能满足COSE的并行性要求.这是因为CoSE发现的冲突SRLG集包含了大量的链路，这进一步导致了大量的子问题，从而导致了较大的问题规模和计算成本。
     \item 效率：与图\ref{fig:Speedup}相似，随着更多的核增多效率值会降低，因为一个大的核心数会带来更多的成本来协调进程。如图\ref{fig:Efficiency}所示，所有算法的效率值都随着核心数的增加而降低。与图\ref{fig:Speedup}中的结果一致，由于CoSE 引入的子问题比我们的SCLS多，在核心数达到4之后，CoSE下的效率大于SCLS。然而，如图\ref{fig:Multiple}所示我们的SCLS实现了更大的算法加速比。
 \end{enumerate}
 
@@ -454,5 +528,5 @@ SRLG边比率 & 9.66\% & 6.16\% &   6.18\% &   14.94\%    &   22.55\%  &  9.65\%
 \end{minipage}
 \end{figure*}
 \section{小结}
-本章提出了一种创新的分而治之算法，该算法能在遇到陷阱问题时将原有的min-min SRLG 不相交路由问题划分为多个并行执行子问题。与现有技术相比，这样的解决方案在搜索过程可以利用现有的AP 搜索结果，并且并行执行来加快路径查找。
+本章提出了一种创新的分而治之算法，该算法能在遇到陷阱问题时将原有的min-min SRLG 不相交路由问题划分为多个并行执行的子问题。与现有其它算法相比，提出的解决方案在搜索过程中利用现有的AP 搜索结果来加快求最优结果的速度，并且并行执行来进一步加快路径查找速度。
 
