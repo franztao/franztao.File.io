@@ -1,9 +1,11 @@
 ﻿---------------
 doing 
-ppt
+
+ppt 练习
+
+
 design pattern
 openstack
-springboot
 
 湖南大学 南校区 中楼306教室 9-16周：星期五3-4节(10:00-11:40)
 
@@ -18,10 +20,6 @@ when i read some post,then i should auto-translate it before scanning it.
 
 
 
-basketball
-http://m.kekenet.com/Article/201709/524557.shtml
 https://mp.weixin.qq.com/s/fzYCoiIefuTSSYcVwbLJXw
-
-
 
 

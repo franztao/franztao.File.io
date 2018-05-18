@@ -1,7 +1,7 @@
 \chapter{单物理节点故障可生存性虚拟网络嵌入问题}
 \section{问题描述}
-在这一部分中，我们首先介绍了虚拟网络嵌入的基本概念，然后提出了我们的可生存性虚拟网络嵌入问题。
-\subsection{虚拟网络嵌入}
+在这一部分中，我们首先介绍了虚拟网络嵌入问题的基本概念，然后提出了我们的可生存性虚拟网络嵌入问题。
+\subsection{虚拟网络嵌入问题}
 我们将\textbf{虚拟网络}VN表示为无向图$G (V,E)$，其中$V$ 和$E$ 分别是虚拟节点和虚拟链路的集合。每个虚拟链路$e_{ij}$具有带宽需求$d_{ij}$。 每个虚拟节点$v_i$ 具有计算容量需求$d_i$。 对于虚拟节点$v_i$，需要在虚拟节点上执行的虚拟功能表示为$f(i)$。如图\ref{fig:VirtualNetworkRequest} 所示虚拟网络$G (V,E)$ 具有虚拟节点集$V=\{v_1,v_2,v_3,v_4\}$ 和虚拟边集$E= \{e_{12},e_{13},e_{14},e_{23}\}$。需要在这些虚拟节点上执行的虚拟函数是$f(1)=f_1$, $f(2)=f_2$, $f(3)=f_3$, $f(4)=f_4$。
 
 \begin{figure}[htbp]
@@ -33,7 +33,7 @@
 
 给定VN请求$G(V,E)$和物理网络$G(S,L)$，对于可行映射，我们将映射的物理图表示为$G\left( {\hat S,P} \right)$，其中$\hat S$是容纳虚拟节点的物理节点集，其中$\hat S = \{ {s_{i'}}:\phi({v_i}) = {s_{i'}},for\ \ {\rm{ }}all\ {v_i} \in V,{s_{i'}} \in S\}$ 和$P$ 是路径集，其中每个路径都持有一个虚拟链路$P = \{ p_{\phi({v_i}) \phi({v_j})}:\rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})}{\rm{ }}, for\ all,{e_{ij}} \in E\}$。由于每个虚拟链路对应一个物理网络路径，该路径由多个物理链路组成，因此我们还将$G\left( {\hat S,\hat L} \right)$表示为占领的物理网络$\hat L = \{ {l_{pg}}:{l_{pg}} \in {p_{s_{i'}s_{j'}}}, \rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})},for\ all\ {e_{ij}} \in E,{l_{pg}} \in L\}$。
 
-已经有了许多关于虚拟网络嵌入问题\cite{fischer2013virtual}的研究;，因为本文的重点不是虚拟网络嵌入算法，我们采用了\cite{lischka2009virtual} 中的算法作为基本的虚拟网络嵌入算法。
+已经有了许多关于虚拟网络嵌入问题\cite{liu2011completing}的研究，文献\cite{amaldi2016computational}指出虚拟网络嵌入问题复杂度是NP-hard，因为本文的重点不是虚拟网络嵌入算法，我们采用了\cite{lischka2009virtual} 中的算法作为基本的虚拟网络嵌入算法。
 
 
 \begin{figure}[htbp]
@@ -42,7 +42,7 @@
 \includegraphics[width=4in]{figures/VirtualNetworkEmbedding}\\
 \caption{节点映射和链路映射的实例}\label{fig:VirtualNetworkEmbedding}
 \end{figure}
-\subsection{可生存性虚拟网络嵌入}
+\subsection{可生存性虚拟网络嵌入问题}
 由于恶意攻击、自然灾害、无意中断电缆、计划维护、设备故障、物理节点承载的虚拟节点可能会遭受不可避免的故障。当单个或多个物理网络组件发生故障时，VN 中可能会发生故障，从而造成财务损失。一般来说，多个物理节点的同时失效是相互独立的，单个节点的失效通常发生在大多数时间\cite{yeow2010designing}。本文研究了单节点失效的可生存性虚拟网络嵌入问题。在本章中，我们将讨论如何将我们的算法扩展到多节点故障的场景中。
 
 对于VN请求$G (V,E)$和物理网络$G (S,L)$，给出了其占用物理网络的可行映射，在任何一个物理节点发生故障时，增加最小备份物理资源以提供可生存性的网络服务。
@@ -59,6 +59,7 @@
 \caption{1+1-保护机制}\label{fig:One2OneProtection}
 \end{figure}
 %\subsection{复杂度规模}
+
 %Given a graph representing a substrate (or physical) network with node and edge
 %capacities and a set of virtual networks with node capacity demands and node-tonode
 %traffic demands, the Virtual Network Embedding problem (VNE) calls for an
@@ -73,57 +74,57 @@
 %present or when each virtual network request consists of a single virtual node and
 %that it is weakly NP-hard for the case with a single physical node.
 
-\section{原有算法概述}
-\subsection{共享vs非共享}
-可以通过在底层物理网络内集成回退资源来发挥VNE方面的可生存性性。可以为可能故障失效的某些特定主节点/链路建立备份节点/链路。在任何时候，必须保证网络拓扑的一致性，特别是关于被定义为对故障有可生存性的资源。对于用户来说，从故障中恢复应该是透明性的，也就是说，他不应该注意到网络切换到备份资源。即使在使用时间敏感的应用程序时，用户也不应觉察到到发生了错误。这尤其要求，为了选择备份资源，必须考虑主要实体的所有QoS要求。
-
-备份资源本身可以是专用的，也可以是共享的\cite{guo2011shared}。专用意味着每个虚拟网络都可以建立完整的备份网络和备份资源。完全致力于虚拟网络，相互独立。但是，这是资源效率低下的，因为对于每个虚拟资源都需要获得一个已经嵌入的专用底层实体。在某些情况下，共享和重用备份资源也是可以接受的，以便减少附加备份资源在底层物理网络上的占用。通常，较高程度的重用备份资源会导致可靠性降低，反之亦然。
-
-此外，(共享)备份资源可以预先分配(即在第一个虚拟网络嵌入请求到达之前)或“按需”(即为每个嵌入请求分配)。共享按需备份资源可以在嵌入时间分配，即每次虚拟网络请求到达\cite{guo2011shared,yeow2010designing,yu2011cost}时。然而，共享预分配算法在配置阶段定义了一些特定的备份资源，即在任何虚拟网络请求到达之前\cite{rahman2010survivable}。
-\subsection{主动保护vs被动恢复}
-根据是否对租户的虚拟网络提供备份资源，可以将SVNE算法划分为两类： 基于主动保护策略的算法和基于被动恢复策略的算法\cite{herker2013survey}。
-
-在基于主动保护策略的算法中，在嵌入虚拟网络请求前，为虚拟网络预置备份资源，以供后续故障恢复使用。该策略可以提供较高的虚拟网络可生存性保障， 但是对于备份资源消耗较大。代表性算法如:FI-EVN\cite{yu2011cost}、FD-EVN\cite{wang2014survivable} LC-SVNE\cite{hu2012location} 等。
-
-在基于被动恢复策略的算法中，在嵌入虚拟网络请求前，不预置备份资源， 在后续故障发生后再使用节点迁移或者现有的物理网络资源进行故障恢复。该策 略的优势在于不需要额外提供虚拟网络备份资源，但是相对而言，故障恢复成功 率不稳定且恢复效率较低。代表性算法如：MR-SVNE\cite{qiang2014heuristic}、NB-SVNE\cite{bo2014dynamic} 等。
-
-SVNE算法的两种备份策略均存在性能问题，其中主动保护策略需要提供虚拟网 络全部重要节点及其关联链路的备份资源，所以该策略的虚拟网络请求接受率较 低，被动恢复策略每次进行故障发生时需要使用现有网络资源进行故障恢复，故障恢复效率低下。
-
-总之，如表\ref{tab:survivableVirtualNetworkEmbedd}所示给出了可生存虚拟网络嵌入算法的总结。
-\begin{table}[htbp]
-\caption{可生存性虚拟网络嵌入算法比较}\label{tab:survivableVirtualNetworkEmbedd}
-\vspace{0.5em}\centering\wuhao
-\begin{tabularx}{48em}{|*{4}{>{\centering\arraybackslash}X|}}
-\toprule[1.5pt]
-算法（论文）   & 故障类型  & 优化目标 & 处理机制  \\
-\midrule[1pt]
-Survivable virtual network embedding\cite{rahman2013svne} & 单个物理链路故障 & 为基础设施提供最大限度的收入 & 被动，故障后(Restoration)\\
-\hline
-Shared backup network provision for virtual network embedding\cite{guo2011shared} & 单个物理链路故障 & 最大化收益/VN接受率& 主动，故障前(Protection)\\
-\hline
-Migration based protection for virtual infrastructure survivability for link failure\cite{yu2011migration} & 单个物理链路故障 & 最小化成本 & Protection\\
-\hline
-QoSMap: Achieving Quality and Resilience through Overlay Construction\cite{shamsi2009qosmap} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
-\hline
-An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay}；An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
-\hline
-Cost efficient design of survivable virtual infrastructure to recover from facility node failures\cite{yu2011cost} & 单个虚拟节点故障& 最小化成本 & Protection\\
-\hline
-A novel two-step approach to surviving facility failures\cite{qiao2011novel} & 单个虚拟节点故障 & 尽量减少资源/总成本 & Protection\\
-\hline
-Survivable virtual infrastructure mapping in a federated computing and networking system under single regional failures\cite{yu2010survivable} & 单个区域故障 & 最小化成本 & Protection \\
-\hline
-Location-constrained survivable network virtualization\cite{hu2012location} & 单个虚拟节点故障 & 尽量减少资源 & Protection\\
-\hline
-Designing and embedding reliable virtual infrastructures\cite{yeow2010designing} & 单个物理节点故障 & 尽量减少所用资源 & Protection\\
-\hline
-Survivable virtual infrastructure mapping in virtualized data centers\cite{xu2012survivable} & 单个服务器故障 & 最小化运营成本& Protection\\
-\hline
-Adaptive virtual network provisioning\cite{houidi2010adaptive} & 单个节点或者链路故障 & 最小化通信成本 & Restoration\\
-\bottomrule[1.5pt]
-\end{tabularx}
-\vspace{\baselineskip}
-\end{table}
+%\section{原有算法概述}
+%\subsection{共享vs非共享}
+%可以通过在底层物理网络内集成回退资源来发挥VNE方面的可生存性性。可以为可能故障失效的某些特定主节点/链路建立备份节点/链路。在任何时候，必须保证网络拓扑的一致性，特别是关于被定义为对故障有可生存性的资源。对于用户来说，从故障中恢复应该是透明性的，也就是说，他不应该注意到网络切换到备份资源。即使在使用时间敏感的应用程序时，用户也不应觉察到到发生了错误。这尤其要求，为了选择备份资源，必须考虑主要实体的所有QoS要求。
+%
+%备份资源本身可以是专用的，也可以是共享的\cite{guo2011shared}。专用意味着每个虚拟网络都可以建立完整的备份网络和备份资源。完全致力于虚拟网络，相互独立。但是，这是资源效率低下的，因为对于每个虚拟资源都需要获得一个已经嵌入的专用底层实体。在某些情况下，共享和重用备份资源也是可以接受的，以便减少附加备份资源在底层物理网络上的占用。通常，较高程度的重用备份资源会导致可靠性降低，反之亦然。
+%
+%此外，(共享)备份资源可以预先分配(即在第一个虚拟网络嵌入请求到达之前)或“按需”(即为每个嵌入请求分配)。共享按需备份资源可以在嵌入时间分配，即每次虚拟网络请求到达\cite{guo2011shared,yeow2010designing,yu2011cost}时。然而，共享预分配算法在配置阶段定义了一些特定的备份资源，即在任何虚拟网络请求到达之前\cite{rahman2010survivable}。
+%\subsection{主动保护vs被动恢复}
+%根据是否对租户的虚拟网络提供备份资源，可以将SVNE算法划分为两类： 基于主动保护策略的算法和基于被动恢复策略的算法\cite{herker2013survey}。
+%
+%在基于主动保护策略的算法中，在嵌入虚拟网络请求前，为虚拟网络预置备份资源，以供后续故障恢复使用。该策略可以提供较高的虚拟网络可生存性保障， 但是对于备份资源消耗较大。代表性算法如:FI-EVN\cite{yu2011cost}、FD-EVN\cite{wang2014survivable} LC-SVNE\cite{hu2012location} 等。
+%
+%在基于被动恢复策略的算法中，在嵌入虚拟网络请求前，不预置备份资源， 在后续故障发生后再使用节点迁移或者现有的物理网络资源进行故障恢复。该策 略的优势在于不需要额外提供虚拟网络备份资源，但是相对而言，故障恢复成功 率不稳定且恢复效率较低。代表性算法如：MR-SVNE\cite{qiang2014heuristic}、NB-SVNE\cite{bo2014dynamic} 等。
+%
+%SVNE算法的两种备份策略均存在性能问题，其中主动保护策略需要提供虚拟网 络全部重要节点及其关联链路的备份资源，所以该策略的虚拟网络请求接受率较 低，被动恢复策略每次进行故障发生时需要使用现有网络资源进行故障恢复，故障恢复效率低下。
+%
+%总之，如表\ref{tab:survivableVirtualNetworkEmbedd}所示给出了可生存虚拟网络嵌入算法的总结。
+%\begin{table}[htbp]
+%\caption{可生存性虚拟网络嵌入算法比较}\label{tab:survivableVirtualNetworkEmbedd}
+%\vspace{0.5em}\centering\wuhao
+%\begin{tabularx}{48em}{|*{4}{>{\centering\arraybackslash}X|}}
+%\toprule[1.5pt]
+%算法（论文）   & 故障类型  & 优化目标 & 处理机制  \\
+%\midrule[1pt]
+%Survivable virtual network embedding\cite{rahman2013svne} & 单个物理链路故障 & 为基础设施提供最大限度的收入 & 被动，故障后(Restoration)\\
+%\hline
+%Shared backup network provision for virtual network embedding\cite{guo2011shared} & 单个物理链路故障 & 最大化收益/VN接受率& 主动，故障前(Protection)\\
+%\hline
+%Migration based protection for virtual infrastructure survivability for link failure\cite{yu2011migration} & 单个物理链路故障 & 最小化成本 & Protection\\
+%\hline
+%QoSMap: Achieving Quality and Resilience through Overlay Construction\cite{shamsi2009qosmap} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
+%\hline
+%An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay}；An overlay mapping model for achieving enhanced QoS and resilience performance\cite{zhang2011overlay} & 单个物理链路故障 & 尽量减少额外备份资源和延迟 & Protection\\
+%\hline
+%Cost efficient design of survivable virtual infrastructure to recover from facility node failures\cite{yu2011cost} & 单个虚拟节点故障& 最小化成本 & Protection\\
+%\hline
+%A novel two-step approach to surviving facility failures\cite{qiao2011novel} & 单个虚拟节点故障 & 尽量减少资源/总成本 & Protection\\
+%\hline
+%Survivable virtual infrastructure mapping in a federated computing and networking system under single regional failures\cite{yu2010survivable} & 单个区域故障 & 最小化成本 & Protection \\
+%\hline
+%Location-constrained survivable network virtualization\cite{hu2012location} & 单个虚拟节点故障 & 尽量减少资源 & Protection\\
+%\hline
+%Designing and embedding reliable virtual infrastructures\cite{yeow2010designing} & 单个物理节点故障 & 尽量减少所用资源 & Protection\\
+%\hline
+%Survivable virtual infrastructure mapping in virtualized data centers\cite{xu2012survivable} & 单个服务器故障 & 最小化运营成本& Protection\\
+%\hline
+%Adaptive virtual network provisioning\cite{houidi2010adaptive} & 单个节点或者链路故障 & 最小化通信成本 & Restoration\\
+%\bottomrule[1.5pt]
+%\end{tabularx}
+%\vspace{\baselineskip}
+%\end{table}
 
 \section{星型图分解动态规划节点嵌入算法}
 可生存性虚拟网络嵌入需要添加备份资源，以保证当任何一个物理节点失效时，剩余的物理资源加上备份资源仍然可以支持原先的虚拟网络请求。为了便于在节点失效时找到可行的嵌入，本节首先对虚拟网络进行分解，物理网络以星型结构为基础的局部组件。在此基础上，提出了一种新的二分图，并将具有最小备份资源的可生存性虚拟网络嵌入问题转化为一个基于定义良好的二分图的虚拟星图分配问题。
@@ -395,7 +396,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \label{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}
 \end{equation*}
 \subsection{算法步骤}
-在这一部分中，我们首先给出了SeVN图的增广资源分配过程。下面将详述更多细节。
+在这一部分中，我们首先给出了SVNE图的增广资源分配过程。下面将详述更多细节。
 
 此外，对于节点嵌入和虚拟链路嵌入，由于单个节点失效时并不是所有的虚拟链路或它们的带宽都会同时使用，所以如果将虚拟链路嵌入在同一底层物理链路上，则一些虚拟链路可以共享底层物理资源。减少总底层物理带宽所需。简单地说，底层物理链路对应不同虚拟网络节点失效时可生存性请求的备份带宽可以相互共享。
 %\subsection{嵌入增广的备份资源}
@@ -422,7 +423,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 %  \includegraphics[width=3.0in]{figures/AugmentResource}\\
 %  \caption{增广的备份资源图}\label{fig:AugmentResource}
 %\end{figure}
-最后，迭代的重复图分解过程和多背包问题求解过程，处理每个嵌入虚拟节点的物理节点失效情况，重新构造增强图，以保证虚拟网络的生存请求。如图\ref{fig:Node4Failure}所示，连续使用不同颜色标记SeVN的部分增广资源并且连续显示每个节点故障。值得注意的是，部分增广资源的每一步都是基于前一步的资源增强。
+最后，迭代的重复图分解过程和多背包问题求解过程，处理每个嵌入虚拟节点的物理节点失效情况，重新构造增强图，以保证虚拟网络的生存请求。如图\ref{fig:Node4Failure}所示，连续使用不同颜色标记SVNE的部分增广资源并且连续显示每个节点故障。值得注意的是，部分增广资源的每一步都是基于前一步的资源增强。
 %\begin{figure}[htbp]
 %\centering
 %% Requires \usepackage{graphicx}
@@ -430,13 +431,13 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 %  \caption{节点$s_4$失效实例}\label{fig:Node4Failure}
 %\end{figure}
 %\subsection{算法步骤}
-在本节中，我们描述了SeVN问题完整的算法步骤，如伪码\ref{alg:SeVNAlg} 所示
+在本节中，我们描述了SVNE问题完整的算法步骤，如伪码\ref{alg:SVNEAlg} 所示。
 \begin{algorithm}[htbp]
-\label{alg:SeVNAlg}
-\caption{可生存性虚拟网络嵌入算法}
+\label{alg:SVNEAlg}
+\caption{星型图分解动态规划节点嵌入算法}
 \begin{algorithmic}[1]
 \REQUIRE $G (V,E)$：虚拟网络请求; $G (S,L)$：物理网络。
-\ENSURE 生成SeVN并增加资源将SeVN嵌入到底层物理网络中。
+\ENSURE 生成SVNE并增加资源将SVNE嵌入到底层物理网络中。
 \STATE 将虚拟网络$G^V$ 嵌入\cite{liu2011completing}到底层网络$G^S$中
 \STATE 从与此VN嵌入请求对应的SN中提取嵌入的虚拟网络eVN$G\left( {\hat S,\hat L} \right)$
 %\STATE AllMinimumCycle($G(V,E)$)
@@ -452,11 +453,11 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \end{algorithmic}
 \end{algorithm}
 \subsection{算法时间复杂度}
-对SeVN请求问题分析，该问题是优化领域中的二次规划问题，而SeVN问题解的实质是一系列排列矩阵，决定了每个节点失效后的迁移重分配过程。虚拟网络$|V|$节点全部都依次失效，每个节点的迭代时间复杂度为$O[|V|*|S|*\prod_{i=1}^{|S|}c^i]$。 因此，其总体计算复杂度为$O[|V|*|S|*|V|*\prod_{i=1}^{|S|}c^i]$，其中$|V|$为失效节点数。
+对SVNE请求问题分析，该问题是优化领域中的二次规划问题，而SVNE问题解的实质是一系列排列矩阵，决定了每个节点失效后的迁移重分配过程。虚拟网络$|V|$节点全部都依次失效，每个节点的迭代时间复杂度为$O[|V|*|S|*\prod_{i=1}^{|S|}c^i]$。 因此，其总体计算复杂度为$O[|V|*|S|*|V|*\prod_{i=1}^{|S|}c^i]$，其中$|V|$为失效节点数。
 
 
 \section{仿真配置与评价指标}
-首先描述了仿真配置，然后给出了评价指标。
+本节首先描述了物理网络和虚拟网络的配置，然后给出了各种可生存性评价指标。
 \subsection{仿真配置}
 对于任何VN请求，VN节点的数目是由3到10之间的均匀分布随机得到的，每一对虚拟节点都是以概率0.5 随机连接的。VN节点的计算需求从1到5 之间随机分布，并且VN 上的带宽从1 到10之间随机分布。
 
@@ -504,7 +505,7 @@ VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求�
 \subsection{评价指标}
 本节介绍了启发式算法在平均接受率、活动节点和其他度量方面的不同度量\cite{fischer2013virtual}如下所述。
 \begin{enumerate}
-  \item 接受率：与阻塞概率的概念相反。虚拟网络请求的比率是成功嵌入物理网络的虚拟网络请求数数除以虚拟网络嵌入请求数，表示为$A_{eVN}/A_{VN}$。为可生存性保证而成功增广和嵌入到物理网络的虚拟网络请求数表示为$A_{SeVN}/A_{VN}$，当虚拟网络嵌入到底层网络中时该虚拟网络成功可生存性保护的比率被表示为$A_{SeVN}/A_{eVN}$。
+  \item 接受率：与阻塞概率的概念相反。虚拟网络请求的比率是成功嵌入物理网络的虚拟网络请求数数除以虚拟网络嵌入请求数，表示为$A_{eVN}/A_{VN}$。为可生存性保证而成功增广和嵌入到物理网络的虚拟网络请求数表示为$A_{SVNE}/A_{VN}$，当虚拟网络嵌入到底层网络中时该虚拟网络成功可生存性保护的比率被表示为$A_{SVNE}/A_{eVN}$。
   \item 活动节点：表示底层物理网络开启的节点数和可生存性虚拟网络的节点数，这种度量在节能的VNE算法中特别有用。
   \item 链路或路径长度：链路长度度量虚拟网络中链路的数量，和路径长度度量是两个互连虚拟节点映射到两个底层节点之间的物理链路数量。
   \item 成本、收入和成本/收益：成本：使用的物理网络节点计算能力或链路带宽资源。收益：虚拟网络的节点计算能力或链路带宽需求。成本/收益：这个比率表示虚拟化开销。
@@ -515,7 +516,7 @@ VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求�
 \end{enumerate}
 
 
-$A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReqSurNetReq} 所示，嵌入到物理网络中的虚拟网络请求的成功数目表示为$A_{eVN}$，以及成功增广资源并且嵌入到物理网络中表示为$A_{SeVN}$。
+$A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReqSurNetReq} 所示，嵌入到物理网络中的虚拟网络请求的成功数目表示为$A_{eVN}$，以及成功增广资源并且嵌入到物理网络中表示为$A_{SVNE}$。
 %\begin{figure}
 %  \centering
 %  % Requires \usepackage{graphicx}
@@ -543,10 +544,10 @@ $A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReq
 \end{minipage}\vspace{\baselineskip}
 \end{figure}
 
-考虑所有虚拟节点的情况下，评估了SeVN问题启发式方法$\MyAlgorithmMethodAbrreviation$在分配资源时的性能。我们特别关注物理网络使用的资源和虚拟网络请求的资源情况，以及可生存虚拟网络请求的可接受率。
+考虑所有虚拟节点的情况下，评估了SVNE问题启发式方法$\MyAlgorithmMethodAbrreviation$在分配资源时的性能。我们特别关注物理网络使用的资源和虚拟网络请求的资源情况，以及可生存虚拟网络请求的可接受率。
 \subsection{算法性能评估及比较}
 \subsubsection{接受率}
-在这一部分中，如图\ref{fig:AcceptionRatio}所示比较了SeVN问题不同算法可生存性虚拟请求的接受率。此外，$\ThirdAlgorithmMethodAbrreviation$是所有其它算法前期的虚拟嵌入算法，在可生存性增广嵌入过程中，我们假设算法$\ThirdAlgorithmMethodAbrreviation$没有可生存性资源增广而已经达到可生存性功能需求。以$\ThirdAlgorithmMethodAbrreviation$作为标准比较算法来度量其它算法的性能，特别是可生存性需求导致的对底层物理网络额外资源消耗量。
+在这一部分中，如图\ref{fig:AcceptionRatio}所示比较了SVNE问题不同算法可生存性虚拟请求的接受率。此外，$\ThirdAlgorithmMethodAbrreviation$是所有其它算法前期的虚拟嵌入算法，在可生存性增广嵌入过程中，我们假设算法$\ThirdAlgorithmMethodAbrreviation$没有可生存性资源增广而已经达到可生存性功能需求。以$\ThirdAlgorithmMethodAbrreviation$作为标准比较算法来度量其它算法的性能，特别是可生存性需求导致的对底层物理网络额外资源消耗量。
 %由于到达的VN请求没有足够的底层物理资源，在200次单元时间之前，接受率迅速下降。
 如图\ref{fig:AcceptionRatio}所示，当系统中运行到250单元时间后接受率相对稳定和保持一致，$\MyAlgorithmMethodAbrreviation$ 算法比$\SecondAlgorithmMethodAbrreviation$ 算法有更高的接受率，接受率提高了近4\%，这是因为$\MyAlgorithmMethodAbrreviation$算法当可生存性需求时资源增广分配过程中比$\SecondAlgorithmMethodAbrreviation$ 算法消耗更少的底层资源。 $\MyAlgorithmMethodAbrreviation$-NoShared 比$\MyAlgorithmMethodAbrreviation$-Shared的接受率低，直观地说，这是因为$\MyAlgorithmMethodAbrreviation$-NoShared的为了可生存性的保证而需要更多的资源，备份资源之间都相互不共享，为了可生存性需求而资源增广都需要申请大量的额外资源，由于冗余资源消耗的原因，接受率至少比$\MyAlgorithmMethodAbrreviation$-Shared 损失了6\%。
 
@@ -645,7 +646,7 @@ $A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReq
 %  \includegraphics[width=4in]{figures/CostCurrentAverageSubstrateNetwork}\\
 %  \caption{底层物理网络实时消耗的成本}\label{fig:CostCurrentAverageSubstrateNetwork}
 %\end{figure}
-底层物理网络消耗资源的平均成本如图\ref{fig:CostAccumulateAverageSubstrateNetwork}所示。
+底层物理网络消耗资源的平均成本如图\ref{fig:CostAccumulateAverageSubstrateNetwork}所示，虚拟网络的平均收益如图\ref{fig:RevenueAccumulateAverageVirtualNetwork}所示。
 \begin{figure}[htbp]
 \centering
 \begin{minipage}{0.4\textwidth}
@@ -679,7 +680,7 @@ $A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReq
 %  \includegraphics[width=4in]{figures/RevenueAverageCurrentVirtualNetwork}\\
 %  \caption{虚拟网络实时的平均收益}\label{fig:RevenueAverageCurrentVirtualNetwork}
 %\end{figure}
-虚拟网络的平均收益如图\ref{fig:RevenueAccumulateAverageVirtualNetwork}所示。
+
 
 
 %\subsection{压力}
@@ -688,4 +689,4 @@ $A_{VN}$表示单位时间$t$时虚拟网络请求数。如图\ref{fig:VirNetReq
 %\subsection{备份节点数}
 
 \section{小结}
-本节提出了一种有效的算法$\MyAlgorithmMethodAbrreviation$，用于解决在具有可生存性保证请求的嵌入虚拟网络中，通过冗余节点和链路来有效地分配SeVN问题的增广资源(启动新的物理节点、使用链路带宽或使用节点计算)。资源分配方法考虑的是冗余节点是被动的还是主动的，只要在从故障恢复时有充足的资源可用。由于一个物理基础设施(底层网络)承载多个虚拟网络，因此在虚拟网络之间共享冗余节点是更有效的方式。我们引入了一种启发式方法来共享这些独立和相关的故障类型，并在星型构造分解和动态规划的基础上实现了资源的最优分配。我们的算法采用了一种新的资源分配方法来减少新的启动主机，在有限的进程时间内最小化资源，而且即使问题的规模相对较小，线性规划也无法计算出最优解。仿真结果表明，该算法在节约资源、实现高的虚拟请求接受率、高资源利用率和低启动节点数量等方面具有显著的效果。
+本节提出了一种有效的算法$\MyAlgorithmMethodAbrreviation$，用于解决在具有可生存性保证请求的嵌入虚拟网络中，通过冗余节点和链路来有效地分配SVNE问题的增广资源(启动新的物理节点、使用链路带宽或使用节点计算)。资源分配方法考虑的是冗余节点是被动的还是主动的，只要在从故障恢复时有充足的资源可用。由于一个物理基础设施(底层网络)承载多个虚拟网络，因此在虚拟网络之间共享冗余节点是更有效的方式。我们引入了一种启发式方法来共享这些独立和相关的故障类型，并在星型构造分解和动态规划的基础上实现了资源的最优分配。我们的算法采用了一种新的资源分配方法来减少新的启动主机，在有限的进程时间内最小化资源，而且即使问题的规模相对较小，线性规划也无法计算出最优解。仿真结果表明，该算法在节约资源、实现高的虚拟请求接受率、高资源利用率和低启动节点数量等方面具有显著的效果。

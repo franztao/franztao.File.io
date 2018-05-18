@@ -231,20 +231,6 @@ A_t=1-\prod_k(1-A_k)
 \end{figure}
 \section{共享风险链路组不相交路径}
 
-共享风险链接组(SRLG)是一组链路共享同一个组件，该组件的故障会导致所有链路的故障。一条链接可以属于多个共享风险链接组里。举个例子，在光网络的导管中\cite{bhandari1994optimal}可以放置多条光链路，如图\ref{fig:Logic shift operation} 所示，链路(1,2),(3,2) 和(3,4) 放置在一个导管中，同时链路(3,2)和(3,4)也共同放置在另一个导管中。如果某个导管被切断，相应导管的链路将失效。每个导管对应一个共享风险链接组。其它共享风险链接组的应用是交通网络的相关拥塞和电网的级联故障\cite{coudert2007shared}。
-
-
-\begin{figure}[htbp]
-\centering
-\subfigure[带有conduit的物理网络]{\includegraphics[width=2.2 in]{figures/PhysicalGraph}
-}
-\subfigure[逻辑网络]{\includegraphics[width=1.8 in]{figures/VirtualGraph}
-}
-\caption{共享风险链接组(SRLG)实例}\label{fig:SRLGgraph}
-\label{fig:Logic shift operation}
-\end{figure}
-
-设$\mathbb{R}$为网络中的风险集（故障）。每个风险可能对应于导管断开、光纤断裂、在一个节点上驱动故障、软件故障或这些因素的任何组合。对每一个共享风险链路组$r_i \in \mathbb{R}$ 是指与其风险$r_i$ 相关的链路集合$\mathbb{R}_{r_i}$，$1\leq i\leq \chi$ 和 $\chi=|{\mathbb{R}}|$是共享风险链路组集合的个数。如图\ref{fig:CompositeGraph}(a) 所示，该图包含五个共享风险链路组集合$\mathbb{R}_{r_1}=\{e_1,e_9\}$, $\mathbb{R}_{r_2}=\{e_2,e_3,e_{19}\}$, $\mathbb{R}_{r_3}=\{e_2,e_4,e_{11},e_{17}\}$, $\mathbb{R}_{r_4}=\{e_5,e_{13}\}$, $\mathbb{R}_{r_5}=\{e_{15},e_{18}\}$。 在这个例子中，链路$e_2$同属两个共享风险链路组集合里$\mathbb{R}_{r_2}$ 和 $\mathbb{R}_{r_3}$
 
 
 
