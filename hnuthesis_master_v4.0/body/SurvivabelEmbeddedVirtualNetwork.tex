@@ -261,7 +261,7 @@ dp[i][{x_1}][{x_2}] \ldots [{x_m}] = min\{\theta (i,1),\theta (i,2),\ldots,\thet
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=5.5in]{figures/DPIllustration}\\
-  \caption{动态规划方法的演示}\label{fig:DPIllustration}
+  \caption{动态规划解法演示}\label{fig:DPIllustration}
 \end{figure}
 
 
@@ -456,9 +456,9 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 对SVNE请求问题分析，该问题是优化领域中的二次规划问题，而SVNE问题解的实质是一系列排列矩阵，决定了每个节点失效后的迁移重分配过程。虚拟网络$|V|$节点全部都依次失效，每个节点的迭代时间复杂度为$O[|V|*|S|*\prod_{i=1}^{|S|}c^i]$。 因此，其总体计算复杂度为$O[|V|*|S|*|V|*\prod_{i=1}^{|S|}c^i]$，其中$|V|$为失效节点数。
 
 
-\section{仿真配置与评价指标}
+\section{实验配置与评价指标}
 本节首先描述了物理网络和虚拟网络的配置，然后给出了各种可生存性评价指标。
-\subsection{仿真配置}
+\subsection{实验配置}
 对于任何VN请求，VN节点的数目是由3到10之间的均匀分布随机得到的，每一对虚拟节点都是以概率0.5 随机连接的。VN节点的计算需求从1到5 之间随机分布，并且VN 上的带宽从1 到10之间随机分布。
 
 VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求的持续时间服从指数分布，平均100个时间单位，高的请求率和较长的租用时间保证了物理基础设施的高利用率。

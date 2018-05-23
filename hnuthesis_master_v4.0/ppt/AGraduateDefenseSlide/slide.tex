@@ -1,0 +1,188 @@
+%是否有ppt笔？
+%一般时间多久
+
+%ctrl+L  幻灯片播放
+
+%LaTeX手动安装宏包（package）以及生成帮助文档的整套流程
+%https://www.cnblogs.com/csucat/p/5142459.html
+%https://www.ctan.org/pkg/
+
+%一、要对论文的内容进行概括性的整合，将论文分为引言和试验设计的目的意义、材料和方法、结果、讨论、结论、致谢几部分。
+%
+%二、在每部分内容的presentation中，原则是：图的效果好于表的效果，表的效果好于文字叙述的效果。最忌满屏幕都是长篇大论，让评委心烦。能引用图表的地方尽量引用图表，的确需要文字的地方，要将文字内容高度概括，简洁明了化，用编号标明。
+%三、
+%1 文字版面的基本要求
+%幻灯片的数目：硕士答辩20min 20～35张
+%硕士答辩10min 10～20张
+%博士答辩30min 30～50张
+%字号字数行数：标题44号（40）
+%正文32号（不小于24号字）
+%每行字数在20～25个
+%每张PPT 6～7行 （忌满字）
+%中文用宋体(可以加粗)，英文用 Time New Romans
+%对于PPT中的副标题要加粗
+%PPT中的字体颜色不要超过3种（字体颜色要与背景颜色反差大）
+%建议新手配色：（1）白底，黑、红、篮字
+%（2）蓝底，白、黄字（浅黄或橘黄也可）
+%添加图片格式：好的质量图片TIF格式，GIF图片格式最小
+%图片外周加阴影或外框效果比较好
+%PPT总体效果：图片比表格好，表格比文字好；动的比静 的好，无声比有声好。
+%
+%四、(注意)
+%幻灯片的内容和基调。背景适合用深色调的，例如深蓝色，字体用白色或黄色的黑体字，显得很庄重。值得强调的是，无论用哪种颜色，一定要使字体和背景显成 明显反差。 注意：要点！用一个流畅的逻辑打动评委。字要大：在昏暗房间里小字会看不清，最终结果是没人听你的介绍。不要用PPT自带模板：自带模板那些评委们都见 过，且与论文内容无关，要自己做，简单没关系，纯色没关系，但是要自己做！ 时间不要太长：20分钟的汇报，30页内容足够，主要是你讲，PPT 是辅助性的。 记得最后感谢母校，系和老师，弄得煽情点 ^_^ 。
+
+\documentclass{beamer}
+\usepackage[UTF8]{ctex}
+
+%metropolis Boadilla Madrid CambridgeUS JuanLesPins
+\usetheme{Madrid}
+% 这里还可以选择别的主题Bergen,Boadilla,Madrid,AnnArbor, CambridgeUS,Pittsburgh
+% Rochester. 有导航栏的Antibes,JuanLesPins,Montpellier,有内容的Berkeley,PaloAlto,
+% Goettingen,Marburg,Hannover,有最小导航栏的Berlin,Ilmenau,Dresden,Darmstadt,
+% Frankfurt,Singapore,Szeged,有章和节表单的Copenhagen,Luebeck,Malmoe,Warsaw
+
+
+%\usecolortheme{default}
+% 这个主题一般选择动物来命名
+% 这里还可以选择别的颜色主题,如默认的和有特别目的的颜色主题default,structure,sidebartab,全颜色主题albatross,
+% beetle,crane,dove,fly,seagull,wolverine,beaver
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%设置内部颜色主题(这些主题一般改变block 里的颜色)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usecolortheme{orchid}
+% 这个主题一般选择植物来命名
+% 这里还可以选择别的颜色主题,如默认的和有特别目的的颜色主题lily,orchid,rose
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%设置外部颜色主题(这些主题一般改变title 里的颜色)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usecolortheme{whale}
+% 这个主题一般选择海洋动物来命名
+% 这里还可以选择别的颜色主题,如默认的和有特别目的的颜色主题whale,seahorse,dolphin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%设置字体主题%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usefonttheme{professionalfonts}
+% 类似的还可以定义structurebold,structuresmallcapsserif,professionalfonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamerfont{title}{size=\zihao 4}
+\usepackage{appendixnumberbeamer}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{booktabs}                       % 表格，横的粗线；\
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{subfigure}                      % 支持子图 %centerlast 设置最后一行是否居中
+\usepackage[subfigure]{ccaption}            % 支持子图的中文标题
+
+%\usepackage[colorlinks,linkcolor=red,anchorcolor=blue]{hyperref}
+
+%\usetikzlibrary{matrix,calc,shapes,backgrounds,patterns,positioning,decorations.pathreplacing}
+\graphicspath{{figures/}}                  % 定义所有的.eps文件在
+%\usepackage[unicode,               % pdflatex, pdftex 这里决定运行文件的方式不同
+%            pdfstartview=FitH
+%            CJKbookmarks=true,
+%            bookmarksnumbered=true,
+%            bookmarksopen=true,
+%            colorlinks=true,
+%            pdfborder={0 0 1},
+%            citecolor=black,
+%            linkcolor=black,
+%            anchorcolor=black,
+%            urlcolor=black,
+%            breaklinks=true
+%            ]{hyperref}
+
+%\floatname{algorithm}{算法}
+%\newcommand\forthsection[1]{\noindent \S #1}
+\renewcommand{\algorithmicrequire}{ \textbf{输入:}} %Use Input in the format of Algorithm
+\renewcommand{\algorithmicensure}{ \textbf{输出:}} %UseOutput in the format of Algorithm
+% \renewcommand\theequation{\arabic{chapter}-\arabic{equation}}
+\renewcommand{\thealgorithm}{}
+
+%%%%%%%%%% Table, Figure and Equation %%%%%%%%%%%%%%%%%
+\renewcommand{\tablename}{表} % 插表题头
+\renewcommand{\figurename}{图} % 插图题头
+% show fig and table number
+%\setbeamertemplate{caption}[numbered]
+% show theorems and example number
+%\setbeamertemplate{theorems}[numbered]
+%\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}} % 使图编号为 7.1 的格式 %\protect{~}
+%\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}%使表编号为 7.1 的格式
+%\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}%使公式编号为 7-1 的格式
+
+
+
+\title{SDN/NFV网络架构可生存性算法研究}
+\author[陶恒]{
+    \makebox[2.5em][s]{姓名:} \makebox[3em][s]{陶恒}\\
+    \makebox[2.5em][s]{导师:} \makebox[3em][s]{谢鲲\ 教授} \\
+    \makebox[2.5em][s]{专业:} \makebox[10em][l]{计算机科学与技术}\\
+}
+\date{2018-05-20}
+\titlegraphic{\hfill\includegraphics[height=1.5cm]{figures/Hnulogo}}
+
+
+\include{body/terminology}
+\include{body/number}
+
+\begin{document}
+% make title
+\maketitle
+
+% make content
+\begin{frame}{目录}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\include{body/chapter1}
+\include{body/chapter2}
+\include{body/chapter3}
+\include{body/chapter4}
+%\include{body/chap2}
+%\include{body/chap3}
+%\include{body/chap4}
+%\include{body/chap5}
+%\include{body/chap6}
+\begin{frame}
+\textbf{攻读学位期间所发表的学术论文和专利}
+\begin{itemize}
+  \item Kun Xie, Heng Tao, Xin Wang, Gaogang Xie, Jigang Wen, Jiannong Cao, Zheng Qin. Divide And Conquer For Fast SRLG Disjoint Routing[C]. DSN 2018: International Conference on Dependable Systems and Networks, Luxerbourg(CCF B)已发表。
+  \item 陶恒，谢鲲. 一种求完全风险共享链路组分离路径对的方法及系统：中国。已具有国家知识产权局公开号，并已进入实审阶段。
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[standout]
+\begin{center}
+\huge{谢谢观看}
+\end{center}
+\begin{center}
+研究生生活即将结束，在此，我要感谢所有教导我的老师和一齐成长的同学，他们在我的研究生学生涯给予了很大的帮助。本论文能够顺利完成，要特别感谢我的导师谢鲲老师，感谢各位老师的关心和帮助！
+\end{center}
+\begin{center}
+  恳请各位老师提出宝贵意见！
+\end{center}
+\end{frame}
+
+% If there are too many of them to fit on the frame,
+% you must manually split them among additional frames or use the allowframebreaks option.
+\begin{frame}[allowframebreaks]{References}
+  \scriptsize
+  \bibliographystyle{plain}
+  \bibliography{reference}
+\end{frame}
+
+\end{document}
