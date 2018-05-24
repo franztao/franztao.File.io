@@ -1,6 +1,8 @@
 ﻿---------------
 doing 
 
+thesis abstract
+
 design pattern
 openstack
 
@@ -12,7 +14,7 @@ sing-write method
 think out the mathamatic problem from tao's book 
 
 
-when i read some post,then i should auto-translate it before scanning it.
+when i read some post,then i should auto-translate it before scanning it. translate every post into english. after a paper I should do a note.
 
 
 
