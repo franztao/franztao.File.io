@@ -2,11 +2,11 @@
 \section{Avoid  duplicately adding backup resource}
 
 
-Given one node fails, after applying Algorithm \ref{alg:DPAlg} to calculate the minimum additional resource, new physical node and physical path is added and involved to maintain the network service. If a physical node that does not hold any virtual node before node fail is added to be the backup node, we should set the physical node with $a=1$ to indicate that this physical node is involved to hold virtual already.
+Given one node fails, after applying Algorithm \ref{alg:DPAlg} to calculate the minimum additional resource, new physical node and physical path is added and involved to maintain the network function. If a physical node that does not hold any virtual node before node fail is added to be the backup node, we should set the physical node with $a=1$ to indicate that this physical node is involved to hold virtual already.
 
-As our survivable virtual network embedding problem wants to minimize the backup resource added when any one node fails instead of given one node failure, we should test each node fail one by one and add sufficient backup resource. As the backup resource only need when node fails,  the  backup resource  should be shared when different node fails. If we directly apply cost defined in (\ref{eq:edge weight}) to calculate the backup resources when another physical node fails, as cost defined in (\ref{eq:edge weight}) does not consider the backup resource sharing, it will result in a problem of duplicately adding backup resource.
+As our survivable virtual network embedding problem wants to minimize the backup resource added when any one node fails instead of considering only one node failure, we should test each node fail one by one and add sufficient backup resource. As the backup resource only need when node fails,  the  backup resource  should be shared when different node fails. If we directly apply cost defined in (\ref{eq:edge weight}) to calculate the backup resources when another physical node fails, as cost defined in (\ref{eq:edge weight}) does not consider the backup resource sharing, it will result in a problem of duplicately adding backup resource.
 
-To  solve this problem,  we add the  $M(j)$ to the physical star structure to denote the set of virtual nodes migrated into  physical node $s_j$ in the case of node failure.
+Considering the case of backup resource sharing,  we add the  $M(j)$ to the physical star structure to denote the set of virtual nodes migrated into  physical node $s_j$ in the case of node failure testing before.
 
 
 \begin{equation}
@@ -27,16 +27,23 @@ When we test another node fails, instead of cost defined in (\ref{eq:edge weight
     \begin{equation}
   \footnotesize
 w(i,j) = \left\{ {\begin{array}{*{20}{c}}
-   {\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} } & {{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right),{v_{i'}} \in M(j),k \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}  \\
-   {\sum\limits_{k \in N(i) \cap N(i')} {f({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}}  + \lambda f({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)) + \beta {M_m} + \theta } & {{v_i} \notin \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right),{v_{i'}} \in M(j)}  \\
+   {\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} } & {{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right),{v_{i'}} \in M(j),k \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}  \\
+   {\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}}  + \lambda \mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)) + \beta {M_m} + \theta } & {{v_i} \notin \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right),{v_{i'}} \in M(j)}  \\
 \end{array}} \right.
     \label{eq:new edge weight}
     \end{equation}
 \end{figure*}
 
-As shown in  eq(\ref{eq:new edge weight}), the resource cost is setting according to two cases.  If virtual node $v_i$ is originally hold by  physical server $s_j$ or $v_i$ is migrated to the physical server, that is, ${{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right)}$, when its neighbor $v_k \in N(i)$ fails with ${\phi \left( k \right) \notin \phi \left( {{\phi ^{ - 1}}({s_j})} \right)}$, the path bandwidth cost is ${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$.
+As shown in (\ref{eq:new edge weight}), the resource cost is setting according to two cases.
 
-Otherwise, the virtual node $v_i$ is not hold by the physical server and not migrated to the server in previous physical node fail test, besides the bandwidth cost ${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$, the node capacity cost ${\lambda * \mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, VM migrate cost ${\beta * {M_m}}$ and $\theta$ should be counted for mapping the virtual star ($v_i$) to the physical server ($s_j$). In ${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$, if the backup capacity already allocated ${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is larger than amount needed  in current mapping (i.e., $d_i$), no additional resource is needed, otherwise, the backup resource gap ${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is needed.
+Case 1: If virtual node $v_i$ is held by  physical node $s_j$ (i.e., ${{v_i} \in \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right)}$), when its neighbor $v_k \in N(i)$ fails (i.e., ${\phi \left( k \right) \notin \phi \left(N\left( {{\phi ^{ - 1}}({s_j})} \right)\right)}$), the path bandwidth cost is ${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$ where ${v_{i'}}$ is the  virtual node that is migrated to physical node $s_j$ in pervious node failure testing (i.e., ${v_{i'}} \in M(j)$).
+%$v_{i'_1},\ldots,v_{i'_{|M(j)|}}\in M(j)$
+%${\sum\limits_{k \in ((N(i) \cap N(i'_1))\cup \ldots \cup(N(i) \cap N(i'_{M(j)})))} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i'_1)- \ldots - N(i'_{M(j)})} \right)} {{d_{ik}}} }$.
+
+Case 2: Otherwise, if the virtual node $v_i$ is not held by the physical node (i.e., ${{v_i} \notin \left( {{\phi ^{ - 1}}({s_j}) \cup M(j)} \right)}$), besides the bandwidth cost ${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$, VM migrate cost ${ {M_m}}$, $\theta$, and the capability cost ${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$ should be counted for mapping the virtual star ($v_i$) to the physical node ($s_j$). If the backup capacity already allocated ${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is larger than the amount needed  in current mapping (i.e., $d_i$), no additional resource is needed, otherwise, the backup resource gap ${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ is the further needed in current mapping, therefore, we use  ${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$ to denote the capacity cost needed.
+
+Fig.\ref{fig:StarRepresentationNode2} use an example to illustrate the the cost when we test physical node $s_2$ fails after we have tested physical node $s_1$ fails. From Fig.\ref{fig:Node1Failure}, we know when physical node $s_1$ fails, physical node $s_5$ is added as the backup node to hold virtual node $v_1$ instead of $s_1$. Therefore, in the  edge weight matrix, the cost of mapping $v_1$ to $s_5$ is  $e(1,5)=0$ as the backup resource of mapping $v_1$ to $s_5$ has been added when physical node $s_1$ fails. The cost of mapping $v_2$ to $s_5$ is , which including the additional capacity cost (), the bandwidth cost (), and the migration cost (). In the example, the capacity cost is $d_2-d_1=1$ instead of $d_2=3$. This is because that the amount of capacity $d_1=2$ is added as the backup capacity when $s_1$ fails, when $s_2$ fails, only $d_2-d_1=1$ is further needed to hold $v_2$.
+
 
 .................................
 
@@ -54,25 +61,6 @@ As shown in Fig.\ref{fig:StarRepresentationNode2} and Equ.(\ref{lab:Node2Faliure
 \end{array}} \right]$.
 
 
-\begin{figure}
-\centering
-% Requires \usepackage{graphicx}
-\includegraphics[width=3.5in]{Fig/StarRepresentationNode2}\\
-  \caption{Components of VirtualStar($v_i$) and PhysicalStar($s_j$) when physical node $s_2$ fail}\label{fig:StarRepresentationNode2}
-\end{figure}
-
-\begin{equation*}
-\tiny{
- {\begin{array}{*{20}{c}}
-&R_{S_{1}}&R_{S_{2}}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
-{L_{V_1}}&\fbox{4}&\infty&\infty&\infty&M_{m}&C_{s}+M_{m}+(2)+12&\infty\\
-L_{V_2}&\infty&\infty&\infty&\infty&\fbox{$M_{m}$+(1)+5}&\infty&C_{s}+M_{m}+(3)+10\\
-L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+(5)+11\\
-L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
-\end{array}}
-}
-\label{lab:Node2FaliureAlignmentMatrixNew}
-\end{equation*}
 
 %\begin{equation*}
 %\tiny{
@@ -105,10 +93,10 @@ Based method in Sec.\ref{lab:DynamicProgrammingEquation}, obtaining the optimal 
 \tiny{
  {\begin{array}{*{20}{c}}
 &R_{S_1}&R_{S_2}&R_{S_3}&R_{S_4}&R_{S_5}&R_{S_6}&R_{S_{7}}\\
-{L_{V_1}}&\infty&\infty&\infty&\infty&\fbox{$C_{s}+M_{m}$+(2)+12}&C_{s}++M_{m}+(2)+12&\infty\\
-L_{V_2}&\infty&\infty&\infty&\infty&C_{s}+M_{m}+(3)+10&\infty&\fbox{$C_{s}+M_{m}+(3)+10$}\\
-L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+(5)+11\\
-L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
+{L_{V_1}}&\infty&\infty&\infty&\infty&\fbox{$C_{s}+M_{m}+\lambda(2)+\alpha 12$}&C_{s}+M_{m}+\lambda(2)+\alpha 12&\infty\\
+L_{V_2}&\infty&\infty&\infty&\infty&C_{s}+M_{m}+\lambda(3)+\alpha 10&\infty&\fbox{$C_{s}+M_{m}+\lambda(3)+\alpha 10$}\\
+L_{V_3}&\infty&\infty&\fbox{5}&\infty&\infty&\infty&C_{s}+M_{m}+\lambda(5)+\alpha 11\\
+L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+\lambda(6)+\alpha 3&\infty\\
 \end{array}}
 }
 \label{lab:Node1Node2FaliureAlignmentMatrixNewTwoFailure}

@@ -174,7 +174,7 @@ In this section, acceptance ratio of the embedded VN's survivable request with r
 
 In Fig.\ref{fig:AcceptionRatio}, acceptance ratio drops quickly before 200 time units because there are not sufficient substrate resources for the arrived VN requests. when the amount of running VN requests in system are stable after 400 time units, acceptance ratio would keep consistent. Fig.\ref{fig:AcceptionRatio} also depicts that $\MyAlgorithmMethodAbrreviation$ lead to higher acceptance ratio than $\SecondAlgorithmMethodAbrreviation$ algorithm needless of resources sharing. In particular, comparing with $\SecondAlgorithmMethodAbrreviation$-Shared, $\MyAlgorithmMethodAbrreviation$-Shared approach achieves almost 6\% improvement of acceptance ratio in the long run. Intuitively, it is the result of fact that, for $\MyAlgorithmMethodAbrreviation$-NoShared embedding, the backup node is associated with a lot of resources since it has to emulate every primary node after it fails, and so, embedding of backup node is vulnerable. However, the acceptance ratio suffers at least 6\% losses than $\MyAlgorithmMethodAbrreviation$-Shared caused by redundant resources consumption for survivability purpose.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/AcceptionRatio}\\
@@ -185,7 +185,7 @@ In Fig.\ref{fig:AcceptionRatio}, acceptance ratio drops quickly before 200 time 
 Number of nodes that need to be active and embedded in order to host all the virtual networks.
 
 Virtual Network Active Node Fig.\ref{fig:ActiveNodeVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/ActiveNodeVirtualNetwork}\\
@@ -193,7 +193,7 @@ Virtual Network Active Node Fig.\ref{fig:ActiveNodeVirtualNetwork}:
 \end{figure}
 
 Virtual Network Average Active Node Fig.\ref{fig:ActiveNodeAverageVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/ActiveNodeAverageVirtualNetwork}\\
@@ -204,7 +204,7 @@ Virtual Network Average Active Node Fig.\ref{fig:ActiveNodeAverageVirtualNetwork
 The number of active substrate nodes is related to the average length of substrate paths, because additional nodes are used to forward communication data between end nodes. Therefore, the probability that previously switched off nodes are selected to forward data rises. Regarding energy efficiency, the number of nodes that need to be turned for an embedding can be a rough estimation of energy consumption.
 
 Substrate Network Active Node Fig.\ref{fig:ActiveNodeSubstrateNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/ActiveNodeSubstrateNetwork}\\
@@ -213,7 +213,7 @@ Substrate Network Active Node Fig.\ref{fig:ActiveNodeSubstrateNetwork}:
 
 
 Substrate Network Average Active Node Fig.\ref{fig:ActiveNodeAverageSubstrateNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/ActiveNodeAverageSubstrateNetwork}\\
@@ -224,7 +224,7 @@ Substrate Network Average Active Node Fig.\ref{fig:ActiveNodeAverageSubstrateNet
 In general, the ratio between running nodes and the total number of substrate nodes should be taken into account.
 
 Substrate Network Active Node/ Virtual Network Active Node Fig.\ref{fig:ActiveNodeSubVir2VirNet}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/ActiveNodeSubVir2VirNet}\\
@@ -235,7 +235,7 @@ Substrate Network Active Node/ Virtual Network Active Node Fig.\ref{fig:ActiveNo
 \subsubsection{Virtual network Path Length}
 
 Virtual Network Path Length Fig.\ref{fig:PathLengthVirtualNetwork}
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/PathLengthVirtualNetwork}\\
@@ -244,7 +244,7 @@ Virtual Network Path Length Fig.\ref{fig:PathLengthVirtualNetwork}
 
 
 Virtual Network Average Path Length Fig.\ref{fig:PathLengthAverageVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/PathLengthAverageVirtualNetwork}\\
@@ -255,7 +255,7 @@ Virtual Network Average Path Length Fig.\ref{fig:PathLengthAverageVirtualNetwork
 The longer a corresponding path, the more resources had to be reserved for the embedding of the virtual link. Since every substrate node (except the receiving node) that is part of a path will take some time to forward packages sent via this path, the quality of service is influenced by the path length. In general, the package delay increases in connection with the length of a path.
 
 Substrate Network Path Length Fig.\ref{fig:PathLengthSubstrateNetwork}.
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/PathLengthSubstrateNetwork}\\
@@ -263,7 +263,7 @@ Substrate Network Path Length Fig.\ref{fig:PathLengthSubstrateNetwork}.
 \end{figure}
 
 Substrate Network Average Path Length Fig.\ref{fig:PathLengthAverageSubstrateNetwork}.
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/PathLengthAverageSubstrateNetwork}\\
@@ -277,7 +277,7 @@ Substrate Network Average Path Length Fig.\ref{fig:PathLengthAverageSubstrateNet
 
 
 Substrate Network Path Length/ Virtual Network Path Length Fig.\ref{fig:PathLengthSubVir2VirNet}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/PathLengthSubVir2VirNet}\\
@@ -291,7 +291,7 @@ Substrate Network Path Length/ Virtual Network Path Length Fig.\ref{fig:PathLeng
 In this work, the embedding cost is calculated as the cost of the substrate resources (i.e. cost of node computing ability on all facility nodes, edge bandwidth on all fiber links) consumed to satisfy the $\MyProblemAbrreviation$ resource requirements.
 
 Substrate Network Real-Time Cost Fig.\ref{fig:CostCurrentSubstrateNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/CostCurrentSubstrateNetwork}\\
@@ -299,7 +299,7 @@ Substrate Network Real-Time Cost Fig.\ref{fig:CostCurrentSubstrateNetwork}:
 \end{figure}
 
 Substrate Network Increment Cost Fig.\ref{fig:CostAccumulateSubstrateNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/CostAccumulateSubstrateNetwork}\\
@@ -307,7 +307,7 @@ Substrate Network Increment Cost Fig.\ref{fig:CostAccumulateSubstrateNetwork}:
 \end{figure}
 
 Substrate Network Average Real-Time  Cost Fig.\ref{fig:CostCurrentAverageSubstrateNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/CostCurrentAverageSubstrateNetwork}\\
@@ -315,7 +315,7 @@ Substrate Network Average Real-Time  Cost Fig.\ref{fig:CostCurrentAverageSubstra
 \end{figure}
 
 Substrate Network Increment Average Cost Fig.\ref{fig:CostAccumulateAverageSubstrateNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/CostAccumulateAverageSubstrateNetwork}\\
@@ -326,7 +326,7 @@ Substrate Network Increment Average Cost Fig.\ref{fig:CostAccumulateAverageSubst
 
 \subsubsection{Revenue}
 Virtual Network Real-Time Revenue Fig.\ref{fig:RevenueCurrentVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/RevenueCurrentVirtualNetwork}\\
@@ -334,7 +334,7 @@ Virtual Network Real-Time Revenue Fig.\ref{fig:RevenueCurrentVirtualNetwork}:
 \end{figure}
 
 Virtual Network Increment Revenue Fig.\ref{fig:RevenueAccumulateVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/RevenueAccumulateVirtualNetwork}\\
@@ -342,7 +342,7 @@ Virtual Network Increment Revenue Fig.\ref{fig:RevenueAccumulateVirtualNetwork}:
 \end{figure}
 
 Virtual Network Average Real-Time Revenue Fig.\ref{fig:RevenueAverageCurrentVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/RevenueAverageCurrentVirtualNetwork}\\
@@ -350,7 +350,7 @@ Virtual Network Average Real-Time Revenue Fig.\ref{fig:RevenueAverageCurrentVirt
 \end{figure}
 
 Virtual Network Average Increment Revenue Fig.\ref{fig:RevenueAccumulateAverageVirtualNetwork}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/RevenueAccumulateAverageVirtualNetwork}\\
@@ -362,7 +362,7 @@ Virtual Network Average Increment Revenue Fig.\ref{fig:RevenueAccumulateAverageV
 By dividing Cost by Revenue, varying Cost values are balanced. The higher the value, the more resources were needed to embed the SeVNs.
 
 Cost/Revenue Fig.\ref{fig:CostRevenue}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/CostRevenue}\\
@@ -370,7 +370,7 @@ Cost/Revenue Fig.\ref{fig:CostRevenue}:
 \end{figure}
 
 Increment Cost to Increment Revenue Fig.\ref{fig:CostRevenueAccumulate}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/CostRevenueAccumulate}\\
@@ -382,7 +382,7 @@ Increment Cost to Increment Revenue Fig.\ref{fig:CostRevenueAccumulate}:
 \subsection{Migration Frequency}
 Typically, at least the virtual nodes hosted on the failing substrate nodes have to be moved. Other constraints, like maximum path length, might however trigger even more migrations. Since migrations are resource intensive, they should be kept to a minimum.
 Fig.\ref{fig:MigrationFrequence}
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/MigrationFrequence}\\
@@ -397,7 +397,7 @@ The stress level of a substrate entity reflects the number of virtual entities t
 between virtual entities.
 The stress of a SN element (node or link)is the number of virtual instances mapped on top of it.
 Stress Fig.\ref{fig:Stress}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/Stress}\\
@@ -410,7 +410,7 @@ Utilization measures, in each SN entity (node or link), the sum of the spent sub
 the stress level metric, because it also takes into account the magnitude of the resource usage instead of simply counting the number of virtual entities that use a resource. For example, to measure the utilization of a substrate node, the sum of mapped computing resources divided by the node computing capacity of the node could be used. The usage of a substrate link could be based on the sum of mapped bandwidth resources divided by the total link bandwidth capacity.
 
 Utilization Fig.\ref{fig:Utilization}:
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   % Requires \usepackage{graphicx}
   \includegraphics[width=3in]{Fig/Utilization}\\
