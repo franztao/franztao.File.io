@@ -4,10 +4,7 @@ In this section, we describe how to find a SRLG Conflicting Link Set for a given
 
 \subsection{Build a new graph $G^*$ with novel link capability setting principle}
 
-
 As introduced in Section \ref{sec:PRELIMINARIES},  if all the links in the cut-set $\mathbb{\mathbb{L}}_{\Phi}$ are removed in a graph $G$, then $|f| = 0$. That is, no flow can pass from $s$ to $d$. In this paper,  we try to find the SRLG Conflicting Link Set based on the concept of the cut-set. If an AP flow passes from $s$ to $d$ through a path that shares the risk with  all links in the cut-set, then no SRLG-disjoint BP can be found, as no link in the cut-set can be selected for a BP path to pass through the cut.
-
-
 
 To facilitate finding the SRLG Conflicting Link Set based on the cut-set, we construct a new graph $G^*$ as follows.
 
@@ -49,9 +46,6 @@ We will first show that some good properties of our rebuilt graph $G^*$ can serv
 Let $\Phi$=${(\mathbb{S}},{\mathbb{D}})$ be a min-cut of $G^*$ and $\mathbb{L}_{\Phi}$  represent the \textbf{cut-set}. Fig.\ref{fig:MinCutStarGraph} shows the min-cut $\Phi$=${(\mathbb{S}},{\mathbb{D}})$ with ${\mathbb{S}}=\{s, 1, 2, 3, 4, 5, 9\}$,  ${\mathbb{D}}=\{6, 7, 8, d\}$, and $\mathbb{L}_{\Phi}=\{e_{11}, e_{13}, e_{19}, e_6\}$.
 
 
-
-
-
 \begin{lemma}
 \label{le:lemma1}
     Any path from $s$ to $d$ in $G^*$ must pass through at least one link in $\mathbb{AP}$ or $\mathbb{\mathbb{ER}}$.
@@ -90,15 +84,12 @@ In the network with SRLG, if  a link is selected by an AP or shares the same ris
     If a path of a unit-flow blocks all the links in \textbf{cut-set} $\mathbb{L}_{\Phi}$, then no flow can use the links in  $\mathbb{L}_{\Phi}$ and thus no more flow can pass the cut $\Phi$.
 \end{proof}
 
-Theorem \ref{th:block flow} provides us the possibility to find the SRLG Conflicting Link Set. That is, when an AP encounters a trap problem, we can find the sub-set of the $\mathbb{AP}$  that can block all the links in \textbf{cut-set} $\mathbb{L}_{\Phi}$, and this sub-set of links can form the  SRLG Conflicting Link Set. When any a path contains all links in the SRLG Conflicting Link Set, no more flow can pass the cut $\Phi$, thus no SRLG-disjoint BP can be found.
+Theorem \ref{th:block flow} provides us the possibility to find the SRLG Conflicting Link Set. That is, when an AP encounters a trap problem, we can find the sub-set of \del{the} $\mathbb{AP}$  that can block all the links in \rev{the} \textbf{cut-set} $\mathbb{L}_{\Phi}$, and this sub-set of links can form the  SRLG Conflicting Link Set. When any a path contains all links in the SRLG Conflicting Link Set, no more flow can pass the cut $\Phi$, thus no SRLG-disjoint BP can be found.
 
 
 \subsection{Set cover problem for SRLG Conflicting Link Set}
 \label{subsec:Set cover problem for SRLG Conflicting Link Set}
 Although together all links on the AP path form a SRLG Conflicting Link Set, we are interested in a set that has as few links as possible, as the size of the SRLG Conflicting Link Set determines the number of sub-problems partitioned according to Section \ref{subsec:dividedconquer}.
-
-
-
 
 
 According to theorem \ref{th:block flow}, \textbf{the minimum SRLG Conflicting Link Set finding problem} can be described as:  find the minimum subset of links on AP  that can block all the  links in the \textbf{cut-set} $\mathbb{L}_{\Phi}$.
@@ -109,19 +100,19 @@ For each link $e_i$ on AP, we define its cut-block-link set as ${\mathbb{B}_{{e_
 
 Therefore, the minimum SRLG Conflicting Link Set finding problem can be formulated as a Set Cover Problem: given $\mathbb{AP}$ (the link set of path links of $AP$), the \textbf{cut-set} $\mathbb{L}_{\Phi}$,  and a collection of the cut-block-link sets ${\mathbb{B}_{{e_1}}},{\mathbb{B}_{{e_2}}}, \cdots ,{\mathbb{B}_{{e_{|\mathbb{AP}|}}}}$, we want to find the fewest sets whose union is $\mathbb{L}_{\Phi}$, that is, the smallest $\mathbb{T} \subseteq \{e_i| e_i\in \mathbb{AP}\}$ such that ${ \cup_{e_i \in \mathbb{T}}}{\mathbb{B}_{e_i}} = \mathbb{L}_{\Phi}$.
 
-\begin{figure*}[tp]
+\begin{figure}[tp]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=3.8in]{franz/MinCutStarGraph}
+  \includegraphics[width=3.6in]{franz/MinCutStarGraph}
   \caption{Min cut of the network graph, $\mathbb{SR}_{e_1}=\{e_1, e_9\},\mathbb{SR}_{e_2}=\{e_2,e_3,e_4, e_{11},e_{17},e_{19}\},\mathbb{SR}_{e_3}=\{e_2,e_3, e_{19}\},\mathbb{SR}_{e_4}=\{e_2,e_4, e_{11},e_{17}\},\mathbb{SR}_{e_5}=\{e_5, e_{13}\},\mathbb{SR}_{e_6}=\{e_6\},\mathbb{SR}_{e_7}=\{e_7\} $ and $\mathbb{SR}_{e_8}=\{e_8\}$. $\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$. $\mathbb{B}_{e_1}=\emptyset,\mathbb{B}_{e_2}=\{e_{11},e_{19}\},\mathbb{B}_{e_3}=\{e_{19}\},\mathbb{B}_{e_4}=\{e_{11}\},\mathbb{B}_{e_5}=\{e_{13}\},\mathbb{B}_{e_6}=\{e_6\}$,$\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$.}\label{fig:MinCutStarGraph}
   \label{fig:MinCutStarGraph}
-\end{figure*}
+\end{figure}
 
 The Set Cover Problem is usually an NP-hard problem with its complexity depending on the size of the elements (denoted by $n$). In our minimum SRLG Conflicting Link Set finding problem, $n=|\mathbb{L}_{\Phi}|$, that is, the edge number of cut set $\mathbb{L}_{\Phi}$. As this paper's focus is not to improve the solution of the set cover problem, we apply the algorithm proposed in \cite{chvatal1979greedy} with the complexity $O(log(|\mathbb{L}_{\Phi}|))$  to find the minimum SRLG Conflicting Link Set.
 
-\revtao{The number of subproblems to partition in our divide-and-conquer algorithm is determined by the size of the SRLG Conflicting Link Set, which is at most the hop number of the AP. The random graph of Erd{\"o}s, and R{\'e}nyi \cite{erdos1959random} is one of the best studied models of real-world networks such as Internet, social networks or biological networks. According to random graph theorem, the average distances (hops) between any two nodes in a random network are proportional to log($|\mathbb{\mathbb{V}}|$) (not a large number). }
+The number of subproblems to partition in our divide-and-conquer algorithm is determined by the size of the SRLG Conflicting Link Set, which is at most \rev{equal to} the hop number of \del{the} AP. The random graph of Erd{\"o}s, and R{\'e}nyi \cite{erdos1959random} is one of the best studied models of real-world networks such as Internet, social networks or biological networks. According to random graph theorem, \rev{the average distance (number of hops) between any two nodes in a random network is} proportional to log($|\mathbb{\mathbb{V}}|$), \rev{which is not a large number.} 
 
-Usually, even for a large scale network, \revtao{the  AP with the shortest path does not have a large number of $n=|\mathbb{L}_{\Phi}|$}. Therefore, the cost to calculate the minimum SRLG Conflicting Link Set through the set cover is not large.
+Usually, even for a large scale network, \revtao{the shortest path of AP} does not have a large number of $n=|\mathbb{L}_{\Phi}|$. \note{The last part of the sentence does not read right. i am not sure what you want to say.} Therefore, the cost to calculate the minimum SRLG Conflicting Link Set through the set cover is not large.
 
 To illustrate how to find the minimum SRLG Conflicting Link Set, we show an example in Fig.\ref{fig:MinCutStarGraph}. For the min-cut $\Phi(\mathbb{S},\mathbb{D})$, $\mathbb{S}=\{s, 1, 2, 3, 4, 5, 9\}$ and $\mathbb{D}=\{d, 6, 7, 8\}$, the \textbf{cut-set} is $\mathbb{L}_{\Phi}=\{e_{11},e_{13},e_{19},e_{6}\}$. For links in $\mathbb{AP}$,  cut-block-link sets are: $\mathbb{B}_{e_1}=\emptyset$, $\mathbb{B}_{e_2}=\{e_{11},e_{19}\}$, $\mathbb{B}_{e_3}=\{e_{19}\}$, $\mathbb{B}_{e_4}=\{e_{11}\}$, $\mathbb{B}_{e_5}=\{e_{13}\}$, $\mathbb{B}_{e_6}=\{e_6\}$, $\mathbb{B}_{e_7}=\emptyset$ and $\mathbb{B}_{e_8}=\emptyset$. To cover $\mathbb{L}_{\Phi}$, the fewest cut-block-link sets are $\{\mathbb{B}_{e_2}$, $\mathbb{B}_{e_5}$, $\mathbb{B}_{e_6}\}$. Therefore, the minimum SRLG Conflicting Link Set is $\mathbb{T}=\{e_2, e_5, e_6 \}$.
 
