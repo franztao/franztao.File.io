@@ -33,7 +33,7 @@
 
 给定VN请求$G(V,E)$和物理网络$G(S,L)$，对于可行映射，我们将映射的物理图表示为$G\left( {\hat S,P} \right)$，其中$\hat S$是容纳虚拟节点的物理节点集，其中$\hat S = \{ {s_{i'}}:\phi({v_i}) = {s_{i'}},for\ \ {\rm{ }}all\ {v_i} \in V,{s_{i'}} \in S\}$ 和$P$ 是路径集，其中每个路径都持有一个虚拟链路$P = \{ p_{\phi({v_i}) \phi({v_j})}:\rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})}{\rm{ }}, for\ all,{e_{ij}} \in E\}$。由于每个虚拟链路对应一个物理网络路径，该路径由多个物理链路组成，因此我们还将$G\left( {\hat S,\hat L} \right)$表示为占领的物理网络$\hat L = \{ {l_{pg}}:{l_{pg}} \in {p_{s_{i'}s_{j'}}}, \rho(e_{ij}) = p_{\phi({v_i}) \phi({v_j})},for\ all\ {e_{ij}} \in E,{l_{pg}} \in L\}$。
 
-已经有了许多关于虚拟网络嵌入问题\cite{liu2011completing}的研究，文献\mycite{amaldi2016computational}指出虚拟网络嵌入问题复杂度是NP-hard，因为本文的重点不是虚拟网络嵌入算法，我们采用了\cite{lischka2009virtual} 中的算法作为基本的虚拟网络嵌入算法。
+已经有了许多关于虚拟网络嵌入问题\cite{liu2011completing}的研究，文献\mycite{amaldi2016computational}指出虚拟网络嵌入问题复杂度是NP-hard，因为本文的重点不是虚拟网络嵌入算法，我们采用了文献\cite{lischka2009virtual}中的算法作为基本的虚拟网络嵌入算法。
 
 
 \begin{figure}[htbp]
@@ -132,23 +132,23 @@
 将虚拟网络分解为虚拟局部星型图。每个虚拟局部星型图与一个虚拟节点相关联。给出虚拟节点$v_i$，相应的虚拟局部星型图被定义为属性化单层根树，并如公式\ref{eq:virtualstar} 所示。
 
 \begin{equation}
-VirtualStar(v_i)=(v_i, \phi(v_i), d_i, f_i, D_i, N_i)
+VS(v_i)=(v_i, \phi(v_i), d_i, f_i, D_i, N_i)
 \label{eq:virtualstar}
 \end{equation}
 
 
-其中，$N_i$是虚拟网络中的相邻节点集，并与节点$v_i$相关联的带宽需求集${D_i} = \left\{ {{d_{ij}}|{v_j} \in {N_i}} \right\} $。 注意，VirtualStar($v_i$) 包括节点映射信息$\phi(v_i)$。 因为我们希望最小化备份资源以提供可生存性的网络服务，在节点失效前重复使用映射可能减少额外资源，使系统保持稳定的一个很好的选择。在虚拟星型图结构中，根节点和它的邻居节点存在链路，但是根节点的邻居节点之间不存在链路。
+其中，$N_i$是虚拟网络中的相邻节点集，并与节点$v_i$相关联的带宽需求集${D_i} = \left\{ {{d_{ij}}|{v_j} \in {N_i}} \right\} $。 注意，VS($v_i$) 包括节点映射信息$\phi(v_i)$。 因为我们希望最小化备份资源以提供可生存性的网络服务，在节点失效前重复使用映射可能减少额外资源，使系统保持稳定的一个很好的选择。在虚拟星型图结构中，根节点和它的邻居节点存在链路，但是根节点的邻居节点之间不存在链路。
 
 物理网络被分解为物理局部星型图。同样，每个物理局部星型图与一个物理节点相关联。给定物理节点$s_j$，对应的物理局部星型图被定义为属性化单层根树，并表示如公式\ref{eq:physicalstar}所示。
 \begin{equation}
-PhysicalStar(s_j)=(s_j, \phi^{-1}( s_j), c_j, F(j), \phi(N(\phi^{-1}( s_j))), a)
+PS(s_j)=(s_j, \phi^{-1}( s_j), c_j, F(j), \phi(N(\phi^{-1}( s_j))), a)
 \label{eq:physicalstar}
 \end{equation}
 
 其中$\phi^{-1}( s_j)$是映射到物理节点$s_j$的虚拟节点集，$N(\phi^{-1}( s_j))$ 是$\phi^{-1}( s_j)$中虚拟节点的相邻节点，$\phi(N(\phi^{-1}( s_j)))$ 是承载这些邻居的物理节点，$c_j$是节点容量，$F(j)$ 是$s_j$支持的虚拟功能，$a$是一个1 位的单比特，它的值为0 或1，以指示这个物理节点是否开启和设置了虚拟机。与虚拟星型图类似，在物理星型图结构中，根节点与相邻节点之间存在边，相邻节点之间不存在边。定义在\ref{eq:virtualstar} 和\ref{eq:physicalstar} 中的虚拟星型图和物理星型图很好地捕获了隐藏在VN 请求中的局部结构，以保持节点与其相邻节点之间的关系。基于虚拟局部星型图和物理虚拟星型图，虚拟网络和物理网络可以分解为多个组件。
 
 \subsection{构建星型二分图}
-构造了一个二分图$G=\{V_1,V_2,E\}$来表示虚拟网络与物理网络之间的关系。$V_1$ 和$V_2$分别表示虚拟星型图和物理星型图的集合。如果VirtualStar($v_i$) 的虚拟功能 $f_i$能在具有${f_i} \in {F_j}$ 的物理节点$s_j$上执行，则在边集$E$ 中添加边$e(i,j)$，以连接VirtualStar($v_i$) 和PhysicalStar($s_j$)。
+构造了一个二分图$G=\{V_1,V_2,E\}$来表示虚拟网络与物理网络之间的关系。$V_1$ 和$V_2$分别表示虚拟星型图和物理星型图的集合。如果VS($v_i$) 的虚拟功能 $f_i$能在具有${f_i} \in {F_j}$ 的物理节点$s_j$上执行，则在边集$E$ 中添加边$e(i,j)$，以连接VS($v_i$) 和PS($s_j$)。
 
 我们的目标是最小化备份资源以提供可生存性的服务。为了服务于目标，给定边$e(i,j)$，我们定义了边权$w(i,j)$作为备份资源成本。当节点发生故障时，将虚拟星型图($v_i$) 映射到物理星型图($s_j$)。 根据虚拟节点$v_i$映射到物理节点$s_j$ 节点是否失效，如公式\ref{eq:edge weight}所示在两种不同的情况下定义了边权重$w(i,j)$。
 \begin{equation}
@@ -175,7 +175,7 @@ w(i,j) = \left\{ {\begin{array}{*{20}{c}}
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=4.5in]{figures/StarRepresentation}\\
-  \caption{当物理节点$s_1$ 失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\label{fig:StarRepresentation}
+  \caption{当物理节点$s_1$ 失效时VS($v_i$)和PS($s_j$)}\label{fig:StarRepresentation}
 \end{figure}
 
 \begin{equation}
@@ -192,11 +192,11 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \end{equation}
 
 
-对于虚拟节点$v_i$，如果它的虚拟功能不能在具有$f(i) \notin F(i)$ 的物理节点$s_j$ 中执行，则没有边连接在$V_1$ 中的$VirtualStar(v_i)$和在$V_2$中 的$PhysicalStar(s_j)$。为了便于问题表述，我们将边权设为$\infty $。例如，由于$v_1$ 的虚拟功能是$f_1$，所以它不能在物理节点$s_2$ 中执行。因此，与$VirtualStar(v_1)$ 和$PhysicalStar(s_2)$连接时，不添加任何边，我们设置$w(1,2)=\infty$。
+对于虚拟节点$v_i$，如果它的虚拟功能不能在具有$f(i) \notin F(i)$ 的物理节点$s_j$ 中执行，则没有边连接在$V_1$ 中的$VS(v_i)$和在$V_2$中 的$PS(s_j)$。为了便于问题表述，我们将边权设为$\infty $。例如，由于$v_1$ 的虚拟功能是$f_1$，所以它不能在物理节点$s_2$ 中执行。因此，与$VS(v_1)$ 和$PS(s_2)$连接时，不添加任何边，我们设置$w(1,2)=\infty$。
 
-对于$VirtualStar(v_2)$，因为$v_2$最初由$s_2$ 持有，但是，当物理节点$s_1$(最初持有$v_1$)失效时，虚拟链路$e_{12}$无法映射到物理网络。我们应该找到一条连接$\phi(v_2)$和$\phi(v_1)$ 满足带宽需求$d_{12}=4$的新路径。因此，边权系数$VirtualStar(v_2)$和$PhysicalStar(s_2)$的值为4。
+对于$VS(v_2)$，因为$v_2$最初由$s_2$ 持有，但是，当物理节点$s_1$(最初持有$v_1$)失效时，虚拟链路$e_{12}$无法映射到物理网络。我们应该找到一条连接$\phi(v_2)$ 和$\phi(v_1)$ 满足带宽需求$d_{12}=4$的新路径。因此，边权系数$VS(v_2)$和$PS(s_2)$的值为4。
 
-当节点$s_1$失效时，它直接影响虚拟节点$v_1$。 由于$s_5$ 可以执行虚拟功能$f_1$，我们可以添加一个边来连接$VirtualStar(v_1)$和$PhysicalStar(s_5)$。 然而，在由于$s_5$ 以前没有设置虚拟机，因此还引入了虚拟机的启动成本$C_s$。 因此，链路权重为$C_s$(启动成本)+$M_m$(迁移成本)+3(节点容量成本)+10(带宽成本)。
+当节点$s_1$失效时，它直接影响虚拟节点$v_1$。 由于$s_5$ 可以执行虚拟功能$f_1$，我们可以添加一个边来连接$VS(v_1)$和$PS(s_5)$。 然而，在由于$s_5$ 以前没有设置虚拟机，因此还引入了虚拟机的启动成本$C_s$。 因此，链路权重为$C_s$(启动成本)+$M_m$(迁移成本)+3(节点容量成本)+10(带宽成本)。
 
 \subsection{星型二分图匹配问题定义}
 为了提供可生存性的服务，每个虚拟星型图(根虚拟节点和连接根节点及其相邻节点的虚拟链路)都应该映射到物理星型图。假设虚拟网络由n 个虚拟节点组成，因此有n个虚拟星型图。物理网络由m 个物理节点组成，从而构成m 个物理星型图。在等式\ref{eq:indication}中，我们使用二进制位$M_{ij}$ 来表示第i 个虚拟星型图是否映射到第j 物理星型图。
@@ -321,7 +321,7 @@ M_{ij}=\left[ {\begin{array}{*{20}{c}}
 
 为了解决这一问题，我们将$M(j)$加入到物理星型结构中，表示在节点失效的情况下迁移到物理节点$s_j$中的虚拟节点集。
 \begin{equation}
-PhysicalStar(s_j)=(s_j, \phi^{-1}( s_j), c_j, F(j), \phi(N(\phi^{-1}( s_j))), a, M(j))
+PS(s_j)=(s_j, \phi^{-1}( s_j), c_j, F(j), \phi(N(\phi^{-1}( s_j))), a, M(j))
 \end{equation}
 由于备份资源应该只添加一次，为了便于表示该约束，我们定义了以下函数。
 \begin{equation}
@@ -349,7 +349,7 @@ w(i,j) = \left\{ {\begin{array}{*{20}{c}}
 
 否则，在原先节点失效的测试前这个虚拟节点$v_i$ 没有被一个物理节点持有和迁移到其他物理节点，除了这个带宽成本为${\sum\limits_{k \in N(i) \cap N(i')} {\mu({d_{ik}} - {d_{i'k}})}  + \sum\limits_{k \in \left( {N(i) - N(i')} \right)} {{d_{ik}}} }$，节点的容量成本为${\lambda * \mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$，虚拟服务器迁移的代价为${\beta * {M_m}}$ 和 $\theta$是从映射虚拟星型图$v_i$ 到物理星型图$s_j$ 的代价。如${\mu({d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right))}$ 而言，如果备份容量已分配的最大值${\mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$ 大于当前映射(即$d_i$)，不需要任何资源，否则，备份资源还缺少${{d_i} - \mathop {\max }\limits_{{v_{i'}}} \left( {{d_{i'}}} \right)}$。
 
-对于$VirtualStar(v_2)$，由于$v_3$最初由$s_3$ 持有，但是当物理节点$s_1$ 失效时，我们可以将虚拟节点$v_3$迁移到物理节点$s_2$，因为$s_2$ 是以前已经安装过虚拟机，因此，成本包括虚拟链路带宽成本$11$，节点容量成本5，虚拟机迁移成本$M_m$。
+对于$VS(v_2)$，由于$v_3$最初由$s_3$ 持有，但是当物理节点$s_1$ 失效时，我们可以将虚拟节点$v_3$迁移到物理节点$s_2$，因为$s_2$ 是以前已经安装过虚拟机，因此，成本包括虚拟链路带宽成本$11$，节点容量成本5，虚拟机迁移成本$M_m$。
 
 基于节\ref{lab:DynamicProgrammingEquation}的方法，在物理节点$s_1$失效时得到最佳节点映射：$v_1 \rightarrow s_5$, $v_2 \rightarrow s_2$, $v_3 \rightarrow s_3$, $v_4 \rightarrow s_4$。 物理节点$s_5$ 开始为虚拟节点$v_1$ 建立和应用2个节点计算资源，并分别找到带宽约束为4、5、3 的对应的虚拟链路$(v_1,v_2),(v_1,v_3),(v_1,v_4)$ 的三个物理路径。
 
@@ -371,7 +371,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=5.0in]{figures/StarRepresentationNode2}\\
-  \caption{当物理节点$s_2$ 失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\label{fig:StarRepresentationNode2}
+  \caption{当物理节点$s_2$ 失效时VS($v_i$)和PS($s_j$)}\label{fig:StarRepresentationNode2}
 \end{figure}
 
 %\section{多节点故障情形}
@@ -381,7 +381,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \centering
 % Requires \usepackage{graphicx}
 \includegraphics[width=3.5in]{figures/StarRepresentationTwoFailure}\\
-  \caption{当物理节点$s_1$和$s_2$同时失效时VirtualStar($v_i$)和PhysicalStar($s_j$)}\label{fig:StarRepresentationTwoFailure}
+  \caption{当物理节点$s_1$和$s_2$同时失效时VS($v_i$)和PS($s_j$)}\label{fig:StarRepresentationTwoFailure}
 \end{figure}
 \begin{equation}
 \small{
@@ -442,9 +442,9 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 \STATE 从与此VN嵌入请求对应的SN中提取嵌入的虚拟网络eVN$G\left( {\hat S,\hat L} \right)$
 %\STATE AllMinimumCycle($G(V,E)$)
 \FORALL{$v_i$ 并且 $v_i\in G\left( {\hat S,\hat L} \right)$}
-\STATE  从图 $G\left( {\hat S,\hat L} \right)$中分解 eVN $G\left( {\hat S,\hat L} \right)$ 成两个星型结构集 $VirtualStar(v_i)$ 和 $PhysicalStar(s_j)$
-\STATE 构建items根据星型结构集 $VirtualStar(v_i)$.
-\STATE 构建knapsacks根据星型结构集$PhysicalStar(s_j)$
+\STATE  从图 $G\left( {\hat S,\hat L} \right)$中分解 eVN $G\left( {\hat S,\hat L} \right)$ 成两个星型结构集 $VS(v_i)$ 和 $PS(s_j)$
+\STATE 构建items根据星型结构集 $VS(v_i)$.
+\STATE 构建knapsacks根据星型结构集$PS(s_j)$
 \STATE 构建边权值矩阵\ref{eq:new edge weight}.
 \STATE 根据节\ref{lab:DynamicProgrammingEquation}所描述的动态规划方法解决多背包问题
 \STATE 添加新节点，连接新的边，重新分配节点计算资源和链路的带宽资源到$G\left( {\hat S,\hat L} \right)$中构建新的$G\left( {\hat S,\hat L} \right)$
@@ -463,7 +463,7 @@ L_{V_4}&\infty&\infty&\infty&\fbox{3}&\infty&C_{s}+M_{m}+(6)+3&\infty\\
 
 VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求的持续时间服从指数分布，平均100个时间单位，高的请求率和较长的租用时间保证了物理基础设施的高利用率。
 
-根据\cite{yu2010survivable}，即$\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$，节点的计算资源与链路的带宽资源的相对成本为3。 使用的SN 拓扑是SNDlib拓扑数据\cite{orlowski2010sndlib}如表\ref{tab:SNDlibTopo}所示。 底层物理节点(链路)的计算(带宽)资源都是整数的。分别分布在10至20(50 至100)之间。为了对设备节点失效场景进行建模，我们选择了底层物理网络中的所有底层物理设备节点逐个失效，并统计了每$\SubStrateFacilityNodeFailDuration$个时间单元的迁移频率。
+根据文献\mycite{yu2010survivable}，即$\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$，节点的计算资源与链路的带宽资源的相对成本为3。 使用的SN 拓扑是SNDlib拓扑数据\cite{orlowski2010sndlib}如表\ref{tab:SNDlibTopo}所示。 底层物理节点(链路)的计算(带宽)资源都是整数的。分别分布在10至20(50 至100)之间。为了对设备节点失效场景进行建模，我们选择了底层物理网络中的所有底层物理设备节点逐个失效，并统计了每$\SubStrateFacilityNodeFailDuration$个时间单元的迁移频率。
 \begin{table}[htbp]
 \centering
 \caption{SNDlib拓扑数据}\label{tab:SNDlibTopo}
@@ -508,7 +508,7 @@ VN请求的到达服从泊松过程(平均每1时间单位请求15次)。请求�
   \item $\FouthAlgorithmMethodAbrreviation$：当与虚拟节点映射的底层物理上的每个节点失效时，一种简单的方法是增加一个新的物理节点，用于迁移失败的虚拟节点，并将新的链路与失败的物理节点连接起来。
 \end{enumerate}
 
-此外，我们还与虚拟网络嵌入算法\cite{liu2011completing}进行了比较，后者是虚拟网络请求第一次到达时的嵌入方法，其中VN没有可生存性要求，虚拟网络嵌入算法请求(标记为$\ThirdAlgorithmMethodAbrreviation$)作为衡量可生存性所消耗的扩展资源量的标准算法，在实验评估图中标记为“algorithm shared”或者“algorithm Noshared”。 我们假设当一个虚拟网络嵌入到底层物理网络中时，对于$\ThirdAlgorithmMethodAbrreviation$算法来说，就需要有成功的可生存性保证。
+此外，我们还与虚拟网络嵌入算法\mycite{liu2011completing}进行了比较，后者是虚拟网络请求第一次到达时的嵌入方法，其中VN没有可生存性要求，虚拟网络嵌入算法请求(标记为$\ThirdAlgorithmMethodAbrreviation$)作为衡量可生存性所消耗的扩展资源量的标准算法，在实验评估图中标记为“algorithm shared”或者“algorithm Noshared”。 我们假设当一个虚拟网络嵌入到底层物理网络中时，对于$\ThirdAlgorithmMethodAbrreviation$算法来说，就需要有成功的可生存性保证。
 
 基于底层物理网络的资源，无论是共享的还是非共享的(专用的)\cite{lu2006efficient}，我们在资源分配模式上独立地实现了这两种情况。每个虚拟网络请求的相应的备份需求相应的底层物理资源可以相互共享，并具有可生存性保证。“专用的”意味着对每个虚拟网络是一个完整的备份网络，备份资源完全用到虚拟网络中，相互独立。但是这是资源效率低下的，因为对于每个获得嵌入式的虚拟资源，都需要一个专用的底层物理实体。在某些情况下，共享和重用备份资源也是可以接受的，以便减少附加备份资源在底层物理网络上的占用。通常，较高程度的重用备份资源会导致可靠性降低，反之亦然。
 
