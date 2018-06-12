@@ -6,20 +6,20 @@ We first described the simulation setup, then present the simulation results.
 \subsection{Simulation setup}
 
 \subsubsection{Experimental Parameter}
-For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability of $\VirtualNodenodeProbability$. The computing demand on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$.
+For any VN request, the number of VN nodes is randomly determined by a uniform distribution between $\VirtualNodeSizeMinimum$ and $\VirtualNodeSizeMaximum$ and each pair of virtual nodes is randomly connected with probability of $\VirtualNodenodeProbability$, and ensure the VN is connected graph. The computing demand on VN nodes follow a uniform distribution from $\VirtualNodeComputationMinimum$ to $\VirtualNodeComputationMaximum$, as well as the bandwidth on VN links from $\VirtualEdgeBandwithMinimum$ to $\VirtualEdgeBandwithMaximum$.
 
-%VN requests arrive randomly over a timespan of $\SubstrateNewtorkRunTimeInterval$ time slots and the inter-arrival time is
+%VN requests arrive randomly over a timespan of $\PhysicalNewtorkRunTimeInterval$ time slots and the inter-arrival time is
 %assumed to follow the Geometric distribution at a rate of $\requestAppearProbability$ per time slot. The resource lease times of each VN request follows the uniform distribution as well at a rate  range from $\VNRequestsContinueTimeMinimum$ and $\VNRequestsContinueTimeMaximum$ per time slot.
 The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean \ requests per 1 time units).
 The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average.
-A high request rate and long lease time ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated physically substrate node.
+A high request rate and long lease time ensures that the physical infrastructure is operating at high utilization. we supposed a assumption that each virtual node of VN should be mapped on only one isolated  physical node.
 %The arrivals of VN requests are modeled by a Poisson process (with mean of \PossionMean requests per 1 time units).
 %The duration of the requests follows an exponential distribution with $\VNRequestsContinueTimeExponentialMean$ time units on average
 
 We assumed the relative cost of computing demand  compared with bandwidth demand is $\RelativeCostbetweenComputingBandwidth$ according to  \cite{armbrust2009above,yu2010survivable}, which means $\lambda/\alpha=\RelativeCostbetweenComputingBandwidth$.
 %The SN topologies used are randomly generated with $\SubStrateNodeSize$ nodes using the GT-ITM tool  \cite{zegura1996model}.
-The SN topologies used from SNDlib topology data \cite{orlowski2010sndlib}as shown in Tab.\ref{tab:SNDlibTopo}.
-The computing(bandwidth) resources of the substrate nodes (links) are integer uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and $\SubStrateEdgeBandwithMaximum$), respectively. To model the facility node failure scenario, we choose all substrate facility nodes of substrate network to fail one by one, and statistically calculating migration frequency in every $\SubStrateFacilityNodeFailDuration$ time units.
+The SN topologies used from SNDlib topology data \cite{orlowski2010sndlib} as shown in Tab.\ref{tab:SNDlibTopo}.
+The computing(bandwidth) resources of the physical nodes (links) are integer uniformly distributed between $\SubStrateNodeComputationMinimum$ and $\SubStrateNodeComputationMaximum$ ($\SubStrateEdgeBandwithMinimum$ and $\SubStrateEdgeBandwithMaximum$), respectively. To model the physical node failure scenario, we choose all nodes of physical network to fail one by one, and statistically calculating migration frequency in every $\SubStrateFacilityNodeFailDuration$ time units.
 \begin{table}[htb]
 \centering
 \caption{SNDlib topology data}\label{tab:SNDlibTopo}
@@ -49,17 +49,17 @@ The computing(bandwidth) resources of the substrate nodes (links) are integer un
 
 For performance comparisons, besides our scheme (named by $\MyAlgorithmMethodAbrreviation$), we also implemented other survivable algorithms $\SecondAlgorithmMethodAbrreviation$ \cite{yeow2011designing} as follows:
 \begin{itemize}
-  \item $\SecondAlgorithmMethodAbrreviation$ : algorithm connect links between backup and critical nodes, between backup and backup nodes, but not connect links between critical and critical nodes. critical node denote the former physical node which is embedded with virtual nodes. backup node denote the augmented nodes.
-  \item $\FouthAlgorithmMethodAbrreviation$: When every node of substrate mapped with virtual node fail, a simple method is that augment a new node physical node for migrating the failure virtual node and connect new link with the failure link in terms of the failure physical node.
+  \item $\SecondAlgorithmMethodAbrreviation$ : algorithm connect links between backup and critical nodes, between backup and backup nodes, but not connect links between critical and critical nodes. critical node denote the former physical node which is embedded with virtual nodes. backup node denote the added nodes.
+  \item $\FouthAlgorithmMethodAbrreviation$: When every node of physical network mapped with virtual node fail, a simple method is that add a new  physical node for migrating the failure virtual node and connect new link with the failure link in terms of the failure physical node.
 \end{itemize}
 
-Moreover, We compare with a virtual network embedding algorithm\cite{liu2011completing} which is the embedding method when virtual network request firstly arrived, where VN do not have survivability requirement, and the virtual network embedding request (labeled $\ThirdAlgorithmMethodAbrreviation$) as a baseline to gauge the amount of augmented resources consumed for survivability, label "algorithm shared" or "algorithm Noshared" in experimental evaluation figures. We supposed that when a virtual network is embedded in substrate network, the successful survivable guarantee has been supposed  with respect to algorithm $\ThirdAlgorithmMethodAbrreviation$.
+Moreover, All algorithm is  compared with a virtual network embedding algorithm\cite{liu2011completing} which is the embedding method when virtual network request firstly arrived, where VN do not have survivability requirement, and the virtual network embedding request (labeled $\ThirdAlgorithmMethodAbrreviation$) as a baseline to gauge the amount of added resources consumed for survivability, label "algorithm shared" or "algorithm Noshared" in experimental evaluation figures. We supposed that when a virtual network is embedded in physical network, the successful survivable guarantee has been supposed  with respect to algorithm $\ThirdAlgorithmMethodAbrreviation$.
 
-Based on the resource of substrate network whether shared or non-shared(dedicated) \cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern. The substrate resource corresponding augment backup demand of  every virtual network request with survivable guarantee  could be shared with each other. Dedicated means that for each virtual network a
-complete backup network can be set up and backup resources are fully dedicated to the virtual networks and independent from each other. However, this is resource inefficient, since for each virtual resource that gets embedded a dedicated substrate entity is needed. In some cases it might also be acceptable to share and reuse the backup resources in order to reduce the footprint on the substrate network caused by the additional
+Based on the resource of physical network whether shared or non-shared(dedicated) \cite{lu2006efficient}, we independently implement the two situation with respect to resource distribution pattern. The physical resource corresponding augment backup demand of  every virtual network request with survivable guarantee  could be shared with each other. Dedicated means that for each virtual network a
+complete backup network can be set up and backup resources are fully dedicated to the virtual networks and independent from each other. However, this is resource inefficient, since for each virtual resource that gets embedded a dedicated physical entity is needed. In some cases it might also be acceptable to share and reuse the backup resources in order to reduce the footprint on the physical network caused by the additional
 backup resources. Usually, a higher degree of reused backup resources results in lower reliability, and vice versa.
 
-Every virtual network's request exist a life lease time span, statistically record virtual or substrate network's performance metric in real-time situation. Because the experimental data of every algorithm's performance metric fluctuate, we incrementally record experimental data of every virtual or substrate network performance metric, then average the experimental data by successful accepted virtual network embedding or survivable embedded virtual network  as denominator.
+Every virtual network's request exist a life lease time span, statistically record virtual or physical network's performance metric in real-time situation. Because the experimental data of every algorithm's performance metric fluctuate, we incrementally record experimental data of every virtual or physical network performance metric, then average the experimental data by successful accepted virtual network embedding or survivable embedded virtual network  as denominator.
 
 
 All simulations ran on a server, which is equipped with Intel(R) Xeon(R) CPU E5-2620 2.00GHz (24 Cores) and 32.00GB RAM.
@@ -88,14 +88,14 @@ In this section, we evaluate the performance of the SeVN problem heuristic metho
 %of a virtual link is 30 units.
 
 
-%The simulation experiments aim to assess the effect of substrate resource sharing among multiple priority classes and multiple vir- tual networks. Table 4 summarizes the settings for the simulation experiments. Random networks are considered to be the topology of the substrate networks [28] . In the random networks, a link is sequentially configured between each pair of nodes at the same probability. When random tree networks are considered to be the topology of the substrate networks, a substrate link is sequentially configured between each pair of substrate nodes at the same prob- ability under the condition that the addition of the new substrate link can avoid loop occurrence. Generation of the random networks is repeated until a connected graph is obtained as the topology of the substrate network. The number of virtual nodes in each requested virtual network follows a binomial distribution. The number of virtual nodes is more than one and less than or equal to the total number of sub- strate nodes. This means that the probability of the number of vir- tual nodes being vn ( > 1) can be given by the following expres- sion: P ( v n ) = P  ( v n ) /  | SN| v n  =2 P  v n  P  ( v n ) = | SN| C v n ( | V N| / | SN| ) v n ( 1 . 0 −| V N| / | SN| ) | SN| −v n (21) In the above expression, the notations | SN | and | VN | indicate the total number of substrate nodes and the average number of virtual nodes in each requested virtual network. A virtual link connects a pair of virtual nodes at a given probability P . However, each vir- tual node must be connected with at least one of the other virtual nodes using a virtual link. This means that the topology of the vir- tual networks is given by the connected random graph as with the substrate networks. Each priority class is evenly specified for each virtual link and pair of service components at both sides of the vir- tual link. The arrival of VNE requests follows the Poisson process and the lifetime of virtual networks follows a negative exponential distribution. Since the average lifetime of virtual networks is set at 1.0, the arrival rate of VNE requests is equal to the average number of virtual networks embedded simultaneously. For simplicity, the average traffic volume T is assumedto be 0.5 in every virtual link and service component, and the standard deviation of the traffic volume σ(T) is also identical in every vir- tual link and service component. Furthermore, the deviation part of the required amount of substrate resources k pr σ(T) is identical in every virtual link and service component belonging to the same priority class pr , and is given as shown in Table 4 . When the num- ber of priority classes is two, the deviation part is 0.8 in the low priority class and 1.2 in the high priority class. When the number of priority classes is four, the deviation part increases from 0.7 in the lowest priority class to 1.3 in the highest priority class. Then, the amount of substrate resources required for a set of m virtual links or service components that involves m pr virtual links or ser- vice components of each priority class pr is derived from expres- sions ( 2 ) and ( 3 ) as follows, when those m virtual links or service components share the substrate resource with each other: B = 0 . 5 m +  pr ( kpr σ(T ) ×√ mpr ) (22) Meanwhile, the amount of substrate resources required for a set of m virtual links or service components is derived from expression ( 4 ), when those m virtual links or service components cannot share the substrate resource: B = 0 . 5 m +  pr ( kpr σ(T ) ×mpr ) (23) It can be expected from expressions ( 22 ) and ( 23 ) that the ef- fect of substrate resource sharing strengthens due to the increase in the ratio of virtual links or service components belonging to higher priority classes, although the total required amount of sub- strate resources increases. However, the following simulation ex- periments specify the ratio such that the virtual links or service components of each priority class are distributed equally in order to estimate the effect of statistical multiplexing apart from the im- pact of the ratio. When the required amount of substrate resources is calculated, both the weights for the substrate link bandwidth W1 and sub- strate node capacity W2 are set at 1.0. In each simulation, the ini- tial interval for the first 50 0 0 virtual network requests is regarded as the transition state. The following interval for 10,0 0 0 virtual network requests is regarded as the stationary state and the statis- tics required are collected from the measurement results during the interval.
+%The simulation experiments aim to assess the effect of physical resource sharing among multiple priority classes and multiple vir- tual networks. Table 4 summarizes the settings for the simulation experiments. Random networks are considered to be the topology of the physical networks [28] . In the random networks, a link is sequentially configured between each pair of nodes at the same probability. When random tree networks are considered to be the topology of the physical networks, a physical link is sequentially configured between each pair of physical nodes at the same prob- ability under the condition that the addition of the new physical link can avoid loop occurrence. Generation of the random networks is repeated until a connected graph is obtained as the topology of the physical network. The number of virtual nodes in each requested virtual network follows a binomial distribution. The number of virtual nodes is more than one and less than or equal to the total number of sub- strate nodes. This means that the probability of the number of vir- tual nodes being vn ( > 1) can be given by the following expres- sion: P ( v n ) = P  ( v n ) /  | SN| v n  =2 P  v n  P  ( v n ) = | SN| C v n ( | V N| / | SN| ) v n ( 1 . 0 −| V N| / | SN| ) | SN| −v n (21) In the above expression, the notations | SN | and | VN | indicate the total number of physical nodes and the average number of virtual nodes in each requested virtual network. A virtual link connects a pair of virtual nodes at a given probability P . However, each vir- tual node must be connected with at least one of the other virtual nodes using a virtual link. This means that the topology of the vir- tual networks is given by the connected random graph as with the physical networks. Each priority class is evenly specified for each virtual link and pair of service components at both sides of the vir- tual link. The arrival of VNE requests follows the Poisson process and the lifetime of virtual networks follows a negative exponential distribution. Since the average lifetime of virtual networks is set at 1.0, the arrival rate of VNE requests is equal to the average number of virtual networks embedded simultaneously. For simplicity, the average traffic volume T is assumedto be 0.5 in every virtual link and service component, and the standard deviation of the traffic volume σ(T) is also identical in every vir- tual link and service component. Furthermore, the deviation part of the required amount of physical resources k pr σ(T) is identical in every virtual link and service component belonging to the same priority class pr , and is given as shown in Table 4 . When the num- ber of priority classes is two, the deviation part is 0.8 in the low priority class and 1.2 in the high priority class. When the number of priority classes is four, the deviation part increases from 0.7 in the lowest priority class to 1.3 in the highest priority class. Then, the amount of physical resources required for a set of m virtual links or service components that involves m pr virtual links or ser- vice components of each priority class pr is derived from expres- sions ( 2 ) and ( 3 ) as follows, when those m virtual links or service components share the physical resource with each other: B = 0 . 5 m +  pr ( kpr σ(T ) ×√ mpr ) (22) Meanwhile, the amount of physical resources required for a set of m virtual links or service components is derived from expression ( 4 ), when those m virtual links or service components cannot share the physical resource: B = 0 . 5 m +  pr ( kpr σ(T ) ×mpr ) (23) It can be expected from expressions ( 22 ) and ( 23 ) that the ef- fect of physical resource sharing strengthens due to the increase in the ratio of virtual links or service components belonging to higher priority classes, although the total required amount of sub- strate resources increases. However, the following simulation ex- periments specify the ratio such that the virtual links or service components of each priority class are distributed equally in order to estimate the effect of statistical multiplexing apart from the im- pact of the ratio. When the required amount of physical resources is calculated, both the weights for the physical link bandwidth W1 and sub- strate node capacity W2 are set at 1.0. In each simulation, the ini- tial interval for the first 50 0 0 virtual network requests is regarded as the transition state. The following interval for 10,0 0 0 virtual network requests is regarded as the stationary state and the statis- tics required are collected from the measurement results during the interval.
 
 
 %Simulation settings.
 %Setting item Setting value
-%Topology of substrate network Random (tree) network
-%Total number of substrate nodes (| SN |) 20, 100, 150, 201
-%Total number of substrate links (| SL |) 30, 150, 200, 250
+%Topology of physical network Random (tree) network
+%Total number of physical nodes (| SN |) 20, 100, 150, 201
+%Total number of physical links (| SL |) 30, 150, 200, 250
 %Distribution of number of virtual nodes Binomial distribution
 %Average number of virtual nodes (| VN |) 6 , 9,12
 %Probability that a virtual link exists between a pair
@@ -114,14 +114,14 @@ In this section, we evaluate the performance of the SeVN problem heuristic metho
 %Standard deviation of traffic volume for each
 %virtual link and service component ( σ( T ))
 %Constant
-%Deviation part of substrate resource required for
+%Deviation part of physical resource required for
 %each virtual link and service component
 %belonging to priority class pr ( k pr σ( T ))
 %0.8, 1.2 when | Pr | = 2,
 %0.7, 0.9, 1.1, 1.3 when
 %| Pr | = 4
-%Weight for the substrate link bandwidth ( W1 ) 1 .0
-%Weight for the substrate node capacity ( W2 ) 1 .0
+%Weight for the physical link bandwidth ( W1 ) 1 .0
+%Weight for the physical node capacity ( W2 ) 1 .0
 %Transition state interval in one simulation 50 0 0 requests
 %Stationary state interval in one simulation 10,0 0 0 requests
 
@@ -137,23 +137,23 @@ $A_{VN}$ denote at time t arrived virtual network request number. Fig.\ref{fig:V
 \end{figure}
 
 \begin{itemize}
-  \item \textbf{Acceptance Ratio}: Opposite to the concept of Blocking Probability. Ratio of a virtual network request is successful embedded into substrate network denoted as $A_{eVN}/A_{VN}$. Ratio of embedded virtual networks that were successfully augmented for survivable guarantees and embedded into the substrate topology denoted as $A_{SeVN}/A_{VN}$. Ratio of a embedded virtual network is successful survivable when the virtual network had been embedded in substrate network denoted as $A_{SeVN}/A_{eVN}$.
-  \item \textbf{Active Node}, represent that number of substrate network booted nodes and number of survivable embedded virtual network request demand nodes. This metric is especially useful in the context of energy efficient VNE algorithms.
-  \item \textbf{Path Length}: the path length metric measures the number of links between two interconnected virtual nodes, the number of links between two substrate nodes that are mapped to two interconnected virtual nodes.
+  \item \textbf{Acceptance Ratio}: Opposite to the concept of Blocking Probability. Ratio of a virtual network request is successful embedded into physical network denoted as $A_{eVN}/A_{VN}$. Ratio of embedded virtual networks that were successfully added for survivable guarantees and embedded into the physical topology denoted as $A_{SeVN}/A_{VN}$. Ratio of a embedded virtual network is successful survivable when the virtual network had been embedded in physical network denoted as $A_{SeVN}/A_{eVN}$.
+  \item \textbf{Active Node}, represent that number of physical network booted nodes and number of survivable embedded virtual network request demand nodes. This metric is especially useful in the context of energy efficient VNE algorithms.
+  \item \textbf{Path Length}: the path length metric measures the number of links between two interconnected virtual nodes, the number of links between two physical nodes that are mapped to two interconnected virtual nodes.
 
   \item \textbf{Cost, Revenue, and Cost/Revenue}: Cost: Sum of node computing ability or link bandwidth resources being used for the embedding. Revenue: Sum of node computing ability or link bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.
-  \item \textbf{Stress}: Average number of virtual links/nodes that have been assigned to the substrate links/nodes .
- \item \textbf{Migration Frequency Ratio}: The number of migrations refers to the number of virtual nodes that need to be migrated to new facility nodes in case corresponding substrate nodes fail.
- \item \textbf{Utilization}: Bandwidth utilization or computing utilization of substrate links/nodes, in each SN entity (node or link), the sum of the spent substrate resources due to the mapping of virtual entities divided by the total amount of resources.
- \item \textbf{Backup nodes number}: The number of backups metric counts the number of backup resources that are set up for a virtual entity. Several additional substrate entities can be reserved to serve as a replacement in case the entity hosting the virtual entity fails.
+  \item \textbf{Stress}: Average number of virtual links/nodes that have been assigned to the physical links/nodes .
+ \item \textbf{Migration Frequency Ratio}: The number of migrations refers to the number of virtual nodes that need to be migrated to new facility nodes in case corresponding physical nodes fail.
+ \item \textbf{Utilization}: Bandwidth utilization or computing utilization of physical links/nodes, in each SN entity (node or link), the sum of the spent physical resources due to the mapping of virtual entities divided by the total amount of resources.
+ \item \textbf{Backup nodes number}: The number of backups metric counts the number of backup resources that are set up for a virtual entity. Several additional physical entities can be reserved to serve as a replacement in case the entity hosting the virtual entity fails.
 \end{itemize}
 %\begin{table*}
 %\label{tab:measure}
 %  \centering
 %  \begin{tabular}{ll}
-%    \fbox{Accepted SeVN Ratio} & Ratio of embedded virtual networks that were successfully augmented and embedded into the substrate topology \\
-%    \fbox{Stress} & NO Average number of virtual links/nodes that have been assigned to the substrate links/nodes \\
-%    \fbox{Utilization}& Bandwidth/CPU utilization of substrate links/nodes.\\
+%    \fbox{Accepted SeVN Ratio} & Ratio of embedded virtual networks that were successfully added and embedded into the physical topology \\
+%    \fbox{Stress} & NO Average number of virtual links/nodes that have been assigned to the physical links/nodes \\
+%    \fbox{Utilization}& Bandwidth/CPU utilization of physical links/nodes.\\
 %    \fbox{Cost, Revenue, and Cost/Revenue}& Cost: Sum of CPU and bandwidth resources being used for the embedding. Revenue: Sum of CPU and bandwidth demands realized for the virtual networks. Cost/Revenue: The ratio indicates the virtualization overhead.\\
 %    \fbox{Active Nodes} &Number of nodes that need to be active in order to host all the virtual networks. This metric is especially useful in the context of energy efficient VNE algorithms.\\
 %    Path Length & NO Length of communication paths assigned to virtual links\\
@@ -162,10 +162,9 @@ $A_{VN}$ denote at time t arrived virtual network request number. Fig.\ref{fig:V
 %    Runtime & Average runtime of the algorithm.\\
 %    Initialization Overhead &Some algorithms come with initialization cost (in terms of runtime), e.g., the distributed algorithm presented in initially partitions the network before embedding VNRs.\\
 %    Hidden Hops Ratio& Ratio of hidden hops, e.g., the number of nodes only needed for forwarding packages between other nodes. Especially useful in the context of energy efficient VNE algorithms.\\
-%    Communication Overhead &Communication overhead of distributed algorithms (i.e., number of messages sent between substrate nodes).
+%    Communication Overhead &Communication overhead of distributed algorithms (i.e., number of messages sent between physical nodes).
 %  \end{tabular}
 %\end{table*}
-
 
 
 
@@ -454,6 +453,74 @@ Utilization Fig.\ref{fig:Utilization}:
 %\end{equation*}
 %\end{figure*}
 
+
+
+
+\subsection{Edge Weight}
+Edge Weight Fig.\ref{fig:EdgeWeight}:
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/EdgeWeight}\\
+  \caption{EdgeWeight}\label{fig:EdgeWeight}
+\end{figure}
+EdgeWeightAccumulate  Fig.\ref{fig:EdgeWeightAccumulate}:
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/EdgeWeightAccumulate}\\
+  \caption{EdgeWeightAccumulate}\label{fig:EdgeWeightAccumulate}
+\end{figure}
+
+EdgeWeightCurrentAverage Fig.\ref{fig:EdgeWeightCurrentAverage}:
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/EdgeWeightCurrentAverage}\\
+  \caption{EdgeWeightCurrentAverage}\label{fig:EdgeWeightCurrentAverage}
+\end{figure}
+
+EdgeWeightAccumulateAverage Fig.\ref{fig:EdgeWeightAccumulateAverage}:
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/EdgeWeightAccumulateAverage}\\
+  \caption{EdgeWeightAccumulateAverage}\label{fig:EdgeWeightAccumulateAverage}
+\end{figure}
+
+
+\subsection{Acception Ratio with different Exponential Mean}
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/AcceptionRatioExponentialMean}\\
+  \caption{Acception Ratio with different Exponential Mean}\label{fig:AcceptionRatioExponentialMean}
+\end{figure}
+
+\subsection{Acception Ratio with different Possion Mean}
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/AcceptionRatioPossionMean}\\
+  \caption{Acception Ratio with different Possion Mean}\label{fig:AcceptionRatioPossionMean}
+\end{figure}
+
+\subsection{Node Failure}
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/NodeFailure}\\
+  \caption{Node Failure}\label{fig:NodeFailure}
+\end{figure}
+
+
+\subsection{Node Migration}
+\begin{figure}[htbp]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=3in]{Fig/NodeMigration}\\
+  \caption{Node Failure}\label{fig:NodeMigration}
+\end{figure}
 
 
 

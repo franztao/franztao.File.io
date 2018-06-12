@@ -40,11 +40,11 @@
 %\usepackage[pdftex,active,tightpage]{preview}
 %\setlength\PreviewBorder{0mm}
 \usepackage{booktabs} % For formal tables
-
+\usepackage[square,comma,sort&compress,numbers]{natbib}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue]{hyperref}
 %
-%æœ€åä»‹ç»ä¸€ä¸ªå®ç”¨çš„å·¥å…·å®åŒ…syntonlyã€‚åŠ è½½è¿™ä¸ªå®åŒ…åï¼Œåœ¨å¯¼è¨€åŒºä½¿ç”¨\syntaxonly å‘½
-%ä»¤ï¼Œå¯ä»¤LATEX ç¼–è¯‘åä¸ç”ŸæˆDVI æˆ–è€…PDF æ–‡æ¡£ï¼Œåªæ’æŸ¥é”™è¯¯ï¼Œç¼–è¯‘é€Ÿåº¦ä¼šå¿«ä¸å°‘ï¼š
+%×îºó½éÉÜÒ»¸öÊµÓÃµÄ¹¤¾ßºê°üsyntonly¡£¼ÓÔØÕâ¸öºê°üºó£¬ÔÚµ¼ÑÔÇøÊ¹ÓÃ\syntaxonly Ãü
+%Áî£¬¿ÉÁîLATEX ±àÒëºó²»Éú³ÉDVI »òÕßPDF ÎÄµµ£¬Ö»ÅÅ²é´íÎó£¬±àÒëËÙ¶È»á¿ì²»ÉÙ£º
 %\usepackage{syntonly}
 %\syntaxonly
 
@@ -76,17 +76,17 @@
 
 
 \begin{document}
-\title{Survivable embedded Virtual Network Design to Survive a Physical Node Failure}
+\title{Survivable Virtual Network Embedding with Low Cost in the Presence of Physical Node Failures}
 \thanks{The work is supported  by the  National Natural Science Foundation of China under Grant Nos.61572184, 61725206, 61472130, 61472131, and 61772191,  Hunan Provincial Natural Science Foundation of China under Grant No.2017JJ1010,  Science and Technology Key Projects of Hunan Province under Grant No.2015TP1004 and No.2016JC2012,  U.S. ONR N00014-17-1-2730, NSF ECCS 1408247, CNS 1526843, and ECCS 1731238,  the open project funding (CASNDST201704) of CAS Key Lab of Network Data Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences, and the foundation of Key Laboratory of Machine Intelligence and Advanced Computing of the Ministry of Education under Grant No.MSC-201708A.}
 
 \author{Kun Xie$^1$, \emph{Member, IEEE}, Heng Tao$^1$, Xin Wang$^2$, \emph{Member, IEEE}, Gaogang Xie$^3$, \emph{Member, IEEE},\\
-Jigang Wen$^3$, Jiannong Cao$^4$, \emph{Fellow, IEEE}, Zheng Qin$^1$\\
+Jigang Wen$^3$, Jiannong Cao$^4$, \emph{Fellow, IEEE}, Dafang Zhang$^1$ \\
 $^1$ College of Computer Science and Electronic Engineering, Hunan University, China\\
 $^2$ Department of Electrical and Computer Engineering, Stony Brook University, New York, USA\\
 $^3$ Institute of Computing Technology, Chinese Academy of Sciences, Bei Jing, China \\
 $^4$ Department of computing,The Hong Kong Polytechnic University,Hong Kong, China \\
 xiekun@hnu.edu.cn, franztaoheng@gmail.com, x.wang@stonybrook.edu, xie@ict.ac.cn, wenjigang@ict.ac.cn, \\
-csjcao@comp.polyu.edu.hk, zqin@hnu.edu.cn}
+csjcao@comp.polyu.edu.hk, dfzhang@hnu.edu.cn}
 %\titlenote{Produces the permission block, andcopyright information}
 %\subtitle{Extended Abstract}
 %\subtitlenote{The full version of the author's guide is available as
@@ -96,7 +96,8 @@ csjcao@comp.polyu.edu.hk, zqin@hnu.edu.cn}
 \maketitle
 \input{body/Abstract}
 %https://mp.weixin.qq.com/s/VDRd8g7TF5kGeAuYLSzRng
-\input{body/Introduction}
+\input{body/Introduction1}
+%\input{body/Introduction}
 \input{body/RelatedWork}
 %\input{Preliminaries}
 \input{body/ProblemFormulation}

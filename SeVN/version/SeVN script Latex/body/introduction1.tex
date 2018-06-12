@@ -1,0 +1,41 @@
+\section{Introduction}
+\rev{A network service often} consists of a number of network functions \rev{that} are implemented by hardware middle boxes \cite{sherry2012making}, such as firewall, load balancers, intrusion and prevention systems. To accelerate the implementation of network functions \rev{with} middle boxes and reduce the deployment cost, recently, Network Function Virtualization \cite{koponen2014network}(NFV) has emerged to enable software-oriented network functions/middle boxes where virtual network functions run  on commodity servers.
+
+Network virtualization has been recognized as a promising solution to enable the rapid deployment of customized services by building multiple Virtual Networks (VNs) with each virtual node corresponding \rev{to} a network function  on a shared physical network. As an effective means  \rev{of sharing} physical network  infrastructure to improve the resource utilization  \rev{with multiple service providers \cite{armbrust2009above,yu2008rethinking}, network virtualization helps reduce the network operation costs and management complexity, and is attracting growing research interest \cite{chowdhury2009network,chowdhury2010survey}.}
+
+\rev{Efficient use} of physical network resources requires effective techniques for virtual network (VN) embedding  ---- \rev{a process that maps a new virtual network with constraints on the virtual nodes and links onto specific physical network nodes and links.}
+
+% Several work studies the virtual network (VN) embedding and propose efficient solutions.
+
+\rev{Existing studies \cite{yu2008rethinking,chowdhury2009virtual,houidi2008distributed,lischka2009virtual,cheng2011virtual,botero2012energy,butt2010topology,fajjari2011vne,chowdhury2010polyvine,guo2011shared,zhu2006algorithms,liu2011completing} on virtual network  embedding  often} have a strong assumption that the physical network remains \rev{operational all the time.}
+Due to malicious attacks, natural disasters, unintentional cable cuts, planned maintenance, equipment malfunctioning, \rev{physical nodes may be unavailable to host virtual nodes \cite{gill2011understanding}.}
+\rev{To avoid service disruptions, spare (or redundant) physical nodes and link bandwidth need to be allocated in advance to migrate/remap the VN requests upon any failure.}
+%there are adequate remaining computing and network resources to migrate/remap the VN request.
+\rev{Compared to traditional virtual network embedding, enabling survivable virtual network embedding is a new problem that is more critical and challenging.}
+
+
+%Very few work [][]
+\rev{Some initial efforts \cite{yu2011cost,yeow2010designing,rahman2010survivable,koslovski2010reliability,yu2017survivable,patel2014survivable} have been made to study the survivable virtual network embedding problem. However, virtual functions have diverse resource requirements, and not all physical servers can execute all types of network functions.  Simply adding redundant physical nodes to be shared and act as backup nodes for all virtual nodes may fail in practical network scenarios. The consideration of the constraint of a physical node in supporting the virtual function types, however, would make the problem much harder.}
+
+%not all virtual nodes can benefit from the backup resources, this existing backup solutions may not be feasible in practical network scenarios.}
+
+\rev{Besides the lack of considering different resource requirements, most existing work \cite{rahman2010survivable,koslovski2010reliability,yu2017survivable,patel2014survivable} has a strong assumption that failures from multiple physical nodes are mutually independent, and only considers a single node failure at a time. In a practical network, multiple physical node failures may be observed.} For example, a large scale regional failure could destroy one or more physical nodes to which some virtual nodes are mapped \cite{yu2010survivable}.
+
+
+\rev{In this paper, we investigate the low cost Survivable Virtual Network Embedding problem to minimize the redundant resources reserved for VN requests to tolerate physical node failures.
+Different from current studies, for a given a virtual network request,  we simultaneously consider node capacity, link bandwidth, and virtual function type constraints.  We propose several novel techniques to solve the problems:}
+
+\begin{itemize}
+  \item \rev{To find feasible mapping upon node failure,} we propose a novel algorithm to decompose the virtual network and physical network into star-based local structures, \rev{which can effectively capture  the relationship of a virtual/phyisical node with its adjacent when a node fails.}\note{What do you mean even?}
+      \item  \rev{We formulate a} low cost survival virtual network assignment problem as a binary ILP bipartite matching problem and  prove \rev{its NP-completeness.  We construct intelligent bipartite graph based on the star structure, considering costs of backup node capacity, bandwidth,  and migration, as well as the function type constraint.}
+  \item Although solving the ILP formulation will result in an optimal solution with the minimum cost, its exponential time complexity makes such a approach impractical to embed a virtual network \rev{into} a large physical network. \rev{To address the challenge,} we propose a dynamic programming based algorithm that has only a polynomial time complexity and, thus, is feasible for practical network systems.
+  \item We have \rev{conducted} extensive simulations using 4 topology traces. The simulation results demonstrate that our algorithm can achieve larger application acceptation ratio \note{What is acceptation ratio?} with minimum backup cost.
+\end{itemize}
+\del{Following our bipartite definition,} As both the single node failure and multiple node failure can be easily represented by the bipartite, \rev{our survivable virtual network embedding algorithm is general}\del{to handle survivable virtual network embedding} \rev{and is not constrained to deal with only single node failure.}
+%can work in a more general network scenario. This is different from most existing studies} that can only handle a single node failure.
+
+The rest of the paper is organized as follows. We introduce the related work in Section \ref{sec:RELATED_WORK}.  We present the system model and problem description in Section \ref{sec:Problem description}.  We present the formulation of the low cost survival virtual network embedding problem, the dynamic programming based algorithm, and the method of avoiding duplicately adding backup resource in Section \ref{lab:Graphdecompositionbasedproblemformulation}, Section \ref{lab:DynamicProgrammingEquation}, and Section \ref{sec:Avoid  duplicately adding backup resource}, respectively.
+In Section \ref{sec:Extend to multiple physical nodes' failure},  we extend our algorithm to the
+scenario of multiple physical nodes' failure. Finally, we evaluate the performance of the proposed algorithms through extensive experiments in Section \ref{sec:Experiment}, and conclude the work in Section \ref{sec:CONCLUSION}.
+
+
